@@ -11,6 +11,11 @@ from xml.etree import ElementTree as ET
 from decimal import Decimal
 import json
 from flask import jsonify
+from socket import *
+
+sock=socket()
+sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+# then bind
 
 
 
