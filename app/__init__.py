@@ -235,6 +235,14 @@ def roomsOnDate(date, course):
         templist.append(item)
     return templist
 
+def defteachersondate(date, course):
+# Lista med salar som anvands i en kurs
+    templist = []
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.code == course).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
 # Lista med antal salstimmar per rum i sjunkande ordning
 def topRoomsInCourse(course):
 # Lista med salar som anvands i en kurs
