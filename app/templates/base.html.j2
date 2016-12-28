@@ -79,9 +79,9 @@
 
 
 <div class="container">
-    <ol class='example'>
+    <ol id="uitest">
         {% for item in teachersInCourse(varrubrik) %}
-            <li>{{ item }}</li>
+            <li>{{ item[0] }}</li>
             {% endfor %}
 
     </ol>
@@ -249,6 +249,8 @@
             $('#chart3').draggable();
 
             $('#sort tbody').sortable().disableSelection();
+
+            $('#uitest').sortable();
 
         });
     </script>
