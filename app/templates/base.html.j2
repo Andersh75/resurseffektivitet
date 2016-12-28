@@ -171,11 +171,17 @@
                 title: 'Select Course'
             });
 
-            $('[id^=content]').editable({
-                title: 'Select Course'
+            $('[id^=content]').draggable()
+                .click(function() {
+                    $(this).draggable({ disabled: false });
+            }).dblclick(function() {
+                $(this).draggable({ disabled: true });
             });
 
-            $('[id^=content]').draggable();
+
+
+
+
 
 
         });
