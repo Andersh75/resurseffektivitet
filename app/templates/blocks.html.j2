@@ -4,7 +4,7 @@
 
 {% block listofteachers %}
 
-    <ul class="list-unstyled" id="2uitest">
+    <ul class="list-unstyled" id="uitest">
         {% for item in teachersInCourse(varrubrik) %}
             <li><a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
             </li>
@@ -25,7 +25,7 @@
 {% block scheduleincourses2 %}
     <table class="table table-hover sorted_table">
         <tbody>
-            <tr id="uitest">
+            <tr>
                 <th class="text-left">Datum</th>
                 <th class="text-left">Tid</th>
                 <th class="text-left">Innehåll</th>
@@ -234,8 +234,8 @@
 
 
 {% block scheduleincourses %}
-    <table>
-        <tbody id='sortable'>
+    <table class="table table-hover sorted_table">
+        <tbody>
             <tr>
                 <th class="text-left">Datum</th>
                 <th class="text-left">Tid</th>
@@ -243,6 +243,38 @@
                 <th class="text-left">Salar</th>
                 <th class="text-left">Lärare</th>
             </tr>
+            <tr>
+                <td>
+                    test
+                </td>
+                <td>
+                    test
+                </td>
+                <td>
+                    test
+                </td>
+                <td>
+                    test
+                </td>
+                <td>
+                    {% block listofteachers %}
+
+                        <ul class="list-unstyled" id="uitest">
+                            {% for item in teachersInCourse(varrubrik) %}
+                                <li><a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
+                                </li>
+
+                                {% endfor %}
+
+                        </ul>
+                    {% endblock %}
+                </td>
+            </tr>
+
+
+
+
+
             {% for item in scheduleInCourse(varrubrik): %}
             {% set rowloop = loop %}
             <tr>
@@ -271,12 +303,12 @@
                 <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ item[6] }}</td>
                 <td class="text-left">
                     {% for subitem in roomsOnDate(item[0], varrubrik): %}
-                        <a href="#" class="btn btn-success btn-xs">{{ subitem[0] }}</a>
+                        <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
                     {% endfor %}
                 </td>
                 <td class="text-left">
                     {% for subitem in defteachersondate(item[0], varrubrik): %}
-                        <a href="#" class="btn btn-success btn-xs">{{ subitem[0] }} {{ subitem[1] }}</a>
+                        <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }} {{ subitem[1] }}</button>
                     {% endfor %}
                 </td>
             </tr>
