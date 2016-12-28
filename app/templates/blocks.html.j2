@@ -154,6 +154,7 @@
                 <th class="text-left">Tid</th>
                 <th class="text-left">Innehåll</th>
                 <th class="text-left">Salar</th>
+                <th class="text-left">Lärare</th>
             </tr>
             {% for item in scheduleInCourse(varrubrik): %}
             {% set rowloop = loop %}
@@ -181,11 +182,11 @@
                 <td class="text-left">0{{ item[4] }}-{{ item[5] }}</td>
                 {% endif %}
                 <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ item[6] }}</td>
-
-
-
-
-
+                <td class="text-left">
+                    {% for subitem in roomsOnDate(item[0], varrubrik): %}
+                        <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
+                    {% endfor %}
+                </td>
                 <td class="text-left">
                     {% for subitem in roomsOnDate(item[0], varrubrik): %}
                         <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
