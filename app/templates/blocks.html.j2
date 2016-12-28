@@ -4,14 +4,14 @@
 
 {% block listofteachers %}
 
-    <ol id="uitest">
+    <ul id="uitest">
         {% for item in teachersInCourse(varrubrik) %}
             <li><a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
             </li>
 
             {% endfor %}
 
-    </ol>
+    </ul>
 {% endblock %}
 
 
