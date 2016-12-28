@@ -441,7 +441,7 @@ def index2():
 def user_edit_titlename1():
     id = request.form["pk"]
     print id
-    print "hej"
+    print "he"
 
     varteacher = Teachers.query.get(id)
     print varteacher
