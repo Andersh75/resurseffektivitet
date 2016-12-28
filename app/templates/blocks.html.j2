@@ -236,34 +236,56 @@
 {% block scheduleincourses %}
 
 
-<ul class="list-unstyled list-inline" id="uitest">
-    {% for item in teachersInCourse(varrubrik) %}
+{% for item in teachersInCourse(varrubrik) %}
+
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <ul class="list-unstyled list-inline">
         <li>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-
-
             <a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
-            </div>
         </li>
+    </ul>
+</div>
 
-        {% endfor %}
-
-</ul>
-<ul class="list-unstyled list-inline" id="5uitest">
-    {% for item in teachersInCourse(varrubrik) %}
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <ul class="list-unstyled list-inline">
         <li>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-
-
-            <a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
-            </div>
+            <a href="#" class="btn btn-success btn-xs">hej {{ item[1] }}</a>
         </li>
+    </ul>
+</div>
 
-        {% endfor %}
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <ul class="list-unstyled list-inline">
+        <li>
+            <a href="#" class="btn btn-success btn-xs">hej {{ item[2] }}</a>
+        </li>
+    </ul>
+</div>
 
-</ul>
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <ul class="list-unstyled list-inline">
+        <li>
+            <a href="#" class="btn btn-success btn-xs">hej {{ item[3] }}</a>
+        </li>
+    </ul>
+</div>
 
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <ul class="list-unstyled list-inline">
+        <li>
+            <a href="#" class="btn btn-success btn-xs">hej {{ item[4] }}</a>
+        </li>
+    </ul>
+</div>
 
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <ul class="list-unstyled list-inline">
+        <li>
+            <a href="#" class="btn btn-success btn-xs">hej {{ item[5] }}</a>
+        </li>
+    </ul>
+</div>
+{% endfor %}
 
 
 
