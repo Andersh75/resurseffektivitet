@@ -50,7 +50,7 @@ def grabcoursepm(code):
     #print contactName
     if isinstance(courseresp, unicode):
         #contactName = unicode(contactName, "utf8")
-        print "Unicode Hejas"
+        print "Unicode Heja s"
         #contactName="Unicode"
         #print contactName
     else:
