@@ -237,11 +237,27 @@
 
 
 {% for item in scheduleInCourse(varrubrik) %}
+        {% set rowloop = loop %}
 
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
     <ul class="list-unstyled list-inline">
         <li>
-            <a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
+            {% if item[2] > 9 %}
+                {% if item[3] > 9 %}
+                <a href="#" class="text-left">{{ item[1] }}-{{ item[2] }}-{{ item[3] }}</a>
+                {% endif %}
+                {% if item[3] < 10 %}
+                <a href="#" class="text-left">{{ item[1] }}-{{ item[2] }}-0{{ item[3] }}</a>
+                {% endif %}
+            {% endif %}
+            {% if item[2] < 10 %}
+                {% if item[3] > 9 %}
+                <a href="#" class="text-left">{{ item[1] }}-0{{ item[2] }}-{{ item[3] }}</a>
+                {% endif %}
+                {% if item[3] < 10 %}
+                <a href="#" class="text-left">{{ item[1] }}-0{{ item[2] }}-0{{ item[3] }}</ta>
+                {% endif %}
+            {% endif %}
         </li>
     </ul>
 </div>
@@ -249,7 +265,7 @@
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
     <ul class="list-unstyled list-inline">
         <li>
-            <a href="#" class="btn btn-success btn-xs">hej {{ item[1] }}</a>
+            <a href="#" class="btn btn-success btn-xs">{{ item[4] }}-{{ item[5] }}</a>
         </li>
     </ul>
 </div>
@@ -257,7 +273,7 @@
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
     <ul class="list-unstyled list-inline">
         <li>
-            <a href="#" class="btn btn-success btn-xs">hej {{ item[2] }}</a>
+            <a href="#" class="btn btn-success btn-xs">{{ item[6] }}</a>
         </li>
     </ul>
 </div>
@@ -265,7 +281,7 @@
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
     <ul class="list-unstyled list-inline">
         <li>
-            <a href="#" class="btn btn-success btn-xs">hej {{ item[3] }}</a>
+            <a href="#" class="btn btn-success btn-xs">{{ item[3] }}</a>
         </li>
     </ul>
 </div>
@@ -273,7 +289,7 @@
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
     <ul class="list-unstyled list-inline">
         <li>
-            <a href="#" class="btn btn-success btn-xs">hej {{ item[4] }}</a>
+            <a href="#" class="btn btn-success btn-xs">{{ item[4] }}</a>
         </li>
     </ul>
 </div>
