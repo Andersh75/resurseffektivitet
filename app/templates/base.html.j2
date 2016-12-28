@@ -19,6 +19,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+    <script src='js/jquery-sortable.js'></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
@@ -27,7 +29,24 @@
 
 
     <style type = "text/css">
+    body.dragging, body.dragging * {
+      cursor: move !important;
+    }
 
+    .dragged {
+      position: absolute;
+      opacity: 0.5;
+      z-index: 2000;
+    }
+
+    ol.example li.placeholder {
+      position: relative;
+      /** More li styles **/
+    }
+    ol.example li.placeholder:before {
+      position: absolute;
+      /** Define arrowhead **/
+    }
 
     </style>
 </head>
@@ -35,6 +54,12 @@
 
 <body>
     <div class="container">
+        <ol class='example'>
+  <li>First</li>
+  <li>Second</li>
+  <li>Third</li>
+</ol>
+
         <div class="row page-header">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 {% block rubrik %}
@@ -189,17 +214,16 @@
             $('tr').draggable({
             });
 
-
-
+            $(function  () {
+                $("ol.example").sortable();
+            });
 
             $('#chart3').draggable();
 
-
-
-
-
         });
     </script>
+
+
 
 </body>
 
