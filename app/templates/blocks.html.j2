@@ -6,7 +6,9 @@
 
     <ol id="uitest">
         {% for item in teachersInCourse(varrubrik) %}
-            <li type="button" class="btn btn-success btn-xs">{{ item[0] }}</li>
+            <li><a href="#" class="btn btn-success btn-xs">{{ item[0] }}</a>
+            </li>
+
             {% endfor %}
 
     </ol>
