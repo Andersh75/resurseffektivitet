@@ -244,18 +244,18 @@
         <li>
             {% if item[2] > 9 %}
                 {% if item[3] > 9 %}
-                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}{{ item[2] }}{{ item[3] }}</a><br />
+                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}{{ item[2] }}{{ item[3] }}<br /><br /></a>
                 {% endif %}
                 {% if item[3] < 10 %}
-                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}{{ item[2] }}0{{ item[3] }}</a><br />
+                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}{{ item[2] }}0{{ item[3] }}<br /><br /></a>
                 {% endif %}
             {% endif %}
             {% if item[2] < 10 %}
                 {% if item[3] > 9 %}
-                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}0{{ item[2] }}{{ item[3] }}</a><br />
+                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}0{{ item[2] }}{{ item[3] }}<br /><br /></a>
                 {% endif %}
                 {% if item[3] < 10 %}
-                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}0{{ item[2] }}0{{ item[3] }}</ta><br />
+                <a href="#" class="text-left">{{ item[1][2] }}{{ item[1][3] }}0{{ item[2] }}0{{ item[3] }}<br /><br /></ta>
                 {% endif %}
             {% endif %}
         </li>
