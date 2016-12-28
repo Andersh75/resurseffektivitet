@@ -1,0 +1,97 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <p>hej</p>
+    {{ room.name }}
+{% endblock %}
+
+
+    <div class="container">
+        {% block page_content3 %}
+        {% endblock %}
+    </div>
+
+    <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                <h4>
+                    <a href="#col2Content" data-toggle="collapse">Column 1
+                    </a>
+                </h4>
+                    <div id="col2Content" class="collapse">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor...</p>
+                    </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                <h4>Column 2</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor...</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                <h4>Column 3</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor...</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                <h4>Column 4</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <br />
+
+    <div class="jumbotron">
+        <p>
+            {{ varia }} dfsdfHHHXXH sdfsdfdsf sdfsdfdsfdfsdsdfdfs sdfsdfsdfsdf sdfsdfsdfsdf sdfsdfds
+            sdfsdfsdfsdf sdfsdfsdfsdfdfadfadfds sdfsdfsdf
+            sdfdsfsdfdsf
+            sdfsdfsdfsdfsdfsdfsdfsdf  {% block page_content2 %}{% endblock %}
+            {{ hello(varia) }}
+        </p>
+        <p>
+            <a href="#" class="btn btn-warning" role="button">More info
+            </a>
+            <button type="submit" class="btn btn-danger" role="button" disabled="disabled">Text</button>
+            <input type="button" value="Info" class="btn btn-info"/>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-danger">One</button>
+                <button type="button" class="btn btn-info">Two</button>
+                <button type="button" class="btn btn-danger">Three</button>
+                <button type="button" class="btn btn-warning">Four</button>
+
+            </div>
+        </p>
+    </div>
+
+    <br />
+
+    <!-- Show / Hide elements based on screen size -->
+    <div class="container">
+        <div class="well hidden-sm hidden-md hidden-lg">
+            <p>Screen &lt; 768px</p>
+        </div>
+        <div class="well hidden-md hidden-lg">
+            <p>Screen &gt;= 768px and &lt; 992px</p>
+        </div>
+
+        <div class="well hidden-lg">
+            <p>Screen &gt;= 992px and &lt; 1200px</p>
+        </div>
+
+        <div class="well">
+            <p>Screen &gt; 1200px</p>
+        </div>
+    </div>
+    <br>

@@ -1,0 +1,408 @@
+{% extends "peoplebase.html.j2" %}
+
+
+{% block rubrik %}
+        <h1>
+            {% for item in teachernamefromid(xteacher): %}
+                <a href="#" id="titlename{{ loop.index }}" data-url="/user_edit_titlename{{ loop.index }}" data-pk="{{ xteacher[0] }}" data-title="Change your fullname">{{ item }}</a>
+            {% endfor %}
+        </h1>
+        {% set title, credits, educationalLevel, department, courseresp, examiner = grabcoursepm(varrubrik) %}
+        <h3>{{ department }}
+        </h3>
+{% endblock %}
+
+
+
+
+{% block kursinfo %}
+    {% set title, credits, educationalLevel, department, courseresp, examiner = grabcoursepm(varrubrik) %}
+    <p>
+        Examinator: {{ examiner }}
+    </p>
+    <p>
+        Poäng: {{ credits }}
+    </p>
+    <p>
+        Avdelning: {{ department }}
+    </p>
+    <p>
+        Kursansvarig: {{ courseresp }}
+    </p>
+{% endblock %}
+
+
+
+
+{% block coursesforteacherid %}
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th class="text-left">Kurskod</th>
+                <th class="text-left">Namn</th>
+                <th class="text-left">Timmar</th>
+            </tr>
+            {% for item in defcoursesforteacherid(xteacher): %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+            </tr>
+            {% endfor %}
+
+            {% for item in defcoursestotalhoursforteacherid(xteacher): %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{ item[2] }}</td>
+            </tr>
+            {% endfor %}
+
+
+
+        </tbody>
+    </table>
+{% endblock %}
+
+
+
+
+
+
+{% block examinerforteacherid %}
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th class="text-left">Kurskod</th>
+                <th class="text-left">Namn</th>
+            </tr>
+            {% for item in defexaminerforteacherid(xteacher): %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
+
+
+
+
+
+{% block teachersincourses %}
+    {% for item in teachersInCourse(varrubrik): %}
+        <p>
+            {{ item[0] }} {{ item[1] }}
+        </p>
+    {% endfor %}
+{% endblock %}
+
+
+
+
+
+
+
+{% block roomsincourses %}
+    {% for item in roomsInCourse(varrubrik): %}
+        <p>
+            {{ item[0] }}
+        </p>
+    {% endfor %}
+{% endblock %}
+
+
+
+
+
+{% block toproomsincourses %}
+
+
+    <!-- You can constrain the columns if you want -->
+
+
+  <!-- We could move it to the right with a blank div
+  <div class="col-md-6"></div> -->
+
+  <!-- Or we could use offset -->
+
+
+    <!-- The table class adds nice spacing and the other classes add additional style -->
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th class="text-left">Salstyp</th>
+                        <th class="text-left">Antal timmar</th>
+                        <th class="text-left">Kostnad</th>
+                    </tr>
+                    {% for item in topRoomsInCourseSum(varrubrik): %}
+                    <tr>
+                        <td>{{ item[1] }}</td>
+                        <td>{{ item[2] }}</td>
+                        <td>{{ item[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td>{{ RoomsInCourseNumbersSum(varrubrik) }}</td>
+                        <td>{{ topRoomsInCourseTotal(varrubrik) }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+{% endblock %}
+
+
+
+
+
+{% block teachersincoursesnumbers %}
+
+
+    <!-- You can constrain the columns if you want -->
+
+
+  <!-- We could move it to the right with a blank div
+  <div class="col-md-6"></div> -->
+
+  <!-- Or we could use offset -->
+
+
+    <!-- The table class adds nice spacing and the other classes add additional style -->
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th class="text-left">Namn</th>
+                <th class="text-left">Antal timmar</th>
+            </tr>
+            {% for item in TeachersInCourseNumbers(varrubrik): %}
+            <tr>
+                <td>{{ item[0] }} {{ item[1] }} </td>
+                <td>{{ item[2] }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    {{ TeachersInCourseNumbersSum(varrubrik) }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% block scheduleincourses %}
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th class="text-left">Datum</th>
+                <th class="text-left">Tid</th>
+                <th class="text-left">Innehåll</th>
+                <th class="text-left">Salar</th>
+            </tr>
+            {% for item in scheduleInCourse(varrubrik): %}
+            <tr>
+                {% if item[2] > 9 %}
+                    {% if item[3] > 9 %}
+                    <td class="text-left">{{ item[1] }}-{{ item[2] }}-{{ item[3] }}</td>
+                    {% endif %}
+                    {% if item[3] < 10 %}
+                    <td class="text-left">{{ item[1] }}-{{ item[2] }}-0{{ item[3] }}</td>
+                    {% endif %}
+                {% endif %}
+                {% if item[2] < 10 %}
+                    {% if item[3] > 9 %}
+                    <td class="text-left">{{ item[1] }}-0{{ item[2] }}-{{ item[3] }}</td>
+                    {% endif %}
+                    {% if item[3] < 10 %}
+                    <td class="text-left">{{ item[1] }}-0{{ item[2] }}-0{{ item[3] }}</td>
+                    {% endif %}
+                {% endif %}
+                <td class="text-left">{{ item[4] }}-{{ item[5] }}</td>
+                <td class="text-left">{{ item[6] }}</td>
+
+
+
+
+
+                <td class="text-left">
+                    {% for subitem in roomsOnDate(item[0], varrubrik): %}
+                        {{ subitem[0] }}&nbsp;&nbsp;
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block page_content2 %}
+då {{ hello(varia) }}
+{% endblock %}
+
+{% block page_content3 %}
+
+
+    <!-- You can constrain the columns if you want -->
+    <div class="row">
+
+  <!-- We could move it to the right with a blank div
+  <div class="col-md-6"></div> -->
+
+  <!-- Or we could use offset -->
+        <div class="col-md-12">
+
+    <!-- The table class adds nice spacing and the other classes add additional style -->
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td colspan="4">Best Baseball {{ varia }} Players {{ grabcoursepm(varrubrik) }} </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+    <!-- You can adjust the width of table columns as well -->
+                        <th class="col-md-2"></th>
+
+    <!-- Use text alignment like text-center or text-right -->
+                        <th class="text-center">Average</th>
+                        <th class="text-center">RBIs</th>
+                        <th class="text-center">Homeruns</th>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Hank Aaron*</a></td>
+                        <td>.305</td>
+                        <td>2297</td>
+                        <td>755</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Babe Ruth*</a></td>
+                        <td>.342</td>
+                        <td>2214</td>
+                        <td>714</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Barry Bonds</a></td>
+                        <td>.298</td>
+                        <td>1996</td>
+                        <td>762</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block chart1 %}
+{% set avar = topRoomsInCourseNumbers(varrubrik)[0] %}
+{% set bvar = topRoomsInCourseNumbers(varrubrik)[1] %}
+{% set cvar = topRoomsInCourseNumbers(varrubrik)[2] %}
+{% set dvar = topRoomsInCourseNumbers(varrubrik)[3] %}
+{% set evar = topRoomsInCourseNumbers(varrubrik)[4] %}
+{% set fvar = topRoomsInCourseNumbers(varrubrik)[5] %}
+{% set gvar = topRoomsInCourseNumbers(varrubrik)[6] %}
+{% set hvar = topRoomsInCourseNumbers(varrubrik)[7] %}
+{% set ivar = topRoomsInCourseNumbers(varrubrik)[8] %}
+{% set jvar = topRoomsInCourseNumbers(varrubrik)[9] %}
+
+
+
+<div class="ct-chart" id="chart3"</div>
+<script>
+// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+// as you saw in the previous example
+
+var data = {
+  series: [{{ avar }}, {{ bvar }}, {{ cvar }}, {{ dvar }}, {{ evar }}, {{ fvar }}, {{ gvar }}, {{ hvar }}, {{ ivar }}, {{ jvar }}]
+};
+
+var options = {
+  width: 170,
+  height: 170
+};
+
+var sum = function(a, b) { return a + b };
+
+
+  // Initialize a Line chart in the container with the ID chart1
+  var myChart = new Chartist.Pie('#chart3', data, options, {
+    labelInterpolationFnc: function(value) {
+      return Math.round(value / data.series.reduce(sum) * 100) + '%';
+    }
+});
+
+
+</script>
+
+
+{% endblock %}
+
+
+{% block chart2 %}
+
+
+
+
+<div class="ct-chart" id="chart4"</div>
+<script>
+// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+// as you saw in the previous example
+
+var data = {
+  series: {{ TeachersInCourseNumbersTest(varrubrik) }}
+};
+
+var options = {
+  width: 170,
+  height: 170
+};
+
+var sum = function(a, b) { return a + b };
+
+
+  // Initialize a Line chart in the container with the ID chart1
+  var myChart = new Chartist.Pie('#chart4', data, options, {
+    labelInterpolationFnc: function(value) {
+      return Math.round(value / data.series.reduce(sum) * 100) + '%';
+    }
+});
+
+
+</script>
+
+
+{% endblock %}

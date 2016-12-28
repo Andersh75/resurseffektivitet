@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+	<meta charset="utf-8">
+	<title>Python Programming Tutorials</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+</html>
+<body>
+
+
+
+	{% for item in unlist: %}
+
+		{{ item.content }}
+	<hr>
+	{% endfor %}
+	<hr>
+	<hr>
+	<hr>
+
+
+	{% for item in Coursevar: %}
+
+		{{ item }}
+	<hr>
+	{% endfor %}
+	<hr>
+	<hr>
+	<hr>
+	xx
+	{% for item in Datevar: %}
+
+		{{ item }}
+	<hr>
+	{% endfor %}
+	<hr>
+	<hr>
+	<hr>
+	zz
+	{% for item in unlist: %}
+
+		{{ item }}
+	<hr>
+	{% endfor %}
+	<hr>
+	<hr>
+	<hr>
+
+	{% for item in mylist: %}
+
+		{{ item }}
+	<hr>
+	{% endfor %}
+	<hr>
+	<hr>
+	<hr>
+	{{ Classes.query.order_by(Classes.content).first().content }}
+	qq
+	{{ Rooms.query.all()[1].name }}
+	<br/>
+	    Hej
+	<br/>
+	{{ Rooms.query.filter_by(name='F1').first().seats }}
+	<br/>
+	{% for r in Rooms.query.order_by(Rooms.seats): %}
+		{{ r.seats }}
+	{% endfor %}
+	<br/>
+
+	{% for r in Rooms.query.limit(2).all(): %}
+		{{ r.seats }}
+	{% endfor %}
+
+	<br/>
+
+
+	{{ Rooms.query.get(3).seats }}
+
+
+	<br/>
+
+	{% for r in Roomtypes.query.filter_by(id='4').first().rooms.all(): %}
+		{{ r.name }}
+	{% endfor %}
+
+	<br/>
+	{% for r in Rooms.query.order_by(Rooms.seats).all(): %}
+		{{ r.seats }}
+	{% endfor %}
+
+	<br/>
+	HHHH
+	<br/>
+	{{ Courses.query.filter_by(code='AI1147').first().code }}
+
+	<br/>
+
+	<!-- Namnen på alla freläsningar i en kurs -->
+	{% set newvar = Courses.query.filter_by(code='AI1147').all() %}
+
+	{{ newvar }}
+
+	{% for item in newvar: %}
+	{% for i in item.classes.all(): %}
+		{{ i.content }}
+		<br/>
+		{% endfor %}
+	{% endfor %}
+
+	<!-- End -->
+
+	<br/>
+
+
+
+<hr>
+<hr>
+<hr>
+	<!-- Datum på alla freläsningar i en kurs. Hur får jag de i stigande ordning? -->
+	{% set newvar = Courses.query.filter_by(code='AI1147').first() %}
+
+	{{ newvar.classes.order_by(Classes.id).all() }}
+
+	{% for item in newvar.classes.order_by(Classes.id).all(): %}
+
+		{{ item.content }}
+<hr>
+	{% endfor %}
+
+
+
+	{{ newvar.classes.order_by(Classes.id).all() }}
+
+
+
+
+
+	<!-- End -->
+
+
+	<br/>
+	{{ Classes.query.order_by(Classes.content).all() }}
+
+	{% for item in Classes.query.order_by(Classes.content).all(): %}
+
+		{{ item.content }}
+	<hr>
+	{% endfor %}
+
+	<hr>
+	<hr>
+	<hr>
+	<hr>
+	<hr>
+	<hr>
+
+
+
+
+
+
+
+
+</body>

@@ -1,0 +1,201 @@
+{% from "macros.html.j2" import hello %}
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <title>Resurshanteringssystem</title>
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+</head>
+
+
+
+<body>
+    <div class="container">
+        <div class="row page-header">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                {% block rubrik %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <ul class="pagination">
+                    <li>
+                        {% set courseidprev = xteacher[0] - 1 %}
+                        {% set courseidnext = xteacher[0] + 1 %}
+
+                        {% if xteacher[0] == 28 %}
+                        {% set courseidnext = 7 %}
+                        {% endif %}
+
+                        {% if xteacher[0] == 7 %}
+                        {% set courseidprev = 28 %}
+                        {% endif %}
+
+
+                        <a href="{{ url_for('peopleindex', page=courseidprev) }}">&laquo</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('peopleindex', page=courseidnext) }}">&raquo</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+        <br />
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h4>Kurser
+                </h4>
+                {% block coursesforteacherid %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h4>Fördelning
+                </h4>
+                {% block chart2 %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h4>Kurser
+                </h4>
+                {% block examinerforteacherid %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h4>Fördelning
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h4>Salar
+                </h4>
+                {% block toproomsincourses %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h4>Fördelning
+                </h4>
+                {% block chart1 %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>Schema
+                </h4>
+                {% block scheduleincourses %}
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+
+    <script type="text/javascript">
+        $('document').ready(function() {
+            $.fn.editable.defaults.mode = 'inline';
+
+            $('#titlename1').editable({
+                title: 'Select Course'
+            });
+
+            $('#titlename2').editable({
+                title: 'Select Course'
+            });
+        });
+    </script>
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

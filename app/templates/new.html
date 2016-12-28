@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+	<meta charset="utf-8">
+	<title>Python Programming Tutorials</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+</html>
+<body>
+{{ yeartest }}
+
+{% set newvar = testar(kurskod) %}
+{% for item in newvar: %}
+{{ item[0] }}
+<hr>
+{% endfor %}
+
+<hr>
+<hr>
+{% for item in xvar: %}
+<p>{{ item }}</p>
+<hr>
+{% endfor %}
+</body>
