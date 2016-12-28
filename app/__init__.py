@@ -70,7 +70,7 @@ def grabcoursepm(code):
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e56'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@dansfolk.no-ip.org:1080/e56'
 db = SQLAlchemy(app)
 
 
