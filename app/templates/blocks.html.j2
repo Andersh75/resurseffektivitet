@@ -4,7 +4,7 @@
 
 {% block listofteachers %}
 
-    <ul class="list-unstyled" id="uitest">
+    <ul class="list-unstyled" id="3uitest">
         {% for item in teachersInCourse(varrubrik) %}
             <li><a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
             </li>
@@ -234,6 +234,26 @@
 
 
 {% block scheduleincourses %}
+
+
+<ul class="list-unstyled" id="uitest">
+    {% for item in teachersInCourse(varrubrik) %}
+        <li>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+
+
+            <a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
+            </div>
+        </li>
+
+        {% endfor %}
+
+</ul>
+
+
+
+
+
     <table class="table table-hover sorted_table">
         <tbody>
             <tr>
@@ -243,40 +263,6 @@
                 <th class="text-left">Salar</th>
                 <th class="text-left">Lärare</th>
             </tr>
-            <tr>
-                <td>
-                    test
-                </td>
-                <td>
-                    test
-                </td>
-                <td>
-                    test
-                </td>
-                <td>
-                    test
-                </td>
-                <td>
-
-
-                        <ul class="list-unstyled" id="uitest">
-                            {% for item in teachersInCourse(varrubrik) %}
-                                <li><a href="#" class="btn btn-success btn-xs">hej {{ item[0] }}</a>
-                                </li>
-
-                                {% endfor %}
-
-                        </ul>
-
-
-            
-                </td>
-            </tr>
-
-
-
-
-
             {% for item in scheduleInCourse(varrubrik): %}
             {% set rowloop = loop %}
             <tr>
