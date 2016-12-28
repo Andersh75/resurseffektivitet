@@ -201,7 +201,6 @@ class Schedules(db.Model):
 '''
 
 
-
 # Lista med larare som anvands i en kurs
 def teachersInCourse(course):
     templist = []
