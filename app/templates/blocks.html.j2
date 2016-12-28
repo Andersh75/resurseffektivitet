@@ -1,6 +1,20 @@
 {% extends "base.html.j2" %}
 
 
+
+{% block listofteachers %}
+
+    <ol id="uitest">
+        {% for item in teachersInCourse(varrubrik) %}
+            <li><button type="button" class="btn btn-success btn-xs">{{ item[0] }}</button></li>
+            {% endfor %}
+
+    </ol>
+{% endblock %}
+
+
+
+
 {% block rubrik %}
         <h1>{{ varrubrik }}
         </h1>
