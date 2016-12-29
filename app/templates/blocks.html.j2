@@ -249,6 +249,19 @@
     </ul>
 </div>
 
+<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+<ul class="list-unstyled">
+{% for item in scheduleInCourse(varrubrik) %}
+        {% set rowloop = loop %}
+
+        <li style="overflow: hidden; text-overflow: ellipsis">
+            <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}">{{ item[6] }}</a>
+        </li>
+{% endfor %}
+    </ul>
+</div>
+
+
 
 
 
