@@ -473,7 +473,9 @@ def index2():
 def background_process():
 	lang = request.args.get('proglang', 0, type=str)
 	if lang.lower() == 'python':
-		return json.dumps({"c": 0, "b": 0})
+        respons = {}
+        respons = json.dumps({"c": 0, "b": 0})
+		return respons
 	else:
         return jsonify({'status': True, 'result': "Please check the peer's state"})
 
