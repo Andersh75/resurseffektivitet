@@ -482,7 +482,7 @@ def background_process():
             })
 		else:
 			return json.dumps({
-                'status': True,
+                'status': False,
                 'result': "Please check the peer's state"
             })
 	except Exception as e:
