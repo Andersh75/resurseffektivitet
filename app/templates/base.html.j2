@@ -304,8 +304,8 @@
 
             });
 
-            $('[id^=content]').click(function() {
-                $('[id^=content]').editable('setValue', datavar)
+            $('[id^=xxx]').click(function() {
+                $('[id^=xxx]').editable('setValue', datavar)
                                     .editable({
                                         title: 'Select status',
                                         mode: 'popup',
@@ -326,6 +326,22 @@
                 //$('#msg').hide();
             });
 
+            var getSource = function() {
+                //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
+                return 'Hej';
+            };
+
+            $('[id^=content]').editable({  //to keep track of selected values in multi select
+                type: 'select2',
+                url: '/post',
+                autotext : 'always',
+                value : [1,2],
+                source : getSource(),
+                emptytext: 'None',
+                select2: {
+                    multiple : true
+                }
+            });
 
 
 
