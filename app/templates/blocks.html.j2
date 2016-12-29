@@ -244,10 +244,10 @@
         <li>
             {% if item[2] > 9 %}
                 {% if item[3] > 9 %}
-                <a href="#" class="text-left">{{ defyearslicer(item[1]) }}{{ item[2] }}{{ item[3] }}</a>
+                <a href="#" class="text-left">{{ item[1] }}{{ item[2] }}{{ item[3] }}</a>
                 {% endif %}
                 {% if item[3] < 10 %}
-                <a href="#" class="text-left">{{ defyearslicer(item[1]) }}{{ item[2] }}0{{ item[3] }}</a>
+                <a href="#" class="text-left">{{ item[1] }}{{ item[2] }}0{{ item[3] }}</a>
                 {% endif %}
             {% endif %}
             {% if item[2] < 10 %}
