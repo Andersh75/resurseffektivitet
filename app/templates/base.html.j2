@@ -332,14 +332,12 @@
             };
 
             $('[id^=content]').editable({  //to keep track of selected values in multi select
-                type: 'select2',
+                type: 'select',
                 url: '/post',
                 autotext : 'always',
                 value : [1,2],
                 source : getSource(),
                 emptytext: 'None',
-                select2: {
-                    multiple : true
                 }
             });
 
