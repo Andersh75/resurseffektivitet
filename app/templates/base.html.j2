@@ -269,7 +269,8 @@
                 $.getJSON('/background_process', {
                   proglang: $('input[name="proglang"]').val(),
                 }, function(result) {
-                  alert(JSON.stringify(result));
+                    var varresult = JSON.stringify(result);
+                    alert(varresult);
                 });
                 return false;
             });
