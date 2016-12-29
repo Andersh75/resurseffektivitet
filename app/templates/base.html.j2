@@ -99,32 +99,29 @@
 
 
 
-        <ol class='example'>
-  <li>First</li>
-  <li>Second</li>
-  <li>Third</li>
-</ol>
-<table class="grid" id="sort" title="Kurt Vonnegut novels">
-<thead>
-<tr><th>Year</th><th>Title</th><th>Grade</th></tr>
-</thead>
-<tbody>
-<tr><td>1969</td><td>Slaughterhouse-Five</td><td>A+</td></tr>
-<tr><td>1952</td><td>Player Piano</td><td>B</td></tr>
-<tr><td>1963</td><td>Cat’s Cradle</td><td>A+</td></tr>
-<tr><td>1973</td><td>Breakfast of Champions</td><td>C</td></tr>
-<tr><td>1965</td><td>God Bless You, Mr. Rosewater</td><td>A</td></tr>
-</tbody>
-</table>
+            <ol class='example'>
+      <li>First</li>
+      <li>Second</li>
+      <li>Third</li>
+    </ol>
+    <table class="grid" id="sort" title="Kurt Vonnegut novels">
+    <thead>
+    <tr><th>Year</th><th>Title</th><th>Grade</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>1969</td><td>Slaughterhouse-Five</td><td>A+</td></tr>
+    <tr><td>1952</td><td>Player Piano</td><td>B</td></tr>
+    <tr><td>1963</td><td>Cat’s Cradle</td><td>A+</td></tr>
+    <tr><td>1973</td><td>Breakfast of Champions</td><td>C</td></tr>
+    <tr><td>1965</td><td>God Bless You, Mr. Rosewater</td><td>A</td></tr>
+    </tbody>
+    </table>
 
-{% block listofteachers %}
+    {% block listofteachers %}
 
-{% endblock %}
+    {% endblock %}
 
-<div class="container">
-
-
-
+    <div class="container">
         <div class="row page-header">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 {% block rubrik %}
@@ -160,21 +157,31 @@
 
 
 
-<div class="container">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+    <div class="container">
+        <div class="row">
 
-        {% for subitem in teachersInCourse(varrubrik): %}
-            <a href="#" class="btn btn-success btn-xs" id="allteachers{{ loop.index }}">{{ subitem[2] }}</a>
-        {% endfor %}
+
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                {% for subitem in teachersInCourse(varrubrik): %}
+                    <a href="#" class="btn btn-success btn-xs" id="allteachers{{ loop.index }}">{{ subitem[2] }}</a>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+
 
     </div>
-
-</div>
-
-<br />
-<br />
-<br />
-
+    <br />
+    <br />
+    <br />
 
     <div class="container">
 
