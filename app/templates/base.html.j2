@@ -252,6 +252,16 @@
 
             $('tbody').sortable();
 
+            $(function(){
+  $(".title").each(function(i){
+    len=$(this).text().length;
+    if(len>10)
+    {
+      $(this).text($(this).text().substr(0,10)+'...');
+    }
+  });
+});
+
         });
     </script>
 
