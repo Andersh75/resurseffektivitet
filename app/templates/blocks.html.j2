@@ -280,7 +280,7 @@
 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="overflow: hidden; text-overflow: ellipsis">
     <ul class="list-unstyled list-inline" style="overflow: hidden; text-overflow: ellipsis">
         <li style="overflow: hidden; text-overflow: ellipsis">
-            <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis">{{ item[6] }}</a>
+            <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}">{{ item[6] }}</a>
         </li>
     </ul>
 </div>
@@ -352,7 +352,7 @@
                 {% if item[4] < 10 %}
                 <td class="text-left">0{{ item[4] }}-{{ item[5] }}</td>
                 {% endif %}
-                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ (item[6]) }}</td>
+                <td class="text-left"><a href="#" id="2content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ (item[6]) }}</td>
                 <td class="text-left">
                     {% for subitem in roomsOnDate(item[0], varrubrik): %}
                         <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
