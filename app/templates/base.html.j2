@@ -69,6 +69,7 @@
 
 
 <body>
+    <a href=# id=process_input><button class='btn btn-default'>Submit</button></a>
     <div class="container">
 
 
@@ -257,7 +258,7 @@
                     url:   url,
                     dataType: "json"
                 });
-            }
+            };
 
             getSource().done(function(result) {
 
@@ -274,6 +275,19 @@
                      */
                 });
             });
+
+
+
+            $(function() {
+			  $('a#process_input').bind('click', function() {
+				$.getJSON('/background_process', {
+				  proglang: $('hej').val(),
+				}, function(data) {
+				  $("#result").text(data.result);
+				});
+				return false;
+			  });
+			});
 
 
 
