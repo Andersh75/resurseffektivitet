@@ -275,7 +275,7 @@
 
             getSource().done(function(result) {
 
-                $('[id^=selectteacher]').editable({
+                $('[id^=xxx]').editable({
                     type: 'select',
                     title: 'Select status',
                     placement: 'right',
@@ -287,6 +287,23 @@
                      ,url: '/post'
                      */
                 });
+            });
+
+            $('[id^=selectteacher]').editable({
+                type: 'select',
+                title: 'Select status',
+                placement: 'right',
+                value: 2,
+                source: [
+                    {value: 1, text: 'first'},
+                    {value: 2, text: 'second'},
+                    {value: 3, text: 'third'}
+                ]
+                /*
+                 //uncomment these lines to send data on server
+                 ,pk: 1
+                 ,url: '/post'
+                 */
             });
 
 
