@@ -211,7 +211,6 @@ class Schedules(db.Model):
 
 
 
-
 def allteachers():
     templist = []
     tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().order_by(Teachers.initials).all()
