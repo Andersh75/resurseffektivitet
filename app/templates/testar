@@ -1,3 +1,22 @@
+<div class="container">
+    <div class="row">
+
+            {% block scheduleincourses %}
+            {% endblock %}
+
+    </div>
+
+</div>
+
+<br />
+<br />
+<br />
+
+
+
+
+
+
 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height: 40px">
     <ul class="list-unstyled">
         <li>
