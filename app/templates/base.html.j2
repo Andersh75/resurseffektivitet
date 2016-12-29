@@ -329,21 +329,28 @@
                 //$('#msg').hide();
             });
 
-            var getSource = function() {
-                $.get("/background_process", function(data, status){
-                    alert("Data: " + data + "\nStatus: " + status);
-                });
-                //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
-                //return '[{value: 1, text: "text1"}, {value: 2, text: "text3"}]';
-                return data;
-            };
+            //var getSource = function() {
+            //    $.get("/background_process", function(data, status){
+            //        alert("Data: " + data + "\nStatus: " + status);
+            //    });
+            //    //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
+            //    //return '[{value: 1, text: "text1"}, {value: 2, text: "text3"}]';
+            //    return data;
+            //};
 
             $('[id^=content]').click(function() {
                 $('[id^=content]').editable({  //to keep track of selected values in multi select
                     type: 'select',
                     autotext : 'always',
                     value : [1,2],
-                    source : getSource(),
+                    //source : getSource(),
+                    source : [{% for item in scheduleInCourse(varrubrik) %}
+                        {value: {{ loop.index }}, text: "{{ item[6] }}"}
+                        {% if not loop.last %}
+                        ,
+                        {% endif %}
+                    {% end for %}]
+                        
                     emptytext: 'None'
                 });
             });
