@@ -248,6 +248,9 @@
 
 
     <script type="text/javascript">
+
+    var datavar;
+    
         $('document').ready(function() {
             $.fn.editable.defaults.mode = 'inline';
 
@@ -263,20 +266,28 @@
             element.innerHTML = "New Header";
 
 
-            function getSource() {
-                return $.ajax({
-                    type:  'GET',
-                    async: true,
+            function getSource()
+            {
+                var result = null;
+                $.ajax({
+                    type:  'get',
                     url:   '/background_process',
-                    dataType: "json"
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        result = data;
+                    }
                 });
+                return result;
             };
+
+
 
 
             $('a#process_input').click(function(){
                 $.get("/background_process", function(data, status){
                     alert("Data: " + data + "\nStatus: " + status);
-                    var datavar = data
+                    datavar = data
                 });
             });
 
