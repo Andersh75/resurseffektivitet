@@ -108,6 +108,20 @@
                             });
                         });
 
+
+
+
+                        'a#process_input'
+
+                        [
+                            {value: 1, text: 'first'},
+                            {value: 2, text: 'second'},
+                            {value: 3, text: 'third'}
+                        ]
+
+
+                        
+
                         $('[id^=xxx]').editable({
                             mode: 'popup',
                             type: 'select',
