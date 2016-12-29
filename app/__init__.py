@@ -471,7 +471,7 @@ def index2():
 
 @app.route('/background_process')
 def background_process():
-    #respons = json.dumps({"c": 0, "b": 0})
+    print json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
 	return jsonify({'status': True, 'result': "Please check the peer's state"})
 
 
