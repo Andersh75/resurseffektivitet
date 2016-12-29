@@ -581,7 +581,6 @@ def user_edit_content(page):
 
 
 
-
 @app.errorhandler(404)
 def page_not_found(e):
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
