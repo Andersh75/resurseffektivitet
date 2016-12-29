@@ -269,8 +269,9 @@
                 $.getJSON('/background_process', {
                   proglang: $('input[name="proglang"]').val(),
                 }, function(result) {
-                    var varresult = JSON.stringify(result);
-                    alert(varresult);
+                    //var varresult = JSON.stringify(result);
+                    var resultet = result
+                    alert(resultet);
                 });
                 return false;
             });
@@ -282,7 +283,7 @@
                 title: 'Select status',
                 placement: 'right',
                 value: 2,
-                source: varresult
+                source: resultet
                 /*
                  //uncomment these lines to send data on server
                  ,pk: 1

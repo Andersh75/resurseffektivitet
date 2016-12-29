@@ -107,6 +107,7 @@ dates_teachers = db.Table('dates_teachers',
     db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id'))
 )
 
+
 '''
 rooms_schedules = db.Table('rooms_schedules',
     db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id')),
