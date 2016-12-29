@@ -462,7 +462,6 @@ def user_edit_titlename1():
 
 
 
-
 @app.route('/user_edit_titlename2',methods=['GET', 'POST'])
 def user_edit_titlename2():
     id = request.form["pk"]
