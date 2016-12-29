@@ -431,7 +431,7 @@ def index(page):
         #return render_template('base.html')
         #return render_template('test.xml'), mimetype='application/xml'
         print json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
-        print json.dumps([{value: 1, text: 'first'}, {value: 2, text: 'second'}], separators=(',', ':'))
+        print json.dumps([{'value': 1, 'text': 'first'}, {'value': 2, 'text': 'second'}], separators=(',', ':'))
         return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=page)
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
     xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
