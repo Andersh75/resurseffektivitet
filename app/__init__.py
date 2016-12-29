@@ -462,6 +462,10 @@ def index2():
 
 
 
+@app.route('/backgoundprocess',methods=['GET', 'POST'])
+def backgroundprocess():
+    return jsonify(result='testrespons')
+
 
 
 @app.route('/user_edit_titlename1',methods=['GET', 'POST'])
@@ -571,14 +575,9 @@ def user_edit_content(page):
     print varteacher.content.encode('utf-8')
     #varteacher = Teachers.query.get(id)
     #print varteacher.firstname.encode('utf-8')
-
-    list = [
-        {'param': 'foo', 'val': 2},
-        {'param': 'bar', 'val': 10}
-    ]
-
+    result = {}
     db.session.commit()
-    return jsonify(results=list)
+    return json.dumps(result)
 
 
 
