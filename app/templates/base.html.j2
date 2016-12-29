@@ -273,13 +273,13 @@
             };
 
 
-            $("[xxx]").click(function(){
+            $("'a#process_input'").click(function(){
                 $.get("/background_process", function(data, status){
                     alert("Data: " + data + "\nStatus: " + status);
                 });
             });
 
-            $('[id^=selectteacher]').editable({
+            $('[id^=content]').editable({
                 title: 'Select status'
                 /*
                  //uncomment these lines to send data on server
