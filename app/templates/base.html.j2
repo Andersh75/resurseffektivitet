@@ -166,10 +166,13 @@
 
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-
-                {% for subitem in teachersInCourse(varrubrik): %}
-                    <a href="#" class="btn btn-success btn-xs" id="allteachers{{ loop.index }}">{{ subitem[2] }}</a>
-                {% endfor %}
+                <ul id="src" class="list-inline">
+                    {% for subitem in teachersInCourse(varrubrik): %}
+                    <li data-x="src_0" id="src_0">
+                            <a href="#" class="btn btn-success btn-xs" id="allteachers{{ loop.index }}">{{ subitem[2] }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
 
             </div>
 
