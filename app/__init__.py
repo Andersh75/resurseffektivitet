@@ -469,8 +469,6 @@ def index2():
 
 
 
-
-
 @app.route('/background_process')
 def background_process():
 	lang = request.args.get('proglang', 0, type=str)
