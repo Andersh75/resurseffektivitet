@@ -239,7 +239,7 @@
 {% for item in scheduleInCourse(varrubrik) %}
         {% set rowloop = loop %}
 
-<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height: 200px">
     <ul class="list-unstyled list-inline">
         <li>
             {% if item[2] > 9 %}
@@ -264,7 +264,7 @@
 
 
 
-<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height: 200px">
     <ul class="list-unstyled list-inline">
         <li>
             {% if item[4] > 9 %}
@@ -277,7 +277,7 @@
     </ul>
 </div>
 
-<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="overflow: hidden; text-overflow: ellipsis">
+<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="overflow: hidden; text-overflow: ellipsis; height: 200px">
     <ul class="list-unstyled list-inline" style="overflow: hidden; text-overflow: ellipsis">
         <li style="overflow: hidden; text-overflow: ellipsis">
             <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}">{{ item[6] }}</a>
@@ -287,7 +287,7 @@
 
 
 
-<div class="col-l1-3 col-md-3 col-sm-3 col-xs-3">
+<div class="col-l1-3 col-md-3 col-sm-3 col-xs-3" style="height: 200px">
     <ul class="list-unstyled list-inline">
         <li>
             {% for subitem in roomsOnDate(item[0], varrubrik): %}
@@ -297,7 +297,7 @@
     </ul>
 </div>
 
-<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height: 200px">
     <ul class="list-unstyled list-inline">
         <li>
             {% for subitem in defteachersondate(item[0], varrubrik): %}

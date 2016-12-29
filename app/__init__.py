@@ -395,7 +395,6 @@ app.jinja_env.globals.update(TeachersInCourseNumbersTest=TeachersInCourseNumbers
 app.jinja_env.globals.update(teachersInCourse=teachersInCourse, scheduleInCourse=scheduleInCourse, roomsInCourse=roomsInCourse, topRoomsInCourse=topRoomsInCourse, topRoomsInCourseNumbers=topRoomsInCourseNumbers, testarlista=testarlista)
 
 
-
 @app.route('/<int:page>')
 def index(page):
 
