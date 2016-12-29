@@ -269,6 +269,27 @@
 
 
 
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" id="timerader">
+<ul class="list-unstyled">
+{% for item in scheduleInCourse(varrubrik) %}
+        {% set rowloop = loop %}
+
+        <li>
+            {% if item[4] > 9 %}
+            <a href="#" class="text-left">kl.{{ item[4] }}-{{ item[5] }}</a>
+            {% endif %}
+            {% if item[4] < 10 %}
+            <a href="#" class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</a>
+            {% endif %}
+        </li>
+{% endfor %}
+    </ul>
+</div>
+
+
+
+
+
 
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="teacherrader">
 <ul class="list-unstyled">
