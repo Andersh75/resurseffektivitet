@@ -201,6 +201,7 @@ class Schedules(db.Model):
 '''
 
 def defyearslicer(year):
+    print year[2:]
     return year[2:]
 
 
