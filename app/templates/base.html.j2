@@ -335,18 +335,18 @@
                     });
 
                     $("#info").text("Order: " + orders.join(","));
-                },
-                over: function () {
-                removeIntent = false;
-                },
-                out: function () {
-                    removeIntent = true;
-                },
-                beforeStop: function (event, ui) {
-                    if(removeIntent == true){
-                        ui.item.remove();
-                    }
                 }
+                //over: function () {
+                //removeIntent = false;
+                //},
+                //out: function () {
+                //    removeIntent = true;
+                //},
+                //beforeStop: function (event, ui) {
+                //    if(removeIntent == true){
+                //        ui.item.remove();
+                //    }
+                //}
 
             });
 
