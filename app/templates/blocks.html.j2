@@ -257,7 +257,7 @@
                 <p class="text-left">{{ item[1] }}0{{ item[2] }}{{ item[3] }}</p>
                 {% endif %}
                 {% if item[3] < 10 %}
-                <<p class="text-left">{{ item[1] }}0{{ item[2] }}0{{ item[3] }}</p>
+                <p class="text-left">{{ item[1] }}0{{ item[2] }}0{{ item[3] }}</p>
                 {% endif %}
             {% endif %}
         </li>
@@ -276,10 +276,10 @@
 
         <li style="height: 40px">
             {% if item[4] > 9 %}
-            <a href="#" class="text-left">kl.{{ item[4] }}-{{ item[5] }}</a>
+            <p class="text-left">kl.{{ item[4] }}-{{ item[5] }}</p>
             {% endif %}
             {% if item[4] < 10 %}
-            <a href="#" class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</a>
+            <p class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</p>
             {% endif %}
         </li>
 {% endfor %}
