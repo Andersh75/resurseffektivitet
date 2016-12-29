@@ -412,6 +412,7 @@ yeartest = "2013"
 
 
 
+
 app.jinja_env.globals.update(testar=testar)
 app.jinja_env.globals.update(allteachers=allteachers, defteachersondate=defteachersondate, defexaminerforteacherid=defexaminerforteacherid, defcoursestotalhoursforteacherid=defcoursestotalhoursforteacherid, defcoursesforteacherid=defcoursesforteacherid, teachernamefromid=teachernamefromid, roomsOnDate=roomsOnDate, topRoomsInCourseTotal=topRoomsInCourseTotal, yeartest=yeartest, TeachersInCourseNumbersSum=TeachersInCourseNumbersSum, RoomsInCourseNumbersSum=RoomsInCourseNumbersSum, topRoomsInCourseSum=topRoomsInCourseSum)
 app.jinja_env.globals.update(TeachersInCourseNumbersTest=TeachersInCourseNumbersTest, TeachersInCourseNumbers=TeachersInCourseNumbers, grabcoursepm=grabcoursepm)
