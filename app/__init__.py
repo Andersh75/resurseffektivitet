@@ -200,10 +200,13 @@ class Schedules(db.Model):
 
 '''
 
-def defyearslicer(year):
+def defyearslicer(item):
 
-    print str(year)[2:]
-    return str(year)[2:]
+    print item
+    print str(item)
+
+    print str(item)[2:]
+    return str(item)[2:]
 
 
 # Lista med larare som anvands i en kurs
