@@ -440,7 +440,6 @@ def index2():
 
 
 
-
 @app.route('/user_edit_titlename1',methods=['GET', 'POST'])
 def user_edit_titlename1():
     id = request.form["pk"]
@@ -459,7 +458,7 @@ def user_edit_titlename1():
     db.session.commit()
     return json.dumps(result)
 
-    
+
 
 
 
