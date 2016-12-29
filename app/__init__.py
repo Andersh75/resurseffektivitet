@@ -479,7 +479,7 @@ def index2():
 
 
 
-@app.route('/background_process',methods=['GET', 'POST'])
+@app.route('/background_process', methods=['GET', 'POST'])
 def background_process():
     return json.dumps([{'value': 1, 'text': 'first'}, {'text': 'second', 'value': 2, }], separators=(',', ':'))
 
@@ -488,7 +488,7 @@ def background_process():
 
 
 
-@app.route('/user_edit_titlename1',methods=['GET', 'POST'])
+@app.route('/user_edit_titlename1', methods=['GET', 'POST'])
 def user_edit_titlename1():
     id = request.form["pk"]
     print id
@@ -510,7 +510,7 @@ def user_edit_titlename1():
 
 
 
-@app.route('/user_edit_titlename2',methods=['GET', 'POST'])
+@app.route('/user_edit_titlename2', methods=['GET', 'POST'])
 def user_edit_titlename2():
     id = request.form["pk"]
     print id
@@ -536,7 +536,7 @@ def user_edit_titlename2():
 
 
 
-@app.route('/user_edit_content/<int:page>',methods=['GET', 'POST'])
+@app.route('/user_edit_content/<int:page>', methods=['GET', 'POST'])
 def user_edit_content(page):
     id = request.form["pk"]
     #varcode = id.split(',')[0]
