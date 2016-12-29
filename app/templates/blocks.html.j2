@@ -344,13 +344,13 @@
 {% for item in scheduleInCourse(varrubrik) %}
         {% set rowloop = loop %}
 
-        <ul class="list-unstyled list-inline" id="dest">
+        <ul class="list-unstyled list-inline" id="dest{{ loop.index0 }}">
 
             {% for subitem in defteachersondate(item[0], varrubrik): %}
                 <li data-x="dest_{{ rowloop.index }}{{ loop.index0 }}" id="dest_{{ rowloop.index }}{{ loop.index0 }}" style="height: 40px">
 
                 <a href="#" class="btn btn-success btn-xs">{{ subitem[2] }}</a>
-            
+
                 </li>
                     {% endfor %}
         </ul>
