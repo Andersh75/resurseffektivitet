@@ -269,14 +269,21 @@
             $('tbody').sortable();
 
             $(function(){
-  $("a").each(function(i){
-    len=$(this).text().length;
-    if(len>66)
-    {
-      $(this).text($(this).text().substr(0,66)+'...');
-    }
-  });
-});
+              $("a").each(function(i){
+                len=$(this).text().length;
+                if(len>66)
+                {
+                  $(this).text($(this).text().substr(0,66)+'...');
+                }
+              });
+              $("#daterader p").each(function(i){
+                len=$(this).text().length;
+                if(len>6)
+                {
+                  $(this).text($(this).text().substr(2,7));
+                }
+              });
+            });
 
         });
     </script>
