@@ -199,6 +199,8 @@ class Schedules(db.Model):
 '''
 
 def defstringcutter(word):
+    print "HEJ"
+    print word
     print word[:30]
     return word[:30]
 
