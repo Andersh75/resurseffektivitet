@@ -430,6 +430,7 @@ def index(page):
         #return render_template('new.html', kurskod="AI1146", xvar = xvar, Roomtypes = Roomtypes(), Rooms = Rooms(), Teachers = Teachers(), Courses = Courses(), Roles = Roles(), Dates = Dates(), Classes = Classes())
         #return render_template('base.html')
         #return render_template('test.xml'), mimetype='application/xml'
+        print json.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
         return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=page)
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
     xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
