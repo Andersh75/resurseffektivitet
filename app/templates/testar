@@ -5,3 +5,60 @@ OrderedDict(
 
 
     <script src='js/jquery-sortable.js'></script>
+
+
+
+
+
+
+
+
+
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+        <ul class="list-unstyled list-inline">
+            <li>
+                {% if item[4] > 9 %}
+                <a href="#" class="text-left">{{ item[4] }}-{{ item[5] }}</a>
+                {% endif %}
+                {% if item[4] < 10 %}
+                <a href="#" class="text-left">0{{ item[4] }}-{{ item[5] }}</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <ul class="list-unstyled list-inline">
+            <li>
+                <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis">{{ item[6] }}</a>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div class="col-l1-2 col-md-2 col-sm-2 col-xs-2">
+        <ul class="list-unstyled list-inline">
+            <li>
+                {% for subitem in roomsOnDate(item[0], varrubrik): %}
+                    <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+        <ul class="list-unstyled list-inline">
+            <li>
+                <a href="#" class="btn btn-success btn-xs">{{ item[4] }}</a>
+            </li>
+        </ul>
+    </div>
