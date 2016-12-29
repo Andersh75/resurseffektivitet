@@ -577,7 +577,6 @@ app.after_request(sql_debug)
 #for item in xvar:
     #print item[0]
 
-
 xvar = db.session.query(Teachers.firstname, func.count(Teachers.firstname)).group_by(Teachers.firstname).all()
 
 for item in xvar:
