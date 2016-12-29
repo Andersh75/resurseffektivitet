@@ -204,8 +204,7 @@ def defstringcutter(word):
 
     testword = word.encode('utf-8')
     testword = word[:30].encode('utf-8')
-    print testword.encode('utf-8')
-    return testword.encode('utf-8')
+    return testword
 
 # Lista med larare som anvands i en kurs
 def teachersInCourse(course):
