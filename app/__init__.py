@@ -451,6 +451,7 @@ def peopleindex(page):
             #return render_template('new.html', kurskod="AI1146", xvar = xvar, Roomtypes = Roomtypes(), Rooms = Rooms(), Teachers = Teachers(), Courses = Courses(), Roles = Roles(), Dates = Dates(), Classes = Classes())
             #return render_template('base.html')
             #return render_template('test.xml'), mimetype='application/xml'
+            print json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
             return render_template('peopleblocks.html.j2', xteacher=xteacher, varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=page)
         xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
         xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
@@ -471,7 +472,7 @@ def index2():
 
 @app.route('/background_process')
 def background_process():
-    print json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
+
 	return jsonify({'status': True, 'result': "Please check the peer's state"})
 
 
