@@ -278,7 +278,14 @@
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
     <ul class="list-unstyled list-inline">
         <li>
-            <a href="#" class="text-left">{{ item[6] }}</a>
+            <a href="#" class="text-left">
+                {% for varletter in (item[6]): %}
+                    {% if loop.index < 30: %}
+                    {{ loop.index }}
+                    {{ varletter }}
+                    {% endif %}
+                    {% endfor %}
+            </a>
         </li>
     </ul>
 </div>
