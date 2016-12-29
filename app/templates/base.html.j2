@@ -72,38 +72,6 @@
     <div class="container">
 
 
-        <span id="info">
-            Waiting update...
-        </span>
-
-
-
-
-
-
-
-            <ol class='example'>
-      <li>First</li>
-      <li>Second</li>
-      <li>Third</li>
-    </ol>
-    <table class="grid" id="sort" title="Kurt Vonnegut novels">
-    <thead>
-    <tr><th>Year</th><th>Title</th><th>Grade</th></tr>
-    </thead>
-    <tbody>
-    <tr><td>1969</td><td>Slaughterhouse-Five</td><td>A+</td></tr>
-    <tr><td>1952</td><td>Player Piano</td><td>B</td></tr>
-    <tr><td>1963</td><td>Cat’s Cradle</td><td>A+</td></tr>
-    <tr><td>1973</td><td>Breakfast of Champions</td><td>C</td></tr>
-    <tr><td>1965</td><td>God Bless You, Mr. Rosewater</td><td>A</td></tr>
-    </tbody>
-    </table>
-
-    {% block listofteachers %}
-
-    {% endblock %}
-
     <div class="container">
         <div class="row page-header">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -359,10 +327,9 @@
 
 
             jQuery('#src > li').draggable({
-                //helper: 'clone',
+                helper: 'clone',
                 connectToSortable: '[id^=dest]'
             });
-
         });
     </script>
 

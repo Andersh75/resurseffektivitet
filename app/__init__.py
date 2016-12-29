@@ -501,6 +501,8 @@ def user_edit_titlename2():
 
 
 
+
+
 @app.route('/user_edit_content/<int:page>',methods=['GET', 'POST'])
 def user_edit_content(page):
     id = request.form["pk"]
