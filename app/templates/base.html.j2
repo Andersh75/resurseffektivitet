@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"/>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-tagsinput.css') }}" />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
@@ -29,6 +30,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
     <script src="{{ url_for('static', filename='js/bootstrap-tagsinput.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
 
@@ -328,11 +331,11 @@
 
             var getSource = function() {
                 //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
-                return 'Hej';
+                return '[{id: 1, text: "text1"}, {id: 2, text: "text2"}]';
             };
 
             $('[id^=content]').editable({  //to keep track of selected values in multi select
-                type: 'select',
+                type: 'select2',
                 url: '/post',
                 autotext : 'always',
                 value : [1,2],

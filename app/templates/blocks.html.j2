@@ -304,7 +304,7 @@
         {% set rowloop = loop %}
 
         <li style="height: 40px">
-            <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}" data-type="text" data-pk="{{ item[7] }}" data-url="/user_edit_content/{{ rowloop.index }}" data-title="Enter username">{{ item[6] }}</a>
+            <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}" data-pk="{{ item[7] }}" data-url="/user_edit_content/{{ rowloop.index }}" data-title="Enter username">{{ item[6] }}</a>
         </li>
 {% endfor %}
     </ul>
@@ -348,7 +348,7 @@
             {% for subitem in defteachersondate(item[0], varrubrik): %}
                 <li data-x="dest_{{ rowloop.index }}{{ loop.index0 }}" id="dest_{{ rowloop.index }}{{ loop.index0 }}">
 
-                <a href="#" class="btn btn-success btn-xs" id="selectteacher{{ rowloop.index }}{{ loop.index0 }}" data-type="checklist" data-pk="{{ item[7] }}" data-url="/user_edit_teacher/{{ rowloop.index }}{{ loop.index0 }}" data-title="Enter username">{{ subitem[2] }}</a>
+                <a href="#" class="btn btn-success btn-xs" id="selectteacher{{ rowloop.index }}{{ loop.index0 }}" data-pk="{{ item[7] }}" data-url="/user_edit_teacher/{{ rowloop.index }}{{ loop.index0 }}" data-title="Enter username">{{ subitem[2] }}</a>
                 </li>
             {% endfor %}
         </ul>

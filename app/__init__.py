@@ -612,6 +612,7 @@ app.after_request(sql_debug)
 
 
 
+
 '''
 #test1 = Teachers(username='Test1')
 #db.session.add(test1)
