@@ -273,11 +273,25 @@
             };
 
 
-            $("[id^=selectteacher]").click(function(){
+            $("[xxx]").click(function(){
                 $.get("/background_process", function(data, status){
                     alert("Data: " + data + "\nStatus: " + status);
                 });
             });
+
+            $('[id^=selectteacher]').editable({
+                mode: 'inline',
+                type: 'text',
+                title: 'Select status',
+                placement: 'right',
+                value: 2,
+                source: resultet
+                /*
+                 //uncomment these lines to send data on server
+                 ,pk: 1
+                 ,url: '/post'
+                 */
+
 
 
 
