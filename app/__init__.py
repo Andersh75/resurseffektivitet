@@ -475,7 +475,7 @@ def background_process():
 	if lang.lower() == 'python':
         respons = {}
         respons = json.dumps({"c": 0, "b": 0})
-		return respons
+		return "hej"
 	else:
         return jsonify({'status': True, 'result': "Please check the peer's state"})
 
