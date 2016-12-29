@@ -272,9 +272,13 @@
                 });
             };
 
-            $('a#process_input').bind('click', function() {
-                alert(JSON.stringify(getSource()));
+
+            $("a#process_input").click(function(){
+                $.get("/background_process", function(data, status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
             });
+
 
 
 
