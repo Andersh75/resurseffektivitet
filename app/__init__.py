@@ -475,7 +475,10 @@ def background_process():
 	try:
 		lang = request.args.get('proglang', 0, type=str)
 		if lang.lower() == 'python':
-			return jsonify(result='You are wise')
+			return jsonify({
+                'status': False,
+                'result': "Please check the peer's state"
+            })
 		else:
 			return jsonify({
                 'status': False,
