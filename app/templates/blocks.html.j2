@@ -325,7 +325,7 @@
 
         <li style="height: 40px">
             {% for subitem in roomsOnDate(item[0], varrubrik): %}
-                <button type="button" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}b">{{ subitem[0] }}</button>
+                <button type="button" class="btn btn-success btn-xs" id="room{{ rowloop.index }}{{ loop.index }}b">{{ subitem[0] }}</button>
             {% endfor %}
         </li>
 {% endfor %}
