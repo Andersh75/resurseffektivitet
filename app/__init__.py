@@ -200,9 +200,12 @@ class Schedules(db.Model):
 
 def defstringcutter(word):
     print "HEJ"
-    print word
-    print word[:30]
-    return word[:30]
+    print word.encode('utf-8')
+
+    testword = word.encode('utf-8')
+    testword = word[:30]
+    print testword
+    return testword
 
 # Lista med larare som anvands i en kurs
 def teachersInCourse(course):
