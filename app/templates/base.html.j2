@@ -269,7 +269,7 @@
             element.innerHTML = "New Header";
 
 
-            function getSource()
+            function getSourcesss()
             {
                 var result = null;
                 $.ajax({
@@ -331,7 +331,7 @@
 
             var getSource = function() {
                 $.get("/background_process", function(data, status){
-                    alert("Data: " + data + "\nStatus: " + status);
+                    alert("Data: " + JSON.parse(JSON.stringify((data)) + "\nStatus: " + status);
                 });
                 //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
                 return '[{value: 1, text: "text1"}, {value: 2, text: "text3"}]';
