@@ -433,6 +433,7 @@ def index(page):
         return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=page)
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
     xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
+    print json.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
     return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
 
 
@@ -474,7 +475,6 @@ def index2():
 @app.route('/background_process')
 def background_process():
 	try:
-        print json.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
 		lang = request.args.get('proglang', 0, type=str)
 		if lang.lower() == 'python':
 			return jsonify({
