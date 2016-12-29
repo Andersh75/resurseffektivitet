@@ -250,7 +250,7 @@
     <script type="text/javascript">
 
     var datavar;
-    
+
         $('document').ready(function() {
             $.fn.editable.defaults.mode = 'inline';
 
@@ -284,7 +284,7 @@
 
 
 
-            $('a#process_input').click(function(){
+            $('a#pXXX').click(function(){
                 $.get("/background_process", function(data, status){
                     alert("Data: " + data + "\nStatus: " + status);
                     datavar = data
@@ -300,6 +300,14 @@
                  ,url: '/post'
                  */
 
+            });
+
+            $('a#process_input').click(function() {
+                $('[id^=selectteacher]').editable('setValue', null)  //clear values
+                                        //.editable('option', 'pk', null)          //clear pk
+                                        //.removeClass('editable-unsaved');        //remove bold css
+                //$('#save-btn').show();
+                //$('#msg').hide();
             });
 
 
