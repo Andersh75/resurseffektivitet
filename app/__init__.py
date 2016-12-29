@@ -462,7 +462,7 @@ def index2():
 
 
 
-@app.route('/backgoundprocess')
+@app.route('/backgoundprocess',methods=['GET', 'POST'])
 def backgroundprocess():
     return jsonify(result='testrespons')
 
