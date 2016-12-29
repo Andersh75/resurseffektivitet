@@ -337,18 +337,23 @@
 
 
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="teacherrader">
-<ul class="list-unstyled list-inline">
+<ul class="list-unstyled">
     <li style="height: 40px">
         <h5 class="text-left">Lärare</h5>
     </li>
 {% for item in scheduleInCourse(varrubrik) %}
         {% set rowloop = loop %}
 
-        <li id="dest" data-x="dest_{{ loop.index0 }}" id="dest_{{ loop.index0 }}" style="height: 40px">
+        <ul class="list-unstyled list-inline" id="dest">
+
             {% for subitem in defteachersondate(item[0], varrubrik): %}
+                <li data-x="dest_{{ rowloop.index }}{{ loop.index0 }}" id="dest_{{ rowloop.index }}{{ loop.index0 }}" style="height: 40px">
+
                 <a href="#" class="btn btn-success btn-xs">{{ subitem[2] }}</a>
-            {% endfor %}
-        </li>
+            
+                </li>
+                    {% endfor %}
+        </ul>
 {% endfor %}
     </ul>
 </div>
