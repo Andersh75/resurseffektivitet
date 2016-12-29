@@ -239,8 +239,9 @@
 {% for item in scheduleInCourse(varrubrik) %}
         {% set rowloop = loop %}
 
+<ul class="list-unstyled list-inline">
 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height: 40px">
-    <ul class="list-unstyled list-inline">
+
         <li>
             {% if item[2] > 9 %}
                 {% if item[3] > 9 %}
@@ -259,13 +260,13 @@
                 {% endif %}
             {% endif %}
         </li>
-    </ul>
+    <
 </div>
 
 
 
 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height: 40px">
-    <ul class="list-unstyled list-inline">
+
         <li>
             {% if item[4] > 9 %}
             <a href="#" class="text-left">kl.{{ item[4] }}-{{ item[5] }}</a>
@@ -274,39 +275,39 @@
             <a href="#" class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</a>
             {% endif %}
         </li>
-    </ul>
+
 </div>
 
 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="overflow: hidden; text-overflow: ellipsis; height: 40px">
-    <ul class="list-unstyled list-inline" style="overflow: hidden; text-overflow: ellipsis">
+
         <li style="overflow: hidden; text-overflow: ellipsis">
             <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}">{{ item[6] }}</a>
         </li>
-    </ul>
+
 </div>
 
 
 
 <div class="col-l1-3 col-md-3 col-sm-3 col-xs-3" style="height: 40px">
-    <ul class="list-unstyled list-inline">
+
         <li>
             {% for subitem in roomsOnDate(item[0], varrubrik): %}
                 <button type="button" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}b">{{ subitem[0] }}</button>
             {% endfor %}
         </li>
-    </ul>
+
 </div>
 
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height: 40px">
-    <ul class="list-unstyled list-inline">
+
         <li>
             {% for subitem in defteachersondate(item[0], varrubrik): %}
                 <a href="#" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}">{{ subitem[2] }}</a>
             {% endfor %}
         </li>
-    </ul>
-</div>
 
+</div>
+</ul>
 
 
 
