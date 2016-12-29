@@ -246,18 +246,18 @@
         <li style="height: 40px">
             {% if item[2] > 9 %}
                 {% if item[3] > 9 %}
-                <a href="#" class="text-left">{{ item[1] }}{{ item[2] }}{{ item[3] }}</a>
+                <p class="text-left">{{ item[1] }}{{ item[2] }}{{ item[3] }}</p>
                 {% endif %}
                 {% if item[3] < 10 %}
-                <a href="#" class="text-left">{{ item[1] }}{{ item[2] }}0{{ item[3] }}</a>
+                <p class="text-left">{{ item[1] }}{{ item[2] }}0{{ item[3] }}</p>
                 {% endif %}
             {% endif %}
             {% if item[2] < 10 %}
                 {% if item[3] > 9 %}
-                <a href="#" class="text-left">{{ item[1] }}0{{ item[2] }}{{ item[3] }}</a>
+                <p class="text-left">{{ item[1] }}0{{ item[2] }}{{ item[3] }}</p>
                 {% endif %}
                 {% if item[3] < 10 %}
-                <a href="#" class="text-left">{{ item[1] }}0{{ item[2] }}0{{ item[3] }}</a>
+                <<p class="text-left">{{ item[1] }}0{{ item[2] }}0{{ item[3] }}</p>
                 {% endif %}
             {% endif %}
         </li>
