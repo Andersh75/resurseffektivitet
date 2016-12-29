@@ -481,10 +481,7 @@ def background_process():
                 "b": 0
             })
 		else:
-            return jsonify({
-                'status': True,
-                'result': "Please check the peer's state"
-            })
+            return jsonify({'status': True, 'result': "Please check the peer's state"})
 	except Exception as e:
 		return str(e)
 
