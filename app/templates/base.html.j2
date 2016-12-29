@@ -335,14 +335,12 @@
             };
 
             $('[id^=content]').editable({  //to keep track of selected values in multi select
-                type: 'select2',
+                type: 'select',
                 autotext : 'always',
                 value : [1,2],
-                source : [{id: 1, text: "text1"}, {id: 2, text: "text2"}],
-                emptytext: 'None',
-                select2: {
-                    multiple : true
-                }
+                source : [{value: 1, text: "text1"}, {value: 2, text: "text2"}],
+                emptytext: 'None'
+
 
             });
 
