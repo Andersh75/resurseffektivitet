@@ -235,12 +235,47 @@
 
 {% block scheduleincourses %}
 
+
+
+
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+<ul class="list-unstyled">
+{% for item in scheduleInCourse(varrubrik) %}
+        {% set rowloop = loop %}
+
+        <li style="height: 40px">
+            {% if item[2] > 9 %}
+                {% if item[3] > 9 %}
+                <a href="#" class="text-left">{{ item[1] }}{{ item[2] }}{{ item[3] }}</a>
+                {% endif %}
+                {% if item[3] < 10 %}
+                <a href="#" class="text-left">{{ item[1] }}{{ item[2] }}0{{ item[3] }}</a>
+                {% endif %}
+            {% endif %}
+            {% if item[2] < 10 %}
+                {% if item[3] > 9 %}
+                <a href="#" class="text-left">{{ item[1] }}0{{ item[2] }}{{ item[3] }}</a>
+                {% endif %}
+                {% if item[3] < 10 %}
+                <a href="#" class="text-left">{{ item[1] }}0{{ item[2] }}0{{ item[3] }}</a>
+                {% endif %}
+            {% endif %}
+        </li>
+{% endfor %}
+    </ul>
+</div>
+
+
+
+
+
+
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
 <ul class="list-unstyled">
 {% for item in scheduleInCourse(varrubrik) %}
         {% set rowloop = loop %}
 
-        <li  style="height: 40px">
+        <li style="height: 40px">
             {% for subitem in defteachersondate(item[0], varrubrik): %}
                 <a href="#" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}">{{ subitem[2] }}</a>
             {% endfor %}
