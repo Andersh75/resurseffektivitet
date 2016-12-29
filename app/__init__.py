@@ -288,6 +288,7 @@ def topRoomsInCourseNumbers(course):
 
 
 
+
 def TeachersInCourseNumbers(course):
 # Lista med salar som anvands i en kurs
     templist = []

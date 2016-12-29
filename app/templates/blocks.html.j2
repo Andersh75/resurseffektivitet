@@ -268,10 +268,10 @@
     <ul class="list-unstyled list-inline">
         <li>
             {% if item[4] > 9 %}
-            <a href="#" class="text-left">kl.{{ item[4] }}-{{ item[5] }}</a>
+            <a href="#" class="text-left">kl.{{ item[4] }}{{ item[5] }}</a>
             {% endif %}
             {% if item[4] < 10 %}
-            <a href="#" class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</a>
+            <a href="#" class="text-left">kl.0{{ item[4] }}{{ item[5] }}</a>
             {% endif %}
         </li>
     </ul>
