@@ -473,7 +473,7 @@ def index2():
 
 @app.route('/background_process')
 def background_process():
-    return json.dumps([{'value': 1, 'text': 'first'}, {'value': 2, 'text': 'second'}], separators=(',', ':'))
+    return json.dumps([{'value': 1, 'text': 'first'}, {'text': 'second', 'value': 2, }], separators=(',', ':'))
 
 
 
