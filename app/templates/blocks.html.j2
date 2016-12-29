@@ -260,7 +260,6 @@
             {% endif %}
         </li>
     </ul>
-    if
 </div>
 
 
@@ -274,6 +273,18 @@
 
 
 
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+    <ul class="list-unstyled list-inline">
+        <li>
+            {% if item[4] > 9 %}
+            <a href="#" class="text-left">{{ item[4] }}-{{ item[5] }}</a>
+            {% endif %}
+            {% if item[4] < 10 %}
+            <a href="#" class="text-left">0{{ item[4] }}-{{ item[5] }}</a>
+            {% endif %}
+        </li>
+    </ul>
+</div>
 
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
     <ul class="list-unstyled list-inline">
