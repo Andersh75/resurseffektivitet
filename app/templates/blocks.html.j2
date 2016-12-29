@@ -325,7 +325,7 @@
 
         <li style="height: 40px">
             {% for subitem in roomsOnDate(item[0], varrubrik): %}
-                <button type="button" class="btn btn-success btn-sm" id="teacher{{ rowloop.index }}{{ loop.index }}b">{{ subitem[0] }}</button>
+                <button type="button" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}b">{{ subitem[0] }}</button>
             {% endfor %}
         </li>
 {% endfor %}
@@ -349,7 +349,7 @@
             {% for subitem in defteachersondate(item[0], varrubrik): %}
                 <li data-x="dest_{{ rowloop.index }}{{ loop.index0 }}" id="dest_{{ rowloop.index }}{{ loop.index0 }}" style="height: 20px">
 
-                <a href="#" class="btn btn-success btn-sm">{{ subitem[2] }}</a>
+                <a href="#" class="btn btn-success btn-xs">{{ subitem[2] }}</a>
 
                 </li>
                     {% endfor %}

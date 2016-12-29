@@ -152,7 +152,7 @@
                 <ul id="src" class="list-inline" height="40x">
                     {% for subitem in teachersInCourse(varrubrik): %}
                     <li data-x="src_{{ loop.index0 }}" id="src_{{ loop.index0 }}">
-                            <a href="#" class="btn btn-success btn-sm" id="allteachers{{ loop.index }}">{{ subitem[2] }}</a>
+                            <a href="#" class="btn btn-success btn-xs" id="allteachers{{ loop.index }}">{{ subitem[2] }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -328,6 +328,7 @@
             var removeIntent = false;
 
             $('[id^=dest]').sortable({
+                axis : "x",
                 update: function() {
                     var orders = [];
                     $.each($(this).children(), function(i, item) {
