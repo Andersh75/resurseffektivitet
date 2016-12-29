@@ -328,7 +328,6 @@
             var removeIntent = false;
 
             $('[id^=dest]').sortable({
-                axis : "x",
                 update: function() {
                     var orders = [];
                     $.each($(this).children(), function(i, item) {
@@ -361,6 +360,7 @@
 
             jQuery('#src > li').draggable({
                 helper: 'clone',
+                axis : "x",
                 connectToSortable: '[id^=dest]'
             });
 
