@@ -291,7 +291,7 @@
     <ul class="list-unstyled list-inline">
         <li>
             {% for subitem in roomsOnDate(item[0], varrubrik): %}
-                <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
+                <button type="button" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}b">{{ subitem[0] }}</button>
             {% endfor %}
         </li>
     </ul>
