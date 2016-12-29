@@ -276,11 +276,13 @@
             $('a#process_input').click(function(){
                 $.get("/background_process", function(data, status){
                     alert("Data: " + data + "\nStatus: " + status);
+                    var datavar = data
                 });
             });
 
             $('[id^=content]').editable({
                 title: 'Select status'
+                value: "lite text"
                 /*
                  //uncomment these lines to send data on server
                  ,pk: 1
