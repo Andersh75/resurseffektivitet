@@ -363,6 +363,7 @@ def defcoursestotalhoursforteacherid(teacherid):
     return templist
 
 
+
 def defexaminerforteacherid(teacherid):
     templist = []
     tempvar = db.session.query(Courses.code, Courses.name).join(Courses.classes).join(Classes.teachers).filter(Teachers.id == teacherid[0]).group_by(Courses.code).order_by(Courses.code).all()

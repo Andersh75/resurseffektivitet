@@ -347,6 +347,7 @@
                 <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">
                     {% for varletter in (item[6]): %}
                         {% if loop.index < 30: %}
+                        {{ loop.index }}
                         {{ varletter }}
                         {% endif %}
                         {% endfor %}
