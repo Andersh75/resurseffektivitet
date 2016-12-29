@@ -470,7 +470,6 @@ def index2():
 
 
 
-
 @app.route('/background_process')
 def background_process():
 	try:
@@ -478,7 +477,10 @@ def background_process():
 		if lang.lower() == 'python':
 			return jsonify(result='You are wise')
 		else:
-			return jsonify(result='Try again.')
+			return jsonify({
+                'status': False,
+                'result': "Please check the peer's state"
+            })
 	except Exception as e:
 		return str(e)
 

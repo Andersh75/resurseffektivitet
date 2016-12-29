@@ -275,12 +275,16 @@
 
             getSource().done(function(result) {
 
-                $('[id^=xxx]').editable({
+                $('[id^=selectteacher]').editable({
                     type: 'select',
                     title: 'Select status',
                     placement: 'right',
                     value: 2,
-                    source: result
+                    source: [
+                        {value: 1, text: 'first'},
+                        {value: 2, text: 'second'},
+                        {value: 3, text: 'third'}
+                    ]
                     /*
                      //uncomment these lines to send data on server
                      ,pk: 1
@@ -289,7 +293,7 @@
                 });
             });
 
-            $('[id^=selectteacher]').editable({
+            $('[id^=xxx]').editable({
                 mode: 'popup',
                 type: 'select',
                 title: 'Select status',
@@ -313,8 +317,8 @@
 			  $('a#process_input').bind('click', function() {
 				$.getJSON('/background_process', {
 				  proglang: $('input[name="proglang"]').val(),
-				}, function(data) {
-				  $("#result").text(data.result);
+              }, function(result) {
+				  alert(result);
 				});
 				return false;
 			  });
