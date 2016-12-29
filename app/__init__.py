@@ -481,7 +481,7 @@ def index2():
 
 @app.route('/background_process', methods=['GET', 'POST'])
 def background_process():
-    return jsonify{'value': 1, 'text': 'first'})
+    return jsonify({'value': 1, 'text': 'first'})
 
 
 
