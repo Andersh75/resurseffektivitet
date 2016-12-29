@@ -163,7 +163,7 @@
 <div class="container">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 
-        {% for subitem in allteachers(): %}
+        {% for subitem in teachersInCourse(varrubrik): %}
             <a href="#" class="btn btn-success btn-xs" id="allteachers{{ loop.index }}">{{ subitem[2] }}</a>
         {% endfor %}
 

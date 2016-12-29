@@ -197,6 +197,7 @@ class Schedules(db.Model):
 
 '''
 
+
 def allteachers():
     templist = []
     tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().order_by(Teachers.initials).all()
@@ -209,7 +210,7 @@ def allteachers():
 # Lista med larare som anvands i en kurs
 def teachersInCourse(course):
     templist = []
-    tempvar = db.session.query(Teachers.firstname, Teachers.lastname).distinct().join(Teachers.classes).join(Classes.courses).filter(Courses.code == course).order_by(Teachers.lastname).all()
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().join(Teachers.classes).join(Classes.courses).filter(Courses.code == course).order_by(Teachers.lastname).all()
     for item in tempvar:
         templist.append(item)
     return templist
