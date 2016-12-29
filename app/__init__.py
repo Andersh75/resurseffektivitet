@@ -387,7 +387,6 @@ yeartest = "2013"
 
 
 
-
 app.jinja_env.globals.update(testar=testar)
 app.jinja_env.globals.update(defteachersondate=defteachersondate, defexaminerforteacherid=defexaminerforteacherid, defcoursestotalhoursforteacherid=defcoursestotalhoursforteacherid, defcoursesforteacherid=defcoursesforteacherid, teachernamefromid=teachernamefromid, roomsOnDate=roomsOnDate, topRoomsInCourseTotal=topRoomsInCourseTotal, yeartest=yeartest, TeachersInCourseNumbersSum=TeachersInCourseNumbersSum, RoomsInCourseNumbersSum=RoomsInCourseNumbersSum, topRoomsInCourseSum=topRoomsInCourseSum)
 app.jinja_env.globals.update(TeachersInCourseNumbersTest=TeachersInCourseNumbersTest, TeachersInCourseNumbers=TeachersInCourseNumbers, grabcoursepm=grabcoursepm)
@@ -570,7 +569,7 @@ app.after_request(sql_debug)
 
 #for item in xvar:
     #print item
-    
+
 
 #xvar = db.session.query(func.count(Teachers.initials)).all()
 
