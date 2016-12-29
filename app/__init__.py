@@ -260,6 +260,7 @@ def roomsOnDate(date, course):
 
 
 
+
 def defteachersondate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
