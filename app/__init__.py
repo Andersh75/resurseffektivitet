@@ -481,12 +481,12 @@ def background_process():
                 'result': "Please check the peer's state"
             })
 		else:
-			return jsonify({
-                'status': False,
-                'result': "Please check the peer's state"
-            })
+			return json.dumps({value: 1, text: 'first'},{value: 2, text: 'second'},{value: 3, text: 'third'})
 	except Exception as e:
 		return str(e)
+
+
+
 
 
 @app.route('/user_edit_titlename1',methods=['GET', 'POST'])
