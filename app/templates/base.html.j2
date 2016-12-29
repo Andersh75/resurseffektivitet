@@ -261,17 +261,18 @@
 
             getSource().done(function(result) {
 
-            $('[id^=selectteacher]').editable({
-                type: 'select',
-                title: 'Select status',
-                placement: 'right',
-                value: 2,
-                source: result
-                /*
-                 //uncomment these lines to send data on server
-                 ,pk: 1
-                 ,url: '/post'
-                 */
+                $('[id^=selectteacher]').editable({
+                    type: 'select',
+                    title: 'Select status',
+                    placement: 'right',
+                    value: 2,
+                    source: result
+                    /*
+                     //uncomment these lines to send data on server
+                     ,pk: 1
+                     ,url: '/post'
+                     */
+                });
             });
 
 
