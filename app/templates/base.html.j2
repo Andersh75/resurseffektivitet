@@ -280,7 +280,10 @@
                     title: 'Select status',
                     placement: 'right',
                     value: 2,
-                    source: result
+                    source: [
+                        {value: 1, text: 'first'},
+                        {value: 2, text: 'second'},
+                        {value: 3, text: 'third'}
                     ]
                     /*
                      //uncomment these lines to send data on server
@@ -315,7 +318,7 @@
 				$.getJSON('/background_process', {
 				  proglang: $('input[name="proglang"]').val(),
               }, function(result) {
-				  alert(JSON.stringify(result));
+				  alert(JSON.stringify(result);
 				});
 				return false;
 			  });
