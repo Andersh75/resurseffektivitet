@@ -314,6 +314,9 @@
               });
             });
 
+
+            var removeIntent = false;
+
             $("#dest").sortable({
                 update: function() {
                     var orders = [];
@@ -323,10 +326,27 @@
 
                     $("#info").text("Order: " + orders.join(","));
                 },
-                receive: function(event, ui) {
-                    alert("dropped item ID: " + ui.item.attr('id'));
+                over: function () {
+                removeIntent = false;
+                },
+                out: function () {
+                    removeIntent = true;
+                },
+                beforeStop: function (event, ui) {
+                    if(removeIntent == true){
+                        ui.item.remove();
+                    }
                 }
+
             });
+
+
+
+
+
+
+
+
 
             jQuery('#src > li').draggable({
                 helper: 'clone',
