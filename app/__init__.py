@@ -572,6 +572,7 @@ app.after_request(sql_debug)
     #print item
 
 
+
 #xvar = db.session.query(func.count(Teachers.initials)).all()
 
 #for item in xvar:
