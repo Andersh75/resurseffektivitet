@@ -473,17 +473,12 @@ def index2():
 
 @app.route('/background_process')
 def background_process():
-	try:
-		lang = request.args.get('proglang', 0, type=str)
-		if lang.lower() == 'python':
-			return json.dumps({
-                "c": 0,
-                "b": 0
-            })
-		else:
-            return jsonify({'status': True, 'result': "Please check the peer's state"})
-	except Exception as e:
-		return str(e)
+	lang = request.args.get('proglang', 0, type=str)
+	if lang.lower() == 'python':
+		return json.dumps({"c": 0, "b": 0})
+	else:
+        return jsonify({'status': True, 'result': "Please check the peer's state"})
+
 
 
 
