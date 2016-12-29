@@ -159,6 +159,21 @@
         <br />
 
 
+
+<div class="container">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+
+        {% for subitem in allteachers(): %}
+            <a href="#" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}">{{ subitem[2] }}</a>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+
+
     <div class="container">
 
 
