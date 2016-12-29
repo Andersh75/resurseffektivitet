@@ -291,7 +291,7 @@
                 });
             });
 
-            $('[id^=content]').editable({
+            $('[id^=xxx]').editable({
                 title: 'Select status',
                 value: datavar
                 /*
@@ -302,8 +302,8 @@
 
             });
 
-            $('[id^=selectteacher]').click(function() {
-                $('[id^=selectteacher]').editable('setValue', datavar)  //clear values
+            $('[id^=content]').click(function() {
+                $('[id^=content]').editable('setValue', datavar)  //clear values
                                         //.editable('option', 'pk', null)          //clear pk
                                         //.removeClass('editable-unsaved');        //remove bold css
                 //$('#save-btn').show();
