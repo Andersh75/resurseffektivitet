@@ -344,7 +344,11 @@
                 {% if item[4] < 10 %}
                 <td class="text-left">0{{ item[4] }}-{{ item[5] }}</td>
                 {% endif %}
-                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ defstringcutter(item[6]) }}</td>
+                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">
+                    {% for varletter in (item[6]): %}
+                        {{ varletter }}
+                        {% endfor %}
+                </td>
                 <td class="text-left">
                     {% for subitem in roomsOnDate(item[0], varrubrik): %}
                         <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
