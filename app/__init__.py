@@ -211,7 +211,6 @@ def teachersInCourse(course):
         templist.append(item)
     return templist
 
-    
 
 
 def scheduleInCourse(course):

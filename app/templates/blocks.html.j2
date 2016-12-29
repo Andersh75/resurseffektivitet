@@ -309,10 +309,16 @@
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
     <ul class="list-unstyled list-inline">
         <li>
-            <a href="#" class="btn btn-success btn-xs">{{ item[4] }}</a>
+            {% for subitem in defteachersondate(item[0], varrubrik): %}
+                <a href="#" class="btn btn-success btn-xs">{{ subitem[0] }} {{ subitem[1] }}</a>
+            {% endfor %}
         </li>
     </ul>
 </div>
+
+
+
+
 
 
 
