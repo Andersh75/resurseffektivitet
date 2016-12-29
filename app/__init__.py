@@ -474,6 +474,7 @@ def index2():
 @app.route('/background_process')
 def background_process():
 	try:
+        print json.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
 		lang = request.args.get('proglang', 0, type=str)
 		if lang.lower() == 'python':
 			return jsonify({
@@ -481,7 +482,7 @@ def background_process():
                 'result': "Please check the peer's state"
             })
 		else:
-            print json.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
+
 			return json.dumps({
                 'status': False,
                 'result': "Please check the peer's state"
