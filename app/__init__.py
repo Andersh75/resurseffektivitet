@@ -410,6 +410,7 @@ def index(page):
     return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
 
 
+
 @app.route('/people/<int:page>')
 def peopleindex(page):
 
