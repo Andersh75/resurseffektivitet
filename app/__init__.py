@@ -240,7 +240,7 @@ def roomsOnDate(date, course):
 def defteachersondate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Teachers.firstname, Teachers.lastname).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.code == course).all()
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.code == course).all()
     for item in tempvar:
         templist.append(item)
     return templist
