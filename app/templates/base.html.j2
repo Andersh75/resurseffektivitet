@@ -273,7 +273,7 @@
             };
 
 
-            $("a#process_input").click(function(){
+            $("[id^=selectteacher]").click(function(){
                 $.get("/background_process", function(data, status){
                     alert("Data: " + data + "\nStatus: " + status);
                 });
