@@ -469,9 +469,15 @@ def index2():
 
 
 @app.route('/backgound_process')
-def backgroundprocess():
-    return jsonify(result='testrespons')
-
+def background_process():
+	try:
+		lang = request.args.get('proglang', 0, type=str)
+		if lang.lower() == 'python':
+			return jsonify(result='You are wise')
+		else:
+			return jsonify(result='Try again.')
+	except Exception as e:
+		return str(e)
 
 
 @app.route('/user_edit_titlename1',methods=['GET', 'POST'])
