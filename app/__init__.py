@@ -378,7 +378,6 @@ def defexaminerforteacherid(teacherid):
     #print templist
     return templist
 
-
 yeartest = "2013"
 
 app.jinja_env.globals.update(testar=testar)
