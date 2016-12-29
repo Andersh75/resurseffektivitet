@@ -438,6 +438,7 @@ def index2():
     return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
 
 
+
 @app.route('/user_edit_titlename1',methods=['GET', 'POST'])
 def user_edit_titlename1():
     id = request.form["pk"]
