@@ -318,7 +318,7 @@
 				$.getJSON('/background_process', {
 				  proglang: $('input[name="proglang"]').val(),
               }, function(result) {
-				  alert(result);
+				  alert(JSON.stringify(result));
 				});
 				return false;
 			  });
