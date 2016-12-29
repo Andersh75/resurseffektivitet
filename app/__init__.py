@@ -481,7 +481,7 @@ def background_process():
                 'result': "Please check the peer's state"
             })
 		else:
-            print json.dumps({'status': False, 'result': "Please check the peer's state"})
+            print json.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
 			return json.dumps({
                 'status': False,
                 'result': "Please check the peer's state"
