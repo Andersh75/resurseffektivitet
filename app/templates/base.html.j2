@@ -265,7 +265,7 @@
 
 
 
-            $('a#process_input').bind('click', function() {
+            $('[id^=selectteacher]').bind('click', function() {
                 $.getJSON('/background_process', {
                   proglang: $('input[name="proglang"]').val(),
                 }, function(result) {
