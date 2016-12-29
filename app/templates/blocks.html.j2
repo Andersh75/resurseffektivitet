@@ -274,7 +274,7 @@
 {% for item in scheduleInCourse(varrubrik) %}
         {% set rowloop = loop %}
 
-        <li>
+        <li style="height: 40px">
             {% if item[4] > 9 %}
             <a href="#" class="text-left">kl.{{ item[4] }}-{{ item[5] }}</a>
             {% endif %}
@@ -286,6 +286,38 @@
     </ul>
 </div>
 
+
+
+<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" id="contentrader">
+<ul class="list-unstyled">
+{% for item in scheduleInCourse(varrubrik) %}
+        {% set rowloop = loop %}
+
+        <li style="height: 40px">
+            <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}">{{ item[6] }}</a>
+        </li>
+{% endfor %}
+    </ul>
+</div>
+
+
+
+
+
+
+<div class="col-l1-3 col-md-3 col-sm-3 col-xs-3" id="roomsrader">
+<ul class="list-unstyled">
+{% for item in scheduleInCourse(varrubrik) %}
+        {% set rowloop = loop %}
+
+        <li>
+            {% for subitem in roomsOnDate(item[0], varrubrik): %}
+                <button type="button" class="btn btn-success btn-xs" id="teacher{{ rowloop.index }}{{ loop.index }}b">{{ subitem[0] }}</button>
+            {% endfor %}
+        </li>
+{% endfor %}
+    </ul>
+</div>
 
 
 
@@ -304,21 +336,6 @@
 {% endfor %}
     </ul>
 </div>
-
-<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" id="contentrader">
-<ul class="list-unstyled">
-{% for item in scheduleInCourse(varrubrik) %}
-        {% set rowloop = loop %}
-
-        <li style="height: 40px">
-            <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}">{{ item[6] }}</a>
-        </li>
-{% endfor %}
-    </ul>
-</div>
-
-
-
 
 
 
