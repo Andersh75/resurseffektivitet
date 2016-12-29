@@ -78,6 +78,33 @@
 
 
 
+                        $('a#process_input').bind('click', function() {
+                            $.getJSON('/background_process', {
+                              proglang: $('input[name="proglang"]').val(),
+                            }, function(result) {
+                                //var varresult = JSON.stringify(result);
+                                var resultet = result
+                                alert(resultet);
+                            });
+                            return false;
+                        });
+                    });
+
+                        $('[id^=selectteacher]').editable({
+                            mode: 'popup',
+                            type: 'select',
+                            title: 'Select status',
+                            placement: 'right',
+                            value: 2,
+                            source: resultet
+                            /*
+                             //uncomment these lines to send data on server
+                             ,pk: 1
+                             ,url: '/post'
+                             */
+
+
+
                         function getSource() {
                             var url = "/background_process";
                             return $.ajax({
@@ -120,7 +147,7 @@
                         ]
 
 
-                        
+
 
                         $('[id^=xxx]').editable({
                             mode: 'popup',
