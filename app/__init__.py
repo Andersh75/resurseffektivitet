@@ -199,6 +199,7 @@ class Schedules(db.Model):
 '''
 
 def defstringcutter(word):
+    print word[:30]
     return word[:30]
 
 # Lista med larare som anvands i en kurs
