@@ -1,5 +1,149 @@
 
 
+            $('[id^=content]').editable({
+                title: 'Select Course'
+            });
+
+            //$('[id^=selectteacher]').editable({
+            //    title: 'Select Course'
+            //});
+
+            //$('[id^=teacher]').sortable();
+
+            //$('.pagination').draggable({
+            //});
+
+            //$('tr').draggable();
+
+
+            $(function  () {
+                $("ol").sortable();
+                $("#dragcon ul").sortable();
+                //$("a[id^='teacher']").draggable();
+            });
+
+            //$('#chart3').draggable();
+
+            //$('#sort tbody').sortable().disableSelection();
+
+            //$('#uitest').sortable();
+
+            //$('#sortable').sortable();
+
+            //$('tbody').sortable();
+
+            $(function(){
+              $("a").each(function(i){
+                len=$(this).text().length;
+                if(len>66)
+                {
+                  $(this).text($(this).text().substr(0,66)+'...');
+                }
+              });
+              $("#daterader p").each(function(i){
+                len=$(this).text().length;
+                if(len>6)
+                {
+                  $(this).text($(this).text().substr(2,7));
+                }
+              });
+            });
+
+
+            var removeIntent = false;
+
+            $('[id^=dest]').sortable({
+                update: function() {
+                    var orders = [];
+                    $.each($(this).children(), function(i, item) {
+                        orders.push($(item).data("x"));
+                    });
+
+                    $("#info").text("Order: " + orders.join(","));
+                },
+                over: function () {
+                removeIntent = false;
+                },
+                out: function () {
+                    removeIntent = true;
+                },
+                beforeStop: function (event, ui) {
+                    if(removeIntent == true){
+                        ui.item.remove();
+                    }
+                }
+
+            });
+
+
+
+
+                        function getSource() {
+                            var url = "/background_process";
+                            return $.ajax({
+                                type:  'GET',
+                                async: true,
+                                url:   url,
+                                dataType: "json"
+                            });
+                        };
+
+                        getSource().done(function(result) {
+
+                            $('[id^=selectteacher]').editable({
+                                type: 'select',
+                                title: 'Select status',
+                                placement: 'right',
+                                value: 2,
+                                source: [
+                                    {value: 1, text: 'first'},
+                                    {value: 2, text: 'second'},
+                                    {value: 3, text: 'third'}
+                                ]
+                                /*
+                                 //uncomment these lines to send data on server
+                                 ,pk: 1
+                                 ,url: '/post'
+                                 */
+                            });
+                        });
+
+                        $('[id^=xxx]').editable({
+                            mode: 'popup',
+                            type: 'select',
+                            title: 'Select status',
+                            placement: 'right',
+                            value: 2,
+                            source: [
+                                {value: 1, text: 'first'},
+                                {value: 2, text: 'second'},
+                                {value: 3, text: 'third'}
+                            ]
+                            /*
+                             //uncomment these lines to send data on server
+                             ,pk: 1
+                             ,url: '/post'
+                             */
+                        });
+
+
+
+
+
+
+
+
+
+
+            jQuery('#src > li').draggable({
+                helper: 'clone',
+                connectToSortable: '[id^=dest]'
+            });
+
+
+
+
+
 
 
 

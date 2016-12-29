@@ -263,55 +263,6 @@
             element.innerHTML = "New Header";
 
 
-            function getSource() {
-                var url = "/background_process";
-                return $.ajax({
-                    type:  'GET',
-                    async: true,
-                    url:   url,
-                    dataType: "json"
-                });
-            };
-
-            getSource().done(function(result) {
-
-                $('[id^=selectteacher]').editable({
-                    type: 'select',
-                    title: 'Select status',
-                    placement: 'right',
-                    value: 2,
-                    source: [
-                        {value: 1, text: 'first'},
-                        {value: 2, text: 'second'},
-                        {value: 3, text: 'third'}
-                    ]
-                    /*
-                     //uncomment these lines to send data on server
-                     ,pk: 1
-                     ,url: '/post'
-                     */
-                });
-            });
-
-            $('[id^=xxx]').editable({
-                mode: 'popup',
-                type: 'select',
-                title: 'Select status',
-                placement: 'right',
-                value: 2,
-                source: [
-                    {value: 1, text: 'first'},
-                    {value: 2, text: 'second'},
-                    {value: 3, text: 'third'}
-                ]
-                /*
-                 //uncomment these lines to send data on server
-                 ,pk: 1
-                 ,url: '/post'
-                 */
-            });
-
-
 
             $(function() {
 			  $('a#process_input').bind('click', function() {
