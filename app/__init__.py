@@ -481,7 +481,7 @@ def background_process():
                 'result': "Please check the peer's state"
             })
 		else:
-			return json.dumps({value: 1, text: 'first'},{value: 2, text: 'second'},{value: 3, text: 'third'})
+			return json.dumps({value: 1, text: 'first'})
 	except Exception as e:
 		return str(e)
 
