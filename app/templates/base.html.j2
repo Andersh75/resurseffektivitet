@@ -2,217 +2,100 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="utf-8">
-    <title>Resurshanteringssystem</title>
-    <meta name="viewport" content="width = device-width, initial-scale = 1">
+<meta charset="utf-8">
+<title>Resurshanteringssystem</title>
+<meta name="viewport" content="width = device-width, initial-scale = 1">
 
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"/>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-tagsinput.css') }}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"/>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-tagsinput.css') }}" />
 
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" /> -->
-
-
-    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" /> -->
 
 
-    <script src="{{ url_for('static', filename='js/bootstrap-tagsinput.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script src="{{ url_for('static', filename='js/jquery.select2.js') }}"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
-
-    <style type = "text/css">
-    ul.nav li a, ul.nav li a:visited {
-        color: #fff !important;
-    }
-
-    ul.nav li a:hover, ul.nav li a:active {
-        color: #fff !important;
-    }
-
-    ul.nav li.active a {
-        color: #fff !important;
-    }
-
-    body.dragging, body.dragging * {
-      cursor: move !important;
-    }
-
-    .dragged {
-      position: absolute;
-      opacity: 0.5;
-      z-index: 2000;
-    }
-
-    ol.example li.placeholder {
-      position: relative;
-      /** More li styles **/
-    }
-    ol.example li.placeholder:before {
-      position: absolute;
-      /** Define arrowhead **/
-    }
-
-    .list-inline br {
-      content: "";
-    }
-    .list-inline br:after {
-      content: ", ";
-    }
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-    </style>
+<script src="{{ url_for('static', filename='js/bootstrap-tagsinput.js') }}"></script>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="{{ url_for('static', filename='js/jquery.select2.js') }}"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+
+
+<style type = "text/css">
+ul.nav li a, ul.nav li a:visited {
+    color: #fff !important;
+}
+
+ul.nav li a:hover, ul.nav li a:active {
+    color: #fff !important;
+}
+
+ul.nav li.active a {
+    color: #fff !important;
+}
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
+
+.list-inline br {
+  content: "";
+}
+.list-inline br:after {
+  content: ", ";
+}
+
+
+</style>
+
 </head>
 
 
 <body>
 
 
-    <div class="container">
-        <div class="row page-header">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                {% block rubrik %}
-                {% endblock %}
-
-
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <ul class="pagination">
-                    <li>
-                        {% set courseidprev = courseid - 1 %}
-                        {% set courseidnext = courseid + 1 %}
-
-                        {% if courseid == 28 %}
-                        {% set courseidnext = 7 %}
-                        {% endif %}
-
-                        {% if courseid == 7 %}
-                        {% set courseidprev = 28 %}
-                        {% endif %}
-
-
-                        <a href="{{ url_for('index', page=courseidprev) }}">&laquo</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('index', page=courseidnext) }}">&raquo</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-
-        <br />
-
-
-
-    
-
-    <div class="container">
-        <div class="row">
-
-                {% block scheduleincourses %}
-                {% endblock %}
-
-        </div>
-
-    </div>
-
-
-
-
-
 
 
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                <h4>Kursinformation
-                </h4>
-                {% block kursinfo %}
-                {% endblock %}
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <h4>
-                    <a href="#col2Content" data-toggle="collapse">Lärare
-                    </a>
-                </h4>
-                <div id="col2Content" class="collapse">
-                    {% block teachersincourses %}
-                    {% endblock %}
-                </div>
-            </div>
+            {% block scheduleincourses %}
+            {% endblock %}
         </div>
     </div>
 
-    <br />
-    <br />
-    <br />
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <h4>Salar
-                </h4>
-                {% block toproomsincourses %}
-                {% endblock %}
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <h4>Fördelning
-                </h4>
-                {% block chart1 %}
-                {% endblock %}
-            </div>
-        </div>
-    </div>
-
-    <br />
-    <br />
-    <br />
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <h4>Bemanning
-                </h4>
-                {% block teachersincoursesnumbers %}
-                {% endblock %}
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <h4>Fördelning
-                </h4>
-                {% block chart2 %}
-                {% endblock %}
-            </div>
-        </div>
-    </div>
-
-    <br />
-    <br />
-    <br />
 
 
 
