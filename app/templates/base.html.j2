@@ -370,9 +370,9 @@
                       $.each(checked, function(i, v) {
                         html.push($.fn.editableutils.escape(v.text));
                       });
-                      $(this).html(html.join(', '));
+                      $(this).html(html.join(value));
                   } else {
-                      $(this).empty().html(html.join(value));
+                      $(this).empty();
                     }
                 }
             });
