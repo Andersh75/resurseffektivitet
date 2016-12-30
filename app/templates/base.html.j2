@@ -357,24 +357,7 @@
 
             $('[id^=Tearow]').editable({  //to keep track of selected values in multi select
                 type: 'checklist',
-                mode: 'popup',
-                placement: 'right',
-                title: 'Select teachers',
-                //autotext: 'never',
-                source: vartech,
-                display: function(value, sourceData) {
-                    //display checklist as comma-separated values
-                    var html = [],
-                      checked = $.fn.editableutils.itemsByValue(value, sourceData);
-
-                    if (checked.length) {
-                      $.each(checked, function(i, v) {
-                        html.push($.fn.editableutils.escape(v.text));
-                      });
-                      $(this).html(html.join(', '));
-                    } else {
-                      $(this).empty();
-                    }
+                
                 }
             });
 
