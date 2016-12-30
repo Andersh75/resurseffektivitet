@@ -636,7 +636,6 @@ app.after_request(sql_debug)
 #for item in xvar:
     #print item
 
-
 #xvar = db.session.query(func.count(Teachers.initials)).all()
 
 #for item in xvar:
@@ -648,7 +647,7 @@ for item in xvar:
     print item
 
 
-    
+
 xvar = db.session.query(Teachers.firstname, func.count(Classes.id)).join(Teachers.classes).group_by(Teachers.firstname).all()
 
 for item in xvar:
