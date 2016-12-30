@@ -63,9 +63,6 @@ body.dragging, body.dragging * {
   cursor: move !important;
 }
 
-.mytextarea {
-  width: 100%;
-}
 
 a {
     border-bottom: none;
@@ -367,7 +364,8 @@ ol.example li.placeholder:before {
             });
 
             $('[id^=content]').editable({
-                title: 'Select Course'
+                title: 'Select Course',
+                tpl: <input type="text" style="width: 500px">
             });
 
             var vartech = '[{% for item in teachersInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
