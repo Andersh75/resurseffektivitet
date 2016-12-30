@@ -484,7 +484,6 @@ def index2():
 
 
 
-
 @app.route('/background_process', methods=['GET', 'POST'])
 def background_process():
     #return json.dumps({'value': 'OK'})

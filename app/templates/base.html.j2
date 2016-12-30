@@ -339,10 +339,10 @@
             $('[id^=selectteacher]').click(function() {
                 $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
                     type: 'select',
-                    autotext : 'always',
-                    value : [1,2],
-                    source : getSource(),
-                    emptytext: 'None'
+                    mode: popup,
+                    placement: top,
+                    autotext : 'never',
+                    source : getSource()
                 });
             });
         });
