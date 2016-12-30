@@ -9,7 +9,8 @@
             {% set rowloop = loop %}
 
 
-                <li style="height: 40px" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+            <li style="height: 40px" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                     {% if item[2] > 9 %}
                         {% if item[3] > 9 %}
                         <p class="text-left">{{ item[1] }}{{ item[2] }}{{ item[3] }}</p>
@@ -26,17 +27,20 @@
                         <p class="text-left">{{ item[1] }}0{{ item[2] }}0{{ item[3] }}</p>
                         {% endif %}
                     {% endif %}
-                </li>
+                </div>
+            </li>
 
-                <li style="height: 40px" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+            <li style="height: 40px">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                     {% if item[4] > 9 %}
                     <p class="text-left">kl.{{ item[4] }}-{{ item[5] }}</p>
                     {% endif %}
                     {% if item[4] < 10 %}
                     <p class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</p>
                     {% endif %}
-                </li>
-        
+                </div>
+            </li>
+
 
         {% endfor %}
     </ul>
