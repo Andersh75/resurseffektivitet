@@ -286,6 +286,7 @@ ol.example li.placeholder:before {
                 placement: 'right',
                 title: 'Select teachers',
                 source: vartech,
+                value: "bar",
                 display: function(value, sourceData) {
                     //display checklist as comma-separated values
                     var html = [],
@@ -296,7 +297,7 @@ ol.example li.placeholder:before {
                         html.push($.fn.editableutils.escape(v.text));
                       });
                       $(this).html(html.join(', '));
-                    } 
+                    }
                   }
             });
 
