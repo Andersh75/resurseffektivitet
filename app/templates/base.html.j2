@@ -364,8 +364,7 @@ ol.example li.placeholder:before {
             });
 
             $('[id^=content]').editable({
-                title: 'Select Course',
-                tpl: <input type="text" style="width: 500px">
+                title: 'Select Course'
             });
 
             var vartech = '[{% for item in teachersInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
