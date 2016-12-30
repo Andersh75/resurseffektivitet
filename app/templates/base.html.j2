@@ -92,12 +92,7 @@
                 {% endblock %}
 
 
-                <h3>Welcome! Which is the best programming language of them all?</h3>
-			<form>
-				<input type=text size=5 name=proglang>
-				<a href=# id=process_input><button id=result class='btn btn-default'></button></a>
-			</form>
-		<p></p>
+
 
 
 
@@ -133,26 +128,7 @@
 
 
     <div class="container">
-        <div class="row">
-
-
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-
-
-            </div>
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                <ul id="src" class="list-inline" height="40x">
-                    {% for subitem in teachersInCourse(varrubrik): %}
-                    <li data-x="src_{{ loop.index0 }}" id="src_{{ loop.index0 }}">
-                            <a href="#" class="btn btn-success btn-xs" id="allpeople{{ loop.index }}">{{ subitem[2] }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-
-            </div>
-
-        </div>
-
+        
 
 
 
