@@ -61,7 +61,7 @@
                     <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}" data-pk="{{ item[7] }}" data-url="/user_edit_content/{{ rowloop.index }}" data-title="Enter username">{{ item[6] }}</a>
                 </div>
 
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="Tearow{{ loop.index0 }}">
                     {% for subitem in defteachersondate(item[0], varrubrik): %}
                         <a href="#" class="text-left" id="selectteacher{{ rowloop.index }}{{ loop.index0 }}" data-pk="{{ item[7] }}" data-url="/user_edit_teacher/{{ rowloop.index }}{{ loop.index0 }}" data-title="Enter username" data-value="{{ subitem[2] }}">{{ subitem[2] }}</a>
                     {% endfor %}

@@ -28,7 +28,6 @@ def grabcoursepm(code):
 
 
 
-
     title = data['course']['title'][0]['#text']
     credits = data['course']['credits'][0]['#text']
     gradeScaleCode = data['course']['gradeScaleCode']['#text']
