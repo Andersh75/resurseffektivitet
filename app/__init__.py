@@ -447,7 +447,6 @@ def index(page):
 
 
 
-
 @app.route('/people/<int:page>')
 def peopleindex(page):
 
