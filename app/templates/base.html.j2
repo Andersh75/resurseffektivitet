@@ -339,22 +339,15 @@
             var getSource = function() {
                   //alert('[{% for item in scheduleInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[6] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]');
             //    //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
-                  return '[{% for item in teachersInCourse(varrubrik) %}{ id: {{ loop.index }}, text: \"{{ item[0] }} {{ item[0] }}\" }{% if not loop.last %}, {% endif %}{% endfor %}]';
+                  return '[{% for item in teachersInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[0] }} {{ item[0] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
             //    return data;
             };
 
-            $('[id^=content]').click(function() {
-                $('[id^=content]').editable({  //to keep track of selected values in multi select
+            $('[id^=selectteacher]').click(function() {
+                $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
                     mode: 'popup',
-                    type: 'select2',
-                    source: [
-                      {id: 'gb', text: 'Great Britain'},
-                      {id: 'us', text: 'United States'},
-                      {id: 'ru', text: 'Russia'}
-                    ],
-                    select2: {
-                       multiple: true
-                   }
+                    type: 'checlist',
+                    source: getSource()
                 });
             });
         });
