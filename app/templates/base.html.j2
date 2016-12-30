@@ -344,11 +344,11 @@
                 $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
                     mode: 'popup',
                     autotext : 'auto',
-                    source : getSource(),
-                    emptytext: 'None',
-                    select2: {
-                        multiple: true
-                    }
+                    source : [
+                        { id: 1, value: "testar"},
+                        { id: 2, value: "test"}
+                    ],
+                    emptytext: 'None'
                 });
             });
         });
