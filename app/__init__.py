@@ -81,7 +81,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e56'
 db = SQLAlchemy(app)
 
 
-
 teachers_classes = db.Table('teachers_classes',
     db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id')),
     db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
