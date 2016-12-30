@@ -341,8 +341,10 @@
                     type: 'select',
                     mode: popup,
                     placement: top,
-                    autotext : 'never',
-                    source : getSource()
+                    autotext : 'always',
+                    value : [1,2],
+                    source : getSource(),
+                    emptytext: 'None'
                 });
             });
         });
