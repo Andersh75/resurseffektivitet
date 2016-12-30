@@ -9,7 +9,11 @@
             {% set rowloop = loop %}
 
 
-            <li style="height: 40px" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <li style="height: 40px">
+                <div class="row">
+
+
+
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                     {% if item[2] > 9 %}
                         {% if item[3] > 9 %}
@@ -36,6 +40,7 @@
                     <p class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</p>
                     {% endif %}
                 </div>
+                    </div>
             </li>
 
 
