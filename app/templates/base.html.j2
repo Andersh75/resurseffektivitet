@@ -289,7 +289,7 @@ ol.example li.placeholder:before {
                 value: "bar",
                 display: function(value, sourceData) {
                     //display checklist as comma-separated values
-                    var html = [value],
+                    var html = [sourceData[0]],
                       checked = $.fn.editableutils.itemsByValue(value, sourceData);
 
                     if (1 == 1) {
