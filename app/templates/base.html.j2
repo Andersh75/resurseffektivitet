@@ -85,6 +85,40 @@ ol.example li.placeholder:before {
 <body>
 
 
+    <div class="container">
+        <div class="row page-header">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                {% block rubrik %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <ul class="pagination">
+                    <li>
+                        {% set courseidprev = courseid - 1 %}
+                        {% set courseidnext = courseid + 1 %}
+
+                        {% if courseid == 28 %}
+                        {% set courseidnext = 7 %}
+                        {% endif %}
+
+                        {% if courseid == 7 %}
+                        {% set courseidprev = 28 %}
+                        {% endif %}
+
+
+                        <a href="{{ url_for('index', page=courseidprev) }}">&laquo</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('index', page=courseidnext) }}">&raquo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+
 
 
 
@@ -201,13 +235,82 @@ ol.example li.placeholder:before {
         </div>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <h4>Kursinformation
+                </h4>
+                {% block kursinfo %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <h4>
+                    <a href="#col2Content" data-toggle="collapse">Lärare
+                    </a>
+                </h4>
+                <div id="col2Content" class="collapse">
+                    {% block teachersincourses %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h4>Salar
+                </h4>
+                {% block toproomsincourses %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h4>Fördelning
+                </h4>
+                {% block chart1 %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h4>Bemanning
+                </h4>
+                {% block teachersincoursesnumbers %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <h4>Fördelning
+                </h4>
+                {% block chart2 %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
 
 
 
 
     <script type="text/javascript">
 
-    
+
 
         $(document).ready(function() {
             $.fn.editable.defaults.mode = 'inline';
