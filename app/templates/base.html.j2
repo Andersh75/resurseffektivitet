@@ -357,8 +357,12 @@
 
             $('[id^=Tearow]').editable({  //to keep track of selected values in multi select
                 type: 'checklist',
+                mode: 'popup',
+                placement: 'right',
+                title: 'Select teachers',
+                //autotext: 'never',
+                source: vartech,
                 
-                }
             });
 
         });
