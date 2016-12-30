@@ -76,6 +76,8 @@
 <body>
 
 
+    {% block scheduleincoursestable %}
+    {% endblock %}
 
     <div class="container">
         <div class="row page-header">
@@ -291,7 +293,13 @@
                 return result;
             };
 
+            $(function  () {
+                $("ol").sortable();
+                $("#dragcon ul").sortable();
+                $("tbody").sortable()
 
+                //$("a[id^='teacher']").draggable();
+            });
 
 
             $('a#process_input').click(function(){
