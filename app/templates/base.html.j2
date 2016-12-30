@@ -343,10 +343,11 @@
             //    return data;
             };
 
+            var vartech = '[{% for item in teachersInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
 
             $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
                 type: 'select',
-                source: getSource()
+                source: vartech
             });
 
         });
