@@ -330,7 +330,7 @@
             });
 
             var getSource = function() {
-                  alert('[{% for item in scheduleInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[6] }}\"{% if not loop.last %}, {% endif %}{% endfor %}}]');
+                  alert('[{% for item in scheduleInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[6] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]');
             //    //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
                   return '[{value: 1, text: "text1"}, {value: 2, text: "text3"}]';
             //    return data;
