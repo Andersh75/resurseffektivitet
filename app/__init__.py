@@ -124,6 +124,7 @@ teachers_schedules = db.Table('teachers_schedules',
 
 
 
+
 dates_classes = db.Table('dates_classes',
     db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
     db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
