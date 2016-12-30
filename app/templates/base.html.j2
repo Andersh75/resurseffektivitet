@@ -370,7 +370,7 @@
                       $.each(checked, function(i, v) {
                         html.push($.fn.editableutils.escape(v.text));
                       });
-                      $(this).html(html.join(value));
+                      $(this).html(html.join(sourceData));
                   } else {
                       $(this).empty();
                     }
