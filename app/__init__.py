@@ -651,6 +651,7 @@ for item in xvar:
 
 
 
+
 xvar = db.session.query(Teachers.firstname, func.count(Classes.id)).join(Teachers.classes).group_by(Teachers.firstname).all()
 
 for item in xvar:
