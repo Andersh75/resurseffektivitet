@@ -108,7 +108,7 @@ ol.example li.placeholder:before {
                 {% endblock %}
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <ul class="pagination btn btn-success">
+                <ul class="pagination">
                     <li>
                         {% set courseidprev = courseid - 1 %}
                         {% set courseidnext = courseid + 1 %}
@@ -122,10 +122,10 @@ ol.example li.placeholder:before {
                         {% endif %}
 
 
-                        <a href="{{ url_for('index', page=courseidprev) }}">&laquo</a>
+                        <a class="btn btn-success" href="{{ url_for('index', page=courseidprev) }}">&laquo</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('index', page=courseidnext) }}">&raquo</a>
+                        <a class="btn btn-success" href="{{ url_for('index', page=courseidnext) }}">&raquo</a>
                     </li>
                 </ul>
             </div>
