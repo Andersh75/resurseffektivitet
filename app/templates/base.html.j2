@@ -343,12 +343,12 @@
             //    return data;
             };
 
-            $('[id^=selectteacher]').click(function() {
-                $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
-                    type: 'select',
-                    source: getSource()
-                });
+
+            $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
+                type: 'select',
+                source: getSource()
             });
+
         });
     </script>
 

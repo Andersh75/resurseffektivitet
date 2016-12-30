@@ -179,7 +179,6 @@ class Roles(db.Model):
     name = db.Column(db.String(30))
     #roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
 
-
 class Dates(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
