@@ -285,7 +285,21 @@ ol.example li.placeholder:before {
                 mode: 'popup',
                 placement: 'right',
                 title: 'Select teachers',
-                source: vartech
+                source: vartech,
+                display: function(value, sourceData) {
+                    //display checklist as comma-separated values
+                    var html = [],
+                      checked = $.fn.editableutils.itemsByValue(value, sourceData);
+
+                    if (1 == 1) {
+                      $.each(checked, function(i, v) {
+                        html.push($.fn.editableutils.escape(v.text));
+                      });
+                      $(this).html(html.join(', '));
+                    } else {
+                      $(this).empty();
+                    }
+                  }
             });
 
         });
