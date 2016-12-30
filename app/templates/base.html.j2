@@ -75,17 +75,6 @@
 
 <body>
 
-    <div class="container">
-        <h4>X-editable: tags custom display </h4>
-
-<div id="container" class="row">
-    <div class="controls controls-row">
-        <span class="tags" id="tags-editable-1"
-            data-toggle="manual" data-type="select2" data-pk="1"
-            data-value="apples, oranges, pie" data-original-title="Enter tags"></span>
-        <a href="#" id="tags-edit-1" data-editable="tags-editable-1" class=""><i class="icon-pencil"></i></a>
-    </div>
-</div>
 
 
     <div class="container">
@@ -272,46 +261,6 @@
             $(".js-example-basic-multiple").select2();
 
 
-$.fn.editable.defaults.mode = 'popover';
-
-            $('.tags').editable({
-    placement: 'right',
-    select2: {
-        tags: ['cake', 'cookies'],
-        tokenSeparators: [",", " "]
-    },
-    display: function(value) {
-        $.each(value,function(i){
-           // value[i] needs to have its HTML stripped, as every time it's read, it contains
-           // the HTML markup. If we don't strip it first, markup will recursively be added
-           // every time we open the edit widget and submit new values.
-           value[i] = "<span class='label'>" + $('<p>' + value[i] + '</p>').text() + "</span>";
-        });
-        $(this).html(value.join(" "));
-    }
-});
-
-$('.tags').on('shown', function() {
-    var editable = $(this).data('editable');
-    value = editable.value
-    $.each(value,function(i){
-       value[i] = $('<p>' + value[i] + '</p>').text()
-    });
-});
-
-$('[id^="tags-edit-"]').click(function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    $('#' + $(this).data('editable') ).editable('toggle');
-});
-
-$.mockjax({
-    url: '/post',
-    status: 200,
-    responseTime: 200
-});
-
-
 
 
 
@@ -397,6 +346,7 @@ $.mockjax({
             $('[id^=selectteacher]').click(function() {
                 $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
                     mode: 'popup',
+                    type: 'select2'
                     autotext : 'auto',
                     source : [
                         { id: 1, value: "testar"},
