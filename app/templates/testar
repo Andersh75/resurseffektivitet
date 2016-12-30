@@ -103,7 +103,11 @@
                              ,url: '/post'
                              */
 
-
+                             type: 'select',
+                             mode: popup,
+                             placement: top,
+                             autotext : 'never',
+                             source : getSource()
 
                         function getSource() {
                             var url = "/background_process";
