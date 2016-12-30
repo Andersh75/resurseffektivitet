@@ -2,14 +2,13 @@
 
 
 
-{% block scheduledate %}
+{% block scheduledateandtime %}
     <ul class="list-unstyled">
-        <li style="height: 40px">
-            <h5 class="text-left">Datum</h5>
-        </li>
+
         {% for item in scheduleInCourse(varrubrik) %}
             {% set rowloop = loop %}
-
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
             <li style="height: 40px">
                 {% if item[2] > 9 %}
                     {% if item[3] > 9 %}
@@ -28,21 +27,8 @@
                     {% endif %}
                 {% endif %}
             </li>
-        {% endfor %}
-    </ul>
-{% endblock %}
-
-
-
-
-{% block scheduletime %}
-    <ul class="list-unstyled">
-        <li style="height: 40px">
-            <h5 class="text-left">Tid</h5>
-        </li>
-        {% for item in scheduleInCourse(varrubrik) %}
-            {% set rowloop = loop %}
-
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
             <li style="height: 40px">
                 {% if item[4] > 9 %}
                 <p class="text-left">kl.{{ item[4] }}-{{ item[5] }}</p>
@@ -51,9 +37,14 @@
                 <p class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</p>
                 {% endif %}
             </li>
+            </div>
+        </div>
         {% endfor %}
     </ul>
 {% endblock %}
+
+
+
 
 
 {% block schedulecontent %}
