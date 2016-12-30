@@ -339,7 +339,9 @@
             $('[id^=selectteacher]').click(function() {
                 $('[id^=selectteacher]').editable({  //to keep track of selected values in multi select
                     type: 'select',
-                    autotext : 'always',
+                    mode: popup,
+                    placement: top,
+                    autotext : 'never',
                     source : getSource(),
                     emptytext: 'None'
                 });

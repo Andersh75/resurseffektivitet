@@ -468,7 +468,6 @@ def peopleindex(page):
 
 
 
-
 @app.route('/')
 def index2():
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
