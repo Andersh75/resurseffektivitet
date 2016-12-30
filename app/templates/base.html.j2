@@ -70,6 +70,10 @@ ul a {
     text-decoration: none !important;
 }
 
+.some_class{
+   width: 240px;
+}
+
 .dragged {
   position: absolute;
   opacity: 0.5;
@@ -270,7 +274,8 @@ ol.example li.placeholder:before {
             });
 
             $('[id^=content]').editable({
-                title: 'Select Course'
+                title: 'Select Course',
+                inputclass: 'some_class'
             });
 
             var vartech = '[{% for item in teachersInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
