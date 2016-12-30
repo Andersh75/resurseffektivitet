@@ -18,7 +18,6 @@ sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 # then bind
 
 
-
 def grabcoursepm(code):
     requestURL = 'http://www.kth.se/api/kopps/v1/course/' + code
 
