@@ -32,23 +32,7 @@
 
             //$('tbody').sortable();
 
-            $(function(){
-              $("a").each(function(i){
-                len=$(this).text().length;
-                if(len>66)
-                {
-                  $(this).text($(this).text().substr(0,66)+'...');
-                }
-              });
-              $("#daterader p").each(function(i){
-                len=$(this).text().length;
-                if(len>6)
-                {
-                  $(this).text($(this).text().substr(2,7));
-                }
-              });
-            });
-
+            
 
             var removeIntent = false;
 
@@ -329,3 +313,90 @@ Target List:
             source: getSource()
         });
     });
+
+
+
+    //$('select').select2();
+    //$(".js-example-basic-multiple").select2();
+
+
+
+
+
+    //$('#titlename1').editable({
+    //    title: 'Select Course'
+    //});
+
+
+    //$('#titlename2').editable({
+    //    title: 'Select Course'
+    //});
+    var element = document.getElementById("result");
+    element.innerHTML = "New Header";
+
+
+    function getSources()
+    {
+        var result = null;
+        $.ajax({
+            type:  'get',
+            url:   '/background_process',
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                result = data;
+            }
+        });
+        return result;
+    };
+
+                $('a#process_input').click(function(){
+                    $.get("/background_process", function(data, status){
+                        alert("Data: " + data + "\nStatus: " + status);
+                        datavar = data
+                    });
+                });
+
+                $('[id^=xxx]').editable({
+                    title: 'Select status',
+                    mode: 'popup',
+                    type: 'select',
+                    value: datavar
+                    /*
+                     //uncomment these lines to send data on server
+                     ,pk: 1
+                     ,url: '/post'
+                     */
+
+                });
+
+                $('[id^=xxx]').click(function() {
+                    $('[id^=xxx]').editable('setValue', datavar)
+                                        .editable({
+                                            title: 'Select status',
+                                            mode: 'popup',
+                                            type: 'select',
+                                            value: datavar
+                                            /*
+                                             //uncomment these lines to send data on server
+                                             ,pk: 1
+                                             ,url: '/post'
+                                             */
+
+                                        });
+
+                                            //clear values
+                                            //.editable('option', 'pk', null)          //clear pk
+                                            //.removeClass('editable-unsaved');        //remove bold css
+                    //$('#save-btn').show();
+                    //$('#msg').hide();
+                });
+
+                var getSource = function() {
+                      //alert('[{% for item in scheduleInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[6] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]');
+                //    //i want this function must be called whenever available options is rendred. to ensure i used JSON.parse
+                      return '[{% for item in teachersInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
+                //    return data;
+                };
+
+var datavar;
