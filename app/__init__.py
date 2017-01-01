@@ -582,7 +582,8 @@ def user_edit_content(page):
 def page_not_found(e):
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
     xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
-    return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
+    #return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
+    return "Hej"
 
 
 
@@ -749,5 +750,5 @@ xvar = testar("AI1147")
 '''
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=1080)
-    #app.run()
+    #app.run(debug=True, host='0.0.0.0', port=1080)
+    app.run()
