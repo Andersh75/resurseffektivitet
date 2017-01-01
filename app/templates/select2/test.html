@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -62,7 +64,7 @@
 
     </head>
 
-    <body> 
+    <body>
 
         <div style="width: 80%; margin: auto;">
             <h1>X-editable Demo</h1>
@@ -201,33 +203,59 @@ user!</a></td>
                 <div><textarea id="console" class="form-control" rows="8" style="width: 70%" autocomplete="off"></textarea></div>
             </div>
 
-            <div style="float: left">
-                <h3>More examples and tricks <small>(jsFiddle)</small></h3>
-                <ul>
-                    <li><a href="http://jsfiddle.net/xBB5x/38" target="_blank">Submit data via PUT method</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/39" target="_blank">Autotext option for select</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/40" target="_blank">Display checklist as &lt;UL&gt;</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/62" target="_blank">Process JSON response</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/63" target="_blank">Editable column in table</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/64" target="_blank">MVC pattern in editable interface</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/194" target="_blank">Change buttons style</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/278" target="_blank">Display server response as element's text</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/297" target="_blank">Dependent SELECTs</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/331" target="_blank">Single regular checkbox</a></li>
-                    <li><a href="http://jsfiddle.net/xBB5x/329" target="_blank">Live events: work with delegated targets</a></li>
-                    <li><a href="http://jsfiddle.net/wQysh/8" target="_blank">SELECT2 remote source</a></li>
-                </ul>
-            </div>
-
-            <footer class="footer" style="clear: both; padding-top: 10px">
-                <hr>
-                <p><a href="http://vitalets.github.com/x-editable">X-editable</a> &copy; Vitaliy Potapov 2012. Released under the MIT license.</p>
-            </footer>
 
         </div>
 
-        <script src="static/demo-mock.js"></script>
-        <script src="static/demo.js"></script>
+        <!--<script src="static/demo-mock.js"></script>-->
+        <script>
+
+        $(function(){
+
+           //defaults
+           $.fn.editable.defaults.url = '/post';
+
+            //enable / disable
+           $('#enable').click(function() {
+               $('#user .editable').editable('toggleDisabled');
+           });
+
+            //editables
+            $('#username').editable({
+                   url: '/post',
+                   type: 'text',
+                   pk: 1,
+                   name: 'username',
+                   title: 'Enter username'
+            });
+
+
+
+           $('#fruits').editable({
+               pk: 1,
+               limit: 3,
+               source: [
+                {value: 1, text: 'banana'},
+                {value: 2, text: 'peach'},
+                {value: 3, text: 'apple'},
+                {value: 4, text: 'watermelon'},
+                {value: 5, text: 'orange'}
+               ]
+            });
+
+            $('#tags').editable({
+                inputclass: 'input-large',
+                select2: {
+                    tags: ['html', 'javascript', 'css', 'ajax'],
+                    tokenSeparators: [",", " "]
+                }
+            });
+
+
+
+        });
+
+
+        </script>
 
     </body>
 </html>
