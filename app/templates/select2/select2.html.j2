@@ -116,6 +116,17 @@ hejhopp
 
 
 
+
+<hr />
+
+
+
+<select class="js-example-basic-single">
+  <option value="AL">Alabama</option>
+  <option value="NY">New York</option>
+  <option value="WY">Wyoming</option>
+</select>
+
 <!--
     <div class="container">
         <div class="row page-header">
@@ -132,6 +143,7 @@ hejhopp
 
     <script>
         $(document).ready(function() {
+            $('select').select2();
 
             $('#states').select2({});
 
@@ -146,6 +158,10 @@ hejhopp
                    multiple: true
                 }
             });
+
+
+            $(".js-example-basic-single").select2();
+
 
         });
     </script>
