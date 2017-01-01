@@ -474,7 +474,7 @@ def index2():
 
 
 
-@app.route('/select2')
+@app.route('/select2/1')
 def select21():
     #return render_template('/select2/select2.html.j2')
     return "Hejja"
