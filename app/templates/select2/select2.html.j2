@@ -82,7 +82,7 @@ hejhopp
 
 
 <form action="">
-    <select name="states" id="states">
+    <select name="states1" id="states">
         <option value="AL">Alabama</option>
     	<option value="AK">Alaska</option>
     	<option value="AZ">Arizona</option>
@@ -103,6 +103,12 @@ hejhopp
     	<option value="KY">Kentucky</option>
     	<option value="LA">Louisiana</option>
     	<option value="ME">Maine</option>
+    </select>
+</form>
+
+
+<form action="">
+    <select name="states2" id="username">
     	<option value="MD">Maryland</option>
     	<option value="MA">Massachusetts</option>
     	<option value="MI">Michigan</option>
@@ -135,8 +141,8 @@ hejhopp
     	<option value="WI">Wisconsin</option>
     	<option value="WY">Wyoming</option>
     </select>
-
 </form>
+
 <!--
     <div class="container">
         <div class="row page-header">
@@ -153,7 +159,11 @@ hejhopp
 
     <script>
         $(document).ready(function() {
+
             $('#states').select2({});
+
+            $('#username').editable();
+
         });
     </script>
 
