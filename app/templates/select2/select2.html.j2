@@ -130,6 +130,11 @@ hejhopp
   <option value="WY">Wyoming</option>
 </select>
 
+
+<hr />
+
+<a href="#" id="tags" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click" data-original-title="" title="">html, javascript</a>
+
 <!--
     <div class="container">
         <div class="row page-header">
@@ -159,6 +164,14 @@ hejhopp
                    ],
                 select2: {
                    multiple: true
+                }
+            });
+
+            $('#tags').editable({
+                inputclass: 'input-large',
+                select2: {
+                    tags: ['html', 'javascript', 'css', 'ajax'],
+                    tokenSeparators: [",", " "]
                 }
             });
 
