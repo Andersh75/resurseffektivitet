@@ -262,6 +262,15 @@
 	$( ":checkbox" ).on( "click", function() {
 		$( this ).parent().nextAll( "select" ).prop( "disabled", !this.checked );
 	});
+
+	$('#tags').editable({
+        inputclass: 'input-large',
+        select2: {
+            tags: ['html', 'javascript', 'css', 'ajax'],
+            tokenSeparators: [",", " "]
+        }
+    });
+
 </script>
 
 	</body>
