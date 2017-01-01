@@ -20,6 +20,26 @@
 	<body>
 		<div class="jumbotron">
 	<div class="container">
+
+
+
+
+
+		<hr />
+
+		<a href="#" id="country" data-type="select2" data-pk="1" data-value="ru" data-url="/post" data-title="Select country"></a>
+
+
+
+
+		<hr />
+
+
+
+
+
+
+
 		<div class="select2-wrapper">
 			<select class="form-control input-lg select2-single" dir="rtl">
 				<option></option>
@@ -273,6 +293,22 @@
 	            tokenSeparators: [",", " "]
 	        }
 	    });
+
+		$('#country').editable({
+			source: [
+				  {id: 'gb', text: 'Great Britain'},
+				  {id: 'us', text: 'United States'},
+				  {id: 'ru', text: 'Russia'}
+			   ],
+			select2: {
+			   multiple: true
+			}
+		});
+
+
+
+
+
 	});
 
 </script>
