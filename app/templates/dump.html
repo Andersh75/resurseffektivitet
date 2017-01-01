@@ -1,12 +1,35 @@
+{% block scheduletime %}
+    <ul class="list-unstyled">
+        <li style="height: 40px">
+            <h5 class="text-left">Tid</h5>
+        </li>
+        {% for item in scheduleInCourse(varrubrik) %}
+            {% set rowloop = loop %}
+
+            <li style="height: 40px">
+                {% if item[4] > 9 %}
+                <p class="text-left">kl.{{ item[4] }}-{{ item[5] }}</p>
+                {% endif %}
+                {% if item[4] < 10 %}
+                <p class="text-left">kl.0{{ item[4] }}-{{ item[5] }}</p>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
 
 
+{% block schedulecontent %}
+    <ul class="list-unstyled">
+        <li style="height: 40px">
+            <h5 class="text-left">Innehåll</h5>
+        </li>
+        {% for item in scheduleInCourse(varrubrik) %}
+            {% set rowloop = loop %}
 
-
-
-
-
-
-    
-    <br />
-    <br />
-    <br />
+            <li style="height: 40px">
+                <a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="content{{ rowloop.index }}" data-pk="{{ item[7] }}" data-url="/user_edit_content/{{ rowloop.index }}" data-title="Enter username">{{ item[6] }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
