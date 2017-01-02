@@ -527,7 +527,7 @@ def register_page():
 
     #form = RegistrationForm(request.form)
 
-    return render_template("register.html")
+    return "HEJHOPP"
 
 
 
