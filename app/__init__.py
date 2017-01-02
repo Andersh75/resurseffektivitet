@@ -486,6 +486,7 @@ def index2():
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
     xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
     flash("That username is already taken, please choose another")
+    flash("That username is already taken, please choose anothekjhkjhr")
     return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
 
 
@@ -515,6 +516,8 @@ def login_page():
 
     except Exception as e:
         #flash(e)
+        flash("That username is already taken, please choose another")
+        flash("That username is already taken, please choose anothekjhkjhr")
         return render_template("login.html", error = error)
 
 
