@@ -537,8 +537,9 @@ def register_page():
 
 @app.route('/select2')
 def select21():
-    return render_template('/select2/test.html')
-    #return "Hejja"
+    flash("That username is already taken, please choose another")
+    #return render_template('/select2/test.html')
+    return "Hejja"
 
 
 
