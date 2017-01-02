@@ -538,9 +538,8 @@ def register_page():
             else:
                 flash("Thanks for registering!")
                 flash(username)
-                flash(xrubrik[0])
                 return render_template('register.html', form=form)
-                
+
 
     flash("Please register!")
     return render_template("register.html", form=form)
