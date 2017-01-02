@@ -526,8 +526,16 @@ def login_page():
 def register_page():
 
     form = RegistrationForm(request.form)
+
+    if request.method == "POST" and form.validate():
+            username  = form.username.data
+            email = form.email.data
+            password = form.password.data
+            flash("Thanks for registering!")
+            flash(username)
+            return render_template('register.html', form=form)
+
     flash("That username is already taken, please choose another")
-    flash("That username is already taken, please choose anothekjhkjhr")
     return render_template("register.html", form=form)
 
 
