@@ -485,6 +485,7 @@ def peopleindex(page):
 def index2():
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
     xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
+    flash("That username is already taken, please choose another")
     return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
 
 
@@ -527,29 +528,21 @@ def register_page():
             username  = form.username.data
             email = form.email.data
             password = sha256_crypt.encrypt((str(form.password.data)))
-            c, conn = connection()
 
-            x = c.execute("SELECT * FROM users WHERE username = (%s)",
-                          (thwart(username)))
+
+
+            x = db.session.query(Teachers).filter(Teachers.initials == thwart(username)).first()
+
+
 
             if int(x) > 0:
                 flash("That username is already taken, please choose another")
                 return render_template('register.html', form=form)
 
             else:
-                c.execute("INSERT INTO users (username, password, email, tracking) VALUES (%s, %s, %s, %s)",
-                          (thwart(username), thwart(password), thwart(email), thwart("/introduction-to-python-programming/")))
 
-                conn.commit()
-                flash("Thanks for registering!")
-                c.close()
-                conn.close()
-                gc.collect()
 
-                session['logged_in'] = True
-                session['username'] = username
-
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('index2'))
 
         return render_template("register.html", form=form)
 
