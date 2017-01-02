@@ -538,6 +538,13 @@ def register_page():
             else:
                 flash("Thanks for registering!")
                 flash(username)
+                record = Teachers(**{
+                    'initials' : username,
+                    'email' : email,
+                    'password' : password
+                })
+                db.session.add(record)
+                db.session.commit()
                 return render_template('register.html', form=form)
 
 
