@@ -474,6 +474,12 @@ def index2():
 
 
 
+@app.route('/login/', methods=["GET","POST"])
+def login_page():
+    return render_template("login.html")
+
+    
+
 @app.route('/select2')
 def select21():
     return render_template('/select2/test.html')
