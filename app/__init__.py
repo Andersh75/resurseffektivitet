@@ -526,7 +526,8 @@ def login_page():
 def register_page():
 
     form = RegistrationForm(request.form)
-
+    flash("That username is already taken, please choose another")
+    flash("That username is already taken, please choose anothekjhkjhr")
     return render_template("register.html", form=form)
 
 
