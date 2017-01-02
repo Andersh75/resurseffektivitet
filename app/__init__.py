@@ -522,12 +522,12 @@ def login_page():
 
 
 
-@app.route('/register/')
+@app.route('/register/', methods=["GET","POST"])
 def register_page():
 
-    #form = RegistrationForm(request.form)
+    form = RegistrationForm(request.form)
 
-    return render_template("register.html")
+    return render_template("register.html", form=form)
 
 
 
