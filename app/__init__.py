@@ -13,8 +13,8 @@ import json
 from flask import jsonify
 from socket import *
 
-sock=socket()
-sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+#sock=socket()
+#sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 # then bind
 
 def grabcoursepm(code):
@@ -73,7 +73,7 @@ def grabcoursepm(code):
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e56'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e58'
 db = SQLAlchemy(app)
 
 
@@ -164,6 +164,7 @@ class Teachers(db.Model):
     email = db.Column(db.String(30))
     firstname = db.Column(db.String(30))
     lastname = db.Column(db.String(30))
+    password = db.Column(db.String(30))
     #schedules = db.relationship('Schedules', secondary=teachers_schedules, backref=db.backref('teachers', lazy='dynamic'))
     classes = db.relationship('Classes', secondary=teachers_classes, backref=db.backref('teachers', lazy='dynamic'))
 
@@ -480,7 +481,7 @@ def login_page():
 
     error = ''
     try:
-	
+
         if request.method == "POST":
 
             attempted_username = request.form['username']
