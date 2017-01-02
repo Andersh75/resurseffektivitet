@@ -524,33 +524,31 @@ def login_page():
 
 @app.route('/register/', methods=["GET","POST"])
 def register_page():
-    try:
-        form = RegistrationForm(request.form)
 
-        if request.method == "POST" and form.validate():
-            username  = form.username.data
-            email = form.email.data
-            password = sha256_crypt.encrypt((str(form.password.data)))
+    form = RegistrationForm(request.form)
 
-
-
-            x = db.session.query(Teachers).filter(Teachers.initials == thwart(username)).first()
+    if request.method == "POST" and form.validate():
+        username  = form.username.data
+        email = form.email.data
+        password = sha256_crypt.encrypt((str(form.password.data)))
 
 
 
-            if int(x) > 0:
-                flash("That username is already taken, please choose another")
-                return render_template('register.html', form=form)
-
-            else:
+        x = db.session.query(Teachers).filter(Teachers.initials == thwart(username)).first()
 
 
-                return redirect(url_for('index2'))
 
-        return render_template("register.html", form=form)
+        if int(x) > 0:
+            flash("That username is already taken, please choose another")
+            return render_template('register.html', form=form)
 
-    except Exception as e:
-        return(str(e))
+        else:
+
+
+            return redirect(url_for('index2'))
+
+    return render_template("register.html", form=form)
+
 
 
 
