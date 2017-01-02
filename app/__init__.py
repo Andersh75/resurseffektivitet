@@ -536,8 +536,8 @@ def register_page():
 
 @app.route('/select2')
 def select21():
-    #return render_template('/select2/test.html')
-    return "Hejja"
+    return render_template('/select2/test.html')
+    #return "Hejja"
 
 
 
