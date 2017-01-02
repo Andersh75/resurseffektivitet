@@ -533,13 +533,14 @@ def register_page():
             password = form.password.data
             xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == username).first()
             if xrubrik:
+                flash("That username is already taken, please choose another")
+                return render_template('register.html', form=form)
+            else:
                 flash("Thanks for registering!")
                 flash(username)
                 flash(xrubrik[0])
                 return render_template('register.html', form=form)
-            else:
-                flash("That username is already taken, please choose another")
-                return render_template('register.html', form=form)
+                
 
     flash("Please register!")
     return render_template("register.html", form=form)
