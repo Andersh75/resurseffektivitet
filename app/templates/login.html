@@ -40,6 +40,21 @@
 <body>
 	<div class="container">
 
+
+		<form action="" class="form-signin" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+		<input type="text" class="form-control" placeholder = "Initials" name="initials" value="{{request.form.initials}}">
+		<input type="password" class="form-control" placeholder = "Password" name="password" value="{{request.form.password}}">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+
+	  <!--
 		{% with messages = get_flashed_messages() %}
 			{% if messages %}
 				{% for message in messages %}
@@ -57,7 +72,7 @@
 			<input type="text" class="form-control" placeholder = "Initials" name="initials" value="{{request.form.initials}}">
 			<input type="password" class="form-control" placeholder = "Password" name="password" value="{{request.form.password}}">
 			<input class="btn warning btn-default" type="submit" value="Login">
-		</form>
+		</form> -->
 	</div>
 </body>
 
