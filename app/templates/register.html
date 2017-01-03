@@ -59,20 +59,25 @@
 		{% from "_formhelpers.html" import render_field %}
 		<form class="form-inline" method="post" action="/register/">
 			<div class="form-group">
-
-					{{render_field(form.initials, class='form-control', placeholder='Jane Doe')}}
-					{{render_field(form.email, class='form-control', placeholder='Enter email...', type='email')}}
-					{{render_field(form.password, class='form-control', placeholder='Password...', type='password')}}
-					{{render_field(form.confirm, class='form-control')}}
-				
-
-		<select class="form-control">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			</select>
+				{{render_field(form.initials, class='form-control', placeholder='Jane Doe')}}
+			</div>
+			<div class="form-group">
+				{{render_field(form.email, class='form-control', placeholder='Enter email...', type='email')}}
+			</div>
+			<div class="form-group">
+				{{render_field(form.password, class='form-control', placeholder='Password...', type='password')}}
+			</div>
+			<div class="form-group">
+				{{render_field(form.confirm, class='form-control')}}
+			</div>
+			<div class="form-group">
+				<select class="form-control">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
 			</div>
 			<p><input type="submit" class="btn btn-default" value="Register"></p>
 
