@@ -511,7 +511,7 @@ def peopleindex(page):
 
 @app.route('/')
 def index3():
-    return "START"
+    return render_template('start.html')
 
 
 
