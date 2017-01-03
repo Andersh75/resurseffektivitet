@@ -501,13 +501,15 @@ def login_page():
 
         if request.method == "POST":
 
-            attempted_username = request.form['username']
+            attempted_initials = request.form['initials']
             attempted_password = request.form['password']
 
-            #flash(attempted_username)
+            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == attempted_initials).first()
+
+            flash(xrubrik)
             #flash(attempted_password)
 
-            if attempted_username == "admin" and attempted_password == "password":
+            if attempted_initials == "admin" and attempted_password == "password":
                 return redirect(url_for('index2'))
 
             else:
