@@ -464,7 +464,7 @@ def logout():
     session.clear()
     flash("You have been logged out!")
     gc.collect()
-    return redirect(url_for('index3'))
+    return redirect(url_for('login_page'))
 
 
 
