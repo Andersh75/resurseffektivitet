@@ -464,7 +464,7 @@ def logout():
     session.clear()
     flash("You have been logged out!")
     gc.collect()
-    return redirect(url_for('index2'))
+    return redirect(url_for('index3'))
 
 
 
@@ -509,11 +509,16 @@ def peopleindex(page):
 
 
 
-
-
-
-
 @app.route('/')
+@login_required
+def index3():
+    return "START"
+
+
+
+
+
+@app.route('/s')
 @login_required
 def index2():
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
