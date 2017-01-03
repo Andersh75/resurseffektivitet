@@ -511,7 +511,7 @@ def peopleindex(page):
 
 @app.route('/')
 def index3():
-    return render_template('start.html')
+    return redirect(url_for('login_page'))
 
 
 
