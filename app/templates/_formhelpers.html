@@ -2,12 +2,13 @@
 	{{ field.label }}
 	{{ field(**kwargs)|safe }}
 	{% if field.errors %}
-
+	<ul class="errors">
 		{% for error in field.errors %}
-
-		{{ flash(error) }}
-
+	<li>
+		{{ error }}
+	</li>
 		{% endfor %}
-
+	</ul>
 	{% endif %}
+
 {% endmacro %}
