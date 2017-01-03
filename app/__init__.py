@@ -219,6 +219,7 @@ class Schedules(db.Model):
 class RegistrationForm(Form):
     username = TextField('Username', [validators.Length(min=2, max=20)])
     firstname = TextField('First name', [validators.Length(min=2, max=20)])
+    lastname = TextField('Last name', [validators.Length(min=2, max=20)])
     email = TextField('Email Address', [validators.Length(min=6, max=50)])
     password = PasswordField('New Password', [
         validators.Required(),
@@ -533,6 +534,7 @@ def register_page():
     if request.method == "POST" and form.validate():
             username  = form.username.data
             firstname  = form.firstname.data
+            lastname  = form.lastname.data
             email = form.email.data
             password = form.password.data
             xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == username).first()
@@ -545,6 +547,7 @@ def register_page():
                 record = Teachers(**{
                     'initials' : username,
                     'firstname' : firstname,
+                    'lastname' : lastname,
                     'email' : email,
                     'password' : password
                 })
