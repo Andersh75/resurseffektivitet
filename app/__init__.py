@@ -532,6 +532,7 @@ def register_page():
 
     if request.method == "POST" and form.validate():
             username  = form.username.data
+            initials  = form.initials.data
             email = form.email.data
             password = form.password.data
             xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == username).first()
