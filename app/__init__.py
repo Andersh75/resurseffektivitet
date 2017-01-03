@@ -504,7 +504,7 @@ def login_page():
             attempted_initials = request.form['initials']
             attempted_password = request.form['password']
 
-            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == attempted_initials).first()
+            xrubrik = db.session.query(Teachers).filter(Teachers.initials == attempted_initials).first()
 
             flash(xrubrik)
             #flash(attempted_password)
@@ -519,8 +519,6 @@ def login_page():
 
     except Exception as e:
         #flash(e)
-        flash("That username is already taken, please choose another")
-        flash("That username is already taken, please choose anothekjhkjhr")
         return render_template("login.html", error = error)
 
 
