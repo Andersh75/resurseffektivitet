@@ -218,7 +218,7 @@ class Schedules(db.Model):
 
 
 class RegistrationForm(Form):
-    initials = TextField('Username', [validators.Length(min=2, max=3)])
+    initials = TextField('Initials', [validators.Length(min=2, max=3)])
     email = TextField('Email Address', [validators.Length(min=6, max=50)])
     password = PasswordField('New Password', [
         validators.Required(),
