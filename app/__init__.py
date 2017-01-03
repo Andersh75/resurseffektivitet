@@ -514,6 +514,7 @@ def peopleindex(page):
 
 
 @app.route('/')
+@login_required
 def index2():
     xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
     xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
