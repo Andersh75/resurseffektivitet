@@ -509,7 +509,7 @@ def login_page():
             flash(xrubrik.initials)
             #flash(attempted_password)
 
-            if attempted_initials == xrubrik[2] and attempted_password == "password":
+            if attempted_initials == xrubrik.initials and attempted_password == "password":
                 return redirect(url_for('index2'))
 
             else:
