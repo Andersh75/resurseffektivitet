@@ -37,21 +37,118 @@
 
 </head>
 
+
 <body>
+
+
+
+
+
+
 	<div class="container">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">Brand</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+		        <li><a href="#">Link</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#">Action</a></li>
+		            <li><a href="#">Another action</a></li>
+		            <li><a href="#">Something else here</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">Separated link</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">One more separated link</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		      <form class="navbar-form navbar-left">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search">
+		        </div>
+		        <button type="submit" class="btn btn-default">Submit</button>
+		      </form>
+			  <form action="" class="navbar-form navbar-left" method="post">
+				  <div class="form-group">
+	  			<input type="text" class="form-control" placeholder = "Initials" name="initials" value="{{request.form.initials}}">
+				</div>
+				<div class="form-group">
+	  			<input type="password" class="form-control" placeholder = "Password" name="password" value="{{request.form.password}}">
+				</div>
+				<div class="form-group">
+	  			<input class="btn warning btn-default" type="submit" value="Login">
+				</div>
+	  		</form>
+
+			  <div class="nav navbar-nav navbar-right">
+			  	{% if session.logged_in %}
+					<a class="btn btn-default navbar-btn" href="{{ url_for('logout') }}">Sign out</a>
+					<!--<button type="submit" class="btn btn-default navbar-btn">Sign out</button>-->
+			  	{% else %}
+					<a class="btn btn-default navbar-btn" href="{{ url_for('login_page') }}">Sign in</a>
+					<!--<button type="submit" class="btn btn-default navbar-btn">Sign in</button>-->
+			    {% endif %}
+		  	  </div>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
 
 
-		<form action="" class="form-signin" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-		<input type="text" class="form-control" placeholder = "Initials" name="initials" value="{{request.form.initials}}">
-		<input type="password" class="form-control" placeholder = "Password" name="password" value="{{request.form.password}}">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+
+
+
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default responsive navbar works. It's placed within a <code>.container</code> to limit its width and will scroll with the rest of the page's content.</p>
+        <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+        </p>
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-warning alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+						{{message}}
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <!--<script src="../../dist/js/bootstrap.min.js"></script>
+     IE10 viewport hack for Surface/desktop Windows 8 bug
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+
+
+
 
 
 	  <!--
@@ -73,7 +170,7 @@
 			<input type="password" class="form-control" placeholder = "Password" name="password" value="{{request.form.password}}">
 			<input class="btn warning btn-default" type="submit" value="Login">
 		</form> -->
-	</div>
+
 </body>
 
 
