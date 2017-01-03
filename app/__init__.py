@@ -538,7 +538,7 @@ def register_page():
             xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == initials).first()
             if xrubrik:
                 flash("That username is already taken, please choose another")
-                form.initials = "HEEEJ"
+                #form.initials = "HEEEJ"
                 return render_template('register.html', form=form)
             else:
                 flash("Thanks for registering!")
