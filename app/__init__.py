@@ -506,7 +506,7 @@ def login_page():
 
             #xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == attempted_initials).first()
 
-            #flash(xrubrik)
+            flash(xrubrik)
             #flash(attempted_password)
 
             if attempted_initials == "admin" and attempted_password == "password":
