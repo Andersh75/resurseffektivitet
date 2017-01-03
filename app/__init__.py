@@ -510,6 +510,8 @@ def login_page():
             #flash(attempted_password)
 
             if attempted_initials == xrubrik.initials and attempted_password == "password":
+                session['logged_in'] = True
+                session['username'] = request.form['initials']
                 return redirect(url_for('index2'))
 
             else:
