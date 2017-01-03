@@ -216,15 +216,17 @@ class Schedules(db.Model):
 '''
 
 
-
 class RegistrationForm(Form):
-    username = TextField('Username', [validators.Length(min=2, max=3)])
+    username = TextField('Username', [validators.Length(min=2, max=20)])
     email = TextField('Email Address', [validators.Length(min=6, max=50)])
     password = PasswordField('New Password', [
         validators.Required(),
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
+    #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
+
+
 
 
 
@@ -530,7 +532,7 @@ def register_page():
             username  = form.username.data
             email = form.email.data
             password = form.password.data
-            xrubrik = db.session.query(Teachers.username).filter(Teachers.initials == username).first()
+            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == username).first()
             if xrubrik:
                 flash("That username is already taken, please choose another")
                 return render_template('register.html', form=form)
