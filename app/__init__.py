@@ -586,7 +586,7 @@ def register_page():
                 })
                 db.session.add(record)
                 db.session.commit()
-                return redirect(url_for('index3'))
+                return redirect(url_for('login_page'))
 
 
     flash("Please register!")
