@@ -527,18 +527,18 @@ def register_page():
     form = RegistrationForm(request.form)
 
     if request.method == "POST" and form.validate():
-            username  = form.username.data
+            initials  = form.initials.data
             email = form.email.data
             password = form.password.data
-            xrubrik = db.session.query(Teachers.username).filter(Teachers.initials == username).first()
+            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == initials).first()
             if xrubrik:
-                flash("That username is already taken, please choose another")
+                flash("That initial is already taken, please choose another")
                 return render_template('register.html', form=form)
             else:
                 flash("Thanks for registering!")
-                flash(username)
+                flash(initials)
                 record = Teachers(**{
-                    'initials' : username,
+                    'initials' : initials,
                     'email' : email,
                     'password' : password
                 })
