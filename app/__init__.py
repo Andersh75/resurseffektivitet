@@ -596,7 +596,7 @@ def register_page():
 
 
     flash("Please register!")
-    return render_template("register.html", form=form)
+    return render_template("register.html.j2", form=form)
 
 
 
