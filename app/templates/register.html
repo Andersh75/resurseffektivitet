@@ -60,7 +60,7 @@
 		<form method="post" action="/register/">
 			<div class="form-group">
 			<dl>
-				{{form.initials(class="form-control"}}
+				{{render_field(form.initials, class='form-control')}}
 				{{render_field(form.email)}}
 				{{render_field(form.password)}}
 				{{render_field(form.confirm)}}
