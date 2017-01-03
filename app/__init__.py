@@ -463,7 +463,7 @@ def logout():
     session.clear()
     flash("You have been logged out!")
     gc.collect()
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('index2'))
 
 
 
