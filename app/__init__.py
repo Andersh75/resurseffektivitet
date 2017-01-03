@@ -218,7 +218,7 @@ class Schedules(db.Model):
 
 
 class RegistrationForm(Form):
-    initials = TextField('Initials', [validators.Length(min=2, max=3)])
+    username = TextField('Username', [validators.Length(min=2, max=3)])
     email = TextField('Email Address', [validators.Length(min=6, max=50)])
     password = PasswordField('New Password', [
         validators.Required(),
@@ -528,18 +528,18 @@ def register_page():
     form = RegistrationForm(request.form)
 
     if request.method == "POST" and form.validate():
-            initials  = form.initials.data
+            username  = form.username.data
             email = form.email.data
             password = form.password.data
-            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == initials).first()
+            xrubrik = db.session.query(Teachers.username).filter(Teachers.initials == username).first()
             if xrubrik:
                 flash("That username is already taken, please choose another")
                 return render_template('register.html', form=form)
             else:
                 flash("Thanks for registering!")
-                flash(initials)
+                flash(username)
                 record = Teachers(**{
-                    'initials' : initials,
+                    'initials' : username,
                     'email' : email,
                     'password' : password
                 })
