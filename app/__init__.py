@@ -513,6 +513,10 @@ def peopleindex(page):
 def index3():
     return redirect(url_for('login_page'))
 
+@app.route('/headerlink1')
+def headerlink1():
+    return redirect(url_for('login_page'))
+
 
 
 
