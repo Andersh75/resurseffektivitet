@@ -217,7 +217,7 @@ class Schedules(db.Model):
 
 
 class RegistrationForm(Form):
-    username = TextField('Username', [validators.Length(min=2, max=20)])
+    initials = TextField('Initials', [validators.Length(min=2, max=20)])
     firstname = TextField('First name', [validators.Length(min=2, max=20)])
     lastname = TextField('Last name', [validators.Length(min=2, max=20)])
     email = TextField('Email Address', [validators.Length(min=6, max=50)])
@@ -532,20 +532,20 @@ def register_page():
     flash("Before IF")
 
     if request.method == "POST" and form.validate():
-            username  = form.username.data
+            initials  = form.initials.data
             firstname  = form.firstname.data
             lastname  = form.lastname.data
             email = form.email.data
             password = form.password.data
-            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == username).first()
+            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == initials).first()
             if xrubrik:
                 flash("That username is already taken, please choose another")
                 return render_template('register.html', form=form)
             else:
                 flash("Thanks for registering!")
-                flash(username)
+                flash(initials)
                 record = Teachers(**{
-                    'initials' : username,
+                    'initials' : initials,
                     'firstname' : firstname,
                     'lastname' : lastname,
                     'email' : email,
