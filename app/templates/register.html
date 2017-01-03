@@ -60,6 +60,7 @@
 		<form method="post" action="/register/">
 			<div class="form-group">
 			<dl>
+				<div class="input-group-addon">$</div>
 				{{render_field(form.initials, class='form-control', placeholder='Jane Doe')}}
 				{{render_field(form.email, class='form-control')}}
 				{{render_field(form.password, class='form-control')}}
