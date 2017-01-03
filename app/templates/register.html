@@ -59,12 +59,12 @@
 		{% from "_formhelpers.html" import render_field %}
 		<form class="form-inline" method="post" action="/register/">
 			<div class="form-group">
-				<dl>
+
 					{{render_field(form.initials, class='form-control', placeholder='Jane Doe')}}
 					{{render_field(form.email, class='form-control', placeholder='Enter email...', type='email')}}
 					{{render_field(form.password, class='form-control', placeholder='Password...', type='password')}}
 					{{render_field(form.confirm, class='form-control')}}
-				</dl>
+				
 
 		<select class="form-control">
 			<option>1</option>
