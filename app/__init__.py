@@ -543,7 +543,7 @@ def register_page():
                 flash(username)
                 record = Teachers(**{
                     'initials' : username,
-                    'firstname' : initials
+                    'firstname' : initials,
                     'email' : email,
                     'password' : password
                 })
