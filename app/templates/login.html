@@ -1,6 +1,10 @@
 {% extends "start.html" %}
 
 {% block login %}
+
+{%- if request.path == "/register/" %}
+<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">HEJJA</a>
+{% endif %}
 <form action="" class="navbar-form navbar-right" method="post">
 	<div class="form-group">
 		<input type="text" class="form-control" placeholder = "Initials" name="initials" value="{{request.form.initials}}">
