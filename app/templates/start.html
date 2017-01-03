@@ -83,7 +83,7 @@
 					<a class="btn btn-default navbar-btn" href="{{ url_for('logout') }}">Sign out</a>
 					<!--<button type="submit" class="btn btn-default navbar-btn">Sign out</button>-->
 			  	{% else %}
-				<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">Sign in</a>
+				<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">Register</a>
 				{% block login %}{% endblock %}
 
 					<!--<a class="btn btn-default navbar-btn" href="{{ url_for('login_page') }}">Sign in</a>
