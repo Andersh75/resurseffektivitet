@@ -58,7 +58,7 @@
 		<br>
 		{% from "_formhelpers.html" import render_field %}
 		<form method="post" action="/register/">
-
+			<div class="form-group">
 			<dl>
 				{{render_field(form.initials)}}
 				{{render_field(form.email)}}
@@ -66,6 +66,7 @@
 				{{render_field(form.confirm)}}
 				{{render_field(form.accept_tos)}}
 			</dl>
+		</div>
 			<p><input type="submit" value="Register"></p>
 
 		</form>
