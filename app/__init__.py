@@ -432,10 +432,38 @@ yeartest = "2013"
 
 
 
+
+
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first")
+            return redirect(url_for('login_page'))
+
+    return wrap
+
+
+
+
 app.jinja_env.globals.update(testar=testar)
 app.jinja_env.globals.update(allteachers=allteachers, defteachersondate=defteachersondate, defexaminerforteacherid=defexaminerforteacherid, defcoursestotalhoursforteacherid=defcoursestotalhoursforteacherid, defcoursesforteacherid=defcoursesforteacherid, teachernamefromid=teachernamefromid, roomsOnDate=roomsOnDate, topRoomsInCourseTotal=topRoomsInCourseTotal, yeartest=yeartest, TeachersInCourseNumbersSum=TeachersInCourseNumbersSum, RoomsInCourseNumbersSum=RoomsInCourseNumbersSum, topRoomsInCourseSum=topRoomsInCourseSum)
 app.jinja_env.globals.update(TeachersInCourseNumbersTest=TeachersInCourseNumbersTest, TeachersInCourseNumbers=TeachersInCourseNumbers, grabcoursepm=grabcoursepm)
 app.jinja_env.globals.update(teachersInCourse=teachersInCourse, scheduleInCourse=scheduleInCourse, roomsInCourse=roomsInCourse, topRoomsInCourse=topRoomsInCourse, topRoomsInCourseNumbers=topRoomsInCourseNumbers, testarlista=testarlista)
+
+
+
+
+@app.route("/logout/")
+@login_required
+def logout():
+    session.clear()
+    flash("You have been logged out!")
+    gc.collect()
+    return redirect(url_for('dashboard'))
 
 
 
