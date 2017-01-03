@@ -504,7 +504,7 @@ def login_page():
             attempted_initials = request.form['initials']
             attempted_password = request.form['password']
 
-            #xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == attempted_initials).first()
+            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == attempted_initials).first()
 
             flash(xrubrik)
             #flash(attempted_password)
