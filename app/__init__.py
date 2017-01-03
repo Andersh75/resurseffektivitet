@@ -545,7 +545,7 @@ def login_page():
             if attempted_initials == xrubrik.initials and attempted_password == "password":
                 session['logged_in'] = True
                 session['username'] = request.form['initials']
-                return redirect(url_for('index2'))
+                return redirect(url_for('index3'))
 
             else:
                 error = "Invalid credentials. Try Again."
@@ -586,7 +586,7 @@ def register_page():
                 })
                 db.session.add(record)
                 db.session.commit()
-                return "Registrerad!"
+                return redirect(url_for('index3'))
 
 
     flash("Please register!")
