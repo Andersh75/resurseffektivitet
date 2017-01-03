@@ -57,7 +57,7 @@
 		<h4>Register</h4>
 		<br>
 		{% from "_formhelpers.html" import render_field %}
-		<form class="form-horizontal" method="post" action="/register/">
+		<form class="form-inline" method="post" action="/register/">
 			<div class="form-group">
 				{{render_field(form.initials, class='form-control', placeholder='Jane Doe')}}
 			</div>
