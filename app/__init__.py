@@ -527,6 +527,7 @@ def login_page():
 def register_page():
 
     form = RegistrationForm(request.form)
+    flash("Before IF")
 
     if request.method == "POST" and form.validate():
             username  = form.username.data
