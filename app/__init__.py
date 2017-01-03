@@ -517,7 +517,7 @@ def index3():
 def headerlink1():
     return render_template('headerlink1.html')
 
-    
+
 
 
 
@@ -880,5 +880,5 @@ xvar = testar("AI1147")
 '''
 
 if __name__ == "__main__":
-    #app.run(debug=True, host='0.0.0.0', port=1080)
-    app.run()
+    #app.run(debug=True, host='http://dansfolk.no-ip.org', port=1080)
+    app.run(debug=True)
