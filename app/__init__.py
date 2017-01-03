@@ -510,7 +510,6 @@ def peopleindex(page):
 
 
 @app.route('/')
-@login_required
 def index3():
     return "START"
 
