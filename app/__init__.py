@@ -515,7 +515,9 @@ def index3():
 
 @app.route('/headerlink1')
 def headerlink1():
-    return redirect(url_for('login_page'))
+    return render_template('headerlink1.html')
+
+    
 
 
 
