@@ -1,3 +1,4 @@
+{% extends "headertoinclude.html.j2" %}
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -47,9 +48,10 @@
 
 
       <!-- Main component for a primary marketing message or call to action -->
+{% block one %}
       <div class="jumbotron">
 
-		  {% block register %}{% endblock %}
+
         <h1>Navbar example</h1>
         <p>This example is a quick exercise to illustrate how the default responsive navbar works. It's placed within a <code>.container</code> to limit its width and will scroll with the rest of the page's content.</p>
         <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
@@ -67,10 +69,10 @@
 			{% endif %}
 		{% endwith %}
       </div>
-      {% block one %}{% endblock %}
+
 
     </div> <!-- /container -->
-
+{% endblock %}
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
