@@ -51,14 +51,16 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="btn btn-default">Register</button>
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Register</button>
+					</div>
 				</div>
 			</form>
 
 			{% if error %}
 				<p class="error"><strong>Error:</strong>{{error}}</p>
 			{% endif %}
-            
+
         </div>
 		<!--{% with messages = get_flashed_messages() %}
   			{% if messages %}
