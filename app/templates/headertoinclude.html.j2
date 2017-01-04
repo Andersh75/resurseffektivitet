@@ -126,6 +126,56 @@
     <!--<script src="../../dist/js/bootstrap.min.js"></script>
      IE10 viewport hack for Surface/desktop Windows 8 bug
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $.fn.editable.defaults.mode = 'inline';
+
+
+            $(function(){
+              $("a").each(function(i){
+                len=$(this).text().length;
+                if(len>61)
+                {
+                  $(this).text($(this).text().substr(0,61)+'...');
+                }
+              });
+              $("#daterader p").each(function(i){
+                len=$(this).text().length;
+                if(len>6)
+                {
+                  $(this).text($(this).text().substr(2,7));
+                }
+              });
+            });
+
+
+
+            $(function  () {
+                $("ol").sortable();
+                $("#conandteacherrader ul").sortable();
+                $("#tbodyid").sortable();
+                $("#dateandtimerader ul").sortable();
+            });
+
+            $('[id^=content]').editable({
+                title: 'Select Course',
+                inputclass: 'some_class'
+            });
+
+            var vartech = '[{% for item in teachersInCourse(varrubrik) %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
+
+            $('[id^=Tearow]').editable({  //to keep track of selected values in multi select
+                type: 'checklist',
+                mode: 'popup',
+                placement: 'right',
+                title: 'Select teachers',
+                source: vartech
+            });
+
+        });
+    </script>
+
   </body>
 
 
