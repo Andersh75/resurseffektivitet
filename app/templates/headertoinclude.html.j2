@@ -62,6 +62,7 @@
 		        <li><a href="{{ url_for('login_page') }}">Start</a></li>
 				{% if session.logged_in %}
 		        <li><a href="{{ url_for('rooms_page', page=6)}}">Rooms</a></li>
+                <li><a href="{{ url_for('courses_page')}}">Rooms</a></li>
 				{% endif %}
 			</ul>
 
@@ -103,8 +104,10 @@
 			{% if session.logged_in %}
 				<p>
 					{% block rooms %}
-					TEXT FÖR INLOGGAD
 					{% endblock %}
+                    {% block courses %}
+                    TEXT FÖR INLOGGAD
+                    {% endblock %}
 				</p>
 			{% else %}
 				{% block register %}

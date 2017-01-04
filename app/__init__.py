@@ -234,7 +234,12 @@ class RegistrationForm(Form):
 
 
 
-
+def allcourses():
+    templist = []
+    tempvar = db.session.query(Courses).order_by(Courses.code).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
 
 def allteachers():
     templist = []
@@ -547,6 +552,12 @@ def headertoincludeextender():
 @app.route('/rooms/<int:page>')
 def rooms_page(page=1):
     return render_template('rooms.html.j2', page=page)
+
+
+@app.route('/courses')
+@app.route('/courses/<int:page>')
+def rooms_page(page=1):
+    return render_template('courses.html.j2', page=page)
 
 
 
