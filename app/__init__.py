@@ -523,6 +523,13 @@ def headertoincludeincluder():
     return render_template('headertoincludeincluder.html.j2')
 
 
+@app.route('/headertoincludeextender')
+def headertoincludeextender():
+    return render_template('headertoincludeextender.html.j2')
+
+
+
+
 
 @app.route('/s')
 @login_required
