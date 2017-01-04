@@ -546,7 +546,7 @@ def headertoincludeextender():
 
 @app.route('/rooms')
 def rooms_page():
-    return render_template('rooms.html.j2')
+    return render_template('rooms.html.j2', vardate=1)
 
 
 
