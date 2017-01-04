@@ -543,7 +543,7 @@ def headertoincludeincluder():
 def headertoincludeextender():
     return render_template('headertoincludeextender.html.j2')
 
-@app.route('/rooms/<page>/')
+@app.route('/rooms/<int:page>')
 def rooms_page(page):
     return render_template('rooms.html.j2', page=page)
 
