@@ -543,7 +543,7 @@ def headertoincludeincluder():
 def headertoincludeextender():
     return render_template('headertoincludeextender.html.j2')
 
-@app.route('/rooms')
+@app.route('/rooms?dateval=<int:dateval>')
 def rooms_page(dateval):
     return render_template('rooms.html.j2', vardate=dateval)
 
