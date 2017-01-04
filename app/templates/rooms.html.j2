@@ -20,8 +20,7 @@
 		            {% for itemdate in AllDates(): %}
 						<tr>
 							<td>{{ itemdate.date }}</td>
-							<td>{{ itemdate.id }}</td>
-							<td></td>
+							<td>Salar</td>
 							<td></td>
 						</tr>
 
@@ -45,6 +44,76 @@
 									{% endfor %}
 								</td>
 				            </tr>
+							<tr>
+				                <td>Kl.10</td>
+				                <td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 10 and item[2] >= 11: %}
+											{{ item[0] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+				            </tr>
+							<tr>
+				                <td>Kl.11</td>
+				                <td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 11 and item[2] >= 12: %}
+											{{ item[0] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+				            </tr>
+							<tr>
+				                <td>Kl.12</td>
+				                <td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 12 and item[2] >= 13: %}
+											{{ item[0] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+				            </tr>
+							<tr>
+				                <td>Kl.13</td>
+				                <td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 13 and item[2] >= 14: %}
+											{{ item[0] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+				            </tr>
+							<tr>
+				                <td>Kl.14</td>
+				                <td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 14 and item[2] >= 15: %}
+											{{ item[0] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+				            </tr>
+							<tr>
+				                <td>Kl.15</td>
+				                <td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 15 and item[2] >= 16: %}
+											{{ item[0] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+				            </tr>
+							<tr>
+								<td>Kl.16</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 16 and item[2] >= 17: %}
+											{{ item[0] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+							</tr>
 		            {% endfor %}
 		        </tbody>
 		    </table>
