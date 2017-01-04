@@ -587,7 +587,7 @@ def login_page():
             flash(xrubrik.initials)
             #flash(attempted_password)
 
-            if attempted_initials == xrubrik.initials and attempted_password == "password":
+            if attempted_initials == xrubrik.initials and attempted_password == xrubrik.password:
                 session['logged_in'] = True
                 session['username'] = request.form['initials']
                 return redirect(url_for('login_page'))
