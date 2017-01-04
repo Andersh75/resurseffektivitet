@@ -27,9 +27,9 @@
 						<th class="text-left">Kursansvarig</th>
 		            </tr>
 		            {% for item in allcourses(): %}
-			            <tr id="{{ item.id }}">
+			            <tr>
 			                <td>{{ item.code }}</td>
-			                <td>{{ item.name }}</td>
+			                <td id="{{ item.id }}">{{ item.name }}</td>
 							<td></td>
 							<td></td>
 			            </tr>
