@@ -28,8 +28,8 @@
 		            </tr>
 		            {% for item in allcourses(): %}
 			            <tr>
-			                <td></td>
-			                <td></td>
+			                <td>{{ item.code }}</td>
+			                <td>{{ item.name }}</td>
 			            </tr>
 		            {% endfor %}
 		        </tbody>
