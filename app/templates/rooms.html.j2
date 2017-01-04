@@ -28,7 +28,7 @@
 						<th class="text-left">Övningssal typ B</th>
 						<th class="text-left">Datorsal</th>
 		            </tr>
-		            {% for itemdate in AllDates(): %}
+		            {% for itemdate in AllDates(page): %}
 						<tr>
 							<td>{{ itemdate.date }}</td>
 						</tr>
