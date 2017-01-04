@@ -279,7 +279,15 @@ def roomsOnDate(date, course):
         templist.append(item)
     return templist
 
-def roomsPerDate():
+def roomsPerDate(date):
+# Lista med salar som anvands i en kurs
+    templist = []
+    tempvar = db.session.query(Rooms.name, Classes.starttime, Classes.endtime).join(Rooms.classes).join(Classes.dates).filter(Dates.date == date).order_by(Classes.starttime).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
+def AllDates():
 # Lista med salar som anvands i en kurs
     templist = []
     tempvar = db.session.query(Dates).order_by(Dates.date).all()
@@ -460,7 +468,7 @@ def login_required(f):
 
 
 app.jinja_env.globals.update(testar=testar)
-app.jinja_env.globals.update(roomsPerDate=roomsPerDate, allteachers=allteachers, defteachersondate=defteachersondate, defexaminerforteacherid=defexaminerforteacherid, defcoursestotalhoursforteacherid=defcoursestotalhoursforteacherid, defcoursesforteacherid=defcoursesforteacherid, teachernamefromid=teachernamefromid, roomsOnDate=roomsOnDate, topRoomsInCourseTotal=topRoomsInCourseTotal, yeartest=yeartest, TeachersInCourseNumbersSum=TeachersInCourseNumbersSum, RoomsInCourseNumbersSum=RoomsInCourseNumbersSum, topRoomsInCourseSum=topRoomsInCourseSum)
+app.jinja_env.globals.update(AllDates=AllDates, roomsPerDate=roomsPerDate, allteachers=allteachers, defteachersondate=defteachersondate, defexaminerforteacherid=defexaminerforteacherid, defcoursestotalhoursforteacherid=defcoursestotalhoursforteacherid, defcoursesforteacherid=defcoursesforteacherid, teachernamefromid=teachernamefromid, roomsOnDate=roomsOnDate, topRoomsInCourseTotal=topRoomsInCourseTotal, yeartest=yeartest, TeachersInCourseNumbersSum=TeachersInCourseNumbersSum, RoomsInCourseNumbersSum=RoomsInCourseNumbersSum, topRoomsInCourseSum=topRoomsInCourseSum)
 app.jinja_env.globals.update(TeachersInCourseNumbersTest=TeachersInCourseNumbersTest, TeachersInCourseNumbers=TeachersInCourseNumbers, grabcoursepm=grabcoursepm)
 app.jinja_env.globals.update(teachersInCourse=teachersInCourse, scheduleInCourse=scheduleInCourse, roomsInCourse=roomsInCourse, topRoomsInCourse=topRoomsInCourse, topRoomsInCourseNumbers=topRoomsInCourseNumbers, testarlista=testarlista)
 
