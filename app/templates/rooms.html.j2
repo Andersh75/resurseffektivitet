@@ -29,8 +29,8 @@
 				                <td>Kl.8</td>
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
-										{% if item[1] > 9: %}
-											{{ item[1] }}
+										{% if item[1] < 9: %}
+											{{ item[0] }}
 										{% endif %}
 									{% endfor %}
 								</td>
