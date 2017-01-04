@@ -10,6 +10,13 @@
 
 
 			<h4>Salar</h4>
+			<h4>
+				{% for itemdate in AllDates(page): %}
+
+					{{ itemdate.date }}</td>
+
+				{% endfor %}
+			</h4>
 
 			<nav aria-label="...">
   <ul class="pager">
@@ -20,7 +27,7 @@
 		    <table class="table table-hover" id="testtable">
 		        <tbody>
 		            <tr>
-		                <th class="text-left">{{ page }}</th>
+		                <th class="text-left">Tid</th>
 		                <th class="text-left">Hörsal typ A+</th>
 		                <th class="text-left">Hörsal typ A</th>
 						<th class="text-left">Hörsal typ B</th>
@@ -29,9 +36,6 @@
 						<th class="text-left">Datorsal</th>
 		            </tr>
 		            {% for itemdate in AllDates(page): %}
-						<tr>
-							<td>{{ itemdate.date }}</td>
-						</tr>
 			            <tr>
 			                <td>Kl.8</td>
 			                <td>
