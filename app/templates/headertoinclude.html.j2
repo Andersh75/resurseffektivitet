@@ -45,12 +45,50 @@
 
 
 
+	<div class="container">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">Brand</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <div class="nav navbar-nav navbar-right">
+			  	{% if session.logged_in %}
+					<a class="btn btn-default navbar-btn" href="{{ url_for('logout') }}">Sign out</a>
+					<!--<button type="submit" class="btn btn-default navbar-btn">Sign out</button>-->
+			  	{% else %}
+				{%- if request.path != "/register/" %}
+				<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">Register</a>
+				{% endif %}
+				{% block login %}{% endblock %}
+
+					<!--<a class="btn btn-default navbar-btn" href="{{ url_for('login_page') }}">Sign in</a>
+					<button type="submit" class="btn btn-default navbar-btn">Sign in</button>-->
+			    {% endif %}
+		  	  </div>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
+
+
+
+
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-{% block two %}Not included here{% endblock %}
 
-        <h1>HEADERTOINCLUDE</h1>
+		  {% block register %}{% endblock %}
+        <h1>Navbar example</h1>
         <p>This example is a quick exercise to illustrate how the default responsive navbar works. It's placed within a <code>.container</code> to limit its width and will scroll with the rest of the page's content.</p>
         <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
         <p>
