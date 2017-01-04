@@ -556,7 +556,7 @@ def rooms_page(page=1):
 
 @app.route('/courses')
 @app.route('/courses/<int:page>')
-def rooms_page(page=1):
+def courses_page(page=1):
     return render_template('courses.html.j2', page=page)
 
 
