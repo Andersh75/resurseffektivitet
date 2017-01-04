@@ -19,8 +19,8 @@
 		            </tr>
 		            {% for item in roomsPerDate(): %}
 		            <tr>
-		                <td>{{ item[1] }}</td>
-		                <td>{{ item[0] }}</td>
+		                <td>{{ item.id }}</td>
+		                <td>{{ item.date }}</td>
 		            </tr>
 		            {% endfor %}
 		        </tbody>
