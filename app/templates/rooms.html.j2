@@ -13,8 +13,8 @@
 
 			<nav aria-label="...">
   <ul class="pager">
-    <li><a href="#">Previous</a></li>
-    <li><a href="#">Next</a></li>
+    <li><a href="{{ url_for('rooms_page', Date=(Date - 1)) }}">Previous</a></li>
+    <li><a href="{{ url_for('rooms_page', Date=(Date + 1)) }}">Next</a></li>
   </ul>
 </nav>
 		    <table class="table table-hover" id="testtable">
@@ -31,6 +31,7 @@
 		            {% for itemdate in AllDates(): %}
 						<tr>
 							<td>{{ itemdate.date }}</td>
+							<td>{{ Date }}</td>
 						</tr>
 			            <tr>
 			                <td>Kl.8</td>

@@ -61,7 +61,7 @@
 			<ul class="nav navbar-nav">
 		        <li><a href="{{ url_for('login_page') }}">Start</a></li>
 				{% if session.logged_in %}
-		        <li><a href="{{ url_for('rooms_page') }}">Rooms</a></li>
+		        <li><a href="{{ url_for('rooms_page', Date=10) }}">Rooms</a></li>
 				{% endif %}
 			</ul>
 
