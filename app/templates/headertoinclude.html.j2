@@ -100,7 +100,9 @@
 
 			{% if session.logged_in %}
 				<p>
+					{% block register %}
 					TEXT FÖR INLOGGAD
+					{% endblock %}
 				</p>
 			{% else %}
 				{% block register %}
