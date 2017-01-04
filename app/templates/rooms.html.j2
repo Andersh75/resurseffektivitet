@@ -32,13 +32,69 @@
 										{% endif %}
 									{% endfor %}
 								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 2: %}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 3: %}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 4: %}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 5: %}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
 				            </tr>
 							<tr>
 				                <td>Kl.9</td>
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
 										{% if item[1] <= 9 and item[2] >= 10 and item[4] == 1: %}
-											{{ item[0] }}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 2: %}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 3: %}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 4: %}
+											{{ item[0] }}:{{ item[3] }}
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td>
+									{% for item in roomsPerDate(itemdate.date): %}
+										{% if item[1] <= 8 and item[2] >= 9 and item[4] == 5: %}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
@@ -48,7 +104,7 @@
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
 										{% if item[1] <= 10 and item[2] >= 11 and item[4] == 1: %}
-											{{ item[0] }}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
@@ -58,7 +114,7 @@
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
 										{% if item[1] <= 11 and item[2] >= 12 and item[4] == 1: %}
-											{{ item[0] }}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
@@ -68,7 +124,7 @@
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
 										{% if item[1] <= 12 and item[2] >= 13 and item[4] == 1: %}
-											{{ item[0] }}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
@@ -78,7 +134,7 @@
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
 										{% if item[1] <= 13 and item[2] >= 14 and item[4] == 1: %}
-											{{ item[0] }}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
@@ -88,7 +144,7 @@
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
 										{% if item[1] <= 14 and item[2] >= 15 and item[4] == 1: %}
-											{{ item[0] }}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
@@ -98,7 +154,7 @@
 				                <td>
 									{% for item in roomsPerDate(itemdate.date): %}
 										{% if item[1] <= 15 and item[2] >= 16 and item[4] == 1: %}
-											{{ item[0] }}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
@@ -107,8 +163,8 @@
 								<td>Kl.16</td>
 								<td>
 									{% for item in roomsPerDate(itemdate.date): %}
-										{% if item[1] <= 16 and item[2] >= 17: %}
-											{{ item[0] }}
+										{% if item[1] <= 16 and item[2] >= 17 and item[4] == 1: %}
+											{{ item[0] }}:{{ item[3] }}
 										{% endif %}
 									{% endfor %}
 								</td>
