@@ -56,7 +56,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">Brand</a>
+		      <a class="navbar-brand" href="#">HEJ</a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,10 +66,10 @@
 					<a class="btn btn-default navbar-btn" href="{{ url_for('logout') }}">Sign out</a>
 					<!--<button type="submit" class="btn btn-default navbar-btn">Sign out</button>-->
 			  	{% else %}
-				{%- if request.path != "/register/" %}
-				<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">Register</a>
-				{% endif %}
-				{% block login %}{% endblock %}
+					{%- if request.path != "/register/" %}
+						<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">Register</a>
+						{% endif %}
+					{% block login %}{% endblock %}
 
 					<!--<a class="btn btn-default navbar-btn" href="{{ url_for('login_page') }}">Sign in</a>
 					<button type="submit" class="btn btn-default navbar-btn">Sign in</button>-->
@@ -82,29 +82,6 @@
 
 
 
-
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-
-		  {% block register %}{% endblock %}
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default responsive navbar works. It's placed within a <code>.container</code> to limit its width and will scroll with the rest of the page's content.</p>
-        <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
-        </p>
-		{% with messages = get_flashed_messages() %}
-			{% if messages %}
-				{% for message in messages %}
-					<div class="alert alert-warning alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-						{{message}}
-					</div>
-				{% endfor %}
-			{% endif %}
-		{% endwith %}
-      </div>
 
     </div> <!-- /container -->
 
