@@ -99,10 +99,17 @@
 
 
 		<div class="jumbotron">
-{% block register %}
-{% endblock %}
 
 
+			{% if session.logged_in %}
+				<p>
+					TEXT FÖR INLOGGAD
+				</p>
+			{% else %}
+				{% block register %}
+					TEXT FÖR UTLOGGAD OM EJ REGISTRERING
+				{% endblock %}
+			{% endif %}
 </div>
 </div>
 
