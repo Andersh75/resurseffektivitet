@@ -3,6 +3,72 @@
 
 {% block register %}
 	<div class ="container">
+
+
+		<div class="jumbotron">
+
+
+			<h4>Register</h4>
+			<br>
+			{% from "_formhelpers.html" import render_field %}
+			<form class="form-horizontal" method="post" action="/register/">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">First name</label>
+					<div class="col-sm-10">
+						{{ render_field(form.firstname, class="form-control", type="text", placeholder="First name...") }}
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">Last name</label>
+					<div class="col-sm-10">
+						{{ render_field(form.lastname, class="form-control", type="text", placeholder="Last name...") }}
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">Initials</label>
+					<div class="col-sm-10">
+						{{ render_field(form.initials, class="form-control", type="text", placeholder="2-3 letters...") }}
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-10">
+				{{ render_field(form.email, class="form-control", placeholder="@kth.se", type="email") }}
+				</div>
+					</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-10">
+				{{ render_field(form.password, class="form-control", type="password", placeholder="Password...") }}
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-10">
+				{{ render_field(form.confirm, class="form-control", type="password", placeholder="Password...") }}
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default">Register</button>
+				</div>
+			</form>
+
+			{% if error %}
+				<p class="error"><strong>Error:</strong>{{error}}</p>
+			{% endif %}
+            <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+          </p>
+  		{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+  				{% for message in messages %}
+  					<div class="alert alert-warning alert-dismissible" role="alert">
+  						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+  						{{message}}
+  					</div>
+  				{% endfor %}
+  			{% endif %}
+  		{% endwith %}
+        </div>
 		<!--{% with messages = get_flashed_messages() %}
   			{% if messages %}
 				{% for message in messages %}
@@ -15,54 +81,7 @@
 		{% endwith %}-->
 
 
-		<h4>Register</h4>
-		<br>
-		{% from "_formhelpers.html" import render_field %}
-		<form class="form-horizontal" method="post" action="/register/">
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">First name</label>
-				<div class="col-sm-10">
-					{{ render_field(form.firstname, class="form-control", type="text", placeholder="First name...") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">Last name</label>
-				<div class="col-sm-10">
-					{{ render_field(form.lastname, class="form-control", type="text", placeholder="Last name...") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">Initials</label>
-				<div class="col-sm-10">
-	    			{{ render_field(form.initials, class="form-control", type="text", placeholder="2-3 letters...") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-				<div class="col-sm-10">
-		    {{ render_field(form.email, class="form-control", placeholder="@kth.se", type="email") }}
-			</div>
-				</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">Password</label>
-				<div class="col-sm-10">
-		    {{ render_field(form.password, class="form-control", type="password", placeholder="Password...") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">Password</label>
-				<div class="col-sm-10">
-		    {{ render_field(form.confirm, class="form-control", type="password", placeholder="Password...") }}
-				</div>
-			</div>
-			<div class="form-group">
-	      		<button type="submit" class="btn btn-default">Register</button>
-	  		</div>
-		</form>
 
-		{% if error %}
-			<p class="error"><strong>Error:</strong>{{error}}</p>
-		{% endif %}
 
 	</div>
 
