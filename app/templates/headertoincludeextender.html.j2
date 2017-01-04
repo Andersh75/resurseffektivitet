@@ -1,23 +1,6 @@
-{% include "headertoincludeincluder.html.j2" %}
-<!DOCTYPE html>
-<html lang="sv">
-<head>
-<meta charset="utf-8">
-<title>Resurshanteringssystem</title>
-<meta name="viewport" content="width = device-width, initial-scale = 1">
+{% extends "headertoincludeincluder.html.j2" %}
 
-
-
-</head>
-
-
-<body>
-
-
-
-
-      <!-- Main component for a primary marketing message or call to action -->
-
+{% block two %}
       <div class="jumbotron">
 
 
@@ -39,11 +22,4 @@
 		{% endwith %}
       </div>
 
-
-    </div> <!-- /container -->
-
-
-</body>
-
-
-</html>
+{% endblock %}
