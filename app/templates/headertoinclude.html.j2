@@ -43,6 +43,10 @@
   /* text-align:right; */
   text-align:left;
 }
+
+.some_class{
+   width: 400px !important;
+}
 </style>
 
 
@@ -132,6 +136,8 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
+            $.fn.editable.defaults.mode = 'inline';
 
             $(function  () {
                 $("tbody").sortable();
