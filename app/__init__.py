@@ -524,7 +524,7 @@ def peopleindex(page):
         xteacher = db.session.query(Teachers.id).filter(Teachers.id == 27).first()
         return render_template('peopleblocks.html.j2', xteacher=xteacher, varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
 
-vardate = 10
+vardate = 8
 
 @app.route('/')
 def index3():
