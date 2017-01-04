@@ -290,7 +290,7 @@ def roomsPerDate(date):
 def AllDates():
 # Lista med salar som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Dates).order_by(Dates.date).all()
+    tempvar = db.session.query(Dates).order_by(Dates.date).limit(10).all()
     for item in tempvar:
         templist.append(item)
     return templist
