@@ -718,7 +718,7 @@ def user_edit_titlename2():
 
 
 
-@app.route('/user_edit_course/<int:page>', methods=['GET', 'POST'])
+@app.route('/user_edit_course_name/<int:page>', methods=['GET', 'POST'])
 def user_edit_course(page):
     id = request.form["pk"]
     #print id
@@ -729,6 +729,27 @@ def user_edit_course(page):
     #print varteacher.lastname.encode('utf-8')
     #print request.form["value"].encode('utf-8')
     varcourse.name = request.form["value"]
+    #print "Efter"
+    #varteacher = Teachers.query.get(id)
+    #print varteacher.lastname.encode('utf-8')
+    result = {}
+    db.session.commit()
+    return json.dumps(result)
+
+
+@app.route('/user_edit_course_examiner/<int:page>', methods=['GET', 'POST'])
+def user_edit_course_examiner(page):
+    id = request.form["pk"]
+    #print id
+    #print "hej"
+
+    tempvar = db.session.query(Courses).get(id)
+    #print varteacher
+    #print varteacher.lastname.encode('utf-8')
+    #print request.form["value"].encode('utf-8')
+    examvar = db.session.query(Examiners.id).join(Examiners.teachers).filter(Teacher.initials == request.form["value"]
+
+    tempvar.examiners.id = examvar
     #print "Efter"
     #varteacher = Teachers.query.get(id)
     #print varteacher.lastname.encode('utf-8')
