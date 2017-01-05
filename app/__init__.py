@@ -298,6 +298,14 @@ def roomsPerDate(date):
         templist.append(item)
     return templist
 
+def coursesPerDate(date):
+# Lista med salar som anvands i en kurs
+    templist = []
+    tempvar = db.session.query(Teachers.initials, Classes.starttime, Classes.endtime, Courses.code).join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).order_by(Classes.starttime).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
 def AllDates(page):
 # Lista med salar som anvands i en kurs
     templist = []
@@ -558,6 +566,11 @@ def headertoincludeextender():
 @app.route('/rooms/<int:page>')
 def rooms_page(page=1):
     return render_template('rooms.html.j2', page=page)
+
+@app.route('/teachers')
+@app.route('/teachers/<int:page>')
+def teachers_page(page=1):
+    return render_template('teachers.html.j2', page=page)
 
 
 @app.route('/courses')
