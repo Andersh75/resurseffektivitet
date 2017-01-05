@@ -744,6 +744,8 @@ def user_edit_course_examiner(page):
     #print "hej"
 
     tempvar = Courses.query.get(id)
+
+    tempvar.name = request.form["value"]
     #print varteacher
     #print varteacher.lastname.encode('utf-8')
     #print request.form["value"].encode('utf-8')
