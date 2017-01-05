@@ -12,6 +12,9 @@
 					{% for item in coursesPerDate(itemdate.date): %}
 						{{ item[0] }}
 					{% endfor %}
+					{% for item in coursesPerDate(itemdate.date): %}
+						{{ item[3] }}
+					{% endfor %}
 				{% endfor %}
 			</h4>
 			<nav aria-label="...">
