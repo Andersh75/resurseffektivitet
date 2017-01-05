@@ -172,6 +172,14 @@ class Teachers(db.Model):
     password = db.Column(db.String(30))
     #schedules = db.relationship('Schedules', secondary=teachers_schedules, backref=db.backref('teachers', lazy='dynamic'))
     classes = db.relationship('Classes', secondary=teachers_classes, backref=db.backref('teachers', lazy='dynamic'))
+    examiners = db.relationship('Examiners', backref='teachers', lazy='dynamic')
+
+
+class Examiners(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    teachers_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    courses = db.relationship('Courses', backref='examiners', lazy='dynamic')
+
 
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -181,6 +189,9 @@ class Courses(db.Model):
     year = db.Column(db.Integer)
     #schedules = db.relationship('Schedules', backref='courses', lazy='dynamic')
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
+    exminers_id = db.Column(db.Integer, db.ForeignKey('examiners.id'))
+
+
 
 class Roles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
