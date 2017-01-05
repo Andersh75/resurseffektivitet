@@ -749,7 +749,7 @@ def user_edit_course_examiner(page):
     #print request.form["value"].encode('utf-8')
     #examvar = db.session.query(Examiners.id).join(Examiners.teachers).filter(Teachers.initials == request.form["value"]).first()
 
-    tempvar.examiners_id = 1
+    tempvar.examiners_id = Teachers.query.filter_by(initials="AH").first().id
     #tempvar.examiners.teachers.initials = "AX"
     #print "Efter"
     #varteacher = Teachers.query.get(id)
