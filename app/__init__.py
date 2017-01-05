@@ -751,7 +751,7 @@ def user_edit_course_examiner(page):
 
     tempvar = Courses.query.get(id)
 
-    uservar = Teachers.query.first()
+    uservar = Teachers.query.filter_by(initials=request.form["value"]).first()
 
     tempvar.examiner = uservar
 
