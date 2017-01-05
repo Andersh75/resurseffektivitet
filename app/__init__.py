@@ -745,7 +745,7 @@ def user_edit_course_examiner(page):
 
     tempvar = Courses.query.get(id)
 
-    tempvar.examiners_id = 1
+    tempvar.examiners.id = 1
     tempvar.name = request.form["value"]
     #print varteacher
     #print varteacher.lastname.encode('utf-8')
