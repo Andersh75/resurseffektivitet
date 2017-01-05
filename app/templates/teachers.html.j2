@@ -2,79 +2,24 @@
 
 
 
-{% block rooms %}
+{% block teachers %}
 	<div class ="container">
-
-
 		<div class="jumbotron">
-
-
 			<h4>Lärare</h4>
 			<h4>
 				{% for itemdate in AllDates(page): %}
-
 					{{ itemdate.date }}
 					{% for item in coursesPerDate(itemdate.date): %}
-					{{ item[0] }}
+						{{ item[0] }}
 					{% endfor %}
-
 				{% endfor %}
 			</h4>
-
-
-
 			<nav aria-label="...">
-  <ul class="pager">
-    <li><a href="{{ url_for('rooms_page', page=page-1) }}">Previous</a></li>
-    <li><a href="{{ url_for('rooms_page', page=page+1) }}">Next</a></li>
-  </ul>
-</nav>
-		    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  		{% with messages = get_flashed_messages() %}
-  			{% if messages %}
-  				{% for message in messages %}
-  					<div class="alert alert-warning alert-dismissible" role="alert">
-  						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-  						{{message}}
-  					</div>
-  				{% endfor %}
-  			{% endif %}
-  		{% endwith %}
+			  <ul class="pager">
+			    <li><a href="{{ url_for('rooms_page', page=page-1) }}">Previous</a></li>
+			    <li><a href="{{ url_for('rooms_page', page=page+1) }}">Next</a></li>
+			  </ul>
+		  	</nav>
         </div>
-		<!--{% with messages = get_flashed_messages() %}
-  			{% if messages %}
-				{% for message in messages %}
-	  				<div class="alert alert-warning alert-dismissible" role="alert">
-	  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-						{{message}}
-	  				</div>
-				{% endfor %}
-  			{% endif %}
-		{% endwith %}-->
-
-
-
-
 	</div>
-
 {% endblock %}
