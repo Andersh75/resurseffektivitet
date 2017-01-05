@@ -40,7 +40,7 @@
 			            <tr>
 			                <td>{{ item.code }}</td>
 			                <td><a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="coursename{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course_name/{{ item.id }}" data-title="Enter username">{{ item.name }}</a></td>
-							<td><a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="courseexaminer{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course_examiner/{{ item.id }}" data-title="Enter username">{{ item.name }}</a></td>
+							<td><a href="#" class="text-left" style="overflow: hidden; text-overflow: ellipsis" id="courseexaminer{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course_examiner/{{ item.id }}" data-title="Enter username">{{ item.examiner }}</a></td>
 							<td></td>
 			            </tr>
 		            {% endfor %}
