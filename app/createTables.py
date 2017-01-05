@@ -20,7 +20,7 @@ from socket import *
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e60'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e61'
 db = SQLAlchemy(app)
 
 
@@ -88,13 +88,9 @@ class Teachers(db.Model):
     password = db.Column(db.String(30))
     #schedules = db.relationship('Schedules', secondary=teachers_schedules, backref=db.backref('teachers', lazy='dynamic'))
     classes = db.relationship('Classes', secondary=teachers_classes, backref=db.backref('teachers', lazy='dynamic'))
-    examiners = db.relationship('Examiners', backref='teachers', lazy='dynamic')
+    examiner = db.relationship('Courses', backref='examiner', lazy='dynamic')
 
 
-class Examiners(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    teachers_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    courses = db.relationship('Courses', backref='examiners', lazy='dynamic')
 
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -104,7 +100,8 @@ class Courses(db.Model):
     year = db.Column(db.Integer)
     #schedules = db.relationship('Schedules', backref='courses', lazy='dynamic')
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
-    examiners_id = db.Column(db.Integer, db.ForeignKey('examiners.id'))
+    examiners_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+
 
 class Roles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
