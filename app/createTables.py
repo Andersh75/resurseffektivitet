@@ -20,7 +20,7 @@ from socket import *
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e59'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/e60'
 db = SQLAlchemy(app)
 
 
@@ -104,7 +104,7 @@ class Courses(db.Model):
     year = db.Column(db.Integer)
     #schedules = db.relationship('Schedules', backref='courses', lazy='dynamic')
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
-    exminers_id = db.Column(db.Integer, db.ForeignKey('examiners.id'))
+    examiners_id = db.Column(db.Integer, db.ForeignKey('examiners.id'))
 
 class Roles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
