@@ -734,10 +734,12 @@ def user_edit_course_name(page):
 
 @app.route('/user_edit_course_examiner/<int:page>', methods=['GET', 'POST'])
 def user_edit_course_examiner(page):
-    id = request.form["pk"]
+    listid = request.form["pk"]
+
     #print id
     #print "hej"
 
+    id = listid[0]
     tempvar = Courses.query.get(id)
 
     uservar = Teachers.query.first()
