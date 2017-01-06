@@ -13,12 +13,12 @@ from socket import *
 from functools import wraps
 from decimal import Decimal
 from bs4 import BeautifulSoup
-import urllib.request
 import gc
 import urllib
 import urllib2
 import xmltodict
 import json
+import urllib.request
 
 req = urllib.request.urlopen('http://www.kth.se/api/kopps/v1/course/HS1735')
 
