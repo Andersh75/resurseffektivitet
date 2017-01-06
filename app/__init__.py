@@ -100,6 +100,7 @@ def hello_world():
 
 
         except Exception, e:
+            print varcode
             print "Ingen mail"
 
 
