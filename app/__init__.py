@@ -56,7 +56,7 @@ def hello_world():
 
 
     for item in templist:
-        print item.a
+        print item
 
     #EXAMPLE OF XML TO JSON
     '''
