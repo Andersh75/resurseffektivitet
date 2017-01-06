@@ -54,7 +54,7 @@ def hello_world2():
 
     testv = jsonify(tempdict3)
 
-    data = json.loads(testv)
+    data = json.loads(tempdict3)
 
     print data
 
