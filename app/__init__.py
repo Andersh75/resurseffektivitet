@@ -52,7 +52,7 @@ def hello_world2():
     tempdict3 = courseinfoperyearandround(2016, 1)
 
 
-    new(jsonify(tempdict3))
+    new(tempdict3)
 
     return jsonify(tempdict3)
 
