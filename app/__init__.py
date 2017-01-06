@@ -67,6 +67,10 @@ def hello_world2():
     data_string_jsonify = jsonify(data)
     print 'JSONIFY:', data_string_jsonify
 
+    decoded = json.loads(data_string_jsonify)
+    print 'DECODED JSONIFY:', decoded
+
+
     decoded = json.loads('[{"a": "A", "b": [2, 4], "c": 3.0}]')
     #decoded = json.loads('')
     print 'DECODED:', decoded
