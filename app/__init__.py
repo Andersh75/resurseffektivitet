@@ -58,15 +58,21 @@ def hello_world():
 
     templist = templist.findAll("tr")
 
+    templist2 = []
+
+    tempdict = {}
 
     for tr in templist:
         tdlist = tr.findAll("a")
-        print tdlist[1].text.encode('utf-8')
-        print tdlist[2].text.encode('utf-8')
-        print tdlist[3].text.encode('utf-8')
+        firstname = tdlist[2].text.encode('utf-8')
+        lastname = tdlist[1].text.encode('utf-8')
+        mail = tdlist[3].text.encode('utf-8')
 
+        tempdict = {'firstname':firstname, 'lastname':lastname. 'mail':mail}
+        templist2.append(tempdict)
 
     #EXAMPLE OF XML TO JSON
+
     '''
     varcode = xml.course['code']
     vartitle = xml.title.string
@@ -84,7 +90,7 @@ def hello_world():
     https://www.kth.se/directory/a/aid
     https://www.kth.se/directory/a/aie
     '''
-    return "hej"
+    return jsonify(staff=templist2)
 
 
 if __name__ == "__main__":
