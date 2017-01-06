@@ -39,15 +39,26 @@ def hello_world2():
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
         templist.append(jsonifycoursesfromdepartment(tempdict))
 
-    return jsonify(courses=templist)
+        tempdict2 = staffperdepartment(department)
+        templist2.append(tempdict2)
+
+    return jsonify(staff=templist2)
 
 
 @app.route('/')
 def hello_world():
 
+    tempdict = {}
+    templist = []
+    departments = ["AIB", "AIC", "AID", "AIE"]
 
-    department = "AIB"
-    templist2 = staffperdepartment(department)
+    for item in departments:
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
+
+        tempdict2 = staffperdepartment(department)
+        templist2.append(tempdict2)
+
     return jsonify(staff=templist2)
 
 
