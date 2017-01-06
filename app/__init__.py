@@ -45,4 +45,4 @@ xml = BeautifulSoup(req)
 
 
 print jsonify(code=xml.course['code'],
-              examiner=xml.examiner['primaryemail')
+              examiner=xml.examiner['primaryemail'])
