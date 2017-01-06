@@ -29,16 +29,16 @@ req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/HS1735')
 
 xml = BeautifulSoup(req)
 
-print xml.examiner.attrs
+#print xml.examiner.attrs
 
-print xml.examiner['primaryemail']
-
-
-print xml.course.attrs
-
-print xml.course['code']
+#print xml.examiner['primaryemail']
 
 
-tempdict = {'code':xml.course['code'], 'title':xml.title.text, 'examiner':xml.examiner['primaryemail']}
+print xml.title.attrs
 
-print jsonify(tempdict)
+#print xml.course['code']
+
+
+#tempdict = {'code':xml.course['code'], 'title':xml.title.text, 'examiner':xml.examiner['primaryemail']}
+
+#print jsonify(tempdict)
