@@ -65,7 +65,7 @@ def hello_world():
     for tr in templist:
         tdlist = tr.findAll("a")
         firstname = tdlist[2].text.encode('utf-8')
-        lastname = tdlist[1].text.encode('utf-8')
+        lastname = tdlist[1].text
         mail = tdlist[3].text.encode('utf-8')
 
         tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail}
