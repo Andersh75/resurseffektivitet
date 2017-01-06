@@ -53,7 +53,7 @@ def hello_world():
     #print tempdict
 
 
-    return jsonify(code=varcode, examiner=xml.course['code'])
+    return jsonify(code=varcode, examiner=xml.examiner['primaryemail'])
 
 
 
