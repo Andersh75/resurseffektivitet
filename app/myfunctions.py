@@ -30,21 +30,24 @@ def fetchinglistofcodesfordepartmentcourses(department):
 
     j_obj = json.load(j)
 
+    tempdict = {}
     templist =[]
 
     for item in j_obj['courses']:
         #print item['code']
         templist.append(item['code'])
 
-    return templist
+    tempdict = {'department':j_obj['department'], 'courses':templist)
+
+    return tempdict
 
 
-def jsonifycoursesfromdepartment(templist):
+def jsonifycoursesfromdepartment(tempdict):
 
     templist2 = []
-    tempdict = {}
+    tempdict2 = {}
 
-    for item in templist:
+    for item in tempdict['courses']:
         req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
 
         xml = BeautifulSoup(req)
@@ -78,8 +81,8 @@ def jsonifycoursesfromdepartment(templist):
             vartitle = "no title"
             print vartitle
 
-        tempdict = {'code':varcode, 'title':vartitle, 'examiner':varmail}
+        tempdict2 = {'code':varcode, 'title':vartitle, 'examiner':varmail}
 
-        templist2.append(tempdict)
+        templist2.append(tempdict2)
 
     return templist2
