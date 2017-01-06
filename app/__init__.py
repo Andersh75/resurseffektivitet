@@ -54,10 +54,11 @@ def hello_world2():
 
     testv = jsonify(tempdict3)
     '''
-    tempdict4 = {'key':'value'}
-    data = json.loads([tempdict4])
+    data = [ { 'a':'A', 'b':(2, 4), 'c':3.0 } ]
+    print 'DATA:', repr(data)
 
-    print data
+    data_string = json.dumps(data)
+    print 'JSON:', data_string
 
     return HEJ
 
