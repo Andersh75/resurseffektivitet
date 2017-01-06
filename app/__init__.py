@@ -53,7 +53,11 @@ def hello_world2():
 def hello_world():
 
     tempdict = {}
+    tempdict2 = {}
+
     templist = []
+    templist2 = []
+
     departments = ["AIB", "AIC", "AID", "AIE"]
 
     for item in departments:
