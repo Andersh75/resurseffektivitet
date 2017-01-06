@@ -61,6 +61,7 @@ def hello_world():
 
     for item in templist:
         print "1"
+        print item.['coursecode']
 
 
 
