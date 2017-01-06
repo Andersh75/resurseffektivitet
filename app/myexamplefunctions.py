@@ -90,4 +90,29 @@ for item in templist:
 
 return jsonify(courses=templist2)
 
+
+#NOT WORKING
+data = [ { 'a':'A', 'b':(2, 4), 'c':3.0 } ]
+print 'DATA:', repr(data)
+
+data_string = json.dumps(data)
+print 'JSON:', data_string
+
+data = [ { 'a':'A', 'b':(2, 4), 'c':3.0 } ]
+data_string = json.dumps(data)
+print 'ENCODED:', data_string
+
+data_string_jsonify = jsonify(data)
+print 'JSONIFY:', data_string_jsonify
+print data_string_jsonify['a']
+
+#decoded = json.loads(data_string_jsonify)
+print 'DECODED JSONIFY:', decoded
+
+decoded = json.loads('[{"a": "A", "b": [2, 4], "c": 3.0}]')
+#decoded = json.loads('')
+print 'DECODED:', decoded
+
+print 'ORIGINAL:', type(data[0]['b'])
+print 'DECODED :', type(decoded[0]['b'])
 '''
