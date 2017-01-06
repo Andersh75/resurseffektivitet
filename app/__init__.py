@@ -20,7 +20,7 @@ from urllib2 import urlopen
 import xmltodict
 import json
 from flask import json
-from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment
+from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment, courseinfoperyearandround
 
 app = Flask(__name__)
 
