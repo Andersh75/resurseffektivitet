@@ -52,22 +52,21 @@ def hello_world2():
 @app.route('/')
 def hello_world():
 
-    tempdict = {}
-    tempdict2 = {}
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/2016:1')
 
-    templist = []
-    templist2 = []
+    xml = BeautifulSoup(req)
 
-    departments = ["AIB", "AIC", "AID", "AIE"]
+    templist = templist.findAll("courseRound")
 
-    for item in departments:
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist.append(jsonifycoursesfromdepartment(tempdict))
+    for item in templist:
+        print item
 
-        tempdict2 = staffperdepartment(item)
-        templist2.append(tempdict2)
 
-    return jsonify(staff=templist2)
+
+    return "HEJ"
+
+
+
 
 
 if __name__ == "__main__":
