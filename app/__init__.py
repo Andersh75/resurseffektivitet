@@ -32,7 +32,7 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def hello_world2():
-
+'''
     tempdict = {}
     tempdict2 = {}
     tempdict3 = {}
@@ -53,12 +53,13 @@ def hello_world2():
 
 
     testv = jsonify(tempdict3)
-
-    data = json.loads(tempdict3)
+'''
+    tempdict4 = {'key':'value'}
+    data = json.loads([tempdict4])
 
     print data
 
-    return jsonify(tempdict3)
+    return HEJ
 
 
 @app.route('/2')
