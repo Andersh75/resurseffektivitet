@@ -41,4 +41,4 @@ xml = BeautifulSoup(req)
 
 tempdict = {'code':xml.course['code'], 'examiner':xml.examiner['primaryemail']}
 
-print jsonify(tempdict)
+print tempdict
