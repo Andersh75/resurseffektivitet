@@ -50,4 +50,4 @@ print varcode
 #print tempdict
 
 
-#print jsonify(code1=xml.course['code'], code2=xml.course['code'])
+print jsonify(code=varcode, examiner=varmail)
