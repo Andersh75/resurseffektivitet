@@ -24,7 +24,6 @@ import json
 
 
 
-tempdict = {}
 
 req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/HS1735')
 
@@ -40,7 +39,6 @@ print xml.course.attrs
 print xml.course['code']
 
 
-tempdict['code'] = xml.course['code']
-tempdict['examiner'] = xml.examiner['primaryemail']
+tempdict = {'code':xml.course['code'], 'title':xml.course['title'], 'examiner':xml.examiner['primaryemail'}
 
-print json.dumps(tempdict)
+print jsonify(tempdict)
