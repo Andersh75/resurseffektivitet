@@ -73,7 +73,7 @@ def hello_world():
         #print item['code']
         templist.append(item['code'])
 
-    item = templist[0]:
+    item = templist[0]
     req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
 
     xml = BeautifulSoup(req)
