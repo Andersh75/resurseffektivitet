@@ -22,7 +22,7 @@ import json
 
 req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/HS1735')
 
-xml = BeautifulSoup(req, 'xml')
+xml = BeautifulSoup(req)
 
 for item in xml.findAll('examiner'):
     print item
