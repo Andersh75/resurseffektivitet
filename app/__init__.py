@@ -44,7 +44,7 @@ def hello_world2():
 
     for item in departments:
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist.extend(jsonifycoursesfromdepartment(tempdict))
+        templist.append(jsonifycoursesfromdepartment(tempdict))
 
         tempdict2 = staffperdepartment(item)
         templist2.append(tempdict2)
