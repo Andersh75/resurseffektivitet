@@ -77,9 +77,9 @@ def hello_world():
 
             print coursecode, roundid, startterm, period, year
 
-        tempdict = {'coursecode':coursecode, 'year':year, 'period':period, 'startterm':startterm, 'roundid':roundid}
+            tempdict = {'coursecode':coursecode, 'year':year, 'period':period, 'startterm':startterm, 'roundid':roundid}
 
-        templist2.append(tempdict)
+            templist2.append(tempdict)
 
     print templist2
 
