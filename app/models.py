@@ -1,4 +1,4 @@
-from app import db
+from __init__ import db
 
 
 class Courses(db.Model):
