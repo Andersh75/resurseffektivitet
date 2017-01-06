@@ -75,7 +75,7 @@ def jsonifycoursesfromdepartment(tempdict):
         try:
             vartitle = xml.title.string
             #print vartitle.encode('utf-8')
-            print vartitle
+            #print vartitle
 
         except Exception, e:
             vartitle = "no title"

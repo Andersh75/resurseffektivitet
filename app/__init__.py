@@ -56,7 +56,7 @@ def hello_world():
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
         templist.append(jsonifycoursesfromdepartment(tempdict))
 
-        tempdict2 = staffperdepartment(department)
+        tempdict2 = staffperdepartment(item)
         templist2.append(tempdict2)
 
     return jsonify(staff=templist2)
