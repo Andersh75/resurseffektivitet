@@ -67,7 +67,7 @@ def hello_world():
 
     j_obj = json.load(j)
 
-    templist =[]
+    templist = []
 
     for item in j_obj['courses']:
         #print item['code']
@@ -83,6 +83,9 @@ def hello_world():
 
     tempdict = {'code':varcode}
     '''
+
+    templist2 = []
+    tempdict = {}
 
     for item in templist:
         req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
@@ -118,8 +121,12 @@ def hello_world():
             vartitle = "no title"
             print vartitle
 
+        tempdict = {'code':varcode, 'title':vartitle, 'examiner':varmail}
+
+        templist2.append(tempdict)
 
 
+    print templist2
 
 
     tempdict = {'code':varcode}
