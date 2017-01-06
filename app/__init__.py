@@ -126,9 +126,12 @@ def hello_world():
 
     '''
 
-    templist = fetchinglistofcodesfordepartmentcourses("AIB")
+    templist2 = []
+    departments = ["AIB", "AIC", "AID", "AIE"]
 
-    templist2 = jsonifycoursesfromdepartment(templist)
+    for item in departments:
+        templist = fetchinglistofcodesfordepartmentcourses(item)
+        templist2.append(jsonifycoursesfromdepartment(templist))
 
     return jsonify(courses=templist2)
 
