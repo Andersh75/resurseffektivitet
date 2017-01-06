@@ -90,8 +90,10 @@ def hello_world():
         xml = BeautifulSoup(req)
 
         varcode = xml.course['code']
+        vartitle = xml.title.string
+        varmail = xml.examiner['primaryemail']
 
-        print varcode
+        print varcode + " " + vartitle + " " + varmail
 
 
 
