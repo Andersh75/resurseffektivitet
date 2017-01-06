@@ -64,7 +64,7 @@ def hello_world2():
     data_string = json.dumps(data)
     print 'ENCODED:', data_string
 
-    decoded = json.loads("[{"a": "A", "b": [2, 4], "c": 3.0}]")
+    decoded = json.loads('[{"a": "A", "b": [2, 4], "c": 3.0}]')
     print 'DECODED:', decoded
 
     print 'ORIGINAL:', type(data[0]['b'])
