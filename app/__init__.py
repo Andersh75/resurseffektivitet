@@ -58,8 +58,8 @@ def hello_world():
 
     templist = xml.find("courseRoundList")
 
-    for item in templist:
-        print item
+    print templist
+
 
 
 
