@@ -31,8 +31,11 @@ xml = BeautifulSoup(req)
 
 #print xml.examiner.attrs
 
+vara = xml.examiner['primaryemail']
+
 #print xml.examiner['primaryemail']
 
+print vara
 
 #print (xml.title.string).encode('utf-8')
 
@@ -44,4 +47,4 @@ xml = BeautifulSoup(req)
 #print tempdict
 
 
-print jsonify(code1=xml.course['code'], code2=xml.course['code'])
+#print jsonify(code1=xml.course['code'], code2=xml.course['code'])
