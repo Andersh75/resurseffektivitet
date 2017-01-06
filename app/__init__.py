@@ -55,6 +55,8 @@ def hello_world2():
 @app.route('/2')
 def hello_world():
 
+    return "HEJ"
+
 
 
 
