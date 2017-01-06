@@ -47,7 +47,7 @@ def hello_world():
 
 
 
-    req = urllib2.urlopen('https://www.kth.se/directory/a/aib')
+    req = urllib2.urlopen('http://google.com')
 
     xml = BeautifulSoup(req)
 
