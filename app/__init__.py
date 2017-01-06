@@ -51,7 +51,7 @@ def hello_world2():
 
     tempdict3 = courseinfoperyearandround(2016, 1)
 
-    print templist[0][0]
+    print templist[0][0]['title']
 
 
     testv = jsonify(tempdict3)
