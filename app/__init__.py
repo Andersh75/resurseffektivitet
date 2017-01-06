@@ -68,7 +68,7 @@ def hello_world():
         lastname = tdlist[1].text.encode('utf-8')
         mail = tdlist[3].text.encode('utf-8')
 
-        tempdict = {'firstname':firstname, 'lastname':lastname. 'mail':mail}
+        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail}
         templist2.append(tempdict)
 
     #EXAMPLE OF XML TO JSON
