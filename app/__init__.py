@@ -43,4 +43,4 @@ print xml.course['code']
 tempdict['code'] = xml.course['code']
 tempdict['examiner'] = xml.examiner['primaryemail']
 
-print jsonify(tempdict)
+print json.dumps(tempdict)
