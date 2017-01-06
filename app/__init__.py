@@ -47,6 +47,7 @@ def hello_world():
 
 
     #FETCHING LIST OF CODES FOR AIB COURSES
+    '''
     j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
 
     j_obj = json.load(j)
@@ -60,8 +61,30 @@ def hello_world():
     print templist
 
     return json.dumps(j_obj)
+    '''
 
+    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
 
+    j_obj = json.load(j)
+
+    templist =[]
+
+    for item in j_obj['courses']:
+        #print item['code']
+        templist.append(item['code'])
+
+    item = templist[0]:
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
+
+    xml = BeautifulSoup(req)
+
+    varcode = xml.course['code']
+    vartitle = xml.title.string
+    varmail = xml.examiner['primaryemail']
+
+    tempdict = {'code':varcode, 'title':vartitle, 'examiner':varmail}
+
+    return json.dumps(tempdict)
 
 
 
