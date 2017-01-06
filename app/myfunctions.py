@@ -56,20 +56,20 @@ def jsonifycoursesfromdepartment(tempdict):
         #vartitle = xml.title.string
         try:
             varcode = xml.course['code']
-            print varcode
+            #print varcode
 
         except Exception, e:
             varcode = "no title"
-            print varcode
+            #print varcode
 
 
         try:
             varmail = xml.examiner['primaryemail']
-            print varmail
+            #print varmail
 
         except Exception, e:
             varmail = "no mail"
-            print varmail
+            #print varmail
 
 
         try:
@@ -79,7 +79,7 @@ def jsonifycoursesfromdepartment(tempdict):
 
         except Exception, e:
             vartitle = "no title"
-            print vartitle
+            #print vartitle
 
         tempdict2 = {'code':varcode, 'title':vartitle, 'examiner':varmail, 'department':tempdict['department']}
 
@@ -105,7 +105,7 @@ def staffperdepartment(department):
 
     for tr in templist:
         tdlist = tr.findAll("a")
-        print tdlist
+        #print tdlist
         firstname = tdlist[2].text
         lastname = tdlist[1].text
         mail = tdlist[3].text
