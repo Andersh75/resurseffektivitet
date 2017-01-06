@@ -54,7 +54,7 @@ def hello_world():
 
 
     for item in j_obj['courses']:
-        print item
+        print item['code']
 
 
 
