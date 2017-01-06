@@ -89,17 +89,25 @@ def hello_world():
 
         xml = BeautifulSoup(req)
 
-        varcode = xml.course['code']
+
         #vartitle = xml.title.string
         try:
-            varmail = xml.examiner['primaryemail']
-            #print vartitle.encode('utf-8')
+            varcode = xml.course['code']
             print varcode
+
+        except Exception, e:
+            varcode = "no title"
+            print varcode
+
+
+        try:
+            varmail = xml.examiner['primaryemail']
             print varmail
 
         except Exception, e:
-            print varcode
-            print "Ingen mail"
+            varmail = "no mail"
+            print varmail
+
 
         try:
             vartitle = xml.title.string
@@ -107,7 +115,8 @@ def hello_world():
             print vartitle
 
         except Exception, e:
-            print "Ingen title"
+            vartitle = "no title"
+            print vartitle
 
 
 
