@@ -56,7 +56,12 @@ def hello_world():
 
     xml = BeautifulSoup(req)
 
-    print xml.courseround['coursecode']
+    xml = xml.find("courseRoundList")
+
+    for item in xml:
+        print item.text
+
+
 
 
 
