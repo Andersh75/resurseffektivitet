@@ -56,10 +56,10 @@ def hello_world():
 
     xml = BeautifulSoup(req)
 
-    xml = xml.courseroundlist
+    templist = xml.findAll("courseround")
 
 
-    for item in xml[1]:
+    for item in templist:
         print "1"
 
 
