@@ -47,12 +47,12 @@ def hello_world():
 
 
 
-    req = urllib2.urlopen('http://google.com')
+    req = urllib2.urlopen('https://www.kth.se/directory/a/aib')
 
     xml = BeautifulSoup(req)
 
-    print xml.title
 
+    print xml.title
     #EXAMPLE OF XML TO JSON
     '''
     varcode = xml.course['code']
@@ -71,7 +71,7 @@ def hello_world():
     https://www.kth.se/directory/a/aid
     https://www.kth.se/directory/a/aie
     '''
-    return "hej!"
+    return "hej"
 
 
 if __name__ == "__main__":
