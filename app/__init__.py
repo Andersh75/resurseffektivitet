@@ -39,7 +39,9 @@ def hello_world():
 
     #print varmail
 
-    #print (xml.title.string).encode('utf-8')
+    vartitle = (xml.title.string).encode('utf-8')
+
+    print vartitle
 
     #print xml.course['code']
 
