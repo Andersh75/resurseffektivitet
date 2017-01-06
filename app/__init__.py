@@ -28,42 +28,28 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
 
+    #EXAMPLE OF XML TO JSON
+    '''
     req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/AI1147')
 
     xml = BeautifulSoup(req)
-
-    #print xml.examiner.attrs
-
-
-    #print xml.examiner['primaryemail']
-
-    #print varmail
-
-
-
-    #print vartitle
-
-    #print xml.course['code']
 
     varcode = xml.course['code']
     vartitle = xml.title.string
     varmail = xml.examiner['primaryemail']
 
-
-
-
-    #print varcode
-
     tempdict = {'code':varcode, 'title':vartitle, 'examiner':varmail}
 
-    #print tempdict
     return json.dumps(tempdict)
 
+    return jsonify(code=varcode, title=vartitle, examiner=varmail)
+    '''
 
-    #return jsonify(code=varcode, title=vartitle, examiner=varmail)
+    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
 
+    j_obj = json.load(j)
 
-
+    return json.dumps(j_obj)
 
 
 if __name__ == "__main__":
