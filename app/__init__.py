@@ -51,4 +51,4 @@ print varcode
 #print tempdict
 
 
-print jsonify(code=varcode, examiner=varmail)
+print jsonify(code="hej", examiner="da")
