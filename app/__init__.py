@@ -68,7 +68,11 @@ def hello_world():
             startterm = item['startterm']
             roundid = item['roundid']
 
-            period = int(startterm[-1:]) * int(roundid)
+            if int(startterm[-1:]) == 1:
+                period = int(roundid)
+            else:
+                period = int(roundid) + 2
+                
             print coursecode, roundid, startterm, period
 
 
