@@ -56,7 +56,7 @@ def hello_world():
 
     xml = BeautifulSoup(req)
 
-    print templist.text
+    print xml.text
 
 
 
