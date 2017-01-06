@@ -52,7 +52,11 @@ def hello_world2():
     tempdict3 = courseinfoperyearandround(2016, 1)
 
 
-    new(tempdict3)
+    testv = jsonify(tempdict3)
+
+    data = json.loads(testv)
+
+    print data
 
     return jsonify(tempdict3)
 
