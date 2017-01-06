@@ -28,16 +28,33 @@ app = Flask(__name__)
 
 
 
+@app.route('/2')
+def hello_world2():
+
+    tempdict = {}
+    templist = []
+    departments = ["AIB", "AIC", "AID", "AIE"]
+
+    for item in departments:
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
+
+    return jsonify(courses=templist)
+
 
 @app.route('/')
 def hello_world():
 
-    #EXAMPLE OF XML TO JSON
-    '''
-    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/AI1147')
+
+
+    req = urllib2.urlopen('https://www.kth.se/directory/a/aib')
 
     xml = BeautifulSoup(req)
 
+
+
+    #EXAMPLE OF XML TO JSON
+    '''
     varcode = xml.course['code']
     vartitle = xml.title.string
     varmail = xml.examiner['primaryemail']
@@ -47,96 +64,14 @@ def hello_world():
     return json.dumps(tempdict)
 
     return jsonify(code=varcode, title=vartitle, examiner=varmail)
+
+
+    https://www.kth.se/directory/a/aib
+    https://www.kth.se/directory/a/aic
+    https://www.kth.se/directory/a/aid
+    https://www.kth.se/directory/a/aie
     '''
-
-
-    #FETCHING LIST OF CODES FOR AIB COURSES
-    '''
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
-
-    j_obj = json.load(j)
-
-    templist =[]
-
-    for item in j_obj['courses']:
-        #print item['code']
-        templist.append(item['code'])
-
-    print templist
-
-    return json.dumps(j_obj)
-    '''
-
-
-
-    #JSONIFY COURSES FROM DEPARTMENT
-    '''
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
-
-    j_obj = json.load(j)
-
-    templist = []
-
-    for item in j_obj['courses']:
-        #print item['code']
-        templist.append(item['code'])
-
-    templist2 = []
-    tempdict = {}
-
-    for item in templist:
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
-
-        xml = BeautifulSoup(req)
-
-
-        #vartitle = xml.title.string
-        try:
-            varcode = xml.course['code']
-            print varcode
-
-        except Exception, e:
-            varcode = "no title"
-            print varcode
-
-
-        try:
-            varmail = xml.examiner['primaryemail']
-            print varmail
-
-        except Exception, e:
-            varmail = "no mail"
-            print varmail
-
-
-        try:
-            vartitle = xml.title.string
-            #print vartitle.encode('utf-8')
-            print vartitle
-
-        except Exception, e:
-            vartitle = "no title"
-            print vartitle
-
-        tempdict = {'code':varcode, 'title':vartitle, 'examiner':varmail}
-
-        templist2.append(tempdict)
-
-    return jsonify(courses=templist2)
-
-    '''
-
-    templist2 = []
-    departments = ["AIB", "AIC", "AID", "AIE"]
-
-    for item in departments:
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist2.append(jsonifycoursesfromdepartment(tempdict))
-
-    return jsonify(courses=templist2)
-
-
-
+    return xml.prettify()
 
 
 if __name__ == "__main__":
