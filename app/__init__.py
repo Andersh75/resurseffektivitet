@@ -58,7 +58,8 @@ def hello_world():
 
     templist = xml.findAll("courseround")
 
-
+    templist2 = []
+    
     for item in templist:
         #print "1"
         #print item['coursecode']
