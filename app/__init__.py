@@ -129,9 +129,9 @@ def hello_world():
     print templist2
 
 
-    tempdict = {'code':varcode}
+    #tempdict = {'code':varcode}
 
-    return json.dumps('courses':templist2)
+    return jsonify(courses=templist2)
 
 
 
