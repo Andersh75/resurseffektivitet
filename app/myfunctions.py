@@ -117,3 +117,40 @@ def staffperdepartment(department):
     tempdict2 = {'department':department, 'person':templist2}
 
     return tempdict2
+
+
+
+def courseinfoperyearandround(x, y):
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
+
+    xml = BeautifulSoup(req)
+
+    templist = xml.findAll("courseround")
+
+    templist2 = []
+
+    for item in templist:
+        #print "1"
+        #print item['coursecode']
+        coursecode = item['coursecode']
+        if coursecode[:2] == "AI":
+
+            startterm = item['startterm']
+            roundid = item['roundid']
+
+            if int(startterm[-1:]) == 1:
+                period = int(roundid)
+            else:
+                period = int(roundid) + 2
+
+            year = startterm[:4]
+
+            print coursecode, roundid, startterm, period, year
+
+            tempdict = {'coursecode':coursecode, 'year':year, 'period':period, 'startterm':startterm, 'roundid':roundid}
+
+            templist2.append(tempdict)
+
+    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
+
+    return tempdict2

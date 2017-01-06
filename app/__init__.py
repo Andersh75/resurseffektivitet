@@ -28,11 +28,12 @@ app = Flask(__name__)
 
 
 
-@app.route('/2')
+@app.route('/')
 def hello_world2():
 
     tempdict = {}
     tempdict2 = {}
+    tempdict3 = {}
 
     templist = []
     templist2 = []
@@ -46,49 +47,15 @@ def hello_world2():
         tempdict2 = staffperdepartment(item)
         templist2.append(tempdict2)
 
-    return jsonify(staff=templist2)
+    tempdict3 = courseinfoperyearandround(2016, 1)
+
+    return jsonify(tempdict3)
 
 
-@app.route('/')
+@app.route('/2')
 def hello_world():
 
-    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/2016:2')
 
-    xml = BeautifulSoup(req)
-
-    templist = xml.findAll("courseround")
-
-    templist2 = []
-    
-    for item in templist:
-        #print "1"
-        #print item['coursecode']
-        coursecode = item['coursecode']
-        if coursecode[:2] == "AI":
-
-            startterm = item['startterm']
-            roundid = item['roundid']
-
-            if int(startterm[-1:]) == 1:
-                period = int(roundid)
-            else:
-                period = int(roundid) + 2
-
-            year = startterm[:4]
-
-            print coursecode, roundid, startterm, period, year
-
-            tempdict = {'coursecode':coursecode, 'year':year, 'period':period, 'startterm':startterm, 'roundid':roundid}
-
-            templist2.append(tempdict)
-
-    print templist2
-
-
-
-
-
-    return "HEJ"
 
 
 
