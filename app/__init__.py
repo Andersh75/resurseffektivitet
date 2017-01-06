@@ -49,7 +49,7 @@ def hello_world():
 
     req = urllib2.urlopen('https://www.kth.se/directory/a/aib')
 
-    xml = BeautifulSoup(req)
+    xml = BeautifulSoup(req, 'html.parser')
 
 
 
