@@ -68,7 +68,7 @@ def hello_world():
             startterm = item['startterm']
             roundid = item['roundid']
 
-            period = startterm[-1:] * roundid
+            period = int(startterm[-1:]) * int(roundid)
             print coursecode, roundid, startterm, period
 
 
