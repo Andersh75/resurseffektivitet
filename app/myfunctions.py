@@ -110,10 +110,10 @@ def staffperdepartment(department):
         lastname = tdlist[1].text
         mail = tdlist[3].text
 
-        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail, 'department':department}
+        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail}
         templist2.append(tempdict)
 
 
-    tempdict2 = {'department':department, 'staff':templist2}
+    tempdict2 = {'department':department, 'person':templist2}
 
     return tempdict2
