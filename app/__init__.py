@@ -27,3 +27,8 @@ xml = BeautifulSoup(req)
 print xml.examiner.attrs
 
 print xml.examiner['primaryemail']
+
+
+print xml.course.attrs
+
+print xml.course['code']
