@@ -51,7 +51,7 @@ def hello_world():
 
     xml = BeautifulSoup(req)
 
-
+    print xml.title
 
     #EXAMPLE OF XML TO JSON
     '''
@@ -71,7 +71,7 @@ def hello_world():
     https://www.kth.se/directory/a/aid
     https://www.kth.se/directory/a/aie
     '''
-    return xml.title
+    return "hej!"
 
 
 if __name__ == "__main__":
