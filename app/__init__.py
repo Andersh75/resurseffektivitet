@@ -56,7 +56,7 @@ def hello_world():
     #print tempdict
 
 
-    return jsonify(code=varcode, examiner=varmail, title=vartitle)
+    return jsonify(code=varcode, examiner=varmail, title=vartitle).encode('utf-8')
 
 
 
