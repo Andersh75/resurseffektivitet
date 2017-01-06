@@ -154,3 +154,14 @@ def courseinfoperyearandround(x, y):
     tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
 
     return tempdict2
+
+
+
+
+def new(datafile):
+
+    data = json.load(datafile)
+
+    for item in data['courseinfo']:
+        print item['coursecode']
+        #templist.append(item['code'])

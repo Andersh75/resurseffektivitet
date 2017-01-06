@@ -30,8 +30,6 @@ db = SQLAlchemy(app)
 
 
 
-
-
 @app.route('/')
 def hello_world2():
 
@@ -52,6 +50,9 @@ def hello_world2():
         templist2.append(tempdict2)
 
     tempdict3 = courseinfoperyearandround(2016, 1)
+
+
+    new(jsonify(tempdict3))
 
     return jsonify(tempdict3)
 
