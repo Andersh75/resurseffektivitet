@@ -53,7 +53,7 @@ def hello_world():
     #print tempdict
 
 
-    print jsonify(code="hej", examiner="da")
+    return jsonify(code="hej", examiner="da")
 
 
 
