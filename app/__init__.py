@@ -93,15 +93,21 @@ def hello_world():
         #vartitle = xml.title.string
         try:
             varmail = xml.examiner['primaryemail']
-
             #print vartitle.encode('utf-8')
             print varcode
             print varmail
 
-
         except Exception, e:
             print varcode
             print "Ingen mail"
+
+        try:
+            vartitle = xml.title.string
+            #print vartitle.encode('utf-8')
+            print vartitle
+
+        except Exception, e:
+            print "Ingen title"
 
 
 
