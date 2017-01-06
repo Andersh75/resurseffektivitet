@@ -45,20 +45,25 @@ def hello_world():
     return jsonify(code=varcode, title=vartitle, examiner=varmail)
     '''
 
+
+    #FETCHING LIST OF CODES FOR AIB COURSES
     j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
 
     j_obj = json.load(j)
 
-
-    print j_obj['courses']
-
+    templist =[]
 
     for item in j_obj['courses']:
-        print item['code']
+        #print item['code']
+        templist.append(item['code'])
 
-
+    print templist
 
     return json.dumps(j_obj)
+
+
+
+
 
 
 if __name__ == "__main__":
