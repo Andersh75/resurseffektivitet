@@ -56,7 +56,7 @@ def hello_world():
 
     xml = BeautifulSoup(req)
 
-    print xml.courseRound['courseCode']
+    print xml.courseround['coursecode']
 
 
 
