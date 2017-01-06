@@ -51,7 +51,7 @@ def hello_world2():
 
     tempdict3 = courseinfoperyearandround(2016, 1)
 
-    for item in templist:
+    for item in templist[0]:
         print item['exminer']
 
 
