@@ -91,9 +91,9 @@ def hello_world():
 
         varcode = xml.course['code']
         vartitle = xml.title.string
-        varmail = xml.examiner['primaryemail']
+        #varmail = xml.examiner['primaryemail']
 
-        print varcode + " " + vartitle + " " + varmail
+        print varcode + " " + vartitle
 
 
 
