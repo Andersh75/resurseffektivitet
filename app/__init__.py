@@ -49,8 +49,7 @@ def hello_world():
 
     j_obj = json.load(j)
 
-    for item in j_obj[0]:
-        print item
+    print j_obj['courses']
 
     return json.dumps(j_obj)
 
