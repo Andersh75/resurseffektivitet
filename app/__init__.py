@@ -34,26 +34,27 @@ def hello_world():
 
     #print xml.examiner.attrs
 
-    varmail = xml.examiner['primaryemail']
 
     #print xml.examiner['primaryemail']
 
-    print varmail
+    #print varmail
 
     #print (xml.title.string).encode('utf-8')
 
     #print xml.course['code']
 
     varcode = xml.course['code']
+    varmail = xml.examiner['primaryemail']
 
-    print varcode
+
+    #print varcode
 
     #tempdict = {'code':xml.course['code'], 'examiner':xml.examiner['primaryemail']}
 
     #print tempdict
 
 
-    return jsonify(code=varcode, examiner=xml.examiner['primaryemail'])
+    return jsonify(code=varcode, examiner=varmail, title=xml.title.string)
 
 
 
