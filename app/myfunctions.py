@@ -22,16 +22,24 @@ import json
 from flask import json
 
 
-def jsonifycoursesfromdepartment():
+
+
+
+def fetchinglistofcodesfordepartmentcourses():
     j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
 
     j_obj = json.load(j)
 
-    templist = []
+    templist =[]
 
     for item in j_obj['courses']:
         #print item['code']
         templist.append(item['code'])
+
+    return templist
+
+
+def jsonifycoursesfromdepartment(templist):
 
     templist2 = []
     tempdict = {}

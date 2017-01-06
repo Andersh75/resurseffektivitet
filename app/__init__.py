@@ -20,10 +20,9 @@ from urllib2 import urlopen
 import xmltodict
 import json
 from flask import json
-from myfunctions import jsonifycoursesfromdepartment
+from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses
 
 app = Flask(__name__)
-
 
 
 
@@ -126,7 +125,10 @@ def hello_world():
     return jsonify(courses=templist2)
 
     '''
-    templist2 = jsonifycoursesfromdepartment()
+
+    templist = fetchinglistofcodesfordepartmentcourses()
+
+    templist2 = jsonifycoursesfromdepartment(templist)
 
     return jsonify(courses=templist2)
 
