@@ -114,4 +114,6 @@ def staffperdepartment(department):
         templist2.append(tempdict)
 
 
-    return tempdict
+    tempdict2 = {'department':department, 'staff':templist2}
+
+    return tempdict2
