@@ -34,7 +34,7 @@ xml = BeautifulSoup(req)
 #print xml.examiner['primaryemail']
 
 
-print xml.title.string
+print (xml.title.string).encode('utf-8')
 
 #print xml.course['code']
 
