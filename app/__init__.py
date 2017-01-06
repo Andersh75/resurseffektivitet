@@ -41,7 +41,7 @@ def hello_world():
 
 
 
-    print vartitle
+    #print vartitle
 
     #print xml.course['code']
 
