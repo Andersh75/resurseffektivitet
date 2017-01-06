@@ -32,7 +32,11 @@ app = Flask(__name__)
 def hello_world2():
 
     tempdict = {}
+    tempdict2 = {}
+
     templist = []
+    templist2 = []
+
     departments = ["AIB", "AIC", "AID", "AIE"]
 
     for item in departments:
