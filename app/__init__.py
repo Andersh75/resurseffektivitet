@@ -61,8 +61,8 @@ def hello_world():
 
     for tr in templist:
         tdlist = tr.findAll("a")
-        print td[1]
-    
+        print tdlist[1]
+
 
     #EXAMPLE OF XML TO JSON
     '''
