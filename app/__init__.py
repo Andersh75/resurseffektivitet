@@ -85,7 +85,7 @@ def hello_world2():
 @app.route('/2')
 def hello_world():
 
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (aib))
+    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % ("aib"))
 
     j_obj = json.load(j)
 
