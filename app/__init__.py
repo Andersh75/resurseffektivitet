@@ -52,7 +52,7 @@ def hello_world():
     xml = BeautifulSoup(req)
 
 
-    templist = xml.select("td > a class_='table-responsive'")
+    templist = xml.find("table")
 
 
     for item in templist:
