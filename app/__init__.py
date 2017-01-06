@@ -131,7 +131,7 @@ def hello_world():
 
     tempdict = {'code':varcode}
 
-    return json.dumps("courses" : templist2)
+    return json.dumps('courses':templist2)
 
 
 
