@@ -49,6 +49,9 @@ def hello_world():
 
     j_obj = json.load(j)
 
+    for item in j_obj:
+        print item
+
     return json.dumps(j_obj)
 
 
