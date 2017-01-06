@@ -60,7 +60,7 @@ def hello_world2():
     data_string = json.dumps(data)
     print 'JSON:', data_string
 
-    return HEJ
+    return "HEJ"
 
 
 @app.route('/2')
