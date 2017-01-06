@@ -46,7 +46,7 @@ def hello_world2():
 def hello_world():
 
 
-    department = "aib"
+    department = "AIB"
     templist2 = staffperdepartment(department)
     return jsonify(staff=templist2)
 
