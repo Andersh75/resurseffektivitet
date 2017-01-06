@@ -68,7 +68,7 @@ def hello_world2():
     print 'JSONIFY:', data_string_jsonify
     print data_string_jsonify['a']
 
-    decoded = json.loads(data_string_jsonify)
+    #decoded = json.loads(data_string_jsonify)
     print 'DECODED JSONIFY:', decoded
 
 
@@ -84,6 +84,12 @@ def hello_world2():
 
 @app.route('/2')
 def hello_world():
+
+    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (aib))
+
+    j_obj = json.load(j)
+
+    print j_obj
 
     return "HEJ"
 
