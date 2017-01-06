@@ -160,7 +160,7 @@ def courseinfoperyearandround(x, y):
 
 def new(datafile):
 
-    data = json.load(datafile)
+    data = json.loads(datafile)
 
     for item in data['courseinfo']:
         print item['coursecode']
