@@ -16,11 +16,11 @@ from bs4 import BeautifulSoup
 import gc
 import urllib
 import urllib2
+from urllib2 import urlopen
 import xmltodict
 import json
-import urllib.request
 
-req = urllib.request.urlopen('http://www.kth.se/api/kopps/v1/course/HS1735')
+req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/HS1735')
 
 xml = BeautifulSoup(req, 'xml')
 
