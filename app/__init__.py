@@ -60,8 +60,11 @@ def hello_world():
 
 
     for item in templist:
-        print "1"
-        print item['coursecode']
+        #print "1"
+        #print item['coursecode']
+        coursecode = item['coursecode']
+        if coursecode[:2] == "AI":
+            print coursecode
 
 
 
