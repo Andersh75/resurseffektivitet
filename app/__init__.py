@@ -54,7 +54,7 @@ def hello_world():
 
     templist = xml.find("table")
 
-    templist = templist.fint("tbody")
+    templist = templist.find("tbody")
 
 
     for item in templist:
