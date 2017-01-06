@@ -56,8 +56,8 @@ def hello_world():
 
 
     for item in templist:
-        print item.a.string.strip()
-    
+        print item.a
+
     #EXAMPLE OF XML TO JSON
     '''
     varcode = xml.course['code']
