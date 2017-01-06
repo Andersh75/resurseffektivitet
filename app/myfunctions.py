@@ -92,7 +92,7 @@ def jsonifycoursesfromdepartment(tempdict):
 
 
 def staffperdepartment(department):
-    req = urllib2.urlopen('https://www.kth.se/directory/a/%s.json' % (department))
+    req = urllib2.urlopen('https://www.kth.se/directory/a/%s' % (department))
 
     xml = BeautifulSoup(req)
 
