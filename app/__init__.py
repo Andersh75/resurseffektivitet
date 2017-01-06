@@ -56,11 +56,13 @@ def hello_world():
 
     templist = templist.find("tbody")
 
-    templist = templist.findAll("td")
+    templist = templist.findAll("tr")
 
 
-    for item in templist:
-        print item
+    for tr in templist:
+        tdlist = tr.findAll("a")
+        print td[1]
+    
 
     #EXAMPLE OF XML TO JSON
     '''
