@@ -25,7 +25,7 @@ import json
 
 
 
-req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/HS1735')
+req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/AI1147')
 
 xml = BeautifulSoup(req)
 
