@@ -49,7 +49,7 @@ def hello_world():
 
     req = urllib2.urlopen('https://www.kth.se/directory/a/aib')
 
-    xml = BeautifulSoup(req, 'html.parser')
+    xml = BeautifulSoup(req)
 
 
 
@@ -71,7 +71,7 @@ def hello_world():
     https://www.kth.se/directory/a/aid
     https://www.kth.se/directory/a/aie
     '''
-    return xml.a.string
+    return xml.title
 
 
 if __name__ == "__main__":
