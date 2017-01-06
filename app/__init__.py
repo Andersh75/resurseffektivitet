@@ -20,7 +20,7 @@ from urllib2 import urlopen
 import xmltodict
 import json
 from flask import json
-from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses
+from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment
 
 app = Flask(__name__)
 
@@ -46,50 +46,8 @@ def hello_world2():
 def hello_world():
 
 
-
-    req = urllib2.urlopen('https://www.kth.se/directory/a/aib')
-
-    xml = BeautifulSoup(req)
-
-
-    templist = xml.find("table")
-
-    templist = templist.find("tbody")
-
-    templist = templist.findAll("tr")
-
-    templist2 = []
-
-    tempdict = {}
-
-    for tr in templist:
-        tdlist = tr.findAll("a")
-        firstname = tdlist[2].text
-        lastname = tdlist[1].text
-        mail = tdlist[3].text
-
-        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail}
-        templist2.append(tempdict)
-
-    #EXAMPLE OF XML TO JSON
-
-    '''
-    varcode = xml.course['code']
-    vartitle = xml.title.string
-    varmail = xml.examiner['primaryemail']
-
-    tempdict = {'code':varcode, 'title':vartitle, 'examiner':varmail}
-
-    return json.dumps(tempdict)
-
-    return jsonify(code=varcode, title=vartitle, examiner=varmail)
-
-
-    https://www.kth.se/directory/a/aib
-    https://www.kth.se/directory/a/aic
-    https://www.kth.se/directory/a/aid
-    https://www.kth.se/directory/a/aie
-    '''
+    department = "aib"
+    templist2 = staffperdepartment(department)
     return jsonify(staff=templist2)
 
 

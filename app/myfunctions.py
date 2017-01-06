@@ -86,3 +86,31 @@ def jsonifycoursesfromdepartment(tempdict):
         templist2.append(tempdict2)
 
     return templist2
+
+
+
+
+
+def staffperdepartment(department):
+    req = urllib2.urlopen('https://www.kth.se/directory/a/%s.json' % (department))
+
+    xml = BeautifulSoup(req)
+
+    templist = xml.find("table")
+    templist = templist.find("tbody")
+    templist = templist.findAll("tr")
+
+    templist2 = []
+    tempdict = {}
+
+    for tr in templist:
+        tdlist = tr.findAll("a")
+        firstname = tdlist[2].text
+        lastname = tdlist[1].text
+        mail = tdlist[3].text
+
+        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail}
+        templist2.append(tempdict)
+
+
+    return templist2
