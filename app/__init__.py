@@ -54,7 +54,7 @@ def hello_world():
     #print tempdict
 
 
-    return jsonify(code=varcode, examiner=varmail, title=(xml.title.string.encode('utf-8')))
+    return jsonify(code=varcode, examiner=varmail, title=(xml.title.string).encode('utf-8'))
 
 
 
