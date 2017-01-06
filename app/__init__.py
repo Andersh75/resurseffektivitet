@@ -56,6 +56,8 @@ def hello_world():
 
     templist = templist.find("tbody")
 
+    templist = templist.findAll("td")
+
 
     for item in templist:
         print item
