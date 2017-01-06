@@ -39,6 +39,6 @@ print xml.course.attrs
 print xml.course['code']
 
 
-tempdict = {'code':xml.course['code'], 'title':xml.course['title'], 'examiner':xml.examiner['primaryemail']}
+tempdict = {'code':xml.course['code'], 'title':xml.title.text, 'examiner':xml.examiner['primaryemail']}
 
 print jsonify(tempdict)
