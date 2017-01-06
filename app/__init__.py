@@ -44,4 +44,4 @@ xml = BeautifulSoup(req)
 #print tempdict
 
 
-print jsonify(code=xml.course['code'], code=xml.course['code'])
+print jsonify(code1=xml.course['code'], code2=xml.course['code'])
