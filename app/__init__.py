@@ -71,7 +71,7 @@ def hello_world():
     https://www.kth.se/directory/a/aid
     https://www.kth.se/directory/a/aie
     '''
-    return str(xml)
+    return xml.a
 
 
 if __name__ == "__main__":
