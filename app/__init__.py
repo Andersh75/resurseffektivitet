@@ -55,8 +55,8 @@ def hello_world2():
 
 
     for item in templist[0]:
-        item['title']
-    
+        print item['title']
+
 
 
     testv = jsonify(tempdict3)
