@@ -25,8 +25,8 @@ from flask import json
 
 
 
-def fetchinglistofcodesfordepartmentcourses():
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/AIB.json')
+def fetchinglistofcodesfordepartmentcourses(department):
+    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
 
     j_obj = json.load(j)
 
