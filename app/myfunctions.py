@@ -81,7 +81,7 @@ def jsonifycoursesfromdepartment(tempdict):
             vartitle = "no title"
             print vartitle
 
-        tempdict2 = {'code':varcode, 'title':vartitle, 'examiner':varmail}
+        tempdict2 = {'code':varcode, 'title':vartitle, 'examiner':varmail, 'department':tempdict['department']}
 
         templist2.append(tempdict2)
 
