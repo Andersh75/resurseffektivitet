@@ -37,7 +37,7 @@ def fetchinglistofcodesfordepartmentcourses(department):
         #print item['code']
         templist.append(item['code'])
 
-    tempdict = {'department':j_obj['department'], 'courses':templist)
+    tempdict = {'department':j_obj['department'], 'courses':templist}
 
     return tempdict
 
