@@ -34,11 +34,11 @@ xml = BeautifulSoup(req)
 #print xml.examiner['primaryemail']
 
 
-print (xml.title.string).encode('utf-8')
+#print (xml.title.string).encode('utf-8')
 
 #print xml.course['code']
 
 
-#tempdict = {'code':xml.course['code'], 'title':xml.title.text, 'examiner':xml.examiner['primaryemail']}
+tempdict = {'code':xml.course['code'], 'title':xml.title.string, 'examiner':xml.examiner['primaryemail']}
 
-#print jsonify(tempdict)
+print jsonify(tempdict)
