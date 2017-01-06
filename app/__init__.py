@@ -52,7 +52,7 @@ def hello_world():
     xml = BeautifulSoup(req)
 
 
-    print xml.select("td > a")
+    print xml.select("td > a").string
     #EXAMPLE OF XML TO JSON
     '''
     varcode = xml.course['code']
