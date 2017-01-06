@@ -72,10 +72,16 @@ def hello_world():
                 period = int(roundid)
             else:
                 period = int(roundid) + 2
-                
-            print coursecode, roundid, startterm, period
 
+            year = startterm[:4]
 
+            print coursecode, roundid, startterm, period, year
+
+        tempdict = {'coursecode':coursecode, 'year':year, 'period':period, 'startterm':startterm, 'roundid':roundid}
+
+        templist2.append(tempdict)
+
+    print templist2
 
 
 
