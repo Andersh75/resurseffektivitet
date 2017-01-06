@@ -31,16 +31,19 @@ xml = BeautifulSoup(req)
 
 #print xml.examiner.attrs
 
-vara = xml.examiner['primaryemail']
+varmail = xml.examiner['primaryemail']
 
 #print xml.examiner['primaryemail']
 
-print vara
+print varmail
 
 #print (xml.title.string).encode('utf-8')
 
 #print xml.course['code']
 
+varcode = xml.course['code']
+
+print varcode
 
 #tempdict = {'code':xml.course['code'], 'examiner':xml.examiner['primaryemail']}
 
