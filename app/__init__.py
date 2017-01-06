@@ -79,10 +79,8 @@ def hello_world():
     xml = BeautifulSoup(req)
 
     varcode = xml.course['code']
-    vartitle = xml.title.string
-    varmail = xml.examiner['primaryemail']
 
-    tempdict = {'code':varcode, 'title':vartitle, 'examiner':varmail}
+    tempdict = {'code':varcode}
 
     return json.dumps(tempdict)
 
