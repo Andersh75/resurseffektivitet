@@ -60,7 +60,7 @@ def hello_world():
 
 
     for item in xml:
-        print item
+        print item.courseround
 
 
 
