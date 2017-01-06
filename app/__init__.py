@@ -44,7 +44,7 @@ def hello_world2():
 
     for item in departments:
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist.append(jsonifycoursesfromdepartment(tempdict))
+        templist.extend(jsonifycoursesfromdepartment(tempdict))
 
         tempdict2 = staffperdepartment(item)
         templist2.append(tempdict2)
@@ -52,7 +52,7 @@ def hello_world2():
     tempdict3 = courseinfoperyearandround(2016, 1)
 
     for item in templist[0]:
-        print item['exminer']
+        print item
 
 
     testv = jsonify(tempdict3)
