@@ -56,7 +56,7 @@ def hello_world():
 
     xml = BeautifulSoup(req)
 
-    xml = xml.find("courseroundlist")
+    xml = xml.courseroundlist
 
 
     for item in xml:
