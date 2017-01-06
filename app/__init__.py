@@ -52,7 +52,7 @@ def hello_world2():
 @app.route('/')
 def hello_world():
 
-    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/2016:1')
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/2016:2')
 
     xml = BeautifulSoup(req)
 
