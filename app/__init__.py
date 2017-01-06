@@ -57,7 +57,7 @@ def hello_world2():
 
     testv = jsonify(tempdict3)
 
-    return testv
+    return "testv"
 
 
 @app.route('/2')
