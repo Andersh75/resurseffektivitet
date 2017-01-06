@@ -62,8 +62,8 @@ def hello_world():
     for tr in templist:
         tdlist = tr.findAll("a")
         print tdlist[1].text.encode('utf-8')
-        print tdlist[2]
-        print tdlist[3]
+        print tdlist[2].text.encode('utf-8')
+        print tdlist[3].text.encode('utf-8')
 
 
     #EXAMPLE OF XML TO JSON
