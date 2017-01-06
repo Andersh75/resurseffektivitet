@@ -59,7 +59,7 @@ def hello_world():
     xml = xml.courseroundlist
 
 
-    for item in xml:
+    for item in xml[0]:
         print "1"
 
 
