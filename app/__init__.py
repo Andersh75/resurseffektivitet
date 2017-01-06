@@ -126,7 +126,7 @@ def hello_world():
 
     '''
 
-    templist = fetchinglistofcodesfordepartmentcourses(AIB)
+    templist = fetchinglistofcodesfordepartmentcourses("AIB")
 
     templist2 = jsonifycoursesfromdepartment(templist)
 
