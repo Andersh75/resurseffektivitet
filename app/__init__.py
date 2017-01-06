@@ -93,7 +93,7 @@ def hello_world():
         vartitle = xml.title.string
         #varmail = xml.examiner['primaryemail']
 
-        print varcode + " " + vartitle
+        print varcode + " " + vartitle.encode('utf-8')
 
 
 
