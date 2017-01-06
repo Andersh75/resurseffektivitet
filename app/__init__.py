@@ -23,32 +23,40 @@ from flask import json
 
 
 
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/AI1147')
+
+    xml = BeautifulSoup(req)
+
+    #print xml.examiner.attrs
+
+    varmail = xml.examiner['primaryemail']
+
+    #print xml.examiner['primaryemail']
+
+    print varmail
+
+    #print (xml.title.string).encode('utf-8')
+
+    #print xml.course['code']
+
+    varcode = xml.course['code']
+
+    print varcode
+
+    #tempdict = {'code':xml.course['code'], 'examiner':xml.examiner['primaryemail']}
+
+    #print tempdict
+
+
+    print jsonify(code="hej", examiner="da")
 
 
 
-req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/AI1147')
-
-xml = BeautifulSoup(req)
-
-#print xml.examiner.attrs
-
-varmail = xml.examiner['primaryemail']
-
-#print xml.examiner['primaryemail']
-
-print varmail
-
-#print (xml.title.string).encode('utf-8')
-
-#print xml.course['code']
-
-varcode = xml.course['code']
-
-print varcode
-
-#tempdict = {'code':xml.course['code'], 'examiner':xml.examiner['primaryemail']}
-
-#print tempdict
-
-
-print jsonify(code="hej", examiner="da")
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=1080)
+    #app.run()
