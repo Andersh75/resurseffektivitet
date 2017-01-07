@@ -131,10 +131,12 @@ def staffperdepartment(department):
 
     for tr in templist:
         tdlist = tr.findAll("a")
-        print tdlist[1]['href']
+        #print tdlist[1]['href']
         firstname = tdlist[2].text
         lastname = tdlist[1].text
         mail = tdlist[3].text
+        username = tdlist[1]['href'][27:]
+        print username
 
         tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail}
         templist2.append(tempdict)
