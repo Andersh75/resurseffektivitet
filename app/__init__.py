@@ -245,7 +245,7 @@ def jsonifylitteraturefromdepartment(tempdict):
             templist = xml.findAll("literature")
             for literature in templist:
                 for p in literature:
-                    print p.text
+                    print p
 
 
         except Exception, e:
