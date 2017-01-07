@@ -70,11 +70,21 @@ def hello_world2():
             examiner = item['examiner']
             department = item['department']
 
-            record = Courses(**{
-                'title' : title,
-                'code' : code,
-                'department' : department
-            })
+            tempdict = {}
+
+            if title:
+                tempdict['title'] = title
+
+            if code:
+                tempdict['code'] = code
+
+            if examiner:
+                tempdict['examiner'] = examiner
+
+            if department:
+                tempdict['department'] = department
+
+            record = Courses(**tempdict)
             db.session.add(record)
             db.session.commit()
 
