@@ -236,7 +236,7 @@ def peoplefromdepartment(templist):
 def jsonifylitteraturefromdepartment():
 
     templist = []
-    item = "AI1146"
+    item = "AI1147"
     #for item in tempdict['courses']:
         #vartitle = xml.title.string
     try:
