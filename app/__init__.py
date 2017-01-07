@@ -192,7 +192,7 @@ def coursesfromdepartment(templist):
             department = item['department']
 
             tempdict = {}
-            ret = Session.query(exists().where(Courses.code==code)).scalar()
+            ret = db.session.query(exists().where(Courses.code==code)).scalar()
             print ret
             ret2 = Session.query(exists().where(Courses.code=="AB1147")).scalar()
             print ret2
