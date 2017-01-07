@@ -213,7 +213,9 @@ def coursesfromdepartment(templist):
 
 def peoplefromdepartment(templist):
     for xitem in templist:
-        print xitem
+        #print xitem
+        for item in xitem['department']:
+            print item
         for item in xitem['person']:
             print item
             firstname = item['firstname']
@@ -269,6 +271,8 @@ def jsonifylitteraturefromdepartment():
         print "no literature"
 
 
+
+#NOT READY
 def calTest():
     req = urllib2.Request('https://www.kth.se/social/course/AI1146/calendar/ical/?lang=sv')
     response = urllib2.urlopen(req)
@@ -304,12 +308,12 @@ def hello_world2():
     departments = ["AIB", "AIC", "AID", "AIE"]
 
 
-    #for item in departments:
+    for item in departments:
         #tempdict = fetchinglistofcodesfordepartmentcourses(item)
         #templist.append(jsonifycoursesfromdepartment(tempdict))
 
-        #tempdict2 = staffperdepartment(item)
-        #templist2.append(tempdict2)
+        tempdict2 = staffperdepartment(item)
+        templist2.append(tempdict2)
 
 
         #templist3.append(jsonifylitteraturefromdepartment(tempdict))
@@ -320,13 +324,14 @@ def hello_world2():
     #coursesfromdepartment(templist)
 
     #ADD ALL PEOPLE TO DB
-    #peoplefromdepartment(templist2)
+    peoplefromdepartment(templist2)
 
 
     #FETCH ALL LITERATURE
     #jsonifylitteraturefromdepartment()
 
-    calTest()
+    #FETCH CALENDAR
+    #calTest()
 
     #testv = jsonify(tempdict3)
 
