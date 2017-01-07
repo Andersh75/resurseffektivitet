@@ -201,7 +201,7 @@ def coursesfromdepartment(templist):
                 if title and code and (examiner != "no mail"):
                     tempdict['title'] = title
                     tempdict['code'] = code
-                    tempdict['examiner_id'] = People.query.filter_by(mail=examiner).first()
+                    tempdict['examiner_id'] = People.query.filter_by(mail=examiner).first().id
                     record = Courses(**tempdict)
                     db.session.add(record)
                     db.session.commit()
