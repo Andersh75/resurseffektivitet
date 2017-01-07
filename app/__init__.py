@@ -210,9 +210,11 @@ def coursesfromdepartment(templist):
 
 def peoplefromdepartment(templist):
     for xitem in templist:
+        print xitem
         for itemlist in xitem['person']:
+            print itemlist
             for item in itemlist:
-                print item['firstname']
+                print item
                 firstname = item['firstname']
                 lastname = item['lastname']
                 mail = item['mail']
@@ -241,7 +243,7 @@ def jsonifylitteraturefromdepartment(tempdict):
     tempdict2 = {}
 
     for item in tempdict['courses']:
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
 
         xml = BeautifulSoup(req)
 
@@ -291,6 +293,7 @@ def hello_world2():
 
     templist = []
     templist2 = []
+    templist3 = []
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
@@ -300,6 +303,9 @@ def hello_world2():
 
         tempdict2 = staffperdepartment(item)
         templist2.append(tempdict2)
+
+
+        templist3.append(jsonifylitteraturefromdepartment(tempdict))
 
     tempdict3 = courseinfoperyearandround(2016, 1)
 
