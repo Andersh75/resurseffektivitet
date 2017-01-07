@@ -131,7 +131,7 @@ def staffperdepartment(department):
 
     for tr in templist:
         tdlist = tr.findAll("a")
-        #print tdlist
+        #print tdlist[1]['href']
         firstname = tdlist[2].text
         lastname = tdlist[1].text
         mail = tdlist[3].text
@@ -243,8 +243,9 @@ def jsonifylitteraturefromdepartment(tempdict):
             req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
             xml = BeautifulSoup(req)
             templist = xml.findAll("literature")
-            for p in templist:
-                print p.text
+            for literature in templist:
+                for p in literature:
+                    print p.text
 
 
         except Exception, e:
