@@ -72,21 +72,15 @@ def hello_world2():
 
             tempdict = {}
 
-            if title:
+            if title and code and (examiner != "no mail") and department:
                 tempdict['title'] = title
-
-            if code:
                 tempdict['code'] = code
-
-            if examiner:
                 tempdict['examiner'] = examiner
-
-            if department:
                 tempdict['department'] = department
-
-            record = Courses(**tempdict)
-            db.session.add(record)
-            db.session.commit()
+                
+                record = Courses(**tempdict)
+                db.session.add(record)
+                db.session.commit()
 
 
     testv = jsonify(tempdict3)
