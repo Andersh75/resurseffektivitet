@@ -356,8 +356,16 @@ def hello_world():
 
     print db.session.query(Courses.code).join(Courses.responsible).filter(People.firstname == "Maria").first()
 
+    varuser = db.session.query(People).filter(People.firstname == "Anders").first()
+
+    '''
     varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
     varcourse.responsible_id = 12
+    db.session.commit()
+    '''
+    
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
+    varcourse.responsible = varuser
     db.session.commit()
 
     return "testx"
