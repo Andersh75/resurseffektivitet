@@ -25,21 +25,8 @@ from sqlalchemy import exists
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f6'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f7'
 db = SQLAlchemy(app)
-
-
-
-class Courses(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100))
-    code = db.Column(db.String(30), unique=True)
-    examiner = db.Column(db.String(50))
-    department = db.Column(db.String(100))
-    year = db.Column(db.Integer)
-    period = db.Column(db.Integer)
-    startterm = db.Column(db.Integer)
-    roundid = db.Column(db.Integer)
 
 
 class People(db.Model):
@@ -49,6 +36,17 @@ class People(db.Model):
     mail = db.Column(db.String(50))
     username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
+    examiner = db.relationship('Course', backref='examiner', lazy='dynamic')
+
+
+class Courses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100))
+    code = db.Column(db.String(30), unique=True)
+    #examiner = db.Column(db.String(50))
+    examiner_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+
+
 
 
 
@@ -200,15 +198,15 @@ def coursesfromdepartment(templist):
             ret2 = db.session.query(exists().where(Courses.code=="AB1147")).scalar()
             print ret2
             if not ret:
-                if title and code and (examiner != "no mail") and department:
+                if title and code and (examiner != "no mail"):
                     tempdict['title'] = title
                     tempdict['code'] = code
-                    tempdict['examiner'] = examiner
-                    tempdict['department'] = department
+                    tempdict['examiner_id'] = People.query.filter_by(mail=examiner).first()
                     record = Courses(**tempdict)
                     db.session.add(record)
                     db.session.commit()
                     print tempdict
+
 
 
 def peoplefromdepartment(templist):
