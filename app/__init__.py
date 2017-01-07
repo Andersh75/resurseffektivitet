@@ -244,8 +244,9 @@ def jsonifylitteraturefromdepartment():
         xml = BeautifulSoup(req)
         templist = xml.findAll("literature")
         for literature in templist:
-            print literature
-            print "######"
+            for child in literature.children:
+                print child
+                print "######"
 
 
     except Exception, e:
