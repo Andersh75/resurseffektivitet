@@ -305,7 +305,7 @@ def hello_world2():
         templist2.append(tempdict2)
 
 
-        templist3.append(jsonifylitteraturefromdepartment(tempdict))
+        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
 
     tempdict3 = courseinfoperyearandround(2016, 1)
 
