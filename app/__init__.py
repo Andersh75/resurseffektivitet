@@ -216,17 +216,15 @@ def peoplefromdepartment(templist):
             firstname = item['firstname']
             lastname = item['lastname']
             mail = item['mail']
-            department = item['department']
 
             tempdict = {}
             ret = db.session.query(exists().where(People.mail==mail)).scalar()
             print ret
             if not ret:
-                if firstname and lastname and (mail != "no mail") and department:
+                if firstname and lastname and (mail != "no mail"):
                     tempdict['firstname'] = firstname
                     tempdict['lastname'] = lastname
                     tempdict['mail'] = mail
-                    tempdict['department'] = department
                     record = Courses(**tempdict)
                     db.session.add(record)
                     db.session.commit()
@@ -237,8 +235,7 @@ def peoplefromdepartment(templist):
 '''
 def jsonifylitteraturefromdepartment(tempdict):
 
-    templist2 = []
-    tempdict2 = {}
+    templist = []
 
     for item in tempdict['courses']:
         req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
@@ -249,35 +246,12 @@ def jsonifylitteraturefromdepartment(tempdict):
         #vartitle = xml.title.string
         try:
             templist = xml.findAll("literature")
+            for p in templist:
+                print p.text
 
 
         except Exception, e:
-            templist = ["no literature"]
-
-
-        try:
-            varmail = xml.examiner['primaryemail']
-            #print varmail
-
-        except Exception, e:
-            varmail = "no mail"
-            #print varmail
-
-
-        try:
-            vartitle = xml.title.string
-            #print vartitle.encode('utf-8')
-            #print vartitle
-
-        except Exception, e:
-            vartitle = "no title"
-            #print vartitle
-
-        tempdict2 = {'code':varcode, 'title':vartitle, 'examiner':varmail, 'department':tempdict['department']}
-
-        templist2.append(tempdict2)
-
-    return templist2
+            print "no literature"
 
 '''
 
