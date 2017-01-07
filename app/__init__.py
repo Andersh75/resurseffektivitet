@@ -214,8 +214,8 @@ def coursesfromdepartment(templist):
 def peoplefromdepartment(templist):
     for xitem in templist:
         #print xitem
-        for item in xitem['department']:
-            print item
+        print xitem['department']
+        
         for item in xitem['person']:
             print item
             firstname = item['firstname']
