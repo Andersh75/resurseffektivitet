@@ -25,7 +25,7 @@ from sqlalchemy import exists
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f5'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f6'
 db = SQLAlchemy(app)
 
 
@@ -45,8 +45,9 @@ class Courses(db.Model):
 class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
-    lastname = db.Column(db.String(30), unique=True)
+    lastname = db.Column(db.String(30))
     mail = db.Column(db.String(50))
+    username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
 
 
@@ -136,9 +137,9 @@ def staffperdepartment(department):
         lastname = tdlist[1].text
         mail = tdlist[3].text
         username = tdlist[1]['href'][27:]
-        print username
+        #print username
 
-        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail}
+        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail, 'username':username}
         templist2.append(tempdict)
 
 
@@ -218,15 +219,17 @@ def peoplefromdepartment(templist):
             firstname = item['firstname']
             lastname = item['lastname']
             mail = item['mail']
+            username = item['username']
 
             tempdict = {}
-            ret = db.session.query(exists().where(People.mail==mail)).scalar()
+            ret = db.session.query(exists().where(People.username==username)).scalar()
             print ret
             if not ret:
-                if firstname and lastname and (mail != "no mail"):
+                if firstname and lastname and (mail != "no mail") and username:
                     tempdict['firstname'] = firstname
                     tempdict['lastname'] = lastname
                     tempdict['mail'] = mail
+                    tempdict['username'] = username
                     record = People(**tempdict)
                     db.session.add(record)
                     db.session.commit()
