@@ -158,7 +158,7 @@ def courseinfoperyearandround(x, y):
 
 
 
-def coursesfromdepartment(templist)
+def coursesfromdepartment(templist):
     for itemlist in templist:
         for item in itemlist:
             title = item['title']
