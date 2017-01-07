@@ -249,6 +249,11 @@ def jsonifylitteraturefromdepartment():
                 print "######"
                 print child.string
                 print "______"
+                for child2 in child.children:
+                    print child2
+                    print "######"
+                    print child2.string
+                    print "______"
 
 
     except Exception, e:
