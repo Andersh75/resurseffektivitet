@@ -25,7 +25,7 @@ from sqlalchemy import exists
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f8'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f9'
 db = SQLAlchemy(app)
 
 
@@ -36,9 +36,9 @@ class People(db.Model):
     mail = db.Column(db.String(50))
     username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
-    #examiner = db.relationship('Courses', backref='examiner', lazy='dynamic')
-    #responsible = db.relationship('Courses', backref='responsible', lazy='dynamic')
-    courses = db.relationship('Courses', primaryjoin="or_(People.id==Courses.examiner_id, People.id==Courses.responsible_id)", lazy='dynamic')
+    examiner = db.relationship('Courses', backref='examiner', lazy='dynamic', foreign_keys='[Courses.examiner_id]')
+    responsible = db.relationship('Courses', backref='responsible', lazy='dynamic', foreign_keys='[Courses.responsible_id]')
+    #courses = db.relationship('Courses', primaryjoin="or_(People.id==Courses.examiner_id, People.id==Courses.responsible_id)", lazy='dynamic')
 
 
 class Courses(db.Model):
