@@ -156,25 +156,3 @@ def courseinfoperyearandround(x, y):
     tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
 
     return tempdict2
-
-
-
-
-def coursesfromdepartment(templist):
-    for itemlist in templist:
-        for item in itemlist:
-            title = item['title']
-            code = item['code']
-            examiner = item['examiner']
-            department = item['department']
-
-            tempdict = {}
-
-            if title and code and (examiner != "no mail") and department:
-                tempdict['title'] = title
-                tempdict['code'] = code
-                tempdict['examiner'] = examiner
-                tempdict['department'] = department
-                record = Courses(**tempdict)
-                db.session.add(record)
-                db.session.commit()
