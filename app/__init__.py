@@ -195,7 +195,7 @@ def coursesfromdepartment(templist):
             print exists
             if title and code and (examiner != "no mail") and department:
                 tempdict['title'] = title
-                #tempdict['code'] = code
+                tempdict['code'] = code
                 tempdict['examiner'] = examiner
                 tempdict['department'] = department
                 record = Courses(**tempdict)
