@@ -21,18 +21,14 @@ import xmltodict
 import json
 from flask import json
 from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment, courseinfoperyearandround, new
+from models import Courses
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f3'
 db = SQLAlchemy(app)
 
 
-class Course(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100))
-    code = db.Column(db.String(30))
-    examiner = db.Column(db.String(30))
-    department = db.Column(db.String(100))
+
 
 
 @app.route('/')

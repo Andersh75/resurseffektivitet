@@ -1,7 +1,7 @@
 from __init__ import db
 
 
-class Course(db.Model):
+class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     code = db.Column(db.String(30))
