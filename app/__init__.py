@@ -25,7 +25,7 @@ from sqlalchemy import exists
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f7'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f8'
 db = SQLAlchemy(app)
 
 
