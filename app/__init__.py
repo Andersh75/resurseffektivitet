@@ -247,7 +247,7 @@ def jsonifylitteraturefromdepartment():
             for child in literature.children:
                 print child
                 print "######"
-                print child.text
+                print child.string
                 print "______"
 
 
