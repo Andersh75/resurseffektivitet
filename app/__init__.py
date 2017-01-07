@@ -244,7 +244,7 @@ def jsonifylitteraturefromdepartment():
         xml = BeautifulSoup(req)
         templist = xml.findAll("literature")
         for literature in templist:
-            books = litterature.findAll("p")
+            books = literature.findAll("p")
             for item in books:
                 print item
                 print "######"
