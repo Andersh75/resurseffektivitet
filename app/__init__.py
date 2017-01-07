@@ -194,7 +194,7 @@ def coursesfromdepartment(templist):
             tempdict = {}
             ret = db.session.query(exists().where(Courses.code==code)).scalar()
             print ret
-            ret2 = Session.query(exists().where(Courses.code=="AB1147")).scalar()
+            ret2 = db.session.query(exists().where(Courses.code=="AB1147")).scalar()
             print ret2
             if title and code and (examiner != "no mail") and department:
                 tempdict['title'] = title
