@@ -168,9 +168,9 @@ def courseinfoperyearandround(x, y):
             roundid = item['roundid']
 
             if int(startterm[-1:]) == 1:
-                period = int(roundid)
-            else:
                 period = int(roundid) + 2
+            else:
+                period = int(roundid)
 
             year = startterm[:4]
 
@@ -269,6 +269,25 @@ def jsonifylitteraturefromdepartment():
         print "no literature"
 
 
+def calTest():
+    req = urllib2.Request('https://www.kth.se/social/course/AI1147/calendar/ical/?lang=sv')
+    response = urllib2.urlopen(req)
+    data = response.read()
+
+    cal = Calendar.from_ical(data)
+
+    for event in cal.walk('vevent'):
+
+        date = event.get('dtstart')
+        summery = event.get('summary')
+
+        print str(date)
+        print str(summery)
+
+    return
+
+
+
 @app.route('/')
 def hello_world2():
 
@@ -283,12 +302,12 @@ def hello_world2():
     departments = ["AIB", "AIC", "AID", "AIE"]
 
 
-    for item in departments:
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist.append(jsonifycoursesfromdepartment(tempdict))
+    #for item in departments:
+        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        #templist.append(jsonifycoursesfromdepartment(tempdict))
 
-        tempdict2 = staffperdepartment(item)
-        templist2.append(tempdict2)
+        #tempdict2 = staffperdepartment(item)
+        #templist2.append(tempdict2)
 
 
         #templist3.append(jsonifylitteraturefromdepartment(tempdict))
@@ -296,16 +315,16 @@ def hello_world2():
     #tempdict3 = courseinfoperyearandround(2016, 1)
 
     #ADD ALL COURSES TO DB
-    coursesfromdepartment(templist)
+    #coursesfromdepartment(templist)
 
     #ADD ALL PEOPLE TO DB
-    peoplefromdepartment(templist2)
+    #peoplefromdepartment(templist2)
 
 
     #FETCH ALL LITERATURE
     #jsonifylitteraturefromdepartment()
 
-
+    calTest()
 
     #testv = jsonify(tempdict3)
 
