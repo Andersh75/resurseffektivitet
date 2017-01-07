@@ -274,8 +274,10 @@ def calTest():
     response = urllib2.urlopen(req)
     data = response.read()
     for line in data.split('\n'):
-        print line
+        #print line
         print "######"
+        if line.startswith( 'SUMMARY:' )
+            print line
 
     return
 
