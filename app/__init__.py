@@ -364,18 +364,22 @@ def hello_world():
     varcourse.responsible_id = 12
     db.session.commit()
 
-    #ADD FOREIGN KEY AS OBJECT
+    #ADD FOREIGN KEY AS OBJECT TO FIRST
     varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
     varcourse.responsible = varuser
     db.session.commit()
-    '''
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Berndt").all()
 
+    #ADD FOREIGN KEY AS OBJECT TO ALL
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Berndt").all()
     for item in varcourse:
         item.responsible = varuser
-
     db.session.commit()
+    '''
 
+    varcourse = db.session.query(Courses).join(Courses.responsible).filter(People.id == varuser.id).all()
+    for item in varcourse:
+        item.responsible = db.session.query(People).filter(People.firstname == "Maria").first()
+    db.session.commit()
 
     return "testx"
 
