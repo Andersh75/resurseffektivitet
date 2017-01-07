@@ -196,15 +196,16 @@ def coursesfromdepartment(templist):
             print ret
             ret2 = db.session.query(exists().where(Courses.code=="AB1147")).scalar()
             print ret2
-            if title and code and (examiner != "no mail") and department:
-                tempdict['title'] = title
-                tempdict['code'] = code
-                tempdict['examiner'] = examiner
-                tempdict['department'] = department
-                record = Courses(**tempdict)
-                db.session.add(record)
-                db.session.commit()
-                print tempdict
+            if not ret:
+                if title and code and (examiner != "no mail") and department:
+                    tempdict['title'] = title
+                    tempdict['code'] = code
+                    tempdict['examiner'] = examiner
+                    tempdict['department'] = department
+                    record = Courses(**tempdict)
+                    db.session.add(record)
+                    db.session.commit()
+                    print tempdict
 
 
 @app.route('/')
