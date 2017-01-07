@@ -238,13 +238,10 @@ def jsonifylitteraturefromdepartment(tempdict):
     templist = []
 
     for item in tempdict['courses']:
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
-
-        xml = BeautifulSoup(req)
-
-
         #vartitle = xml.title.string
         try:
+            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
+            xml = BeautifulSoup(req)
             templist = xml.findAll("literature")
             for p in templist:
                 print p.text
