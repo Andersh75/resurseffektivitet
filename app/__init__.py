@@ -63,19 +63,20 @@ def hello_world2():
     print templist[0][0]['title']
 
 
-    for item in templist[0]:
-        title = item['title']
-        code = item['code']
-        examiner = item['examiner']
-        department = item['department']
+    for itemlist in templist:
+        for item in itemlist:
+            title = item['title']
+            code = item['code']
+            examiner = item['examiner']
+            department = item['department']
 
-        record = Courses(**{
-            'title' : title,
-            'code' : code,
-            'department' : department
-        })
-        db.session.add(record)
-        db.session.commit()
+            record = Courses(**{
+                'title' : title,
+                'code' : code,
+                'department' : department
+            })
+            db.session.add(record)
+            db.session.commit()
 
 
     testv = jsonify(tempdict3)
