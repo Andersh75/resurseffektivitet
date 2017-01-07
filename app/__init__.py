@@ -232,7 +232,7 @@ def peoplefromdepartment(templist):
 
 
 
-'''
+
 def jsonifylitteraturefromdepartment(tempdict):
 
     templist = []
@@ -253,7 +253,6 @@ def jsonifylitteraturefromdepartment(tempdict):
         except Exception, e:
             print "no literature"
 
-'''
 
 @app.route('/')
 def hello_world2():
@@ -276,15 +275,15 @@ def hello_world2():
         templist2.append(tempdict2)
 
 
-        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
+        templist3.append(jsonifylitteraturefromdepartment(tempdict))
 
     tempdict3 = courseinfoperyearandround(2016, 1)
 
     #ADD ALL COURSES TO DB
     #coursesfromdepartment(templist)
 
-
-    peoplefromdepartment(templist2)
+    #ADD ALL PEOPLE TO DB
+    #peoplefromdepartment(templist2)
 
 
 
