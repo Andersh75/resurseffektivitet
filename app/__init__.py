@@ -383,7 +383,7 @@ def hello_world():
     '''
 
     #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
-    varcourse = db.session.query(Courses).join(Courses.responsible).filter(People == varuser).all()
+    varcourse = db.session.query(Courses).join(Courses.responsible).filter(People.id == varuser.id).all()
     for item in varcourse:
         print "HEJ"
         item.responsible = db.session.query(People).filter(People.firstname == "Anders").first()
