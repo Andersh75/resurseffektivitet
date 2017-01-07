@@ -244,6 +244,10 @@ def jsonifylitteraturefromdepartment():
         xml = BeautifulSoup(req)
         templist = xml.findAll("literature")
         for literature in templist:
+            print literature
+            print "######"
+            print literature.string
+            print "______"
             for child in literature.children:
                 print child
                 print "######"
