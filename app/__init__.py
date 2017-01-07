@@ -200,6 +200,7 @@ def coursesfromdepartment(templist):
                 record = Courses(**tempdict)
                 db.session.add(record)
                 db.session.commit()
+                print tempdict
 
 
 @app.route('/')
@@ -231,16 +232,6 @@ def hello_world2():
     return "testv"
 
 
-@app.route('/2')
-def hello_world():
-
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % ("aib"))
-
-    j_obj = json.load(j)
-
-    print j_obj
-
-    return "HEJ"
 
 
 
