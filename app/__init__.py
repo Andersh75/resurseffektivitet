@@ -131,7 +131,7 @@ def staffperdepartment(department):
 
     for tr in templist:
         tdlist = tr.findAll("a")
-        #print tdlist[1]['href']
+        print tdlist[1]['href']
         firstname = tdlist[2].text
         lastname = tdlist[1].text
         mail = tdlist[3].text
@@ -232,7 +232,7 @@ def peoplefromdepartment(templist):
 
 
 
-
+#NOT READY
 def jsonifylitteraturefromdepartment():
 
     templist = []
@@ -277,7 +277,7 @@ def hello_world2():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
-    '''
+
     for item in departments:
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
         templist.append(jsonifycoursesfromdepartment(tempdict))
@@ -289,13 +289,16 @@ def hello_world2():
         templist3.append(jsonifylitteraturefromdepartment(tempdict))
 
     tempdict3 = courseinfoperyearandround(2016, 1)
-    '''
+
     #ADD ALL COURSES TO DB
     #coursesfromdepartment(templist)
 
     #ADD ALL PEOPLE TO DB
-    #peoplefromdepartment(templist2)
-    jsonifylitteraturefromdepartment()
+    peoplefromdepartment(templist2)
+
+
+    #FETCH ALL LITERATURE
+    #jsonifylitteraturefromdepartment()
 
 
 
