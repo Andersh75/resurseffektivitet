@@ -212,6 +212,7 @@ def peoplefromdepartment(templist):
     for xitem in templist:
         for itemlist in xitem['person']:
             for item in itemlist:
+                print item['firstname']
                 firstname = item['firstname']
                 lastname = item['lastname']
                 mail = item['mail']
@@ -233,6 +234,53 @@ def peoplefromdepartment(templist):
 
 
 
+'''
+def jsonifylitteraturefromdepartment(tempdict):
+
+    templist2 = []
+    tempdict2 = {}
+
+    for item in tempdict['courses']:
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
+
+        xml = BeautifulSoup(req)
+
+
+        #vartitle = xml.title.string
+        try:
+            varcode = xml.course['code']
+            #print varcode
+
+        except Exception, e:
+            varcode = "no title"
+            #print varcode
+
+
+        try:
+            varmail = xml.examiner['primaryemail']
+            #print varmail
+
+        except Exception, e:
+            varmail = "no mail"
+            #print varmail
+
+
+        try:
+            vartitle = xml.title.string
+            #print vartitle.encode('utf-8')
+            #print vartitle
+
+        except Exception, e:
+            vartitle = "no title"
+            #print vartitle
+
+        tempdict2 = {'code':varcode, 'title':vartitle, 'examiner':varmail, 'department':tempdict['department']}
+
+        templist2.append(tempdict2)
+
+    return templist2
+
+'''
 
 @app.route('/')
 def hello_world2():
