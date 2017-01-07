@@ -36,7 +36,7 @@ class People(db.Model):
     mail = db.Column(db.String(50))
     username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
-    examiner = db.relationship('Course', backref='examiner', lazy='dynamic')
+    examiner = db.relationship('Courses', backref='examiner', lazy='dynamic')
 
 
 class Courses(db.Model):
@@ -324,7 +324,7 @@ def hello_world2():
 
     #ADD ALL PEOPLE TO DB
     peoplefromdepartment(templist2)
-    
+
     #ADD ALL COURSES TO DB
     coursesfromdepartment(templist)
 
