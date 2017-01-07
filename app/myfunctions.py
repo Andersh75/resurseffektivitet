@@ -21,20 +21,3 @@ import xmltodict
 import json
 from flask import json
 from __init__ import db
-
-
-def fetchinglistofcodesfordepartmentcourses(department):
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
-
-    j_obj = json.load(j)
-
-    tempdict = {}
-    templist =[]
-
-    for item in j_obj['courses']:
-        #print item['code']
-        templist.append(item['code'])
-
-    tempdict = {'department':j_obj['department'], 'courses':templist}
-
-    return tempdict

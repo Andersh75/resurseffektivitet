@@ -21,7 +21,7 @@ import xmltodict
 import json
 from flask import json
 from sqlalchemy import exists
-from myfunctions import fetchinglistofcodesfordepartmentcourses
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f9'
@@ -49,8 +49,21 @@ class Courses(db.Model):
     responsible_id = db.Column(db.Integer, db.ForeignKey('people.id'))
 
 
+def fetchinglistofcodesfordepartmentcourses(department):
+    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
 
+    j_obj = json.load(j)
 
+    tempdict = {}
+    templist =[]
+
+    for item in j_obj['courses']:
+        #print item['code']
+        templist.append(item['code'])
+
+    tempdict = {'department':j_obj['department'], 'courses':templist}
+
+    return tempdict
 
 
 def jsonifycoursesfromdepartment(tempdict):
@@ -99,9 +112,6 @@ def jsonifycoursesfromdepartment(tempdict):
     return templist2
 
 
-
-
-
 def staffperdepartment(department):
     req = urllib2.urlopen('https://www.kth.se/directory/a/%s' % (department))
 
@@ -130,7 +140,6 @@ def staffperdepartment(department):
     tempdict2 = {'department':department, 'person':templist2}
 
     return tempdict2
-
 
 
 def courseinfoperyearandround(x, y):
@@ -169,7 +178,6 @@ def courseinfoperyearandround(x, y):
     return tempdict2
 
 
-
 def coursesfromdepartment(templist):
     for itemlist in templist:
         for item in itemlist:
@@ -194,7 +202,6 @@ def coursesfromdepartment(templist):
                     db.session.add(record)
                     db.session.commit()
                     print tempdict
-
 
 
 def peoplefromdepartment(templist):
@@ -227,65 +234,7 @@ def peoplefromdepartment(templist):
                     print tempdict
 
 
-
-#NOT READY
-def jsonifylitteraturefromdepartment():
-
-    templist = []
-    item = "AI1128"
-    #for item in tempdict['courses']:
-        #vartitle = xml.title.string
-    try:
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
-        xml = BeautifulSoup(req)
-        templist = xml.findAll("literature")
-        for literature in templist:
-            print literature
-            print "######"
-            print literature.string
-            print "______"
-            for child in literature.children:
-                print child
-                print "######"
-                print child.string
-                print "______"
-                for child2 in child.children:
-                    print child2
-                    print "######"
-                    print child2.string
-                    print "______"
-
-
-    except Exception, e:
-        print "no literature"
-
-
-
-#NOT READY
-def calTest():
-    req = urllib2.Request('https://www.kth.se/social/course/AI1146/calendar/ical/?lang=sv')
-    response = urllib2.urlopen(req)
-    data = response.read()
-    for line in data.split('\n'):
-        #print line
-        print "######"
-        if line.startswith('SUMMARY:'):
-            print line
-        if line.startswith('LOCATION:'):
-            print line
-        if line.startswith('DTSTART;VALUE=DATE-TIME:'):
-            print line
-        if line.startswith('DTEND;VALUE=DATE-TIME:'):
-            print line
-
-
-    return
-
-
-
-@app.route('/')
-def hello_world2():
-
+def restartall():
     tempdict = {}
     tempdict2 = {}
     tempdict3 = {}
@@ -327,12 +276,63 @@ def hello_world2():
 
     #testv = jsonify(tempdict3)
 
-    return "testv"
+
+#NOT READY
+def jsonifylitteraturefromdepartment():
+
+    templist = []
+    item = "AI1128"
+    #for item in tempdict['courses']:
+        #vartitle = xml.title.string
+    try:
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
+        xml = BeautifulSoup(req)
+        templist = xml.findAll("literature")
+        for literature in templist:
+            print literature
+            print "######"
+            print literature.string
+            print "______"
+            for child in literature.children:
+                print child
+                print "######"
+                print child.string
+                print "______"
+                for child2 in child.children:
+                    print child2
+                    print "######"
+                    print child2.string
+                    print "______"
 
 
-@app.route('/2')
+    except Exception, e:
+        print "no literature"
+
+#NOT READY
+def calTest():
+    req = urllib2.Request('https://www.kth.se/social/course/AI1146/calendar/ical/?lang=sv')
+    response = urllib2.urlopen(req)
+    data = response.read()
+    for line in data.split('\n'):
+        #print line
+        print "######"
+        if line.startswith('SUMMARY:'):
+            print line
+        if line.startswith('LOCATION:'):
+            print line
+        if line.startswith('DTSTART;VALUE=DATE-TIME:'):
+            print line
+        if line.startswith('DTEND;VALUE=DATE-TIME:'):
+            print line
+
+
+    return
+
+
+
+
+@app.route('/')
 def hello_world():
-
     #varcourse = Courses.query.get(1)
     #varcourse.responsible_id = 10
     #db.session.commit()
@@ -374,6 +374,13 @@ def hello_world():
 
     return "testx"
 
+
+
+@app.route('/restartall')
+def restartall():
+    restartall()
+
+    return "restartall"
 
 
 
