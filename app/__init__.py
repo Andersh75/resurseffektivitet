@@ -270,7 +270,7 @@ def jsonifylitteraturefromdepartment():
 
 
 def calTest():
-    req = urllib2.Request('https://www.kth.se/social/course/AI1147/calendar/ical/?lang=sv')
+    req = urllib2.Request('https://www.kth.se/social/course/AI1146/calendar/ical/?lang=sv')
     response = urllib2.urlopen(req)
     data = response.read()
     for line in data.split('\n'):
@@ -278,6 +278,13 @@ def calTest():
         print "######"
         if line.startswith('SUMMARY:'):
             print line
+        if line.startswith('LOCATION:'):
+            print line
+        if line.startswith('DTSTART;VALUE=DATE-TIME:'):
+            print line
+        if line.startswith('DTEND;VALUE=DATE-TIME:'):
+            print line
+
 
     return
 
