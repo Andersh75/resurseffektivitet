@@ -351,7 +351,7 @@ def hello_world2():
 def hello_world():
 
     varcourse = Courses.query.get(1)
-    varcourse.responsible = 10
+    varcourse.responsible_id = 10
     db.session.commit()
 
     return "testx"
