@@ -21,8 +21,7 @@ import xmltodict
 import json
 from flask import json
 from sqlalchemy import exists
-#from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment, courseinfoperyearandround, coursesfromdepartment
-
+from myfunctions import fetchinglistofcodesfordepartmentcourses
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f9'
@@ -52,22 +51,6 @@ class Courses(db.Model):
 
 
 
-
-def fetchinglistofcodesfordepartmentcourses(department):
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
-
-    j_obj = json.load(j)
-
-    tempdict = {}
-    templist =[]
-
-    for item in j_obj['courses']:
-        #print item['code']
-        templist.append(item['code'])
-
-    tempdict = {'department':j_obj['department'], 'courses':templist}
-
-    return tempdict
 
 
 def jsonifycoursesfromdepartment(tempdict):
@@ -387,7 +370,7 @@ def hello_world():
     for item in varcourse:
         print "HEJ"
         print item.code
-    
+
 
     return "testx"
 
