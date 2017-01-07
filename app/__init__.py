@@ -284,8 +284,8 @@ def hello_world2():
 
 
     for item in departments:
-        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        #templist.append(jsonifycoursesfromdepartment(tempdict))
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
 
         tempdict2 = staffperdepartment(item)
         templist2.append(tempdict2)
@@ -296,7 +296,7 @@ def hello_world2():
     #tempdict3 = courseinfoperyearandround(2016, 1)
 
     #ADD ALL COURSES TO DB
-    #coursesfromdepartment(templist)
+    coursesfromdepartment(templist)
 
     #ADD ALL PEOPLE TO DB
     peoplefromdepartment(templist2)
