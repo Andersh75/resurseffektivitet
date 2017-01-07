@@ -356,7 +356,7 @@ def hello_world():
 
     print db.session.query(Courses.code).join(Courses.responsible).filter(People.firstname == "Maria").first()
 
-    varuser = db.session.query(People).filter(People.firstname == "Anders").first()
+    varuser = db.session.query(People).filter(People.firstname == "Maria").first()
 
     '''
     #ADD FOREIGN KEY AS ID
@@ -374,11 +374,18 @@ def hello_world():
     for item in varcourse:
         item.responsible = varuser
     db.session.commit()
-    '''
 
+    #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
     varcourse = db.session.query(Courses).join(Courses.responsible).filter(People.id == varuser.id).all()
     for item in varcourse:
-        item.responsible = db.session.query(People).filter(People.firstname == "Maria").first()
+        item.responsible = db.session.query(People).filter(People.firstname == "Anders").first()
+    db.session.commit()
+    '''
+
+    #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
+    varcourse = db.session.query(Courses).join(Courses.responsible).filter(People == varuser).all()
+    for item in varcourse:
+        item.responsible = db.session.query(People).filter(People.firstname == "Anders").first()
     db.session.commit()
 
     return "testx"
