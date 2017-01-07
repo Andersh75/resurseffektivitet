@@ -273,7 +273,7 @@ def calTest():
     req = urllib2.Request('https://www.kth.se/social/course/AI1147/calendar/ical/?lang=sv')
     response = urllib2.urlopen(req)
     data = response.read()
-    for line in data:
+    for line in data.split('\n'):
         print line
         print "######"
 
