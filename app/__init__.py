@@ -215,7 +215,9 @@ def peoplefromdepartment(templist):
     for xitem in templist:
         #print xitem
         print xitem['department']
-        
+
+        department = xitem['department']
+
         for item in xitem['person']:
             print item
             firstname = item['firstname']
@@ -226,12 +228,14 @@ def peoplefromdepartment(templist):
             tempdict = {}
             ret = db.session.query(exists().where(People.username==username)).scalar()
             print ret
-            if not ret:
+            #if not ret:
+            if ret:
                 if firstname and lastname and (mail != "no mail") and username:
                     tempdict['firstname'] = firstname
                     tempdict['lastname'] = lastname
                     tempdict['mail'] = mail
                     tempdict['username'] = username
+                    tempdict['department'] = department
                     record = People(**tempdict)
                     db.session.add(record)
                     db.session.commit()
