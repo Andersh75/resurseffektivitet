@@ -21,6 +21,7 @@ import xmltodict
 import json
 from flask import json
 from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment, courseinfoperyearandround, new
+from models import Courses
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f1'
@@ -60,7 +61,7 @@ def hello_world2():
         examiner = item['examiner']
         department = item['department']
 
-        newrow = Course(title, code, examiner, department)
+        newrow = Courses(title, code, examiner, department)
         db.session.add(newrow)
         db.session.commit()
 
