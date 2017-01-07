@@ -354,7 +354,7 @@ def hello_world():
     varcourse.responsible_id = 10
     db.session.commit()
 
-    print db.session.query(Courses.code).join(Courses.examiner).filter(firstname == "Maria").first()
+    print db.session.query(Courses.code).join(Courses.examiner).filter(Courses.firstname == "Maria").first()
 
     return "testx"
 
