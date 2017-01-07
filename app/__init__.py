@@ -209,26 +209,27 @@ def coursesfromdepartment(templist):
 
 
 def peoplefromdepartment(templist):
-    for itemlist in templist:
-        for item in itemlist:
-            firstname = item['firstname']
-            lastname = item['lastname']
-            mail = item['mail']
-            department = item['department']
+    for xitem in templist:
+        for itemlist in xitem['person']:
+            for item in itemlist:
+                firstname = item['firstname']
+                lastname = item['lastname']
+                mail = item['mail']
+                department = item['department']
 
-            tempdict = {}
-            ret = db.session.query(exists().where(People.mail==mail)).scalar()
-            print ret
-            if not ret:
-                if firstname and lastname and (mail != "no mail") and department:
-                    tempdict['firstname'] = firstname
-                    tempdict['lastname'] = lastname
-                    tempdict['mail'] = mail
-                    tempdict['department'] = department
-                    record = Courses(**tempdict)
-                    db.session.add(record)
-                    db.session.commit()
-                    print tempdict
+                tempdict = {}
+                ret = db.session.query(exists().where(People.mail==mail)).scalar()
+                print ret
+                if not ret:
+                    if firstname and lastname and (mail != "no mail") and department:
+                        tempdict['firstname'] = firstname
+                        tempdict['lastname'] = lastname
+                        tempdict['mail'] = mail
+                        tempdict['department'] = department
+                        record = Courses(**tempdict)
+                        db.session.add(record)
+                        db.session.commit()
+                        print tempdict
 
 
 
