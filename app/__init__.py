@@ -225,7 +225,7 @@ def peoplefromdepartment(templist):
                     tempdict['firstname'] = firstname
                     tempdict['lastname'] = lastname
                     tempdict['mail'] = mail
-                    record = Courses(**tempdict)
+                    record = People(**tempdict)
                     db.session.add(record)
                     db.session.commit()
                     print tempdict
