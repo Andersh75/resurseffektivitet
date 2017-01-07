@@ -197,7 +197,7 @@ def coursesfromdepartment(templist):
             print ret
             ret2 = db.session.query(exists().where(People.mail==examiner)).scalar()
             print ret2
-            if (not ret) and (not ret2):
+            if (not ret) and ret2:
                 print code
                 print examiner
                 if title and code and (examiner != "no mail"):
