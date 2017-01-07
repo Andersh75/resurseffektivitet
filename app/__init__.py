@@ -24,7 +24,7 @@ from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepa
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f4'
 db = SQLAlchemy(app)
 
 
@@ -33,8 +33,8 @@ db = SQLAlchemy(app)
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
-    code = db.Column(db.String(30))
-    examiner = db.Column(db.String(30))
+    code = db.Column(db.String(30), unique=True)
+    examiner = db.Column(db.String(50))
     department = db.Column(db.String(100))
 
 
@@ -60,27 +60,7 @@ def hello_world2():
 
     tempdict3 = courseinfoperyearandround(2016, 1)
 
-    print templist[0][0]['title']
-
-
-    for itemlist in templist:
-        for item in itemlist:
-            title = item['title']
-            code = item['code']
-            examiner = item['examiner']
-            department = item['department']
-
-            tempdict = {}
-
-            if title and code and (examiner != "no mail") and department:
-                tempdict['title'] = title
-                tempdict['code'] = code
-                tempdict['examiner'] = examiner
-                tempdict['department'] = department
-                
-                record = Courses(**tempdict)
-                db.session.add(record)
-                db.session.commit()
+    coursesfromdepartment(templist)
 
 
     testv = jsonify(tempdict3)

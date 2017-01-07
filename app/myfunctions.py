@@ -158,10 +158,21 @@ def courseinfoperyearandround(x, y):
 
 
 
-def new(datafile):
+def coursesfromdepartment(templist)
+    for itemlist in templist:
+        for item in itemlist:
+            title = item['title']
+            code = item['code']
+            examiner = item['examiner']
+            department = item['department']
 
-    data = json.loads(datafile)
+            tempdict = {}
 
-    for item in data['courseinfo']:
-        print item['coursecode']
-        #templist.append(item['code'])
+            if title and code and (examiner != "no mail") and department:
+                tempdict['title'] = title
+                tempdict['code'] = code
+                tempdict['examiner'] = examiner
+                tempdict['department'] = department
+                record = Courses(**tempdict)
+                db.session.add(record)
+                db.session.commit()
