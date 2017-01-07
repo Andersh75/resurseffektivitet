@@ -41,7 +41,7 @@ class Courses(db.Model):
     roundid = db.Column(db.Integer)
 
 
-class People(dp.Model):
+class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
     lastname = db.Column(db.String(30), unique=True)
