@@ -354,7 +354,11 @@ def hello_world():
     varcourse.responsible_id = 10
     db.session.commit()
 
-    print db.session.query(Courses.code).join(Courses.responsible).filter(Responsible.firstname == "Maria").first()
+    print db.session.query(Courses.code).join(Courses.responsible).filter(People.firstname == "Maria").first()
+
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
+    varcourse.responsible_id = 12
+    db.session.commit()
 
     return "testx"
 
