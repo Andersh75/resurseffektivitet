@@ -36,8 +36,9 @@ class People(db.Model):
     mail = db.Column(db.String(50))
     username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
-    examiner = db.relationship('Courses', backref='examiner', lazy='dynamic')
-    responsible = db.relationship('Courses', backref='responsible', lazy='dynamic')
+    #examiner = db.relationship('Courses', backref='examiner', lazy='dynamic')
+    #responsible = db.relationship('Courses', backref='responsible', lazy='dynamic')
+    courses = db.relationship('Courses', primaryjoin="or_(People.id==Courses.examiner_id, People.id==Courses.responsible_id)", lazy='dynamic')
 
 
 class Courses(db.Model):
