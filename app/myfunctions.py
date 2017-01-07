@@ -20,6 +20,8 @@ from urllib2 import urlopen
 import xmltodict
 import json
 from flask import json
+from __init__ import db
+from __init__ import Courses
 
 
 
