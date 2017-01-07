@@ -20,7 +20,7 @@ from urllib2 import urlopen
 import xmltodict
 import json
 from flask import json
-from myfunctions import fetchinglistofcodesfordepartmentcourses, jsonifycoursesfromdepartment, staffperdepartment, courseinfoperyearandround, coursesfromdepartment
+from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment, courseinfoperyearandround, coursesfromdepartment
 
 
 app = Flask(__name__)
@@ -36,6 +36,7 @@ class Courses(db.Model):
     code = db.Column(db.String(30), unique=True)
     examiner = db.Column(db.String(50))
     department = db.Column(db.String(100))
+
 
 def coursesfromdepartment(templist):
     for itemlist in templist:
