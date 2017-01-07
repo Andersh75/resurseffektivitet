@@ -69,8 +69,13 @@ def hello_world2():
         examiner = item['examiner']
         department = item['department']
 
-        newrow = Courses(title, code, examiner, department)
-        db.session.add(newrow)
+        record = Courses(**{
+            'title' : title,
+            'code' : code,
+            'examiner' : examiner,
+            'department' : department
+        })
+        db.session.add(record)
         db.session.commit()
 
 
