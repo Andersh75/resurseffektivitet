@@ -72,7 +72,6 @@ def hello_world2():
         record = Courses(**{
             'title' : title,
             'code' : code,
-            'examiner' : examiner,
             'department' : department
         })
         db.session.add(record)
