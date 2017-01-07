@@ -233,23 +233,23 @@ def peoplefromdepartment(templist):
 
 
 
-def jsonifylitteraturefromdepartment(tempdict):
+def jsonifylitteraturefromdepartment():
 
     templist = []
-
-    for item in tempdict['courses']:
+    item = "AI1147"
+    #for item in tempdict['courses']:
         #vartitle = xml.title.string
-        try:
-            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
-            xml = BeautifulSoup(req)
-            templist = xml.findAll("literature")
-            for literature in templist:
-                for p in literature:
-                    print p
+    try:
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
+        xml = BeautifulSoup(req)
+        templist = xml.findAll("literature")
+        for literature in templist:
+            for p in literature:
+                print p
 
 
-        except Exception, e:
-            print "no literature"
+    except Exception, e:
+        print "no literature"
 
 
 @app.route('/')
@@ -265,6 +265,7 @@ def hello_world2():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
+    '''
     for item in departments:
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
         templist.append(jsonifycoursesfromdepartment(tempdict))
@@ -276,17 +277,17 @@ def hello_world2():
         templist3.append(jsonifylitteraturefromdepartment(tempdict))
 
     tempdict3 = courseinfoperyearandround(2016, 1)
-
+    '''
     #ADD ALL COURSES TO DB
     #coursesfromdepartment(templist)
 
     #ADD ALL PEOPLE TO DB
     #peoplefromdepartment(templist2)
+    jsonifylitteraturefromdepartment()
 
 
 
-
-    testv = jsonify(tempdict3)
+    #testv = jsonify(tempdict3)
 
     return "testv"
 
