@@ -359,14 +359,23 @@ def hello_world():
     varuser = db.session.query(People).filter(People.firstname == "Anders").first()
 
     '''
+    #ADD FOREIGN KEY AS ID
     varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
     varcourse.responsible_id = 12
     db.session.commit()
-    '''
-    
+
+    #ADD FOREIGN KEY AS OBJECT
     varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
     varcourse.responsible = varuser
     db.session.commit()
+    '''
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Berndt").all()
+
+    for item in varcourse:
+        item.responsible = varuser
+
+    db.session.commit()
+
 
     return "testx"
 
