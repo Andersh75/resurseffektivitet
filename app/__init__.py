@@ -276,7 +276,7 @@ def calTest():
     for line in data.split('\n'):
         #print line
         print "######"
-        if line.startswith( 'SUMMARY:' )
+        if line.startswith('SUMMARY:'):
             print line
 
     return
