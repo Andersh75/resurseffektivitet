@@ -28,7 +28,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f1'
 db = SQLAlchemy(app)
 
 
-
+class Courses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100))
+    code = db.Column(db.String(30))
+    examiner = db.Column(db.String(30))
+    department = db.Column(db.String(100))
 
 
 @app.route('/')
