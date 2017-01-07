@@ -273,16 +273,7 @@ def calTest():
     req = urllib2.Request('https://www.kth.se/social/course/AI1147/calendar/ical/?lang=sv')
     response = urllib2.urlopen(req)
     data = response.read()
-
-    cal = Calendar.from_ical(data)
-
-    for event in cal.walk('vevent'):
-
-        date = event.get('dtstart')
-        summery = event.get('summary')
-
-        print str(date)
-        print str(summery)
+    pint data
 
     return
 
