@@ -20,6 +20,7 @@ from urllib2 import urlopen
 import xmltodict
 import json
 from flask import json
+from sqlalchemy import exists
 #from myfunctions import jsonifycoursesfromdepartment, fetchinglistofcodesfordepartmentcourses, staffperdepartment, courseinfoperyearandround, coursesfromdepartment
 
 
@@ -191,8 +192,10 @@ def coursesfromdepartment(templist):
             department = item['department']
 
             tempdict = {}
-            exists = db.session.query(Courses).filter(code == code).count()
-            print exists
+            ret = Session.query(exists().where(Courses.code==code)).scalar()
+            print ret
+            ret2 = Session.query(exists().where(Courses.code=="AB1147")).scalar()
+            print ret2
             if title and code and (examiner != "no mail") and department:
                 tempdict['title'] = title
                 tempdict['code'] = code
