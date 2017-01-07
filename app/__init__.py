@@ -350,11 +350,11 @@ def hello_world2():
 @app.route('/2')
 def hello_world():
 
-    varcourse = Courses.query.get(1)
-    varcourse.responsible_id = 10
-    db.session.commit()
+    #varcourse = Courses.query.get(1)
+    #varcourse.responsible_id = 10
+    #db.session.commit()
 
-    print db.session.query(Courses.code).join(Courses.responsible).filter(People.firstname == "Maria").first()
+    #print db.session.query(Courses.code).join(Courses.responsible).filter(People.firstname == "Maria").first()
 
     varuser = db.session.query(People).filter(People.firstname == "Maria").first()
 
@@ -385,6 +385,7 @@ def hello_world():
     #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
     varcourse = db.session.query(Courses).join(Courses.responsible).filter(People == varuser).all()
     for item in varcourse:
+        print "HEJ"
         item.responsible = db.session.query(People).filter(People.firstname == "Anders").first()
     db.session.commit()
 
