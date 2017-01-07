@@ -35,6 +35,18 @@ class Courses(db.Model):
     code = db.Column(db.String(30), unique=True)
     examiner = db.Column(db.String(50))
     department = db.Column(db.String(100))
+    year = db.Column(db.Integer)
+    period = db.Column(db.Integer)
+    startterm = db.Column(db.Integer)
+    roundid = db.Column(db.Integer)
+
+
+class People(dp.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(100))
+    lastname = db.Column(db.String(30), unique=True)
+    mail = db.Column(db.String(50))
+    department = db.Column(db.String(100))
 
 
 
