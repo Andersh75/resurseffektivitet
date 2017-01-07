@@ -228,8 +228,7 @@ def peoplefromdepartment(templist):
             tempdict = {}
             ret = db.session.query(exists().where(People.username==username)).scalar()
             print ret
-            #if not ret:
-            if ret:
+            if not ret:
                 if firstname and lastname and (mail != "no mail") and username:
                     tempdict['firstname'] = firstname
                     tempdict['lastname'] = lastname
