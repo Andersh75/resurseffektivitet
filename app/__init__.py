@@ -37,6 +37,7 @@ class People(db.Model):
     username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
     examiner = db.relationship('Courses', backref='examiner', lazy='dynamic')
+    responsible = db.relationship('Courses', backref='responsible', lazy='dynamic')
 
 
 class Courses(db.Model):
@@ -45,6 +46,7 @@ class Courses(db.Model):
     code = db.Column(db.String(30), unique=True)
     #examiner = db.Column(db.String(50))
     examiner_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    responsible_id = db.Column(db.Integer, db.ForeignKey('people.id'))
 
 
 
@@ -342,6 +344,16 @@ def hello_world2():
     #testv = jsonify(tempdict3)
 
     return "testv"
+
+
+@app.route('/2')
+def hello_world():
+
+    varcourse = Courses.query.get(1)
+    varcourse.responsible = "Anders"
+    db.session.commit()
+
+    return "testx"
 
 
 
