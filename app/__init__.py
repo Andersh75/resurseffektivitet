@@ -179,8 +179,8 @@ def coursesfromdepartment(templist):
             department = item['department']
 
             tempdict = {}
-
-            if title and code and (examiner != "no mail") and department:
+            exists = db.session.query(Courses).filter(code == code).first()
+            if title and code and (examiner != "no mail") and department and (exists is not None):
                 tempdict['title'] = title
                 tempdict['code'] = code
                 tempdict['examiner'] = examiner
