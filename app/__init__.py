@@ -134,6 +134,20 @@ class RegistrationForm(Form):
 
 
 
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first")
+            return redirect(url_for('login_page'))
+
+    return wrap
+
+
+
+
 ### CREATE TABLES
 def createtables():
     db.create_all()
@@ -780,6 +794,17 @@ def register_page():
     return render_template("register.html.j2", form=form)
 
 
+@app.route("/logout/")
+@login_required
+def logout():
+    session.clear()
+    flash("You have been logged out!")
+    gc.collect()
+    return redirect(url_for('login_page'))
+
+
+
+
 
 @app.route('/')
 def index():
@@ -833,6 +858,37 @@ def restartall():
 
 
     return "restartall"
+
+
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
+    xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
+    #return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
+    return "fel"
+
+
+
+def sql_debug(response):
+    queries = list(get_debug_queries())
+    query_str = ''
+    total_duration = 0.0
+    for q in queries:
+        total_duration += q.duration
+        stmt = str(q.statement % q.parameters).replace('\n', '\n       ')
+        query_str += 'Query: {0}\nDuration: {1}ms\n\n'.format(stmt, round(q.duration * 1000, 2))
+
+    print '=' * 80
+    print ' SQL Queries - {0} Queries Executed in {1}ms'.format(len(queries), round(total_duration * 1000, 2))
+    print '=' * 80
+    print query_str.rstrip('\n')
+    print '=' * 80 + '\n'
+
+    return response
+
+app.after_request(sql_debug)
 
 
 
