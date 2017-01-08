@@ -893,8 +893,6 @@ def user_edit_myinfo_initials():
 @app.route('/user_edit_course/responsible', methods=['GET', 'POST'])
 def user_edit_course_responsible():
     id = request.form["pk"]
-    id = id[17:]
-    print id
     tempobj = db.session.query(Courses).get(id)
     tempobj.responsible = db.session.query(Teachers).filter(Teachers.firstname == request.form["value"]).first()
 
