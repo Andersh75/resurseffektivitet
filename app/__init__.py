@@ -924,4 +924,4 @@ def page_not_found(e):
 if __name__ == "__main__":
     #app.secret_key = 'asdasdasdasdasd'
     #app.run(debug=True, host='0.0.0.0', port=1080)
-    app.run(host='dansfolk.no-ip.org', port=1080)
+    app.run(host='http://dansfolk.no-ip.org', port=1080)
