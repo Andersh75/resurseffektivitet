@@ -575,6 +575,7 @@ def teachersfromdepartment(templist):
                     db.session.add(record)
                     db.session.commit()
                 else:
+                    print "Not already"
                     tempobj = db.session.query(Teachers).filter(or_(Teachers.username==username, Teachers.email==email)).first()
                     tempobj.firstname = firstname
                     tempobj.lastname = lastname
