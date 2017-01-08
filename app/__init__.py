@@ -29,6 +29,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f22'
 db = SQLAlchemy(app)
