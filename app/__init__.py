@@ -884,7 +884,6 @@ def user_edit_myinfo_initials():
     return json.dumps(result)
 
 
-
 @app.route('/')
 def index():
     print "HE"
