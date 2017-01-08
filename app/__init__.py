@@ -416,42 +416,48 @@ def jsonifycoursesfromdepartment(tempdict):
     tempdict2 = {}
 
     for item in tempdict['courses']:
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
-
-        xml = BeautifulSoup(req)
-
-
-        #varname = xml.title.string
-        try:
-            varcode = xml.course['code']
-            #print varcode
-
-        except Exception, e:
-            varcode = "no name"
-            #print varcode
-
 
         try:
-            varmail = xml.examiner['primaryemail']
-            #print varmail
+            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
+
+            xml = BeautifulSoup(req)
+
+
+            #varname = xml.title.string
+            try:
+                varcode = xml.course['code']
+                #print varcode
+
+            except Exception, e:
+                varcode = "no name"
+                #print varcode
+
+
+            try:
+                varmail = xml.examiner['primaryemail']
+                #print varmail
+
+            except Exception, e:
+                varmail = "no email"
+                #print varmail
+
+
+            try:
+                varname = xml.title.string
+                #print varname.encode('utf-8')
+                #print varname
+
+            except Exception, e:
+                varname = "no name"
+                #print varname
+
+            tempdict2 = {'code':varcode, 'name':varname, 'examiner':varmail, 'department':tempdict['department']}
+
+            templist2.append(tempdict2)
 
         except Exception, e:
-            varmail = "no email"
-            #print varmail
-
-
-        try:
-            varname = xml.title.string
-            #print varname.encode('utf-8')
-            #print varname
-
-        except Exception, e:
-            varname = "no name"
-            #print varname
-
-        tempdict2 = {'code':varcode, 'name':varname, 'examiner':varmail, 'department':tempdict['department']}
-
-        templist2.append(tempdict2)
+            varcode = "no URL"
+            print varcode + " " + item
 
     return templist2
 
