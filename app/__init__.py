@@ -783,6 +783,12 @@ def register_page():
                     flash("Initials are already taken")
                     return render_template('register.html.j2', form=form)
 
+            alreadyregistred = db.session.query(exists().where(and_(Teachers.password==password, Teachers.email==email))).scalar()
+
+            if alreadyregistred:
+                flash("Already registred!")
+                return redirect(url_for('login_page'))
+
             flash("Thanks for registering!")
             flash(email)
             tempobj = db.session.query(Teachers).filter(Teachers.email==email).first()
