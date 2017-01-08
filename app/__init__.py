@@ -531,11 +531,11 @@ def coursesfromdepartment(templist):
             department = item['department']
 
             tempdict = {}
-            ret = db.session.query(exists().where(Courses.code==code)).scalar()
+            already = db.session.query(exists().where(Courses.code==code)).scalar()
             print ret
-            ret2 = db.session.query(exists().where(Teachers.email==examiner)).scalar()
+            existingexamner = db.session.query(exists().where(Teachers.email==examiner)).scalar()
             print ret2
-            if (not ret) and ret2:
+            if (not already) and existingexamner:
                 print code
                 print examiner
                 if name and code and (examiner != "no email"):
@@ -546,6 +546,19 @@ def coursesfromdepartment(templist):
                     db.session.add(record)
                     db.session.commit()
                     print tempdict
+
+            if already and existingexamner:
+                print code
+                print examiner
+                tempobj = db.session.query(Course).filter(Course.code==code).first()
+                tempobj.name = name
+                tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
+                db.session.add(record)
+                db.session.commit()
+                print tempdict
+
+
+
 
 
 def teachersfromdepartment(templist):
@@ -750,11 +763,11 @@ def restartall():
 
 
     for item in departments:
-        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        #templist.append(jsonifycoursesfromdepartment(tempdict))
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
 
-        tempdict2 = staffperdepartment(item)
-        templist2.append(tempdict2)
+        #tempdict2 = staffperdepartment(item)
+        #templist2.append(tempdict2)
 
 
         #templist3.append(jsonifylitteraturefromdepartment(tempdict))
@@ -763,10 +776,10 @@ def restartall():
 
 
     #ADD ALL TEACHERS TO DB
-    teachersfromdepartment(templist2)
+    #teachersfromdepartment(templist2)
 
     #ADD ALL COURSES TO DB
-    #coursesfromdepartment(templist)
+    coursesfromdepartment(templist)
 
 
 
