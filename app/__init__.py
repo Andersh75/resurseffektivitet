@@ -722,8 +722,8 @@ def hello_world():
 @app.route('/restartall')
 def restartall():
 
-    #createtables()
-    #csvimporter()
+    createtables()
+    csvimporter()
 
     tempdict = {}
     tempdict2 = {}
