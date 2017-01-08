@@ -543,31 +543,37 @@ def coursesfromdepartment(templist):
 def teachersfromdepartment(templist):
     for xitem in templist:
         #print xitem
-        print xitem['department']
+        #print xitem['department']
 
         department = xitem['department']
 
         for item in xitem['teacher']:
-            print item
+            #print item
             firstname = item['firstname']
             lastname = item['lastname']
             email = item['email']
             username = item['username']
 
-            tempdict = {}
-            ret = db.session.query(exists().where(Teachers.username==username)).scalar()
-            print ret
-            if not ret:
-                if firstname and lastname and (email != "no email") and username:
-                    tempdict['firstname'] = firstname
-                    tempdict['lastname'] = lastname
-                    tempdict['email'] = email
-                    tempdict['username'] = username
-                    tempdict['department'] = department
+            if firstname and lastname and (email != "no email") and username:
+                tempdict = {}
+                tempdict['firstname'] = firstname
+                tempdict['lastname'] = lastname
+                tempdict['email'] = email
+                tempdict['username'] = username
+                tempdict['department'] = department
+
+                already = db.session.query(exists().where(or_(Teachers.username==username, Teachers.email==email))).scalar()
+                if not already:
                     record = Teachers(**tempdict)
                     db.session.add(record)
                     db.session.commit()
-                    print tempdict
+                else:
+                    tempobj = db.session.query(Teachers).filter(or_(Teachers.username==username, Teachers.email==email)).first()
+                    tempobj.firstname = firstname
+                    tempobj.lastname = lastname
+                    tempobj.email = email
+                    tempobj.username = username
+
 
 
 
@@ -716,10 +722,9 @@ def hello_world():
 @app.route('/restartall')
 def restartall():
 
-    createtables()
-    csvimporter()
+    #createtables()
+    #csvimporter()
 
-    '''
     tempdict = {}
     tempdict2 = {}
     tempdict3 = {}
@@ -751,7 +756,6 @@ def restartall():
     #coursesfromdepartment(templist)
 
 
-    '''
 
 
 
