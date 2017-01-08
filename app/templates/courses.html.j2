@@ -85,4 +85,15 @@
 		</div>
 	</div>
 
+	<script type="text/javascript">
+        $(document).ready(function() {
+			$( ".select2-single, .select2-multiple" ).select2( {
+				theme: "bootstrap",
+				placeholder: "Select course responsible",
+				maximumSelectionSize: 6,
+				containerCssClass: ':all:'
+			} );
+		} );
+	</script>
+
 {% endblock %}
