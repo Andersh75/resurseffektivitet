@@ -766,7 +766,7 @@ def register_page():
     flash("Before IF")
 
     if request.method == "POST" and form.validate():
-            #initials  = form.initials.data
+            initials  = form.initials.data
             akafirstname  = form.firstname.data
             akalastname  = form.lastname.data
             email = form.email.data
@@ -775,19 +775,23 @@ def register_page():
             if not already:
                 flash("Your email is not in the db")
                 return render_template('register.html.j2', form=form)
-            else:
-                flash("Thanks for registering!")
-                flash(initials)
-                record = Teachers(**{
-                    'initials' : initials,
-                    'firstname' : firstname,
-                    'lastname' : lastname,
-                    'email' : email,
-                    'password' : password
-                })
-                db.session.add(record)
-                db.session.commit()
-                return redirect(url_for('login_page'))
+            existinginitials = db.session.query(exists().where(Teachers.initials==initials)).scalar()
+
+            if existinginitials:
+                tempobj = db.session.query(Teachers).filter(Teachers.email==email).first()
+                if tempobj.initials != initials:
+                    flash("Initials are already taken")
+                    return render_template('register.html.j2', form=form)
+
+            flash("Thanks for registering!")
+            flash(email)
+            tempobj = db.session.query(Teachers).filter(Teachers.email==email).first()
+            tempobj.akafirstname = akafirstname
+            tempobj.akalastname = akalastname
+            tempobj.password = password
+            tempobj.initials = initials
+            db.session.commit()
+            return redirect(url_for('login_page'))
 
 
     flash("Please register!")
