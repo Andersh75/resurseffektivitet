@@ -390,13 +390,6 @@ def separate_rooms(list1):
 
 
 
-
-
-
-
-
-
-
 def fetchinglistofcodesfordepartmentcourses(department):
     j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
 
@@ -567,9 +560,6 @@ def coursesfromdepartment(templist):
                 #print tempdict
 
 
-
-
-
 def teachersfromdepartment(templist):
     for xitem in templist:
         #print xitem
@@ -610,49 +600,6 @@ def teachersfromdepartment(templist):
                     db.session.commit()
 
 
-
-
-def xrestartall():
-    tempdict = {}
-    tempdict2 = {}
-    tempdict3 = {}
-
-    templist = []
-    templist2 = []
-    templist3 = []
-
-    departments = ["AIB", "AIC", "AID", "AIE"]
-
-
-    for item in departments:
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist.append(jsonifycoursesfromdepartment(tempdict))
-
-        tempdict2 = staffperdepartment(item)
-        templist2.append(tempdict2)
-
-
-        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
-
-    #tempdict3 = courseinfoperyearandround(2016, 1)
-
-
-    #ADD ALL TEACHERS TO DB
-    teachersfromdepartment(templist2)
-
-    #ADD ALL COURSES TO DB
-    coursesfromdepartment(templist)
-
-
-
-
-    #FETCH ALL LITERATURE
-    #jsonifylitteraturefromdepartment()
-
-    #FETCH CALENDAR
-    #calTest()
-
-    #testv = jsonify(tempdict3)
 
 
 #NOT READY
@@ -706,51 +653,124 @@ def calTest():
 
     return
 
+#NOT READY
+def xrestartall():
+    tempdict = {}
+    tempdict2 = {}
+    tempdict3 = {}
+
+    templist = []
+    templist2 = []
+    templist3 = []
+
+    departments = ["AIB", "AIC", "AID", "AIE"]
+
+
+    for item in departments:
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
+
+        tempdict2 = staffperdepartment(item)
+        templist2.append(tempdict2)
+
+
+        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
+
+    #tempdict3 = courseinfoperyearandround(2016, 1)
+
+
+    #ADD ALL TEACHERS TO DB
+    teachersfromdepartment(templist2)
+
+    #ADD ALL COURSES TO DB
+    coursesfromdepartment(templist)
+
+
+
+
+    #FETCH ALL LITERATURE
+    #jsonifylitteraturefromdepartment()
+
+    #FETCH CALENDAR
+    #calTest()
+
+    #testv = jsonify(tempdict3)
+
+
+
+
+@app.route('/login/', methods=["GET","POST"])
+def login_page():
+
+    error = ''
+    try:
+
+        if request.method == "POST":
+
+            attempted_initials = request.form['initials']
+            attempted_password = request.form['password']
+
+            xrubrik = db.session.query(Teachers).filter(Teachers.initials == attempted_initials).first()
+
+            flash(xrubrik.initials)
+            #flash(attempted_password)
+
+            if attempted_initials == xrubrik.initials and attempted_password == xrubrik.password:
+                session['logged_in'] = True
+                session['username'] = request.form['initials']
+                return redirect(url_for('login_page'))
+
+            else:
+                error = "Invalid credentials. Try Again."
+
+        return render_template("login.html", error = error)
+
+    except Exception as e:
+        #flash(e)
+        return render_template("login.html", error = error)
+
+
+
+@app.route('/register/', methods=["GET","POST"])
+def register_page():
+
+    form = RegistrationForm(request.form)
+    flash("Before IF")
+
+    if request.method == "POST" and form.validate():
+            initials  = form.initials.data
+            firstname  = form.firstname.data
+            lastname  = form.lastname.data
+            email = form.email.data
+            password = form.password.data
+            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == initials).first()
+            if xrubrik:
+                flash("That username is already taken, please choose another")
+                return render_template('register.html.j2', form=form)
+            else:
+                flash("Thanks for registering!")
+                flash(initials)
+                record = Teachers(**{
+                    'initials' : initials,
+                    'firstname' : firstname,
+                    'lastname' : lastname,
+                    'email' : email,
+                    'password' : password
+                })
+                db.session.add(record)
+                db.session.commit()
+                return redirect(url_for('login_page'))
+
+
+    flash("Please register!")
+    return render_template("register.html.j2", form=form)
 
 
 
 @app.route('/')
-def hello_world():
-    #varcourse = Courses.query.get(1)
-    #varcourse.responsible_id = 10
-    #db.session.commit()
+def index():
 
-    #print db.session.query(Courses.code).join(Courses.responsible).filter(TEACHERS.firstname == "Maria").first()
-
-    varuser = db.session.query(Teachers).filter(Teachers.firstname == "Berndt").first()
-
-    '''
-    #ADD FOREIGN KEY AS ID
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Kent").first()
-    varcourse.responsible_id = 12
-    db.session.commit()
-
-    #ADD FOREIGN KEY AS OBJECT TO FIRST
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Kent").first()
-    varcourse.responsible = varuser
-    db.session.commit()
-
-    #ADD FOREIGN KEY AS OBJECT TO ALL
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Berndt").all()
-    for item in varcourse:
-        item.responsible = varuser
-    db.session.commit()
-
-    #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
-    varcourse = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == varuser.id).all()
-    for item in varcourse:
-        item.responsible = db.session.query(Teachers).filter(Teachers.firstname == "Anders").first()
-    db.session.commit()
-    '''
-
-    #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.id == varuser.id).all()
-    for item in varcourse:
-        print "HEJ"
-        print item.code
-
-
-    return "testx"
+    return redirect(url_for('login_page'))
 
 
 

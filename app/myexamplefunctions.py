@@ -116,3 +116,38 @@ print 'DECODED:', decoded
 print 'ORIGINAL:', type(data[0]['b'])
 print 'DECODED :', type(decoded[0]['b'])
 '''
+
+
+
+'''
+varuser = db.session.query(Teachers).filter(Teachers.firstname == "Berndt").first()
+
+#ADD FOREIGN KEY AS ID
+varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Kent").first()
+varcourse.responsible_id = 12
+db.session.commit()
+
+#ADD FOREIGN KEY AS OBJECT TO FIRST
+varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Kent").first()
+varcourse.responsible = varuser
+db.session.commit()
+
+#ADD FOREIGN KEY AS OBJECT TO ALL
+varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Berndt").all()
+for item in varcourse:
+    item.responsible = varuser
+db.session.commit()
+
+#REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
+varcourse = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == varuser.id).all()
+for item in varcourse:
+    item.responsible = db.session.query(Teachers).filter(Teachers.firstname == "Anders").first()
+db.session.commit()
+
+
+#REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
+varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.id == varuser.id).all()
+for item in varcourse:
+    print "HEJ"
+    print item.code
+'''
