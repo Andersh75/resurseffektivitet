@@ -32,92 +32,92 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f10'
 db = SQLAlchemy(app)
 
 
+teachers_classes = db.Table('teachers_classes',
+    db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id')),
+    db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
+)
+
+rooms_classes = db.Table('rooms_classes',
+    db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id')),
+    db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
+)
+
+dates_courses = db.Table('dates_courses',
+    db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
+    db.Column('courses_id', db.Integer, db.ForeignKey('courses.id'))
+)
+
+dates_rooms = db.Table('dates_rooms',
+    db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
+    db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id'))
+)
+
+dates_teachers = db.Table('dates_teachers',
+    db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
+    db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id'))
+)
+
+# One-to-many. Parent to Rooms
+class Roomtypes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    roomtype = db.Column(db.String(30))
+    cost = db.Column(db.Integer)
+    rooms = db.relationship('Rooms', backref='roomtypes', lazy='dynamic')
+
+# One-to-many. Child to Roomtypes
+class Rooms(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30))
+    seats = db.Column(db.Integer)
+    roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
+    classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
+
+
+class Dates(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime)
+    courses = db.relationship('Courses', secondary=dates_courses, backref=db.backref('dates', lazy='dynamic'))
+    rooms = db.relationship('Rooms', secondary=dates_rooms, backref=db.backref('dates', lazy='dynamic'))
+    teachers = db.relationship('Teachers', secondary=dates_teachers, backref=db.backref('dates', lazy='dynamic'))
+    classes = db.relationship('Classes', backref='dates', lazy='dynamic')
+
+
+class Classes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(100))
+    starttime = db.Column(db.Integer)
+    endtime = db.Column(db.Integer)
+    courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
+    dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
+
+
+class Teachers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(100))
+    lastname = db.Column(db.String(30))
+    email = db.Column(db.String(50), unique=True)
+    initials = db.Column(db.String(30), unique=True)
+    password = db.Column(db.String(30))
+    username = db.Column(db.String(50), unique=True)
+    department = db.Column(db.String(100))
+    examiner = db.relationship('Courses', backref='examiner', lazy='dynamic', foreign_keys='[Courses.examiner_id]')
+    responsible = db.relationship('Courses', backref='responsible', lazy='dynamic', foreign_keys='[Courses.responsible_id]')
+    classes = db.relationship('Classes', secondary=teachers_classes, backref=db.backref('teachers', lazy='dynamic'))
+
+
+class Courses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100))
+    code = db.Column(db.String(30))
+    schedule_exists = db.Column(db.Boolean, default=False)
+    year = db.Column(db.Integer)
+    classes = db.relationship('Classes', backref='courses', lazy='dynamic')
+    examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+
+
 ### CREATE TABLES
 def createtables():
-    teachers_classes = db.Table('teachers_classes',
-        db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id')),
-        db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
-    )
-
-    rooms_classes = db.Table('rooms_classes',
-        db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id')),
-        db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
-    )
-
-    dates_courses = db.Table('dates_courses',
-        db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
-        db.Column('courses_id', db.Integer, db.ForeignKey('courses.id'))
-    )
-
-    dates_rooms = db.Table('dates_rooms',
-        db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
-        db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id'))
-    )
-
-    dates_teachers = db.Table('dates_teachers',
-        db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
-        db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id'))
-    )
-
-    # One-to-many. Parent to Rooms
-    class Roomtypes(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        roomtype = db.Column(db.String(30))
-        cost = db.Column(db.Integer)
-        rooms = db.relationship('Rooms', backref='roomtypes', lazy='dynamic')
-
-    # One-to-many. Child to Roomtypes
-    class Rooms(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        name = db.Column(db.String(30))
-        seats = db.Column(db.Integer)
-        roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
-        classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
-
-
-    class Dates(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        date = db.Column(db.DateTime)
-        courses = db.relationship('Courses', secondary=dates_courses, backref=db.backref('dates', lazy='dynamic'))
-        rooms = db.relationship('Rooms', secondary=dates_rooms, backref=db.backref('dates', lazy='dynamic'))
-        teachers = db.relationship('Teachers', secondary=dates_teachers, backref=db.backref('dates', lazy='dynamic'))
-        classes = db.relationship('Classes', backref='dates', lazy='dynamic')
-
-
-    class Classes(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        content = db.Column(db.String(100))
-        starttime = db.Column(db.Integer)
-        endtime = db.Column(db.Integer)
-        courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
-        dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
-
-
-    class Teachers(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        firstname = db.Column(db.String(100))
-        lastname = db.Column(db.String(30))
-        email = db.Column(db.String(50), unique=True)
-        initials = db.Column(db.String(30), unique=True)
-        password = db.Column(db.String(30))
-        username = db.Column(db.String(50), unique=True)
-        department = db.Column(db.String(100))
-        examiner = db.relationship('Courses', backref='examiner', lazy='dynamic', foreign_keys='[Courses.examiner_id]')
-        responsible = db.relationship('Courses', backref='responsible', lazy='dynamic', foreign_keys='[Courses.responsible_id]')
-        classes = db.relationship('Classes', secondary=teachers_classes, backref=db.backref('teachers', lazy='dynamic'))
-
-
-    class Courses(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        title = db.Column(db.String(100))
-        code = db.Column(db.String(30))
-        schedule_exists = db.Column(db.Boolean, default=False)
-        year = db.Column(db.Integer)
-        classes = db.relationship('Classes', backref='courses', lazy='dynamic')
-        examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-        responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-
-
     db.create_all()
     db.session.commit()
 
