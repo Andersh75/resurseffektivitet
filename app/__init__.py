@@ -584,6 +584,7 @@ def teachersfromdepartment(templist):
                     tempobj.username = username
                     tempobj.department = department
                     print tempobj.department.encode('utf-8')
+                    db.session.commit()
 
 
 
