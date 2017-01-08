@@ -580,6 +580,7 @@ def teachersfromdepartment(templist):
                     tempobj.lastname = lastname
                     tempobj.email = email
                     tempobj.username = username
+                    tempobj.department = department
 
 
 
