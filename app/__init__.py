@@ -775,6 +775,14 @@ def register_page():
             if not already:
                 flash("Your email is not in the db")
                 return render_template('register.html.j2', form=form)
+
+
+            alreadyregistred = db.session.query(exists().where(and_(Teachers.password==password, Teachers.email==email))).scalar()
+
+            if alreadyregistred:
+                flash("Already registred!")
+                return redirect(url_for('login_page'))
+
             existinginitials = db.session.query(exists().where(Teachers.initials==initials)).scalar()
 
             if existinginitials:
@@ -783,11 +791,7 @@ def register_page():
                     flash("Initials are already taken")
                     return render_template('register.html.j2', form=form)
 
-            alreadyregistred = db.session.query(exists().where(and_(Teachers.password==password, Teachers.email==email))).scalar()
 
-            if alreadyregistred:
-                flash("Already registred!")
-                return redirect(url_for('login_page'))
 
             flash("Thanks for registering!")
             flash(email)
