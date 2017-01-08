@@ -29,7 +29,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f19'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f20'
 db = SQLAlchemy(app)
 
 
@@ -208,15 +208,16 @@ def csvimporter():
                 i[1] = None
             if len(i[2]) < 1:
                 i[2] = None
-            record = Teachers(**{
-                'kthid' : i[0],
-                'initials' : i[1],
-                'email' : i[2],
-                'firstname' : i[3],
-                'lastname' : i[4]
-            })
-            db.session.add(record)
-            db.session.commit()
+            if i[0] or i[2]:
+                record = Teachers(**{
+                    'kthid' : i[0],
+                    'initials' : i[1],
+                    'email' : i[2],
+                    'firstname' : i[3],
+                    'lastname' : i[4]
+                })
+                db.session.add(record)
+                db.session.commit()
 
 
     for i in courses_list:
