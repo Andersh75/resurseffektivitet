@@ -29,7 +29,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f13'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f14'
 db = SQLAlchemy(app)
 
 
@@ -83,8 +83,6 @@ class Dates(db.Model):
     classes = db.relationship('Classes', backref='dates', lazy='dynamic')
 
 
-
-
 class Teachers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
@@ -92,6 +90,7 @@ class Teachers(db.Model):
     email = db.Column(db.String(50), unique=True)
     initials = db.Column(db.String(3), unique=True)
     password = db.Column(db.String(30))
+    kthid = db.Column(db.String(50), unique=True)
     username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
     examiner = db.relationship('Courses', backref='examiner', lazy='dynamic', foreign_keys='[Courses.examiner_id]')
@@ -124,8 +123,7 @@ def createtables():
     db.create_all()
     db.session.commit()
 
-
-#Import CSV-file
+###Import CSV-file and transform imported CSV to tables
 def csvimporter():
     with open('static/teachers.csv', 'rb') as f:
         reader = csv.reader(f)
@@ -201,10 +199,10 @@ def csvimporter():
 
 
     for i in teachers_list:
-        already = db.session.query(exists().where(or_(Teachers.username==i[0], Teachers.initials==i[1], Teachers.email==i[2]))).scalar()
+        already = db.session.query(exists().where(or_(Teachers.kthid==i[0], Teachers.initials==i[1], Teachers.email==i[2]))).scalar()
         if not already:
             record = Teachers(**{
-                'username' : i[0],
+                'kthid' : i[0],
                 'initials' : i[1],
                 'email' : i[2],
                 'firstname' : i[3],
@@ -285,7 +283,6 @@ def csvimporter():
                     roomvar.dates.append(datevar)
 
                     db.session.commit()
-
 
 ### CLEAN THE CSV
 # Remove Column from Table
@@ -379,141 +376,7 @@ def separate_rooms(list1):
     return temp_list
 
 
-#Transform imported CSV to tables
-def csvtotables():
 
-    teachers_list, roomtypes_list, rooms_list, courses_list, roles_list, schedules_list = importer()
-
-    schedules_list = remove_col(schedules_list, 0)
-
-    schedules_list = reformat_date(schedules_list)
-
-    schedules_list = add_col(schedules_list)
-
-    schedules_list = add_col(schedules_list)
-
-    schedules_list = extract_start_slut_tid(schedules_list)
-
-    schedules_list = remove_col(schedules_list, 1)
-
-
-
-
-
-
-    #for i in schedules_list:
-    #    print i
-
-
-
-
-    #Populate tables
-    for i in roomtypes_list:
-        record = Roomtypes(**{
-            'roomtype' : i[0],
-            'cost' : i[1]
-        })
-        db.session.add(record)
-        db.session.commit()
-
-    for i in rooms_list:
-        #print i[0]
-        record = Rooms(**{
-            'name' : i[0],
-            'seats' : i[1],
-            'roomtypes_id' : Roomtypes.query.filter_by(id=i[2]).first().id
-        })
-        db.session.add(record)
-        db.session.commit()
-
-
-    for i in teachers_list:
-        #print i
-        record = Teachers(**{
-            'username' : i[0],
-            'initials' : i[1],
-            'email' : i[2],
-            'firstname' : i[3],
-            'lastname' : i[4]
-        })
-        db.session.add(record)
-        db.session.commit()
-
-    for i in courses_list:
-        record = Courses(**{
-            'code' : i[0],
-            'name' : i[1],
-            'schedule_exists' : i[2],
-            'year' : i[3]
-
-
-        })
-        db.session.add(record)
-        db.session.commit()
-
-    #print Courses.query.filter_by(code='AI1174').first().id
-
-    for i in roles_list:
-        record = Roles(**{
-            'name' : i[0]
-        })
-        db.session.add(record)
-        db.session.commit()
-
-
-
-
-
-
-    for i in schedules_list:
-        if not Dates.query.filter_by(date=i[0]).first():
-            #print "dubbel"
-        #else:
-            record = Dates(**{
-                'date' : i[0]
-                })
-            db.session.add(record)
-            db.session.commit()
-
-
-    for i in schedules_list:
-        print i[8]
-        #print Dates.query.first().date
-        record = Classes(**{
-            #'date' : i[0],
-            'content' : i[3],
-            'starttime' : i[7],
-            'endtime' : i[8],
-            'courses_id' : Courses.query.filter_by(code=i[5]).first().id,
-            'dates_id' : Dates.query.filter_by(date=i[0]).first().id
-        })
-        db.session.add(record)
-        db.session.commit()
-
-        coursevar = Courses.query.filter_by(code=i[5]).first()
-        datevar = Dates.query.filter_by(date=i[0]).first()
-        #print datevar.date
-        datevar.courses.append(coursevar)
-        #datevar.classes.append(record)
-        db.session.commit()
-
-
-        words = i[4].split()
-        for word in words:
-            teachervar = Teachers.query.filter_by(initials=word).first()
-            #print teachervar.firstname
-            teachervar.classes.append(record)
-            teachervar.dates.append(datevar)
-            db.session.commit()
-
-        words = i[2].split()
-        for word in words:
-            roomvar = Rooms.query.filter_by(name=word).first()
-            #print roomvar.name
-            roomvar.classes.append(record)
-            roomvar.dates.append(datevar)
-
-            db.session.commit()
 
 
 
@@ -707,7 +570,8 @@ def teachersfromdepartment(templist):
                     print tempdict
 
 
-def restartall():
+
+def xrestartall():
     tempdict = {}
     tempdict2 = {}
     tempdict3 = {}
@@ -851,9 +715,49 @@ def hello_world():
 
 @app.route('/restartall')
 def restartall():
-    #restartall()
+
     createtables()
     csvimporter()
+
+    '''
+    tempdict = {}
+    tempdict2 = {}
+    tempdict3 = {}
+
+    templist = []
+    templist2 = []
+    templist3 = []
+
+    departments = ["AIB", "AIC", "AID", "AIE"]
+
+
+    for item in departments:
+        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        #templist.append(jsonifycoursesfromdepartment(tempdict))
+
+        tempdict2 = staffperdepartment(item)
+        templist2.append(tempdict2)
+
+
+        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
+
+    #tempdict3 = courseinfoperyearandround(2016, 1)
+
+
+    #ADD ALL TEACHERS TO DB
+    teachersfromdepartment(templist2)
+
+    #ADD ALL COURSES TO DB
+    #coursesfromdepartment(templist)
+
+
+    '''
+
+
+
+
+
+
 
     return "restartall"
 
