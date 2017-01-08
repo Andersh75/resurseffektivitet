@@ -563,11 +563,11 @@ def coursesfromdepartment(templist):
 
             tempdict = {}
             already = db.session.query(exists().where(Courses.code==code)).scalar()
-            #print already
+            print already
             existingexamner = db.session.query(exists().where(Teachers.email==examiner)).scalar()
             #print existingexamner
             if (not already) and existingexamner:
-                #print code
+                print code
                 #print examiner
                 if name and code and (examiner != "no email"):
                     tempdict['name'] = name
@@ -576,11 +576,11 @@ def coursesfromdepartment(templist):
                     record = Courses(**tempdict)
                     db.session.add(record)
                     db.session.commit()
-                    #print tempdict
+                    print tempdict
 
             if already and existingexamner:
                 #print code
-                #print examiner
+                print examiner
                 tempobj = db.session.query(Courses).filter(Courses.code==code).first()
                 tempobj.name = name
                 tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
