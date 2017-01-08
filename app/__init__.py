@@ -240,51 +240,52 @@ def csvimporter():
 
     for i in schedules_list:
         print i[8]
-        #print Dates.query.first().date
-        record = Classes(**{
-            #'date' : i[0],
-            'content' : i[3],
-            'starttime' : i[7],
-            'endtime' : i[8],
-            'courses_id' : Courses.query.filter_by(code=i[5]).first().id,
-            'dates_id' : Dates.query.filter_by(date=i[0]).first().id
-        })
-        db.session.add(record)
-        db.session.commit()
+        already = db.session.query(exists().where(and_(Classes.content==i[3], Classes.starttime==i[7], Classes.endtime==i[8], Classes.courses_id==Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id==Dates.query.filter_by(date=i[0]).first().id))).scalar()
+        if not already:
+            record = Classes(**{
+                #'date' : i[0],
+                'content' : i[3],
+                'starttime' : i[7],
+                'endtime' : i[8],
+                'courses_id' : Courses.query.filter_by(code=i[5]).first().id,
+                'dates_id' : Dates.query.filter_by(date=i[0]).first().id
+            })
+            db.session.add(record)
+            db.session.commit()
 
-        coursevar = Courses.query.filter_by(code=i[5]).first()
-        datevar = Dates.query.filter_by(date=i[0]).first()
-        #print datevar.date
-        datevar.courses.append(coursevar)
-        #datevar.classes.append(record)
-        db.session.commit()
+            coursevar = Courses.query.filter_by(code=i[5]).first()
+            datevar = Dates.query.filter_by(date=i[0]).first()
+            #print datevar.date
+            datevar.courses.append(coursevar)
+            #datevar.classes.append(record)
+            db.session.commit()
 
 
-        words = i[4].split()
-        for word in words:
-            print word
+            words = i[4].split()
+            for word in words:
+                print word
 
-            initials = db.session.query(exists().where(Teachers.initials==word)).scalar()
+                already = db.session.query(exists().where(Teachers.initials==word)).scalar()
 
-            if initials:
-                teachervar = Teachers.query.filter_by(initials=word).first()
-                print teachervar.firstname
-                teachervar.classes.append(record)
-                teachervar.dates.append(datevar)
-                db.session.commit()
+                if already:
+                    teachervar = Teachers.query.filter_by(initials=word).first()
+                    print teachervar.firstname
+                    teachervar.classes.append(record)
+                    teachervar.dates.append(datevar)
+                    db.session.commit()
 
-        words = i[2].split()
-        for word in words:
+            words = i[2].split()
+            for word in words:
 
-            name = db.session.query(exists().where(Rooms.name==word)).scalar()
+                already = db.session.query(exists().where(Rooms.name==word)).scalar()
 
-            if name:
-                roomvar = Rooms.query.filter_by(name=word).first()
-                #print roomvar.name
-                roomvar.classes.append(record)
-                roomvar.dates.append(datevar)
+                if already:
+                    roomvar = Rooms.query.filter_by(name=word).first()
+                    #print roomvar.name
+                    roomvar.classes.append(record)
+                    roomvar.dates.append(datevar)
 
-                db.session.commit()
+                    db.session.commit()
 
 
 ### CLEAN THE CSV
