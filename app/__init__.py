@@ -29,7 +29,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f12'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f13'
 db = SQLAlchemy(app)
 
 
@@ -90,7 +90,7 @@ class Teachers(db.Model):
     firstname = db.Column(db.String(100))
     lastname = db.Column(db.String(30))
     email = db.Column(db.String(50), unique=True)
-    initials = db.Column(db.String(30), unique=True)
+    initials = db.Column(db.String(3), unique=True)
     password = db.Column(db.String(30))
     username = db.Column(db.String(50), unique=True)
     department = db.Column(db.String(100))
