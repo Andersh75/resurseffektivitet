@@ -824,6 +824,21 @@ def logout():
 
 
 
+@app.route('/rooms')
+@app.route('/rooms/<int:page>')
+def rooms_page(page=1):
+    return render_template('rooms.html.j2', page=page)
+
+@app.route('/teachers')
+@app.route('/teachers/<int:page>')
+def teachers_page(page=1):
+    return render_template('teachers.html.j2', page=page)
+
+
+@app.route('/courses')
+@app.route('/courses/<int:page>')
+def courses_page(page=1):
+    return render_template('courses.html.j2', page=page)
 
 
 @app.route('/')
@@ -888,28 +903,6 @@ def page_not_found(e):
     return "fel"
 
 
-'''
-def sql_debug(response):
-    queries = list(get_debug_queries())
-    query_str = ''
-    total_duration = 0.0
-    for q in queries:
-        total_duration += q.duration
-        stmt = str(q.statement % q.parameters).replace('\n', '\n       ')
-        query_str += 'Query: {0}\nDuration: {1}ms\n\n'.format(stmt, round(q.duration * 1000, 2))
-
-    print '=' * 80
-    print ' SQL Queries - {0} Queries Executed in {1}ms'.format(len(queries), round(total_duration * 1000, 2))
-    print '=' * 80
-    print query_str.rstrip('\n')
-    print '=' * 80 + '\n'
-
-    return response
-
-app.after_request(sql_debug)
-
-
-'''
 
 
 
