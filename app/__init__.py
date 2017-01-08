@@ -766,14 +766,14 @@ def register_page():
     flash("Before IF")
 
     if request.method == "POST" and form.validate():
-            initials  = form.initials.data
-            firstname  = form.firstname.data
-            lastname  = form.lastname.data
+            #initials  = form.initials.data
+            akafirstname  = form.firstname.data
+            akalastname  = form.lastname.data
             email = form.email.data
             password = form.password.data
-            xrubrik = db.session.query(Teachers.initials).filter(Teachers.initials == initials).first()
-            if xrubrik:
-                flash("That username is already taken, please choose another")
+            already = db.session.query(exists().where(Teachers.email==email)).scalar()
+            if not already:
+                flash("Your email is not in the db")
                 return render_template('register.html.j2', form=form)
             else:
                 flash("Thanks for registering!")
