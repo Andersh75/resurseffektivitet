@@ -556,7 +556,7 @@ def coursesfromdepartment(templist):
             if already and existingexamner:
                 print code
                 print examiner
-                tempobj = db.session.query(Course).filter(Course.code==code).first()
+                tempobj = db.session.query(Courses).filter(Courses.code==code).first()
                 tempobj.name = name
                 tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
                 db.session.add(record)
