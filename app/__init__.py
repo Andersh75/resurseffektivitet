@@ -853,6 +853,7 @@ def myinfo_page(page=1):
 @app.route('/user_edit_myinfo/initials', methods=['GET', 'POST'])
 def user_edit_content():
     id = request.form["pk"]
+    print id
     tempobj = db.session.query(Teachers).get(id)
     tempobj.initials = request.form["value"]
 
