@@ -87,50 +87,39 @@
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
-
-
-
-
-
     </div> <!-- /container -->
 
 
 	<div class ="container">
-
-
-		<div class="jumbotron">
-
-
-			{% if session.logged_in %}
-				<p>
-					{% block rooms %}
-					{% endblock %}
-                    {% block teachers %}
-					{% endblock %}
-                    {% block courses %}
-                    TEXT FÖR INLOGGAD
-                    {% set me = myobject() %}
-                    {{ me.password }}
-                    {% endblock %}
-				</p>
-			{% else %}
-				{% block register %}
-					TEXT FÖR UTLOGGAD OM EJ REGISTRERING
+		{% if session.logged_in %}
+			<p>
+				{% block rooms %}
 				{% endblock %}
-			{% endif %}
-</div>
+                {% block teachers %}
+				{% endblock %}
+                {% block courses %}
+                TEXT FÖR INLOGGAD
+                {% set me = myobject() %}
+                {{ me.password }}
+                {% endblock %}
+			</p>
+		{% else %}
+			{% block register %}
+				TEXT FÖR UTLOGGAD OM EJ REGISTRERING
+			{% endblock %}
+		{% endif %}
+    </div>
 
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                {{message}}
-            </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-</div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
 
 
