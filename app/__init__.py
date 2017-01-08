@@ -850,7 +850,7 @@ def myinfo_page(page=1):
 
 
 @app.route('/user_edit_myinfo/akafirstname', methods=['GET', 'POST'])
-def user_edit_content():
+def user_edit_myinfo_akafirstname():
     id = request.form["pk"]
     tempobj = db.session.query(Teachers).get(id)
     tempobj.akafirstname = request.form["value"]
@@ -861,7 +861,7 @@ def user_edit_content():
 
     return json.dumps(result)
 @app.route('/user_edit_myinfo/akalastname', methods=['GET', 'POST'])
-def user_edit_content():
+def user_edit_myinfo_akalastname():
     id = request.form["pk"]
     tempobj = db.session.query(Teachers).get(id)
     tempobj.akalastname = request.form["value"]
@@ -872,7 +872,7 @@ def user_edit_content():
 
     return json.dumps(result)
 @app.route('/user_edit_myinfo/initials', methods=['GET', 'POST'])
-def user_edit_content():
+def user_edit_myinfo_initials():
     id = request.form["pk"]
     tempobj = db.session.query(Teachers).get(id)
     tempobj.initials = request.form["value"]
