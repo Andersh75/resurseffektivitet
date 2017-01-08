@@ -21,7 +21,7 @@
 
 			<h4>My info</h4>
 
-
+			{% set me = myobject() %}
 
 		    <table class="table table-hover" id="testtable">
 		        <tbody id="tbodyid">
@@ -39,16 +39,16 @@
 		            </tr>
 
 		            <tr>
-		                <td>{{ session['firstname'] }}</td>
-						<td>{{ session['lastname'] }}</td>
-						<td>{{ session['akafirstname'] }}</td>
-						<td>{{ session['akalastname'] }}</td>
-						<td>{{ session['email'] }}</td>
-						<td>{{ session['initials'] }}</td>
-						<td>{{ session['password'] }}</td>
-						<td>{{ session['kthid'] }}</td>
-						<td>{{ session['username'] }}</td>
-						<td>{{ session['department'] }}</td>
+		                <td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
+						<td>{{ me.firstname }}</td>
 		            </tr>
 		        </tbody>
 		    </table>

@@ -133,6 +133,10 @@ class RegistrationForm(Form):
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
 
+def myobject():
+    return db.session.query(Teachers).filter(Teachers.initials == session['username']).first()
+
+app.jinja_env.globals.update(myobject=myobject)
 
 def login_required(f):
     @wraps(f)
