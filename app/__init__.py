@@ -95,7 +95,7 @@ class Teachers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
     lastname = db.Column(db.String(30))
-    email = db.Column(db.String(50), unique=True)
+    email = db.Column(db.String(50), unique=)
     initials = db.Column(db.String(30), unique=True)
     password = db.Column(db.String(30))
     username = db.Column(db.String(50), unique=True)
@@ -181,8 +181,10 @@ def csvimporter():
         db.session.add(record)
         db.session.commit()
 
+
     for i in rooms_list:
         #print i[0]
+
         record = Rooms(**{
             'name' : i[0],
             'seats' : i[1],
@@ -193,16 +195,19 @@ def csvimporter():
 
 
     for i in teachers_list:
-        #print i
-        record = Teachers(**{
-            'username' : i[0],
-            'initials' : i[1],
-            'email' : i[2],
-            'firstname' : i[3],
-            'lastname' : i[4]
-        })
-        db.session.add(record)
-        db.session.commit()
+        username = db.session.query(exists().where(Teachers.username==i[0])).scalar()
+        initials = db.session.query(exists().where(Teachers.initials==i[1])).scalar()
+        email = db.session.query(exists().where(Teachers.email==i[2])).scalar()
+        if not (username or initials or email):
+            record = Teachers(**{
+                'username' : i[0],
+                'initials' : i[1],
+                'email' : i[2],
+                'firstname' : i[3],
+                'lastname' : i[4]
+            })
+            db.session.add(record)
+            db.session.commit()
 
     for i in courses_list:
         record = Courses(**{
@@ -210,24 +215,9 @@ def csvimporter():
             'name' : i[1],
             'schedule_exists' : i[2],
             'year' : i[3]
-
-
         })
         db.session.add(record)
         db.session.commit()
-
-    #print Courses.query.filter_by(code='AI1174').first().id
-
-    for i in roles_list:
-        record = Roles(**{
-            'name' : i[0]
-        })
-        db.session.add(record)
-        db.session.commit()
-
-
-
-
 
 
     for i in schedules_list:
