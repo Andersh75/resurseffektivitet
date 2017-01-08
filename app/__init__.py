@@ -895,10 +895,10 @@ def user_edit_course_responsible():
     id = request.form["pk"]
     id = id[17:]
     print id
-    #tempobj = db.session.query(Teachers).get(id)
-    #tempobj.initials = request.form["value"]
+    tempobj = db.session.query(Courses).get(1)
+    tempobj.responsible.firstname = request.form["value"]
 
-    #db.session.commit()
+    db.session.commit()
 
     result = {}
 
