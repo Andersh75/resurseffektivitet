@@ -890,6 +890,27 @@ def user_edit_myinfo_initials():
     return json.dumps(result)
 
 
+@app.route('/user_edit_course/responsible', methods=['GET', 'POST'])
+def _user_edit_course_responsible():
+    id = request.form["pk"]
+    id = id[17:]
+    print id
+    #tempobj = db.session.query(Teachers).get(id)
+    #tempobj.initials = request.form["value"]
+
+    #db.session.commit()
+
+    result = {}
+
+    return json.dumps(result)
+
+
+
+
+
+
+
+
 @app.route('/')
 def index():
     print "HE"
