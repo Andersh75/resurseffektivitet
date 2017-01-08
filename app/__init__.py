@@ -240,11 +240,11 @@ def csvimporter():
 
     for i in schedules_list:
         print i[8]
-        already = db.session.query(exists().where(and_(Classes.content==i[3], Classes.starttime==i[7], Classes.endtime==i[8], Classes.courses_id==Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id==Dates.query.filter_by(date=i[0]).first().id))).scalar()
+        already = db.session.query(exists().where(and_(Classes.content==i[3][:99], Classes.starttime==i[7], Classes.endtime==i[8], Classes.courses_id==Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id==Dates.query.filter_by(date=i[0]).first().id))).scalar()
         if not already:
             record = Classes(**{
                 #'date' : i[0],
-                'content' : i[3],
+                'content' : i[3][:99],
                 'starttime' : i[7],
                 'endtime' : i[8],
                 'courses_id' : Courses.query.filter_by(code=i[5]).first().id,
