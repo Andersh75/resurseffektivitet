@@ -239,12 +239,11 @@ def csvimporter():
 
 
     for i in schedules_list:
-        print i[8]
-        already = db.session.query(exists().where(and_(Classes.content==i[3][:50], Classes.starttime==i[7], Classes.endtime==i[8], Classes.courses_id==Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id==Dates.query.filter_by(date=i[0]).first().id))).scalar()
-        if not already:
+        already = db.session.query(exists().where(and_(Classes.content==i[3], Classes.starttime==i[7], Classes.endtime==i[8], Classes.courses_id==Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id==Dates.query.filter_by(date=i[0]).first().id))).scalar()
+        if (not already) and (len(i[3]) < 100):
             record = Classes(**{
                 #'date' : i[0],
-                'content' : i[3][:50],
+                'content' : i[3],
                 'starttime' : i[7],
                 'endtime' : i[8],
                 'courses_id' : Courses.query.filter_by(code=i[5]).first().id,
@@ -263,13 +262,13 @@ def csvimporter():
 
             words = i[4].split()
             for word in words:
-                print word
+                #print word
 
                 already = db.session.query(exists().where(Teachers.initials==word)).scalar()
 
                 if already:
                     teachervar = Teachers.query.filter_by(initials=word).first()
-                    print teachervar.firstname
+                    #print teachervar.firstname
                     teachervar.classes.append(record)
                     teachervar.dates.append(datevar)
                     db.session.commit()
