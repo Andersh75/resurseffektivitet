@@ -28,7 +28,7 @@ import string
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f10'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f11'
 db = SQLAlchemy(app)
 
 
@@ -836,7 +836,7 @@ def hello_world():
 @app.route('/restartall')
 def restartall():
     #restartall()
-    #createtables()
+    createtables()
     csvimporter()
 
     return "restartall"
