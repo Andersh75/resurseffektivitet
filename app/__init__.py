@@ -176,24 +176,27 @@ def csvimporter():
 
     #Populate tables
     for i in roomtypes_list:
-        record = Roomtypes(**{
-            'roomtype' : i[0],
-            'cost' : i[1]
-        })
-        db.session.add(record)
-        db.session.commit()
+        roomtype = db.session.query(exists().where(Roomtypes.roomtype==i[0])).scalar()
+        if not roomtype:
+            record = Roomtypes(**{
+                'roomtype' : i[0],
+                'cost' : i[1]
+            })
+            db.session.add(record)
+            db.session.commit()
 
 
     for i in rooms_list:
         #print i[0]
-
-        record = Rooms(**{
-            'name' : i[0],
-            'seats' : i[1],
-            'roomtypes_id' : Roomtypes.query.filter_by(id=i[2]).first().id
-        })
-        db.session.add(record)
-        db.session.commit()
+        name = db.session.query(exists().where(Rooms.name==i[0])).scalar()
+        if not name:
+            record = Rooms(**{
+                'name' : i[0],
+                'seats' : i[1],
+                'roomtypes_id' : Roomtypes.query.filter_by(id=i[2]).first().id
+            })
+            db.session.add(record)
+            db.session.commit()
 
 
     for i in teachers_list:
@@ -258,20 +261,28 @@ def csvimporter():
         words = i[4].split()
         for word in words:
             print word
-            teachervar = Teachers.query.filter_by(initials=word).first()
-            print teachervar.firstname
-            teachervar.classes.append(record)
-            teachervar.dates.append(datevar)
-            db.session.commit()
+
+            initials = db.session.query(exists().where(Teachers.initials==word)).scalar()
+
+            if initials:
+                teachervar = Teachers.query.filter_by(initials=word).first()
+                print teachervar.firstname
+                teachervar.classes.append(record)
+                teachervar.dates.append(datevar)
+                db.session.commit()
 
         words = i[2].split()
         for word in words:
-            roomvar = Rooms.query.filter_by(name=word).first()
-            #print roomvar.name
-            roomvar.classes.append(record)
-            roomvar.dates.append(datevar)
 
-            db.session.commit()
+            name = db.session.query(exists().where(Rooms.name==word)).scalar()
+
+            if name:
+                roomvar = Rooms.query.filter_by(name=word).first()
+                #print roomvar.name
+                roomvar.classes.append(record)
+                roomvar.dates.append(datevar)
+
+                db.session.commit()
 
 
 ### CLEAN THE CSV
