@@ -29,7 +29,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f21'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f22'
 db = SQLAlchemy(app)
 
 
@@ -756,7 +756,6 @@ def login_page():
     except Exception as e:
         #flash(e)
         return render_template("login.html", error = error)
-
 
 
 @app.route('/register/', methods=["GET","POST"])
