@@ -257,6 +257,7 @@ def csvimporter():
 
         words = i[4].split()
         for word in words:
+            print word
             teachervar = Teachers.query.filter_by(initials=word).first()
             print teachervar.firstname
             teachervar.classes.append(record)
