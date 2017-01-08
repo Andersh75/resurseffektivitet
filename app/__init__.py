@@ -850,11 +850,11 @@ def myinfo_page(page=1):
     return render_template('myinfo.html.j2', page=page)
 
 
-@app.route('/user_edit_myinfo/<string:page>', methods=['GET', 'POST'])
-def user_edit_content(page="initials"):
+@app.route('/user_edit_myinfo/initials', methods=['GET', 'POST'])
+def user_edit_content():
     id = request.form["pk"]
     tempobj = db.session.query(Teachers).get(id)
-    tempobj.page = request.form["value"]
+    tempobj.initials = request.form["value"]
 
     db.session.commit()
 
