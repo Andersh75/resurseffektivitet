@@ -204,11 +204,11 @@ def csvimporter():
 
 
         if not already:
-            if len(i[0] < 1):
+            if len(i[0]) < 1:
                 i[0] = None
-            if len(i[1] < 1):
+            if len(i[1]) < 1:
                 i[1] = None
-            if len(i[2] < 1):
+            if len(i[2]) < 1:
                 i[1] = None
             record = Teachers(**{
                 'kthid' : i[0],
