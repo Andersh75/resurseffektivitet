@@ -138,7 +138,13 @@ def myobject():
     #print testvar.password
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
-app.jinja_env.globals.update(myobject=myobject)
+def mycourses():
+    #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
+    #print testvar.password
+    return db.session.query(Courses).all()
+
+
+app.jinja_env.globals.update(myobject=myobject, mycourses=mycourses)
 
 def login_required(f):
     @wraps(f)
@@ -150,7 +156,6 @@ def login_required(f):
             return redirect(url_for('login_page'))
 
     return wrap
-
 
 
 
