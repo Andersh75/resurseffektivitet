@@ -87,6 +87,8 @@ class Teachers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
     lastname = db.Column(db.String(30))
+    akafirstname = db.Column(db.String(100))
+    akalastname = db.Column(db.String(30))
     email = db.Column(db.String(50), unique=True)
     initials = db.Column(db.String(3), unique=True)
     password = db.Column(db.String(30))
@@ -214,6 +216,8 @@ def csvimporter():
                     'initials' : i[1],
                     'email' : i[2],
                     'firstname' : i[3],
+                    'akafirstname' : i[3],
+                    'akalastname' : i[4],
                     'lastname' : i[4]
                 })
                 db.session.add(record)
@@ -538,12 +542,12 @@ def coursesfromdepartment(templist):
 
             tempdict = {}
             already = db.session.query(exists().where(Courses.code==code)).scalar()
-            print already
+            #print already
             existingexamner = db.session.query(exists().where(Teachers.email==examiner)).scalar()
-            print existingexamner
+            #print existingexamner
             if (not already) and existingexamner:
-                print code
-                print examiner
+                #print code
+                #print examiner
                 if name and code and (examiner != "no email"):
                     tempdict['name'] = name
                     tempdict['code'] = code
@@ -551,16 +555,16 @@ def coursesfromdepartment(templist):
                     record = Courses(**tempdict)
                     db.session.add(record)
                     db.session.commit()
-                    print tempdict
+                    #print tempdict
 
             if already and existingexamner:
-                print code
-                print examiner
+                #print code
+                #print examiner
                 tempobj = db.session.query(Courses).filter(Courses.code==code).first()
                 tempobj.name = name
                 tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
                 db.session.commit()
-                print tempdict
+                #print tempdict
 
 
 
