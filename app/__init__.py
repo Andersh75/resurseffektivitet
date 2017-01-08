@@ -602,7 +602,8 @@ def teachersfromdepartment(templist):
             email = item['email']
             username = item['username']
 
-            if firstname and lastname and (email != "no email") and username:
+            if (email != "no email"):
+                print "XXXXX"
                 tempdict = {}
                 tempdict['firstname'] = firstname
                 tempdict['lastname'] = lastname
@@ -612,11 +613,12 @@ def teachersfromdepartment(templist):
 
                 already = db.session.query(exists().where(or_(Teachers.username==username, Teachers.email==email))).scalar()
                 if not already:
+                    print "ZZZZZ"
                     record = Teachers(**tempdict)
                     db.session.add(record)
                     db.session.commit()
                 else:
-                    print "Not already"
+                    print "already"
                     tempobj = db.session.query(Teachers).filter(or_(Teachers.username==username, Teachers.email==email)).first()
                     print tempobj.firstname.encode('utf-8')
                     tempobj.firstname = firstname
