@@ -577,11 +577,13 @@ def teachersfromdepartment(templist):
                 else:
                     print "Not already"
                     tempobj = db.session.query(Teachers).filter(or_(Teachers.username==username, Teachers.email==email)).first()
+                    print tempobj.firstname
                     tempobj.firstname = firstname
                     tempobj.lastname = lastname
                     tempobj.email = email
                     tempobj.username = username
                     tempobj.department = department
+                    print tempobj.department
 
 
 
