@@ -840,6 +840,11 @@ def teachers_page(page=1):
 def courses_page(page=1):
     return render_template('courses.html.j2', page=page)
 
+@app.route('/myinfo')
+@app.route('/myinfo/<int:page>')
+def myinfo_page(page=1):
+    return render_template('myinfo.html.j2', page=page)
+
 
 @app.route('/')
 def index():
