@@ -18,6 +18,11 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-tagsinput.css') }}" />
 
 
+<link rel="stylesheet" href="static/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+<link rel="stylesheet" href="static/select2-bootstrap.css">
+<link rel="stylesheet" href="static/gh-pages.css">
+
 <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -34,6 +39,9 @@
 <script src="{{ url_for('static', filename='js/jquery.select2.js') }}"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+
+
+
 
 
 
@@ -186,6 +194,17 @@
                 title: 'Select Course',
                 inputclass: 'some_class'
             });
+
+            $( ".select2-single, .select2-multiple" ).select2( {
+        		theme: "bootstrap",
+        		placeholder: "Select a State",
+        		maximumSelectionSize: 6,
+        		containerCssClass: ':all:'
+        	} );
+
+        	$( ":checkbox" ).on( "click", function() {
+        		$( this ).parent().nextAll( "select" ).prop( "disabled", !this.checked );
+        	});
 
 
 
