@@ -27,23 +27,19 @@
 		    <table class="table table-hover" id="testtable">
 		        <tbody id="tbodyid">
 		            <tr>
-		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">firstname</th>
-		                <th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">lastname</th>
-		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">akafirstname</th>
-						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">akalastname</th>
-						<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">email</th>
-						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">initials</th>
-						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">password</th>
-						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">kthid</th>
-						<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">username</th>
-						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">department</th>
+		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">First name</th>
+		                <th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Last name</th>
+						<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">E-mail</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Initials</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Password</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">kKth-id</th>
+						<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Username</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Department</th>
 		            </tr>
 
 		            <tr>
-		                <td>{{ me.firstname }}</td>
-						<td>{{ me.lastname }}</td>
-						<td>{{ me.akafirstname }}</td>
-						<td>{{ me.akalastname }}</td>
+						<td><a href="#" id="meakafirstname" data-pk="{{ me.id }}" data-url="/user_edit_myinfo/akafirstname" data-title="Enter username">{{ me.akafirstname }}</a></td>
+						<td><a href="#" id="meakalastname" data-pk="{{ me.id }}" data-url="/user_edit_myinfo/akalastname" data-title="Enter username">{{ me.akalastname }}</a></td>
 						<td>{{ me.email }}</td>
 						<td><a href="#" id="meinitials" data-pk="{{ me.id }}" data-url="/user_edit_myinfo/initials" data-title="Enter username">{{ me.initials }}</a></td>
 						<td>{{ me.password }}</td>
