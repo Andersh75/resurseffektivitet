@@ -559,7 +559,6 @@ def coursesfromdepartment(templist):
                 tempobj = db.session.query(Courses).filter(Courses.code==code).first()
                 tempobj.name = name
                 tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
-                db.session.add(record)
                 db.session.commit()
                 print tempdict
 
