@@ -775,8 +775,8 @@ def restartall():
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
         templist.append(jsonifycoursesfromdepartment(tempdict))
 
-        #tempdict2 = staffperdepartment(item)
-        #templist2.append(tempdict2)
+        tempdict2 = staffperdepartment(item)
+        templist2.append(tempdict2)
 
 
         #templist3.append(jsonifylitteraturefromdepartment(tempdict))
@@ -785,7 +785,7 @@ def restartall():
 
 
     #ADD ALL TEACHERS TO DB
-    #teachersfromdepartment(templist2)
+    teachersfromdepartment(templist2)
 
     #ADD ALL COURSES TO DB
     coursesfromdepartment(templist)
