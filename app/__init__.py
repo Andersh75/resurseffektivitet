@@ -898,5 +898,6 @@ app.after_request(sql_debug)
 
 
 if __name__ == "__main__":
+    app.secret_key = 'asdasdasdasdasd'
     app.run(debug=True, host='0.0.0.0', port=1080)
     #app.run()
