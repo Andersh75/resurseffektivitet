@@ -199,7 +199,7 @@ def csvimporter():
 
 
     for i in teachers_list:
-        already = db.session.query(exists().where(or_(Teachers.kthid==i[0], Teachers.email==i[2]))).scalar()
+        already = db.session.query(exists().where(or_(Teachers.kthid==i[0], Teachers.initials==i[1], Teachers.email==i[2]))).scalar()
 
         if not already:
             if len(i[0]) < 1:
