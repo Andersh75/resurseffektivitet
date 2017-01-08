@@ -22,6 +22,7 @@
 			<h4>My info</h4>
 
 			{% set me = myobject() %}
+			<a href="#" id="initials" data-pk="me.id" data-url="/user_edit_content/1" data-title="Enter username">{{ me.initials }}</a>
 
 		    <table class="table table-hover" id="testtable">
 		        <tbody id="tbodyid">
@@ -44,7 +45,7 @@
 						<td>{{ me.akafirstname }}</td>
 						<td>{{ me.akalastname }}</td>
 						<td>{{ me.email }}</td>
-						<td><a href="#" id="initials" data-pk="me.id" data-url="/user_edit_content/1" data-title="Enter username">{{ me.initials }}</a></td>
+						<td>{{ me.initials }}</a></td>
 						<td>{{ me.password }}</td>
 						<td>{{ me.kthid }}</td>
 						<td>{{ me.username }}</td>
