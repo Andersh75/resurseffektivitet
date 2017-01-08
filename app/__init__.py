@@ -134,9 +134,9 @@ class RegistrationForm(Form):
 
 
 def myobject():
-    testvar = db.session.query(Teachers).filter(Teachers.initials == session['user']).first()
+    testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
-    return db.session.query(Teachers).filter(Teachers.initials == session['user']).first()
+    return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
 app.jinja_env.globals.update(myobject=myobject)
 
