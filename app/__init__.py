@@ -850,7 +850,7 @@ def myinfo_page(page=1):
     return render_template('myinfo.html.j2', page=page)
 
 
-@app.route('/user_edit_myinfo/<string: page>', methods=['GET', 'POST'])
+@app.route('/user_edit_myinfo/<string:page>', methods=['GET', 'POST'])
 def user_edit_content(page):
     id = request.form["pk"]
 
