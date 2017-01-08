@@ -596,7 +596,7 @@ def teachersfromdepartment(templist):
         department = xitem['department']
 
         for item in xitem['teacher']:
-            print item['firstname']
+            print item
             firstname = item['firstname']
             lastname = item['lastname']
             email = item['email']
