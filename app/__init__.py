@@ -909,7 +909,6 @@ def user_edit_course_responsible():
 
 
 
-
 @app.route('/')
 def index():
     print "HE"

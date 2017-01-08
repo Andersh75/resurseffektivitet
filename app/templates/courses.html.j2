@@ -19,8 +19,7 @@
 		            <tr>
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
-						<td>{{ item.examiner }}</td>
-						<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">	<div class="select2-wrapper">
+						<td>	<div class="select2-wrapper">
 								<select class="form-control input-lg select2-single" dir="rtl">
 									<optgroup label="Alaskan/Hawaiian Time Zone">
 										<option value="AK">Alaska</option>
@@ -33,7 +32,8 @@
 										<option value="WA">Washington</option>
 									</optgroup>
 								</select>
-							</div></a></td>
+							</div></td>
+						<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
 		            </tr>
 	            {% endfor %}
 	        </tbody>
