@@ -532,9 +532,9 @@ def coursesfromdepartment(templist):
 
             tempdict = {}
             already = db.session.query(exists().where(Courses.code==code)).scalar()
-            print ret
+            print already
             existingexamner = db.session.query(exists().where(Teachers.email==examiner)).scalar()
-            print ret2
+            print existingexamner
             if (not already) and existingexamner:
                 print code
                 print examiner
