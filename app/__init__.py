@@ -777,7 +777,7 @@ def register_page():
                 return render_template('register.html.j2', form=form)
 
 
-            alreadyregistred = db.session.query(exists().where(and_(Teachers.password==password, Teachers.email==email))).scalar()
+            alreadyregistred = db.session.query(exists().where(and_(Teachers.password!=None, Teachers.email==email))).scalar()
 
             if alreadyregistred:
                 flash("Already registred!")
