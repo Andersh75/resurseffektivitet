@@ -201,7 +201,7 @@ def csvimporter():
 
 
     for i in teachers_list:
-        already = db.session.query(exists().where(or_(Teachers.username==i[0], Teachers.initials==i[1], Teachers.email==i[2])).scalar()
+        already = db.session.query(exists().where(or_(Teachers.username==i[0], Teachers.initials==i[1], Teachers.email==i[2]))).scalar()
         if not already:
             record = Teachers(**{
                 'username' : i[0],
@@ -215,7 +215,7 @@ def csvimporter():
 
 
     for i in courses_list:
-        already = db.session.query(exists().where(and_(Courses.code==i[0], Courses.year==i[3])).scalar()
+        already = db.session.query(exists().where(and_(Courses.code==i[0], Courses.year==i[3]))).scalar()
         if not already:
             record = Courses(**{
                 'code' : i[0],
