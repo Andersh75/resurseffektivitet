@@ -141,7 +141,7 @@ def myobject():
 def mycourses():
     #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
-    return db.session.query(Courses).join(Courses.examiner, Courses.responsible).all()
+    return db.session.query(Courses).all()
 
 
 
@@ -157,7 +157,6 @@ def login_required(f):
             return redirect(url_for('login_page'))
 
     return wrap
-
 
 
 
