@@ -82,13 +82,6 @@ class Dates(db.Model):
     classes = db.relationship('Classes', backref='dates', lazy='dynamic')
 
 
-class Classes(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(100))
-    starttime = db.Column(db.Integer)
-    endtime = db.Column(db.Integer)
-    courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
-    dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
 
 
 class Teachers(db.Model):
@@ -114,6 +107,15 @@ class Courses(db.Model):
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
     examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+
+
+class Classes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(100))
+    starttime = db.Column(db.Integer)
+    endtime = db.Column(db.Integer)
+    courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
+    dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
 
 
 ### CREATE TABLES
