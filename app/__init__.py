@@ -25,6 +25,7 @@ import csv
 from datetime import date, datetime, timedelta
 from operator import itemgetter
 import string
+from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
@@ -200,10 +201,8 @@ def csvimporter():
 
 
     for i in teachers_list:
-        username = db.session.query(exists().where(Teachers.username==i[0])).scalar()
-        initials = db.session.query(exists().where(Teachers.initials==i[1])).scalar()
-        email = db.session.query(exists().where(Teachers.email==i[2])).scalar()
-        if not (username or initials or email):
+        already = db.session.query(exists().where(or_(Teachers.username==i[0], Teachers.initials==i[1], Teachers.email==i[2])).scalar()
+        if not already:
             record = Teachers(**{
                 'username' : i[0],
                 'initials' : i[1],
@@ -216,8 +215,8 @@ def csvimporter():
 
 
     for i in courses_list:
-        code = db.session.query(exists().where(Courses.code==i[0])).scalar()
-        if not code:
+        already = db.session.query(exists().where(and_(Courses.code==i[0], Courses.year==i[3])).scalar()
+        if not already:
             record = Courses(**{
                 'code' : i[0],
                 'name' : i[1],
