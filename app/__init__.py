@@ -896,7 +896,7 @@ def user_edit_course_responsible():
     id = id[17:]
     print id
     tempobj = db.session.query(Courses).get(1)
-    tempobj.responsible.firstname = request.form["value"]
+    tempobj.responsible = db.session.query(Teachers).filter(Teachers.firstname == request.form["value"]).first()
 
     db.session.commit()
 
