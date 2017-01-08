@@ -629,6 +629,8 @@ def teachersfromdepartment(templist):
                     print tempobj.department.encode('utf-8')
                     db.session.commit()
 
+        print "YYYYYY"
+
 
 
 
@@ -864,6 +866,7 @@ def restartall():
     #ADD ALL TEACHERS TO DB
     teachersfromdepartment(templist2)
 
+    print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
     #ADD ALL COURSES TO DB
     coursesfromdepartment(templist)
 
