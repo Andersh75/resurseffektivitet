@@ -23,7 +23,7 @@
 			                <td>{{ item.code }}</td>
 				            <td>{{ item.name }}</td>
 							<td>{{ item.examiner }}</td>
-							<td><a href="#" id="courseresponsibe{{ me.id }}" data-pk="{{ me.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
+							<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
 			            </tr>
 		            {% endfor %}
 		        </tbody>
