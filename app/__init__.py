@@ -588,7 +588,7 @@ def coursesfromdepartment(templist):
                 tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
                 db.session.commit()
                 #print tempdict
-
+    print "DONE"
 
 
 def teachersfromdepartment(templist):
@@ -869,17 +869,11 @@ def restartall():
     #ADD ALL TEACHERS TO DB
     teachersfromdepartment(templist2)
 
-    print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
+
     #ADD ALL COURSES TO DB
     coursesfromdepartment(templist)
 
-
-
-
-
-
-
-
+    print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
 
     return "restartall"
 
