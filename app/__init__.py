@@ -856,7 +856,7 @@ def myinfo_page(page=1):
 
 @app.route('/')
 def index():
-
+    print "HEJ"
     return redirect(url_for('login_page'))
 
 
