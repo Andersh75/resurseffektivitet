@@ -95,7 +95,7 @@ class Teachers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
     lastname = db.Column(db.String(30))
-    email = db.Column(db.String(50), unique=)
+    email = db.Column(db.String(50), unique=True)
     initials = db.Column(db.String(30), unique=True)
     password = db.Column(db.String(30))
     username = db.Column(db.String(50), unique=True)
