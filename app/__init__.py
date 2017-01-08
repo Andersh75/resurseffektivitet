@@ -820,7 +820,6 @@ def register_page():
     flash("Please register!")
     return render_template("register.html.j2", form=form)
 
-
 @app.route("/logout/")
 @login_required
 def logout():
@@ -829,8 +828,6 @@ def logout():
     flash("You have been logged out!")
     gc.collect()
     return redirect(url_for('login_page'))
-
-
 
 @app.route('/rooms')
 @app.route('/rooms/<int:page>')
@@ -841,7 +838,6 @@ def rooms_page(page=1):
 @app.route('/teachers/<int:page>')
 def teachers_page(page=1):
     return render_template('teachers.html.j2', page=page)
-
 
 @app.route('/courses')
 @app.route('/courses/<int:page>')
@@ -854,10 +850,25 @@ def myinfo_page(page=1):
     return render_template('myinfo.html.j2', page=page)
 
 
+@app.route('/user_edit_myinfo/<string: page>', methods=['GET', 'POST'])
+def user_edit_content(page):
+    id = request.form["pk"]
+
+    tempobj = db.session.query(Teachers).get(id)
+    tempobj.page = request.form["value"]
+
+    db.session.commit()
+
+    result = {}
+
+    return json.dumps(result)
+
+
 @app.route('/')
 def index():
     print "HE"
     return redirect(url_for('login_page'))
+
 
 
 
