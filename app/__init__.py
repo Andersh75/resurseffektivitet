@@ -717,7 +717,7 @@ def hello_world():
 def restartall():
 
     createtables()
-    csvimporter()
+    #csvimporter()
 
     '''
     tempdict = {}
