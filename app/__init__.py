@@ -560,14 +560,14 @@ def coursesfromdepartment(templist):
             code = item['code']
             examiner = item['examiner']
             department = item['department']
-
+            print item
             tempdict = {}
             already = db.session.query(exists().where(Courses.code==code)).scalar()
-            print already
+            print "already"
             existingexamner = db.session.query(exists().where(Teachers.email==examiner)).scalar()
             #print existingexamner
             if (not already) and existingexamner:
-                print code
+                print "(not already) and existingexamner"
                 #print examiner
                 if name and code and (examiner != "no email"):
                     tempdict['name'] = name
