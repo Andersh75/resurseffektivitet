@@ -5,29 +5,29 @@
 {% block courses %}
 	<div class ="container">
 
-		<div class="jumbotron">
 
 
-			<h4>Kurser</h4>
 
-		    <table class="table table-hover" id="testtable">
-		        <tbody id="tbodyid">
+		<h4>Kurser</h4>
+
+	    <table class="table table-hover col-lg-12 col-md-12 col-sm-12 col-xs-12" id="testtable">
+	        <tbody id="tbodyid">
+	            <tr>
+	                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Kurskod</th>
+	                <th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Namn</th>
+	                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Examinator</th>
+					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Kursansvarig</th>
+	            </tr>
+	            {% for item in mycourses(): %}
 		            <tr>
-		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Kurskod</th>
-		                <th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Namn</th>
-		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Examinator</th>
-						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Kursansvarig</th>
+		                <td>{{ item.code }}</td>
+			            <td>{{ item.name }}</td>
+						<td>{{ item.examiner }}</td>
+						<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
 		            </tr>
-		            {% for item in mycourses(): %}
-			            <tr>
-			                <td>{{ item.code }}</td>
-				            <td>{{ item.name }}</td>
-							<td>{{ item.examiner }}</td>
-							<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
-			            </tr>
-		            {% endfor %}
-		        </tbody>
-		    </table>
+	            {% endfor %}
+	        </tbody>
+	    </table>
 
 
 
@@ -49,16 +49,16 @@
 
 
 
-	  		{% with messages = get_flashed_messages() %}
-	  			{% if messages %}
-	  				{% for message in messages %}
-	  					<div class="alert alert-warning alert-dismissible" role="alert">
-	  						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-	  						{{message}}
-	  					</div>
-	  				{% endfor %}
-	  			{% endif %}
-	  		{% endwith %}
+  		{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+  				{% for message in messages %}
+  					<div class="alert alert-warning alert-dismissible" role="alert">
+  						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+  						{{message}}
+  					</div>
+  				{% endfor %}
+  			{% endif %}
+  		{% endwith %}
 
 
 
@@ -70,56 +70,56 @@
 
 
 
-			<div class="select2-wrapper">
-				<select class="form-control input-lg select2-single" dir="rtl">
-					<optgroup label="Alaskan/Hawaiian Time Zone">
-						<option value="AK">Alaska</option>
-						<option value="HI" disabled="disabled">Hawaii</option>
-					</optgroup>
-					<optgroup label="Pacific Time Zone">
-						<option value="CA">California</option>
-						<option value="NV">Nevada</option>
-						<option value="OR">Oregon</option>
-						<option value="WA">Washington</option>
-					</optgroup>
-				</select>
-			</div>
-			<div class="select2-wrapper">
-				<select class="form-control select2-multiple" multiple="multiple">
-					<optgroup label="Alaskan/Hawaiian Time Zone">
-						<option value="AK">Alaska</option>
-						<option value="HI" disabled="disabled">Hawaii</option>
-					</optgroup>
-					<optgroup label="Pacific Time Zone">
-						<option value="CA">California</option>
-						<option value="NV">Nevada</option>
-						<option value="OR">Oregon</option>
-						<option value="WA">Washington</option>
-					</optgroup>
-				</select>
-			</div>
-			<div class="select2-wrapper">
-				<div class="form-group">
-					<div class="input-group input-group-sm select2-bootstrap-prepend">
-						<span class="input-group-addon">
-							<input type="checkbox">
-						</span>
-						<select id="select2-single-input-group-sm" class="form-control select2-single" disabled>
-							<optgroup label="Alaskan/Hawaiian Time Zone">
-								<option value="AK">Alaska</option>
-								<option value="HI" disabled="disabled">Hawaii</option>
-							</optgroup>
-							<optgroup label="Pacific Time Zone">
-								<option value="CA">California</option>
-								<option value="NV">Nevada</option>
-								<option value="OR">Oregon</option>
-								<option value="WA">Washington</option>
-							</optgroup>
-						</select>
-					</div>
+		<div class="select2-wrapper">
+			<select class="form-control input-lg select2-single" dir="rtl">
+				<optgroup label="Alaskan/Hawaiian Time Zone">
+					<option value="AK">Alaska</option>
+					<option value="HI" disabled="disabled">Hawaii</option>
+				</optgroup>
+				<optgroup label="Pacific Time Zone">
+					<option value="CA">California</option>
+					<option value="NV">Nevada</option>
+					<option value="OR">Oregon</option>
+					<option value="WA">Washington</option>
+				</optgroup>
+			</select>
+		</div>
+		<div class="select2-wrapper">
+			<select class="form-control select2-multiple" multiple="multiple">
+				<optgroup label="Alaskan/Hawaiian Time Zone">
+					<option value="AK">Alaska</option>
+					<option value="HI" disabled="disabled">Hawaii</option>
+				</optgroup>
+				<optgroup label="Pacific Time Zone">
+					<option value="CA">California</option>
+					<option value="NV">Nevada</option>
+					<option value="OR">Oregon</option>
+					<option value="WA">Washington</option>
+				</optgroup>
+			</select>
+		</div>
+		<div class="select2-wrapper">
+			<div class="form-group">
+				<div class="input-group input-group-sm select2-bootstrap-prepend">
+					<span class="input-group-addon">
+						<input type="checkbox">
+					</span>
+					<select id="select2-single-input-group-sm" class="form-control select2-single" disabled>
+						<optgroup label="Alaskan/Hawaiian Time Zone">
+							<option value="AK">Alaska</option>
+							<option value="HI" disabled="disabled">Hawaii</option>
+						</optgroup>
+						<optgroup label="Pacific Time Zone">
+							<option value="CA">California</option>
+							<option value="NV">Nevada</option>
+							<option value="OR">Oregon</option>
+							<option value="WA">Washington</option>
+						</optgroup>
+					</select>
 				</div>
 			</div>
-        </div>
+		</div>
+
 	</div>
 
 {% endblock %}
