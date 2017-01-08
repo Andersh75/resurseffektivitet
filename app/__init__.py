@@ -748,18 +748,18 @@ def login_page():
 
         if request.method == "POST":
 
-            attempted_initials = request.form['initials']
+            attempted_email = request.form['email']
             attempted_password = request.form['password']
 
-            xrubrik = db.session.query(Teachers).filter(Teachers.initials == attempted_initials).first()
+            xrubrik = db.session.query(Teachers).filter(Teachers.email == attempted_email).first()
 
-            flash(xrubrik.initials)
+            flash(xrubrik.email)
             #flash(attempted_password)
 
-            if attempted_initials == xrubrik.initials and attempted_password == xrubrik.password:
+            if attempted_email == xrubrik.email and attempted_password == xrubrik.password:
                 session['logged_in'] = True
                 #session['username'] = request.form['initials']
-                session['user'] = request.form['initials']
+                session['user'] = request.form['email']
                 return redirect(url_for('login_page'))
 
             else:
