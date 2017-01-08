@@ -849,18 +849,40 @@ def myinfo_page(page=1):
     return render_template('myinfo.html.j2', page=page)
 
 
-@app.route('/user_edit_myinfo/<string:page>', methods=['GET', 'POST'])
-def user_edit_content(page):
+@app.route('/user_edit_myinfo/akafirstname', methods=['GET', 'POST'])
+def user_edit_content():
     id = request.form["pk"]
-    print page
     tempobj = db.session.query(Teachers).get(id)
-    tempobj.page = request.form["value"]
+    tempobj.akafirstname = request.form["value"]
 
     db.session.commit()
 
     result = {}
 
     return json.dumps(result)
+@app.route('/user_edit_myinfo/akalastname', methods=['GET', 'POST'])
+def user_edit_content():
+    id = request.form["pk"]
+    tempobj = db.session.query(Teachers).get(id)
+    tempobj.akalastname = request.form["value"]
+
+    db.session.commit()
+
+    result = {}
+
+    return json.dumps(result)
+@app.route('/user_edit_myinfo/initials', methods=['GET', 'POST'])
+def user_edit_content():
+    id = request.form["pk"]
+    tempobj = db.session.query(Teachers).get(id)
+    tempobj.initials = request.form["value"]
+
+    db.session.commit()
+
+    result = {}
+
+    return json.dumps(result)
+
 
 
 @app.route('/')
