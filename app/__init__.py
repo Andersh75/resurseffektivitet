@@ -555,12 +555,14 @@ def courseinfoperyearandround(x, y):
 
 def coursesfromdepartment(templist):
     for itemlist in templist:
+        print itemlist
         for item in itemlist:
+            print item
             name = item['name']
             code = item['code']
             examiner = item['examiner']
             department = item['department']
-            print item
+
             tempdict = {}
             already = db.session.query(exists().where(Courses.code==code)).scalar()
             print "already"
@@ -586,6 +588,7 @@ def coursesfromdepartment(templist):
                 tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
                 db.session.commit()
                 #print tempdict
+
 
 
 def teachersfromdepartment(templist):
