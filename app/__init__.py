@@ -21,32 +21,374 @@ import xmltodict
 import json
 from flask import json
 from sqlalchemy import exists
+import csv
+from datetime import date, datetime, timedelta
+from operator import itemgetter
+import string
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f9'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f10'
 db = SQLAlchemy(app)
 
 
-class People(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(100))
-    lastname = db.Column(db.String(30))
-    mail = db.Column(db.String(50))
-    username = db.Column(db.String(50), unique=True)
-    department = db.Column(db.String(100))
-    examiner = db.relationship('Courses', backref='examiner', lazy='dynamic', foreign_keys='[Courses.examiner_id]')
-    responsible = db.relationship('Courses', backref='responsible', lazy='dynamic', foreign_keys='[Courses.responsible_id]')
-    #courses = db.relationship('Courses', primaryjoin="or_(People.id==Courses.examiner_id, People.id==Courses.responsible_id)", lazy='dynamic')
+### CREATE TABLES
+def createtables():
+    teachers_classes = db.Table('teachers_classes',
+        db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id')),
+        db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
+    )
+
+    rooms_classes = db.Table('rooms_classes',
+        db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id')),
+        db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
+    )
+
+    dates_courses = db.Table('dates_courses',
+        db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
+        db.Column('courses_id', db.Integer, db.ForeignKey('courses.id'))
+    )
+
+    dates_rooms = db.Table('dates_rooms',
+        db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
+        db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id'))
+    )
+
+    dates_teachers = db.Table('dates_teachers',
+        db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
+        db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id'))
+    )
+
+    # One-to-many. Parent to Rooms
+    class Roomtypes(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        roomtype = db.Column(db.String(30))
+        cost = db.Column(db.Integer)
+        rooms = db.relationship('Rooms', backref='roomtypes', lazy='dynamic')
+
+    # One-to-many. Child to Roomtypes
+    class Rooms(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        name = db.Column(db.String(30))
+        seats = db.Column(db.Integer)
+        roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
+        classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
 
 
-class Courses(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100))
-    code = db.Column(db.String(30), unique=True)
-    #examiner = db.Column(db.String(50))
-    examiner_id = db.Column(db.Integer, db.ForeignKey('people.id'))
-    responsible_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    class Dates(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        date = db.Column(db.DateTime)
+        courses = db.relationship('Courses', secondary=dates_courses, backref=db.backref('dates', lazy='dynamic'))
+        rooms = db.relationship('Rooms', secondary=dates_rooms, backref=db.backref('dates', lazy='dynamic'))
+        teachers = db.relationship('Teachers', secondary=dates_teachers, backref=db.backref('dates', lazy='dynamic'))
+        classes = db.relationship('Classes', backref='dates', lazy='dynamic')
+
+
+    class Classes(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        content = db.Column(db.String(100))
+        starttime = db.Column(db.Integer)
+        endtime = db.Column(db.Integer)
+        courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
+        dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
+
+
+    class Teachers(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        firstname = db.Column(db.String(100))
+        lastname = db.Column(db.String(30))
+        email = db.Column(db.String(50), unique=True)
+        initials = db.Column(db.String(30), unique=True)
+        password = db.Column(db.String(30))
+        username = db.Column(db.String(50), unique=True)
+        department = db.Column(db.String(100))
+        examiner = db.relationship('Courses', backref='examiner', lazy='dynamic', foreign_keys='[Courses.examiner_id]')
+        responsible = db.relationship('Courses', backref='responsible', lazy='dynamic', foreign_keys='[Courses.responsible_id]')
+        classes = db.relationship('Classes', secondary=teachers_classes, backref=db.backref('teachers', lazy='dynamic'))
+
+
+    class Courses(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        title = db.Column(db.String(100))
+        code = db.Column(db.String(30))
+        schedule_exists = db.Column(db.Boolean, default=False)
+        year = db.Column(db.Integer)
+        classes = db.relationship('Classes', backref='courses', lazy='dynamic')
+        examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+        responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+
+
+    db.create_all()
+    db.session.commit()
+
+
+#Import CSV-file
+def importer():
+    with open('static/teachers.csv', 'rb') as f:
+        reader = csv.reader(f)
+        teachers_list = list(reader)
+
+    with open('static/roomtypes.csv', 'rb') as f:
+        reader = csv.reader(f)
+        roomtypes_list = list(reader)
+
+    with open('static/rooms.csv', 'rb') as f:
+        reader = csv.reader(f)
+        rooms_list = list(reader)
+
+    with open('static/courses.csv', 'rb') as f:
+        reader = csv.reader(f)
+        courses_list = list(reader)
+
+    with open('static/roles.csv', 'rb') as f:
+        reader = csv.reader(f)
+        roles_list = list(reader)
+
+    with open('static/schedules.csv', 'rb') as f:
+        reader = csv.reader(f)
+        schedules_list = list(reader)
+
+    return teachers_list, roomtypes_list, rooms_list, courses_list, roles_list, schedules_list
+
+
+### CLEAN THE CSV
+# Remove Column from Table
+def remove_col(list1, i):
+    temp_list_suf = []
+    temp_list_pre = []
+    temp_list = []
+    for n in list1:
+        temp_list_suf.append(n[i+1:])
+        temp_list_pre.append(n[:i])
+    for index, item in enumerate(list1):
+        temp_list.append(temp_list_pre[index] + temp_list_suf[index])
+    return temp_list
+
+# Reformat date
+def reformat_date(list1):
+    i = 0
+    for p in range(0, len(list1)):
+        year_var = "2016"
+        if list1[p][i][2] == "/":
+            day_var = list1[p][i][:2]
+            #print day_var
+        else:
+            day_var = "0" + list1[p][i][:1]
+            #print day_var
+        if list1[p][i][-3] == "/":
+            #print "hej"
+            month_var = list1[p][i][-2:]
+            #print month_var
+        else:
+            month_var = "0" + list1[p][i][-1:]
+            #print month_var
+
+        #print list1[p][7]
+        if list1[p][7]:
+            year_var = list1[p][7]
+
+        list1[p][i] = year_var + "-" + month_var + "-" + day_var
+        year_var = "2016"
+
+        #print list1[p][7]
+    return list1
+
+# Insert Column to Table
+def add_col(list1):
+    for i in range(0, len(list1)):
+        list1[i].append("")
+    return list1
+
+# Extract beginning and end time
+def extract_start_slut_tid(list1):
+     i = 1
+     for p in range(0, len(list1)):
+        list1[p][-2] = list1[p][i][0:2]
+        list1[p][-1] = list1[p][i][3:5]
+        # print list1[p][i]
+
+     return list1
+
+# Separate teachers
+def separate_teachers(list1):
+    temp_list = []
+    for p in range(0, len(list1)):
+        words = list1[p][4].split()
+        for word in words:
+            #print word
+            alist = []
+            alist = list1[p]
+            alist[4] = word
+
+            #print alist
+            temp_list.extend(alist)
+            #print "hej"
+
+    #print temp_list
+
+
+
+    return temp_list
+
+# Separate teachers
+def separate_rooms(list1):
+    temp_list = []
+    for p in range(0, len(list1)):
+        words = list1[p][2].split()
+        for word in words:
+            #print word
+            alist = []
+            alist = list1[p]
+            alist[2] = word
+
+            #print alist
+            temp_list.extend(alist)
+            #print "hej"
+
+    return temp_list
+
+
+#Transform imported CSV to tables
+def csvtotables():
+
+    teachers_list, roomtypes_list, rooms_list, courses_list, roles_list, schedules_list = importer()
+
+    schedules_list = remove_col(schedules_list, 0)
+
+    schedules_list = reformat_date(schedules_list)
+
+    schedules_list = add_col(schedules_list)
+
+    schedules_list = add_col(schedules_list)
+
+    schedules_list = extract_start_slut_tid(schedules_list)
+
+    schedules_list = remove_col(schedules_list, 1)
+
+
+
+
+
+
+    #for i in schedules_list:
+    #    print i
+
+
+
+
+    #Populate tables
+    for i in roomtypes_list:
+        record = Roomtypes(**{
+            'roomtype' : i[0],
+            'cost' : i[1]
+        })
+        db.session.add(record)
+        db.session.commit()
+
+    for i in rooms_list:
+        #print i[0]
+        record = Rooms(**{
+            'name' : i[0],
+            'seats' : i[1],
+            'roomtypes_id' : Roomtypes.query.filter_by(id=i[2]).first().id
+        })
+        db.session.add(record)
+        db.session.commit()
+
+
+    for i in teachers_list:
+        #print i
+        record = Teachers(**{
+            'username' : i[0],
+            'initials' : i[1],
+            'email' : i[2],
+            'firstname' : i[3],
+            'lastname' : i[4]
+        })
+        db.session.add(record)
+        db.session.commit()
+
+    for i in courses_list:
+        record = Courses(**{
+            'code' : i[0],
+            'name' : i[1],
+            'schedule_exists' : i[2],
+            'year' : i[3]
+
+
+        })
+        db.session.add(record)
+        db.session.commit()
+
+    #print Courses.query.filter_by(code='AI1174').first().id
+
+    for i in roles_list:
+        record = Roles(**{
+            'name' : i[0]
+        })
+        db.session.add(record)
+        db.session.commit()
+
+
+
+
+
+
+    for i in schedules_list:
+        if not Dates.query.filter_by(date=i[0]).first():
+            #print "dubbel"
+        #else:
+            record = Dates(**{
+                'date' : i[0]
+                })
+            db.session.add(record)
+            db.session.commit()
+
+
+    for i in schedules_list:
+        print i[8]
+        #print Dates.query.first().date
+        record = Classes(**{
+            #'date' : i[0],
+            'content' : i[3],
+            'starttime' : i[7],
+            'endtime' : i[8],
+            'courses_id' : Courses.query.filter_by(code=i[5]).first().id,
+            'dates_id' : Dates.query.filter_by(date=i[0]).first().id
+        })
+        db.session.add(record)
+        db.session.commit()
+
+        coursevar = Courses.query.filter_by(code=i[5]).first()
+        datevar = Dates.query.filter_by(date=i[0]).first()
+        #print datevar.date
+        datevar.courses.append(coursevar)
+        #datevar.classes.append(record)
+        db.session.commit()
+
+
+        words = i[4].split()
+        for word in words:
+            teachervar = Teachers.query.filter_by(initials=word).first()
+            #print teachervar.firstname
+            teachervar.classes.append(record)
+            teachervar.dates.append(datevar)
+            db.session.commit()
+
+        words = i[2].split()
+        for word in words:
+            roomvar = Rooms.query.filter_by(name=word).first()
+            #print roomvar.name
+            roomvar.classes.append(record)
+            roomvar.dates.append(datevar)
+
+            db.session.commit()
+
+
+
+
+
+
 
 
 def fetchinglistofcodesfordepartmentcourses(department):
@@ -92,7 +434,7 @@ def jsonifycoursesfromdepartment(tempdict):
             #print varmail
 
         except Exception, e:
-            varmail = "no mail"
+            varmail = "no email"
             #print varmail
 
 
@@ -129,15 +471,15 @@ def staffperdepartment(department):
         #print tdlist[1]['href']
         firstname = tdlist[2].text
         lastname = tdlist[1].text
-        mail = tdlist[3].text
+        email = tdlist[3].text
         username = tdlist[1]['href'][27:]
         #print username
 
-        tempdict = {'firstname':firstname, 'lastname':lastname, 'mail':mail, 'username':username}
+        tempdict = {'firstname':firstname, 'lastname':lastname, 'email':email, 'username':username}
         templist2.append(tempdict)
 
 
-    tempdict2 = {'department':department, 'person':templist2}
+    tempdict2 = {'department':department, 'teacher':templist2}
 
     return tempdict2
 
@@ -189,46 +531,46 @@ def coursesfromdepartment(templist):
             tempdict = {}
             ret = db.session.query(exists().where(Courses.code==code)).scalar()
             print ret
-            ret2 = db.session.query(exists().where(People.mail==examiner)).scalar()
+            ret2 = db.session.query(exists().where(Teachers.email==examiner)).scalar()
             print ret2
             if (not ret) and ret2:
                 print code
                 print examiner
-                if title and code and (examiner != "no mail"):
+                if title and code and (examiner != "no email"):
                     tempdict['title'] = title
                     tempdict['code'] = code
-                    tempdict['examiner_id'] = People.query.filter_by(mail=examiner).first().id
+                    tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
                     record = Courses(**tempdict)
                     db.session.add(record)
                     db.session.commit()
                     print tempdict
 
 
-def peoplefromdepartment(templist):
+def teachersfromdepartment(templist):
     for xitem in templist:
         #print xitem
         print xitem['department']
 
         department = xitem['department']
 
-        for item in xitem['person']:
+        for item in xitem['teacher']:
             print item
             firstname = item['firstname']
             lastname = item['lastname']
-            mail = item['mail']
+            email = item['email']
             username = item['username']
 
             tempdict = {}
-            ret = db.session.query(exists().where(People.username==username)).scalar()
+            ret = db.session.query(exists().where(Teachers.username==username)).scalar()
             print ret
             if not ret:
-                if firstname and lastname and (mail != "no mail") and username:
+                if firstname and lastname and (email != "no email") and username:
                     tempdict['firstname'] = firstname
                     tempdict['lastname'] = lastname
-                    tempdict['mail'] = mail
+                    tempdict['email'] = email
                     tempdict['username'] = username
                     tempdict['department'] = department
-                    record = People(**tempdict)
+                    record = Teachers(**tempdict)
                     db.session.add(record)
                     db.session.commit()
                     print tempdict
@@ -259,8 +601,8 @@ def restartall():
     #tempdict3 = courseinfoperyearandround(2016, 1)
 
 
-    #ADD ALL PEOPLE TO DB
-    peoplefromdepartment(templist2)
+    #ADD ALL TEACHERS TO DB
+    teachersfromdepartment(templist2)
 
     #ADD ALL COURSES TO DB
     coursesfromdepartment(templist)
@@ -337,36 +679,36 @@ def hello_world():
     #varcourse.responsible_id = 10
     #db.session.commit()
 
-    #print db.session.query(Courses.code).join(Courses.responsible).filter(People.firstname == "Maria").first()
+    #print db.session.query(Courses.code).join(Courses.responsible).filter(TEACHERS.firstname == "Maria").first()
 
-    varuser = db.session.query(People).filter(People.firstname == "Berndt").first()
+    varuser = db.session.query(Teachers).filter(Teachers.firstname == "Berndt").first()
 
     '''
     #ADD FOREIGN KEY AS ID
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Kent").first()
     varcourse.responsible_id = 12
     db.session.commit()
 
     #ADD FOREIGN KEY AS OBJECT TO FIRST
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Kent").first()
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Kent").first()
     varcourse.responsible = varuser
     db.session.commit()
 
     #ADD FOREIGN KEY AS OBJECT TO ALL
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.firstname == "Berndt").all()
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.firstname == "Berndt").all()
     for item in varcourse:
         item.responsible = varuser
     db.session.commit()
 
     #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
-    varcourse = db.session.query(Courses).join(Courses.responsible).filter(People.id == varuser.id).all()
+    varcourse = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == varuser.id).all()
     for item in varcourse:
-        item.responsible = db.session.query(People).filter(People.firstname == "Anders").first()
+        item.responsible = db.session.query(Teachers).filter(Teachers.firstname == "Anders").first()
     db.session.commit()
     '''
 
     #REPLACE FOREIGN KEY AS OBJECT TO ALL OF FILTERED
-    varcourse = db.session.query(Courses).join(Courses.examiner).filter(People.id == varuser.id).all()
+    varcourse = db.session.query(Courses).join(Courses.examiner).filter(Teachers.id == varuser.id).all()
     for item in varcourse:
         print "HEJ"
         print item.code
@@ -378,7 +720,8 @@ def hello_world():
 
 @app.route('/restartall')
 def restartall():
-    restartall()
+    #restartall()
+    createtables()
 
     return "restartall"
 
