@@ -432,7 +432,6 @@ def separate_rooms(list1):
 
 
 
-
 def fetchinglistofcodesfordepartmentcourses(department):
     j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
 
