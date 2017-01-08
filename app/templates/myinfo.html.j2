@@ -26,15 +26,29 @@
 		    <table class="table table-hover" id="testtable">
 		        <tbody id="tbodyid">
 		            <tr>
-		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Förnamn</th>
-		                <th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Efternamn</th>
-		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Initialer</th>
+		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">firstname</th>
+		                <th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">lastname</th>
+		                <th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">akafirstname</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">akalastname</th>
+						<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">email</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">initials</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">password</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">kthid</th>
+						<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">username</th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">department</th>
 		            </tr>
 
 		            <tr>
-		                <td>{{ session['username'] }}</td>
-						<td>{{ session['firstname'] }}</td>
+		                <td>{{ session['firstname'] }}</td>
 						<td>{{ session['lastname'] }}</td>
+						<td>{{ session['akafirstname'] }}</td>
+						<td>{{ session['akalastname'] }}</td>
+						<td>{{ session['email'] }}</td>
+						<td>{{ session['initials'] }}</td>
+						<td>{{ session['password'] }}</td>
+						<td>{{ session['kthid'] }}</td>
+						<td>{{ session['username'] }}</td>
+						<td>{{ session['department'] }}</td>
 		            </tr>
 		        </tbody>
 		    </table>
