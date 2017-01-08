@@ -141,7 +141,7 @@ def myobject():
 def mycourses():
     #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
-    return db.session.query(Courses).join(Courses.examiner).join(Courses.responsible).all()
+    return db.session.query(Courses).join(Courses.examiner).all()
 
 
 
