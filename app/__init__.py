@@ -107,7 +107,7 @@ class Teachers(db.Model):
 
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100))
+    name = db.Column(db.String(100))
     code = db.Column(db.String(30))
     schedule_exists = db.Column(db.Boolean, default=False)
     year = db.Column(db.Integer)
@@ -534,13 +534,13 @@ def jsonifycoursesfromdepartment(tempdict):
         xml = BeautifulSoup(req)
 
 
-        #vartitle = xml.title.string
+        #varname = xml.title.string
         try:
             varcode = xml.course['code']
             #print varcode
 
         except Exception, e:
-            varcode = "no title"
+            varcode = "no name"
             #print varcode
 
 
@@ -554,15 +554,15 @@ def jsonifycoursesfromdepartment(tempdict):
 
 
         try:
-            vartitle = xml.title.string
-            #print vartitle.encode('utf-8')
-            #print vartitle
+            varname = xml.title.string
+            #print varname.encode('utf-8')
+            #print varname
 
         except Exception, e:
-            vartitle = "no title"
-            #print vartitle
+            varname = "no name"
+            #print varname
 
-        tempdict2 = {'code':varcode, 'title':vartitle, 'examiner':varmail, 'department':tempdict['department']}
+        tempdict2 = {'code':varcode, 'name':varname, 'examiner':varmail, 'department':tempdict['department']}
 
         templist2.append(tempdict2)
 
@@ -638,7 +638,7 @@ def courseinfoperyearandround(x, y):
 def coursesfromdepartment(templist):
     for itemlist in templist:
         for item in itemlist:
-            title = item['title']
+            name = item['name']
             code = item['code']
             examiner = item['examiner']
             department = item['department']
@@ -651,8 +651,8 @@ def coursesfromdepartment(templist):
             if (not ret) and ret2:
                 print code
                 print examiner
-                if title and code and (examiner != "no email"):
-                    tempdict['title'] = title
+                if name and code and (examiner != "no email"):
+                    tempdict['name'] = name
                     tempdict['code'] = code
                     tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
                     record = Courses(**tempdict)
@@ -740,7 +740,7 @@ def jsonifylitteraturefromdepartment():
     templist = []
     item = "AI1128"
     #for item in tempdict['courses']:
-        #vartitle = xml.title.string
+        #varname = xml.title.string
     try:
         req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
         xml = BeautifulSoup(req)
