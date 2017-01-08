@@ -214,15 +214,18 @@ def csvimporter():
             db.session.add(record)
             db.session.commit()
 
+
     for i in courses_list:
-        record = Courses(**{
-            'code' : i[0],
-            'name' : i[1],
-            'schedule_exists' : i[2],
-            'year' : i[3]
-        })
-        db.session.add(record)
-        db.session.commit()
+        code = db.session.query(exists().where(Courses.code==i[0])).scalar()
+        if not code:
+            record = Courses(**{
+                'code' : i[0],
+                'name' : i[1],
+                'schedule_exists' : i[2],
+                'year' : i[3]
+            })
+            db.session.add(record)
+            db.session.commit()
 
 
     for i in schedules_list:
