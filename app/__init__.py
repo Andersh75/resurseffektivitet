@@ -844,10 +844,13 @@ def restartall():
 
 
     for item in departments:
+        print item
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        print tempdict
         templist.append(jsonifycoursesfromdepartment(tempdict))
 
         tempdict2 = staffperdepartment(item)
+        print tempdict2
         templist2.append(tempdict2)
 
 
