@@ -19,10 +19,10 @@
 		<div class="jumbotron">
 
 
-			<h4>My info 8</h4>
+			<h4>My info</h4>
 
 			{% set me = myobject() %}
-			<p><a href="#" id="initials" data-pk="me.id" data-url="/user_edit_content/1" data-title="Enter username">{{ me.akafirstname }}</a></p>
+
 
 		    <table class="table table-hover" id="testtable">
 		        <tbody id="tbodyid">
@@ -45,7 +45,7 @@
 						<td>{{ me.akafirstname }}</td>
 						<td>{{ me.akalastname }}</td>
 						<td>{{ me.email }}</td>
-						<td>{{ me.initials }}</a></td>
+						<td><a href="#" id="meinitials" data-pk="me.id" data-url="/user_edit_content/1" data-title="Enter username"></a>{{ me.initials }}</a></td>
 						<td>{{ me.password }}</td>
 						<td>{{ me.kthid }}</td>
 						<td>{{ me.username }}</td>
