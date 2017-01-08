@@ -758,7 +758,8 @@ def login_page():
 
             if attempted_initials == xrubrik.initials and attempted_password == xrubrik.password:
                 session['logged_in'] = True
-                session['username'] = request.form['initials']
+                #session['username'] = request.form['initials']
+                session['user'] = request.form['initials']
                 return redirect(url_for('login_page'))
 
             else:
@@ -823,6 +824,7 @@ def register_page():
 @app.route("/logout/")
 @login_required
 def logout():
+    session.pop('user', None)
     session.clear()
     flash("You have been logged out!")
     gc.collect()
