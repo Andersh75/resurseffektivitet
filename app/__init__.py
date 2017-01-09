@@ -926,6 +926,7 @@ def user_edit_myinfo_initials():
 
 
 
+
 @app.route('/user_edit_course/responsible', methods=['GET', 'POST'])
 def user_edit_course_responsible():
     id = request.form["pk"]
@@ -934,7 +935,7 @@ def user_edit_course_responsible():
 
     db.session.commit()
 
-    result = {}
+    result = { 'id': id, 'text': request.form["value"] }
 
     return json.dumps(result)
 
