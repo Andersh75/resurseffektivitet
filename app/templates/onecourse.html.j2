@@ -51,7 +51,7 @@
 						{% endif %}
 						<td class="text-left">
 							{% for subitem in subjectsinslot(courseid): %}
-							<a href="#" id="subject{{ rowloop.index }}" data-type="checklist" data-url="/user_edit_subject/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ subitem[0] }}</a>
+							<a href="#" id="subject{{ rowloop.index }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.id }}">{{ item.id }}</a>
 							{% endfor %}
 						</td>
 						<td class="text-left">
