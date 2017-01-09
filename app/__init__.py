@@ -294,7 +294,7 @@ def mycourseslist():
     return tempvar
 
 def subjectslistjson():
-    templist = [["Ämne 1"], ["Ämne 2"], ["Ämne 3"], ["Ämne 4"], ["Ämne 5"], ["Ämne 6"]]
+    templist = [["Subject 1"], ["Subject 2"], ["Subject 3"], ["Subject 4"], ["Subject 5"], ["Subject 6"]]
 
     tempvar = "[{"
     id = 1
