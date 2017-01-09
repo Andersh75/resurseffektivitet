@@ -4,7 +4,7 @@ from wtforms import Form, BooleanField, TextField, PasswordField, validators
 from flask_sqlalchemy import SQLAlchemy
 from flask.ext.sqlalchemy import get_debug_queries
 from sqlalchemy import desc, create_engine, func
-from sqlalchemy.orm import scoped_session, sessionmaker, joinedload
+from sqlalchemy.orm import scoped_session, sessionmaker, joinedload, aliased
 from sqlalchemy.ext.declarative import declarative_base
 from passlib.hash import sha256_crypt
 from MySQLdb import escape_string as thwart
