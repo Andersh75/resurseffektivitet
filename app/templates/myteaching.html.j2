@@ -20,7 +20,7 @@
 	            {% for item in allcourses() %}
 					{% if amiteaching(item.code) %}
 		            <tr>
-		                <td><a href="{{ url_for('onecourse_page', item.id) }}">{{ item.code }}</a></td>
+		                <td><a href="{{ url_for('onecourse_page', courseid=item.id) }}">{{ item.code }}</a></td>
 			            <td>{{ item.name }}</td>
 						<td>{{ item.examiner.email }}</a></td>
 						{% if amiexaminer(item.code) %}
