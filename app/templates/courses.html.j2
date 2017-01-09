@@ -22,8 +22,7 @@
 		            <tr>
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
-						<td><a href="#" id="courseexaminer{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/examiner" data-title="Enter username">{{ item.examiner.email }}</a>
-						</td>
+						<td>{{ item.examiner.email }}</a></td>
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.responsible.email }}">{{ item.responsible.email }}</a></td>
 		            </tr>
 	            {% endfor %}
