@@ -151,15 +151,22 @@ def myobject():
     #print testvar.password
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
-def mycourses():
+def mycoursesrxaminer():
     testvar = db.session.query(Courses).join(Courses.examiner).filter(Teachers.email == session['user']).all()
     print "ZZZZZZZZ"
     for item in testvar:
         print item.code
 
-
-    #return db.session.query(Courses).all()
     return testvar
+
+def mycoursesresponsible():
+    testvar = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
+    print "ZZZZZZZZ"
+    for item in testvar:
+        print item.code
+
+    return testvar
+
 
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
@@ -176,7 +183,6 @@ def mycourseslist():
     #tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     #print testvar.password
     return tempvar
-
 
 
 
