@@ -184,10 +184,8 @@
 
 
 
-            $(".js-example-data-array").editable({
-                source:tempvar
-                title: 'Select Course',
-                inputclass: 'some_class'
+            $('[id^=courseexaminer]').editable({
+                source:tempvar,
                 select2: {
                    multiple: true
                 }
