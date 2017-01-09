@@ -175,6 +175,7 @@ def idtocode(courseid):
     return tempvar[0]
 
 
+
 def allcourses():
     templist = db.session.query(Courses).all()
     return templist
