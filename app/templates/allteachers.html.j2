@@ -21,12 +21,12 @@
 			            <td>{{ item.akafirstname }} {{ item.akalastname }}</td>
 						<td>{{ item.email }}</a></td>
 						<td>
-							{% for subitem in mycoursesresponsible(): %}
+							{% for subitem in onescoursesresponsible(item.id): %}
 		                        <button type="button" class="btn btn-success btn-xs">{{ subitem.code }}</button>
 		                    {% endfor %}
 						</td>
 						<td>
-							{% for subitem in mycoursesteaching(): %}
+							{% for subitem in onescoursesteaching(item.id): %}
 		                        <button type="button" class="btn btn-success btn-xs">{{ subitem.code }}</button>
 		                    {% endfor %}
 						</td>

@@ -187,6 +187,28 @@ def allteachers():
     templist = db.session.query(Teachers).order_by(Teachers.akalastname).all()
     return templist
 
+def onescoursesexaminerorresponsible(teacherid):
+    examiner = aliased(Teachers)
+    responsible = aliased(Teachers)
+    templist = db.session.query(Courses).join(examiner, Courses.examiner).join(responsible, Courses.responsible).filter(or_(examiner.id == teacherid, responsible.id == teacherid)).all()
+
+    return templist
+
+def onescoursesresponsible(teacherid):
+    templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == teacherid).all()
+
+    return templist
+
+def onescoursesteaching(teacherid):
+    templist = db.session.query(Courses).join(Courses.classes).join(Classes.teachers).distinct().filter(Teachers.id == teacherid).all()
+
+    return templist
+
+def onescoursesexaminer(teacherid):
+    templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == teacherid).all()
+
+    return templist
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
@@ -213,6 +235,9 @@ def mycoursesexaminer():
     templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
 
     return templist
+
+
+
 
 def myslots():
     templist = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Courses.code, Courses.id).distinct().join(Dates.classes).join(Classes.teachers).join(Classes.courses).filter(Teachers.email == session['user']).order_by(Dates.date).order_by(Classes.starttime).all()
