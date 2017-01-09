@@ -144,7 +144,6 @@ class RegistrationForm(Form):
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
 
-
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
