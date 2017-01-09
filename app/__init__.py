@@ -25,7 +25,7 @@ import csv
 from datetime import date, datetime, timedelta
 from operator import itemgetter
 import string
-from sqlalchemy.sql import and_, or_, not_
+from sqlalchemy.sql import and_, or_, not_, joinedload
 
 
 
