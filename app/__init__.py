@@ -148,7 +148,7 @@ class RegistrationForm(Form):
 def scheduleInCourse(course):
 # Lista med kurstillfallen som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id).distinct().join(Dates.classes).join(Classes.courses).filter(Courses.code == course).order_by(Dates.date).order_by(Classes.starttime).all()
+    tempvar = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id).distinct().join(Dates.classes).join(Classes.courses).filter(Courses.id == course).order_by(Dates.date).order_by(Classes.starttime).all()
     for item in tempvar:
         templist.append(item)
     return templist
@@ -156,7 +156,7 @@ def scheduleInCourse(course):
 def roomsOnDate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Rooms.name).distinct().join(Rooms.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.code == course).all()
+    tempvar = db.session.query(Rooms.name).distinct().join(Rooms.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
     for item in tempvar:
         templist.append(item)
     return templist
@@ -164,7 +164,7 @@ def roomsOnDate(date, course):
 def defteachersondate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.code == course).all()
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
     for item in tempvar:
         templist.append(item)
     return templist
