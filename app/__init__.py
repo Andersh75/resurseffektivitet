@@ -800,6 +800,7 @@ def coursesfromdepartment(templist):
     print "DONE"
 
 
+
 def teachersfromdepartment(templist):
     for xitem in templist:
         #print xitem
