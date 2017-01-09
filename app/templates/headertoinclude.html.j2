@@ -91,6 +91,7 @@
 			{% endblock %}
 		{% endif %}
     </div>
+    <select class="js-example-data-array"></select>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -152,10 +153,7 @@
             var data = '[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item.code }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
 
             $(".js-example-data-array").select2( {
-                theme: "bootstrap",
-                placeholder: "Select course responsible",
                 data:[{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]
-                }
             } );
 
             $('#meinitials').editable({
