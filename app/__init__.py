@@ -169,7 +169,6 @@ def defteachersondate(date, course):
         templist.append(item)
     return templist
 
-
 def idtocode(courseid):
     tempvar = db.session.query(Courses.code).filter(Courses.id == courseid).first()
     print tempvar[0]
