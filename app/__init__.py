@@ -65,7 +65,7 @@ dates_teachers = db.Table('dates_teachers',
 
 
 subjects_classes = db.Table('subjects_classes',
-    db.Column('subjects_id', db.Integer, db.ForeignKey('rooms.id')),
+    db.Column('subjects_id', db.Integer, db.ForeignKey('subjects.id')),
     db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
 )
 
