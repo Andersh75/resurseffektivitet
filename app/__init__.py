@@ -930,7 +930,7 @@ def user_edit_myinfo_initials():
 def user_edit_course_responsible():
     id = request.form["pk"]
     tempobj = db.session.query(Courses).get(id)
-    tempobj.responsible = db.session.query(Teachers).filter(Teachers.firstname == request.form["value"]).first()
+    tempobj.responsible = db.session.query(Teachers).filter(Teachers.email == request.form["value"]).first()
 
     db.session.commit()
 
