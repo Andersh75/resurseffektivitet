@@ -144,6 +144,32 @@ class RegistrationForm(Form):
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
 
+
+def scheduleInCourse(course):
+# Lista med kurstillfallen som anvands i en kurs
+    templist = []
+    tempvar = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id).distinct().join(Dates.classes).join(Classes.courses).filter(Courses.code == course).order_by(Dates.date).order_by(Classes.starttime).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
+def roomsOnDate(date, course):
+# Lista med salar som anvands i en kurs
+    templist = []
+    tempvar = db.session.query(Rooms.name).distinct().join(Rooms.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.code == course).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
+def defteachersondate(date, course):
+# Lista med salar som anvands i en kurs
+    templist = []
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.code == course).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
+
 def allcourses():
     templist = db.session.query(Courses).all()
     return templist
@@ -211,7 +237,7 @@ def amiteaching(code):
 
 
 
-app.jinja_env.globals.update(allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
@@ -914,6 +940,11 @@ def teachers_page(page=1):
 @app.route('/courses/<int:page>')
 def courses_page(page=1):
     return render_template('courses.html.j2', page=page)
+
+@app.route('/onecourse')
+@app.route('/onecourses/<int:courseid>')
+def onecourse_page(courseid=1):
+    return render_template('onecourse.html.j2', courseid=courseid)
 
 
 @app.route('/myteaching')
