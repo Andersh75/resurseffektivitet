@@ -54,12 +54,16 @@
 								HOPP
 							</p>
 
+							{% if subjectsinslot(courseid) %}
 							{% for subitem in subjectsinslot(courseid): %}
 							<p>
 								HEJ
 							</p>
 							<a href="#" id="subject{{ rowloop.index }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.id }}">{{ item.id }}</a>
 							{% endfor %}
+							{% else %}
+							<a href="#" id="subject{{ rowloop.index }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.id }}">{{ item.id }}</a>
+							{% endif %}
 						</td>
 						<td class="text-left">
 		                    {% for subitem in roomsOnDate(item[0], courseid): %}

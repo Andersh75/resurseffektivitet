@@ -277,7 +277,6 @@ def teachersincourse(courseid):
 
 
 
-
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
 
