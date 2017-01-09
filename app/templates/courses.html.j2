@@ -12,9 +12,6 @@
 		<table class="table table-hover col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 	        <tbody>
-				<p>
-					test2
-				</p>
 	            <tr>
 	                <th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Kurskod</th>
 	                <th class="text-left col-lg-5 col-md-5 col-sm-5 col-xs-5">Namn</th>
@@ -23,7 +20,7 @@
 	            </tr>
 	            {% for item in mycourses() %}
 		            <tr>
-		                <td>{{ item.code }}</td>x-
+		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
 						<td><a href="#" id="courseexaminer{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/examiner" data-title="Enter username">{{ item.examiner.email }}</a>
 						</td>
