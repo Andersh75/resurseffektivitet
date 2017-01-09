@@ -33,7 +33,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f23'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f24'
 db = SQLAlchemy(app)
 
 
@@ -365,6 +365,10 @@ def csvimporter():
         reader = csv.reader(f)
         rooms_list = list(reader)
 
+    with open('static/subjects.csv', 'rb') as f:
+        reader = csv.reader(f)
+        subjects_list = list(reader)
+
     with open('static/courses.csv', 'rb') as f:
         reader = csv.reader(f)
         courses_list = list(reader)
@@ -421,6 +425,16 @@ def csvimporter():
                 'name' : i[0],
                 'seats' : i[1],
                 'roomtypes_id' : Roomtypes.query.filter_by(id=i[2]).first().id
+            })
+            db.session.add(record)
+            db.session.commit()
+
+    for i in subjects_list:
+        #print i[0]
+        name = db.session.query(exists().where(Subjects.name==i[0])).scalar()
+        if not name:
+            record = Subjects(**{
+                'name' : i[0]
             })
             db.session.add(record)
             db.session.commit()
