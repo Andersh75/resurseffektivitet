@@ -18,7 +18,7 @@
 					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Kursansvarig</th>
 	            </tr>
 	            {% for item in allcourses() %}
-				{% if amiteaching(item.code) %}
+					{% if amiteaching(item.code) %}
 		            <tr>
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
