@@ -154,9 +154,9 @@ def mycourseslist():
     id = 1
     for item in testvar[:-1]:
         print item
-        tempvar = tempvar + " id: " + str(id) + ", text: '" + item[0] + "' }, "
+        tempvar = tempvar + " id: " + str(id) + ", text: '" + item[0] + "' }, {"
         id = id + 1
-    tempvar = tempvar + "{ id: " + str(id) + ", text: '" + testvar[-1][0] + "' }]"
+    tempvar = tempvar + " id: " + str(id) + ", text: '" + testvar[-1][0] + "' }]"
 
     print tempvar
     tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
