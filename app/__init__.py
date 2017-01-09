@@ -152,8 +152,10 @@ def myobject():
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
 def mycourses():
-    #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
-    #print testvar.password
+    testvar = db.session.query(Courses).filter(Courses.responsible.email == session['user']).first()
+    print testvar.firstname
+
+
     return db.session.query(Courses).all()
 
 def mycourseslist():
