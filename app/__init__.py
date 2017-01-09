@@ -1182,7 +1182,7 @@ def user_edit_slot_subject():
 
     print test
 
-    print item.id
+    print test.id
 
     for item in test:
         print item.name
