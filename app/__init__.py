@@ -978,6 +978,10 @@ def courses_page(page=1):
 def allcourses_page(page=1):
     return render_template('allcourses.html.j2', page=page)
 
+@app.route('/allteachers')
+@app.route('/allteachers/<int:page>')
+def allteachers_page(page=1):
+    return render_template('allteachers.html.j2', page=page)
 
 
 @app.route('/onecourse')
@@ -1030,6 +1034,7 @@ def user_edit_myinfo_initials():
     result = {}
 
     return json.dumps(result)
+
 
 
 
