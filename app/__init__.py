@@ -4,7 +4,7 @@ from wtforms import Form, BooleanField, TextField, PasswordField, validators
 from flask_sqlalchemy import SQLAlchemy
 from flask.ext.sqlalchemy import get_debug_queries
 from sqlalchemy import desc, create_engine, func
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker, joinedload
 from sqlalchemy.ext.declarative import declarative_base
 from passlib.hash import sha256_crypt
 from MySQLdb import escape_string as thwart
@@ -25,7 +25,7 @@ import csv
 from datetime import date, datetime, timedelta
 from operator import itemgetter
 import string
-from sqlalchemy.sql import and_, or_, not_, joinedload
+from sqlalchemy.sql import and_, or_, not_
 
 
 
