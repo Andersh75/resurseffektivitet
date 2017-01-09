@@ -157,7 +157,6 @@ class RegistrationForm(Form):
 
 
 
-
 def scheduleInCourse(course):
 # Lista med kurstillfallen som anvands i en kurs
     templist = []
