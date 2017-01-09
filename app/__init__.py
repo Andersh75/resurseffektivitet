@@ -215,6 +215,8 @@ def mycourseslist():
     #print testvar.password
     return tempvar
 
+
+
 def amiexaminer(code):
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     already = db.session.query(exists().where(and_(Courses.code==code, Courses.examiner==testvar))).scalar()
