@@ -1183,7 +1183,6 @@ def index():
     return redirect(url_for('login_page'))
 
 
-
 @app.route('/restartall')
 def restartall():
 
