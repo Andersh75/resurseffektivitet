@@ -191,7 +191,7 @@ def mycourseslist():
 
 
 
-app.jinja_env.globals.update(myobject=myobject, mycourses=mycourses, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(myobject=myobject, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
