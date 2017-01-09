@@ -171,6 +171,7 @@ def defteachersondate(date, course):
 
 
 
+
 def allcourses():
     templist = db.session.query(Courses).all()
     return templist
