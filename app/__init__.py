@@ -1192,7 +1192,6 @@ def user_edit_slot_subject():
 
 
 
-
 @app.route('/')
 def index():
     print "HE"
