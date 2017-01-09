@@ -153,7 +153,7 @@ def myobject():
 def mycoursesexaminer():
     exam = aliased(Teachers)
     resp = aliased(Teachers)
-    testvar = db.session.query(Courses).join(exam, Courses.examiner).join(resp, Courses.responsible).filter(Teachers.email == session['user']).all()
+    testvar = db.session.query(Courses).join(exam, Courses.examiner).join(resp, Courses.responsible).filter(examiner.email == session['user']).all()
     print "QQQQQQQQQQQ"
     for item in testvar:
         print item.code
