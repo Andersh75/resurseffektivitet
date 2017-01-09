@@ -59,10 +59,10 @@
 							<p>
 								HEJ
 							</p>
-							<a href="#" id="subject{{ rowloop.index }}" data-type="checklist" data-pk="{{ item[7] }}" data-url="/user_edit_slot/subject" data-title="Enter username" data-value="{{ subitem.id }}">{{ subitem.name }}</a>
+							<a href="#" id="subject{{ rowloop.index }}" data-type="select" data-pk="{{ item[7] }}" data-url="/user_edit_slot/subject" data-title="Enter username" data-value="{{ subitem.id }}">{{ subitem.name }}</a>
 							{% endfor %}
 							{% else %}
-							<a href="#" id="subject{{ rowloop.index }}" data-type="checklist" data-pk="{{ item[7] }}" data-url="/user_edit_slot/subject" data-title="Enter username" data-value="1">TEST</a>
+							<a href="#" id="subject{{ rowloop.index }}" data-type="select" data-pk="{{ item[7] }}" data-url="/user_edit_slot/subject" data-title="Enter username" data-value="1">TEST</a>
 							{% endif %}
 						</td>
 						<td class="text-left">
