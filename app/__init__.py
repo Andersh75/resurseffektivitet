@@ -152,7 +152,7 @@ def myobject():
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
 def mycourses():
-    testvar = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
+    testvar = db.session.query(Courses).join(Courses.examiner).filter(Teachers.email == session['user']).all()
     print "ZZZZZZZZ"
     for item in testvar:
         print item.code
