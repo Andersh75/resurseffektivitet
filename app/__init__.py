@@ -148,11 +148,17 @@ def mycourses():
     return db.session.query(Courses).all()
 
 def mycourseslist():
-    #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
+    testvar = db.session.query(Courses).all()
 
-    tempvar = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
+    tempvar = "[{"
+    id = 1
+    for item in testvar:
+        tempvar = tempvar + " id: " + id + ", text: '"item.code'" }, "
+
+    prin tempvar
+    tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     #print testvar.password
-    return tempvar
+    return tempvar2
 
 
 
