@@ -151,10 +151,10 @@
             $('select').select2();
 
             //var tempvar = "[{% for item in mycourseslist() %}{ id: {{ loop.index }}, text: '{{ item }}'}{% if not loop.last %}, {% endif %}{% endfor %}]";
-
+            var tempvar = {{ mycourseslist() }}
             $(".js-example-data-array").select2( {
                 //data:[{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]
-                data:mycourseslist()
+                data:tempvar
             } );
 
             $('#meinitials').editable({
