@@ -61,6 +61,7 @@ dates_teachers = db.Table('dates_teachers',
     db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id'))
 )
 
+
 # One-to-many. Parent to Rooms
 class Roomtypes(db.Model):
     id = db.Column(db.Integer, primary_key=True)

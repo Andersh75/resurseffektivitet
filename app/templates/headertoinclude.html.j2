@@ -154,9 +154,11 @@
             $(".js-example-data-array").select2( {
                 theme: "bootstrap",
                 placeholder: "Select course responsible",
-                maximumSelectionSize: 6,
-                containerCssClass: ':all:'
-                data: data
+                data:[
+                    {value: 1, text: 'first'},
+                    {value: 2, text: 'second'},
+                    {value: 3, text: 'third'}
+                ]
                 }
             } );
 
