@@ -147,6 +147,7 @@ def mycourses():
     return db.session.query(Courses).all()
 
 
+
 app.jinja_env.globals.update(myobject=myobject, mycourses=mycourses)
 
 def login_required(f):

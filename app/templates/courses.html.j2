@@ -19,14 +19,9 @@
 		            <tr>
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
-						<td>	<div class="select2-wrapper">
-								<select class="form-control input-lg select2-single" dir="rtl">
-										<option value="CA">California</option>
-										<option value="NV">Nevada</option>
-										<option value="OR">Oregon</option>
-										<option value="WA">Washington</option>
-								</select>
-							</div></td>
+						<td>
+							<select class="js-example-data-array"></select>
+						</td>
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
 		            </tr>
 	            {% endfor %}

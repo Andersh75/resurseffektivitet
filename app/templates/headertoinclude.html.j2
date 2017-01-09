@@ -181,7 +181,7 @@
 
             var data = '[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
 
-            $( ".select2-single, .select2-multiple" ).select2( {
+            $(".js-example-data-array").select2( {
                 theme: "bootstrap",
                 placeholder: "Select course responsible",
                 maximumSelectionSize: 6,
