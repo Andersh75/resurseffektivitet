@@ -198,7 +198,7 @@ def amiresponsible(code):
     return already
 
 def amiteaching(code):
-    testvar = db.session.query(Teachers).join(Teachers.classes).join(Classes.courses).filter(and_(Teachers.email==session['user'], Courses.code==code)).first()
+    testvar = db.session.query(Courses).join(Teachers.classes).join(Classes.courses).filter(and_(Teachers.email==session['user'], Courses.code==code)).first()
     print testvar
     already = False
     if testvar:
