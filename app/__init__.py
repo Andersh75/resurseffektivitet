@@ -1133,7 +1133,6 @@ def user_edit_course_responsible():
 
 
 
-
 @app.route('/user_edit_content/<int:page>', methods=['GET', 'POST'])
 def user_edit_content(page):
     id = request.form["pk"]
