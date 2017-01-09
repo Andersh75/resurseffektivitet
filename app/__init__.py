@@ -268,6 +268,8 @@ def teachersonslot(slotid):
 
 def subjectsinslot(slotid):
     templist = db.session.query(Subjects).join(Subjects.classes).filter(Classes.id == slotid).all()
+    for item in templist:
+        print item.id
     return templist
 
 def teachersincourse(courseid):
@@ -1175,6 +1177,7 @@ def user_edit_slot_subject():
     id = request.form["pk"]
     print id
     tempobj = db.session.query(Classes).get(id)
+    print tempobj.content
     tempobj.subjects = db.session.query(Subjects).filter(Subjects.id == request.form["value"]).first()
 
     db.session.commit()
