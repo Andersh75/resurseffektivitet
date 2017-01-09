@@ -28,7 +28,7 @@
 						{% endif %}
 						<td>
 						{% for subitem in teachersincourse(item.id): %}
-							<button type="button" class="btn btn-success btn-xs">{{ subitem.initials }}</button>
+						
 							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem.id) }}" role="button">{{ subitem.initials }}</a>
 						{% endfor %}
 						</td>
