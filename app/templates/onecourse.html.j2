@@ -45,13 +45,13 @@
 		                <td class="text-left">0{{ item[4] }}-{{ item[5] }}</td>
 		                {% endif %}
 						{% if (amiresponsible(idtocode(courseid)) or amiexaminer(idtocode(courseid))) %}
-		                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ item[6] }}</td>
+		                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ item[6] }}</a></td>
 						{% else %}
 						<td class="text-left">{{ item[6] }}</td>
 						{% endif %}
 						<td class="text-left">
 							{% for subitem in subjectsinslot(courseid): %}
-								<button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
+							<a href="#" id="subject{{ rowloop.index }}" data-type="checklist" data-url="/user_edit_subject/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ subitem[0] }}</a>
 							{% endfor %}
 						</td>
 						<td class="text-left">
