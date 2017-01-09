@@ -144,6 +144,10 @@ class RegistrationForm(Form):
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
 
+def allcourses():
+    templist = db.session.query(Courses).all()
+    return templist
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
@@ -193,7 +197,12 @@ def amiresponsible(code):
     already = db.session.query(exists().where(and_(Courses.code==code, Courses.responsible==testvar))).scalar()
     return already
 
-
+def amiteaching(code):
+    testvar = db.session.query(Teachers).join(Teachers.classes).join(Classes.courses).filter(and_(Teachers.email==session['user'], Courses.code==code)).first()
+    print testvar
+    if testvar:
+        already = True
+    return already
 
 
 
