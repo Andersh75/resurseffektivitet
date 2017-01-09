@@ -52,7 +52,7 @@
 		                <th class="text-left">Salar</th>
 		                <th class="text-left">Lärare</th>
 		            </tr>
-		            {% for item in myslots: %}
+		            {% for item in myslots(): %}
 		            {% set rowloop = loop %}
 		            <tr>
 		                {% if item[2] > 9 %}
