@@ -179,7 +179,7 @@
                 inputclass: 'some_class'
             });
 
-            var data = '[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item[2] }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
+            var data = '[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item.code }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
 
             $(".js-example-data-array").select2( {
                 theme: "bootstrap",
