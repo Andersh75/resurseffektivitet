@@ -147,6 +147,16 @@ def mycourses():
     #print testvar.password
     return db.session.query(Courses).all()
 
+def mycourseslist():
+    #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
+    templist = []
+    tempobjlist = db.session.query(Courses).all()
+    for item in tempobjlist:
+        templist.append(item.code)
+    #print testvar.password
+    return templist
+
+
 
 
 app.jinja_env.globals.update(myobject=myobject, mycourses=mycourses)
