@@ -1070,7 +1070,6 @@ def oneslot_page(slotid=1):
 
 
 
-
 @app.route('/myteaching')
 @app.route('/myteaching/<int:page>')
 def myteaching_page(page=1):
