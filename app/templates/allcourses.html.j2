@@ -13,20 +13,24 @@
 	            <tr>
 	                <th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Kurskod</th>
 	                <th class="text-left col-lg-5 col-md-5 col-sm-5 col-xs-5">Namn</th>
-	                <th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Examinator</th>
 					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Kursansvarig</th>
+					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Undervisar</th>
 	            </tr>
 	            {% for item in allcourses() %}
 				{% if item.examiner.email %}
 		            <tr>
 		                <td><a href="{{ url_for('onecourse_page', courseid=item.id) }}">{{ item.code }}</a></td>
 			            <td>{{ item.name }}</td>
-						<td>{{ item.examiner.email }}</a></td>
 						{% if amiexaminer(item.code) %}
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.responsible.email }}">{{ item.responsible.email }}</a></td>
 						{% else %}
 						<td>{{ item.responsible.email }}</a></td>
 						{% endif %}
+						<td>
+						{% for subitem in teachersincourse(item.id): %}
+							<button type="button" class="btn btn-success btn-xs">{{ subitem.initials }}</button>
+						{% endfor %}
+						</td>
 					</tr>
 				{% endif %}
 	            {% endfor %}
