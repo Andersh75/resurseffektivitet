@@ -1186,8 +1186,6 @@ def user_edit_slot_subject():
 
 
 
-/user_edit_slot/subjec
-
 
 
 @app.route('/')
