@@ -1023,6 +1023,42 @@ def user_edit_course_responsible():
 
 
 
+@app.route('/user_edit_content/<int:page>', methods=['GET', 'POST'])
+def user_edit_content(page):
+    id = request.form["pk"]
+    #varcode = id.split(',')[0]
+    #varclassid = id.split(',')[1]
+    #print varcode
+    #print varclassid
+    print id
+    print "hej"
+
+    #templist = []
+
+    #templist = scheduleInCourse(varcode)
+    #print templist
+
+    #for item in templist:
+    #   print item
+
+
+    varteacher = db.session.query(Classes).get(id)
+    print varteacher.content.encode('utf-8')
+    #print varteacher.firstname.encode('utf-8')
+    #print request.form["value"].encode('utf-8')
+    varteacher.content = request.form["value"]
+    print "Efter"
+    print varteacher.content.encode('utf-8')
+    #varteacher = Teachers.query.get(id)
+    #print varteacher.firstname.encode('utf-8')
+    result = {}
+    db.session.commit()
+    return json.dumps(result)
+
+
+
+
+
 
 @app.route('/')
 def index():

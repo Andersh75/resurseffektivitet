@@ -15,9 +15,7 @@
 
 
 
-
-<!--
-/*
+<style>
 .form-horizontal .control-label{
   text-align:left;
 }
@@ -25,9 +23,8 @@
 .some_class{
    width: 300px !important;
 }
-*/
--->
 
+</style>
 
 </head>
 
@@ -195,6 +192,11 @@
                     //render response into element
                     $(this).html(response);
                 }
+            });
+
+            $('[id^=content]').editable({
+                title: 'Select Course',
+                inputclass: 'some_class'
             });
 
 
