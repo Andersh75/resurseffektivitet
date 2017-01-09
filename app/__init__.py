@@ -156,7 +156,7 @@ def mycourseslist():
         print item
         tempvar = tempvar + " id: " + str(id) + ", text: '" + item[0] + "' }, "
 
-    #print tempvar
+    print tempvar
     tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     #print testvar.password
     return tempvar2
