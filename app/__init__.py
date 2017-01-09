@@ -1176,6 +1176,7 @@ def user_edit_slot_subject():
     print tempobj.id
 
     print request.form["value"]
+    print "XXX"
 
     test = db.session.query(Subjects).filter(Subjects.name == request.form["value"]).first()
 
