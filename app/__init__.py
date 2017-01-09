@@ -32,9 +32,8 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f22'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f23'
 db = SQLAlchemy(app)
 
 
@@ -65,6 +64,13 @@ dates_teachers = db.Table('dates_teachers',
 
 
 
+subjects_classes = db.Table('subjects_classes',
+    db.Column('subjects_id', db.Integer, db.ForeignKey('rooms.id')),
+    db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
+)
+
+
+
 
 
 
@@ -82,6 +88,12 @@ class Rooms(db.Model):
     seats = db.Column(db.Integer)
     roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
     classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
+
+
+class Subjects(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30))
+    classes = db.relationship('Classes', secondary=subjects_classes, backref=db.backref('subjects', lazy='dynamic'))
 
 
 class Dates(db.Model):
@@ -251,6 +263,11 @@ def roomsonslot(slotid):
 def teachersonslot(slotid):
     templist = db.session.query(Teachers.initials).join(Teachers.classes).filter(Classes.id == slotid).all()
 
+    return templist
+
+
+def subjectsinslot(slotid):
+    templist = db.session.query(Subjects).join(Subjects.classes).filter(Classes.id == slotid).all()
     return templist
 
 def teachersincourse(courseid):
