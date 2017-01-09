@@ -401,6 +401,7 @@ def csvimporter():
 
                     db.session.commit()
 
+
 ### CLEAN THE CSV
 # Remove Column from Table
 def remove_col(list1, i):

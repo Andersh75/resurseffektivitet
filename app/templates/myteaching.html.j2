@@ -18,16 +18,18 @@
 					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Kursansvarig</th>
 	            </tr>
 	            {% for item in allcourses() %}
+				{% if amiteaching(item.code) %}
 		            <tr>
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
 						<td>{{ item.examiner.email }}</a></td>
-						{% if amiteaching(item.code) %}
+						{% if amiexaminer(item.code) %}
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.responsible.email }}">{{ item.responsible.email }}</a></td>
 						{% else %}
 						<td>{{ item.responsible.email }}</a></td>
 						{% endif %}
 					</tr>
+					{% endif %}
 	            {% endfor %}
 	        </tbody>
 	    </table>
