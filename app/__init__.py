@@ -149,8 +149,8 @@ def mycourses():
 
 def mycourseslist():
     #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
-    
-     tempvar = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
+
+    tempvar = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     #print testvar.password
     return tempvar
 
