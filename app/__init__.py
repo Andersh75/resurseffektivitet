@@ -1133,6 +1133,7 @@ def user_edit_course_responsible():
 @app.route('/user_edit_content/<int:page>', methods=['GET', 'POST'])
 def user_edit_content(page):
     id = request.form["pk"]
+
     #varcode = id.split(',')[0]
     #varclassid = id.split(',')[1]
     #print varcode
@@ -1161,17 +1162,19 @@ def user_edit_content(page):
     result = {}
     db.session.commit()
     return json.dumps(result)
+h
 
 
 
-
-@app.route('/user_edit_slot/subject', methods=['GET', 'POST'])
+@app.route('/user_edit_slot/subject/<int:page>', methods=['GET', 'POST'])
 def user_edit_slot_subject():
     id = request.form["pk"]
     print id
 
-    content = request.json
-    print content['value']
+    print request.data
+
+
+
 
     tempobj = db.session.query(Classes).get(id)
 
