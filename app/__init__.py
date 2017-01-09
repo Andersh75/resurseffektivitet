@@ -1172,6 +1172,7 @@ def user_edit_slot_subject():
     print id
 
     print request.data
+    print request.json
 
 
 
