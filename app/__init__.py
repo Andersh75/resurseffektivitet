@@ -151,8 +151,8 @@ def myobject():
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
 def mycoursesexaminer():
-    exam = aliased(Teacher)
-    resp = aliased(Teacher)
+    exam = aliased(Teachers)
+    resp = aliased(Teachers)
     testvar = db.session.query(Courses).join(exam, Courses.examiner).join(resp, Courses.responsible).filter(Teachers.email == session['user']).all()
     print "QQQQQQQQQQQ"
     for item in testvar:
