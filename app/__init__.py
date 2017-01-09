@@ -969,6 +969,13 @@ def teachers_page(page=1):
 def courses_page(page=1):
     return render_template('courses.html.j2', page=page)
 
+@app.route('/allcourses')
+@app.route('/allcourses/<int:page>')
+def allcourses_page(page=1):
+    return render_template('allcourses.html.j2', page=page)
+
+
+
 @app.route('/onecourse')
 @app.route('/onecourse/<int:courseid>')
 def onecourse_page(courseid=1):

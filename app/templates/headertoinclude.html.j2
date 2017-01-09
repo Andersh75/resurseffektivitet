@@ -45,6 +45,7 @@
 				{% if session.logged_in %}
 		        <li><a href="{{ url_for('rooms_page', page=6)}}">Rooms</a></li>
                 <li><a href="{{ url_for('teachers_page', page=6)}}">Teachers</a></li>
+                <li><a href="{{ url_for('allcourses_page')}}">All courses</a></li>
                 <li><a href="{{ url_for('courses_page')}}">My courses</a></li>
                 <li><a href="{{ url_for('myteaching_page')}}">My teaching</a></li>
                 <li><a href="{{ url_for('myinfo_page')}}">My info</a></li>
@@ -80,6 +81,8 @@
                 {% block teachers %}
 				{% endblock %}
                 {% block onecourse %}
+                {% endblock %}
+                {% block allcourses %}
                 {% endblock %}
                 {% block courses %}
 
