@@ -17,6 +17,7 @@
 		                <th class="text-left">Innehåll</th>
 		                <th class="text-left">Salar</th>
 		                <th class="text-left">Lärare</th>
+						<th class="text-left">Edit</th>
 		            </tr>
 		            {% for item in scheduleInCourse(courseid): %}
 		            {% set rowloop = loop %}
@@ -59,6 +60,9 @@
 		                        <button type="button" class="btn btn-success btn-xs">{{ subitem[2] }}</button>
 		                    {% endfor %}
 		                </td>
+						<td>
+							<a class="btn btn-warning" href="#" role="button">Edit</a>
+						</td>
 		            </tr>
 		            {% endfor %}
 		        </tbody>
