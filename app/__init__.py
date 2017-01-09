@@ -1171,8 +1171,8 @@ def user_edit_slot_subject():
     id = request.form["pk"]
     print id
 
-    content = request.get_json(silent=True)
-    print content
+    content = request.json
+    print content['value']
 
     tempobj = db.session.query(Classes).get(id)
 
