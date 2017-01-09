@@ -1170,6 +1170,10 @@ def user_edit_content(page):
 @app.route('/user_edit_slot/subject', methods=['GET', 'POST'])
 def user_edit_slot_subject():
     id = request.form["pk"]
+    print id
+
+    for item in id:
+        print item
 
     tempobj = db.session.query(Classes).get(id)
 
