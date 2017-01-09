@@ -150,11 +150,11 @@
             //$.fn.editable.defaults.mode = 'inline';
             $('select').select2();
 
-            var data = '[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item.code }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
+            var tempvar = "[{% for item in mycourses() %}{ id: {{ loop.index }}, text: \'{{ item.code }}\'}{% if not loop.last %}, {% endif %}{% endfor %}]";
 
             $(".js-example-data-array").select2( {
                 //data:[{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]
-                data:[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item.code }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]
+                data:tempvar
             } );
 
             $('#meinitials').editable({
