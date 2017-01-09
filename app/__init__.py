@@ -942,7 +942,7 @@ def courses_page(page=1):
     return render_template('courses.html.j2', page=page)
 
 @app.route('/onecourse')
-@app.route('/onecourses/<int:courseid>')
+@app.route('/onecourse/<int:courseid>')
 def onecourse_page(courseid=1):
     return render_template('onecourse.html.j2', courseid=courseid)
 
