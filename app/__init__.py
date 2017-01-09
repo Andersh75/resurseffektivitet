@@ -167,7 +167,6 @@ def mycoursesresponsible():
 
     return testvar
 
-
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
 
@@ -184,6 +183,10 @@ def mycourseslist():
     #print testvar.password
     return tempvar
 
+def amiexaminer(code):
+    testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
+    already = db.session.query(exists().where(and_(Courses.code==code, Courses.examiner==testvar))).scalar()
+    return already
 
 
 
@@ -191,7 +194,7 @@ def mycourseslist():
 
 
 
-app.jinja_env.globals.update(myobject=myobject, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)

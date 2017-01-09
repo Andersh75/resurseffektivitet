@@ -46,8 +46,12 @@
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
 						<td>{{ item.examiner.email }}</a></td>
+						{% if amiexaminer(item.code) %}
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.responsible.email }}">{{ item.responsible.email }}</a></td>
-		            </tr>
+						{% else %}
+						<td>{{ item.responsible.email }}</a></td>
+						{% endif %}
+					</tr>
 	            {% endfor %}
 	        </tbody>
 	    </table>
