@@ -373,10 +373,6 @@ def csvimporter():
         reader = csv.reader(f)
         courses_list = list(reader)
 
-    with open('static/roles.csv', 'rb') as f:
-        reader = csv.reader(f)
-        roles_list = list(reader)
-
     with open('static/schedules.csv', 'rb') as f:
         reader = csv.reader(f)
         schedules_list = list(reader)
