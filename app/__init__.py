@@ -1176,6 +1176,8 @@ def user_edit_slot_subject():
 
     print request.form["value"]
 
+    print request.form.get('key', default_value)
+
 
 
 
