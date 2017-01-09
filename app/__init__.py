@@ -183,6 +183,10 @@ def allcourses():
     templist = db.session.query(Courses).order_by(Courses.code).all()
     return templist
 
+def allteachers():
+    templist = db.session.query(Teachers).order_by(Teachers.akalastname).all()
+    return templist
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
@@ -197,6 +201,11 @@ def mycoursesexaminerorresponsible():
 
 def mycoursesresponsible():
     templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
+
+    return templist
+
+def mycoursesteaching():
+    templist = db.session.query(Courses).join(Courses.classes).join(Classes.teachers).distinct().filter(Teachers.email == session['user']).all()
 
     return templist
 
@@ -267,8 +276,7 @@ def amiteaching(code):
 
 
 
-
-app.jinja_env.globals.update(teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
