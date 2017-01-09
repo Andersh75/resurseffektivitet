@@ -12,11 +12,13 @@
 	        <tbody>
 	            <tr>
 	                <th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Namn</th>
-					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Namn</th>
+					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
+					<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Initialer</th>
 					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Kursansvarig</th>
-					<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Undervisar</th>
+					<th class="text-left col-lg-5 col-md-5 col-sm-5 col-xs-5">Undervisar</th>
 	            </tr>
 	            {% for item in allteachers() %}
+				{% if item.initials %}
 		            <tr>
 						{% if item.akafirstname %}
 			            <td>{{ item.akafirstname }}</td>
@@ -28,6 +30,7 @@
 						{% else %}
 						<td>{{ item.lastname }}</td>
 						{% endif %}
+						<td>{{ item.initials }}</td>
 						<td>
 							{% for subitem in onescoursesresponsible(item.id): %}
 		                        <button type="button" class="btn btn-success btn-xs">{{ subitem.code }}</button>
@@ -39,7 +42,7 @@
 		                    {% endfor %}
 						</td>
 					</tr>
-
+				{% endif %}
 	            {% endfor %}
 	        </tbody>
 	    </table>

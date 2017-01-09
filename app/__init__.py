@@ -312,6 +312,7 @@ def login_required(f):
     return wrap
 
 
+
 ### CREATE TABLES
 def createtables():
     db.create_all()
