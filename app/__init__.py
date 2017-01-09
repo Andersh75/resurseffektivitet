@@ -160,9 +160,9 @@ def mycoursesexaminer():
 
 def mycoursesresponsible():
     testvar = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
-    print "ZZZZZZZZ"
-    for item in testvar:
-        print item.code
+    #print "ZZZZZZZZ"
+    #for item in testvar:
+    #    print item.code
 
     return testvar
 
