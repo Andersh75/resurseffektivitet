@@ -1184,7 +1184,6 @@ def index():
 
 
 
-
 @app.route('/restartall')
 def restartall():
 
