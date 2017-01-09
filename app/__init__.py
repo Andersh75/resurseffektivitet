@@ -1172,7 +1172,9 @@ def user_edit_slot_subject():
     id = request.form["pk"]
     print id
 
-    for item in id:
+    tempvar = request.form["value"]
+    print tempvar
+    for item in tempvar:
         print item
 
     tempobj = db.session.query(Classes).get(id)
