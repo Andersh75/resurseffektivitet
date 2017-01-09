@@ -1174,10 +1174,11 @@ def user_edit_slot_subject():
     id = request.form["pk"]
     print id
 
-    print request.data
+    #print request.data
 
     print "QQQ"
-    print request.json
+    print request.json['data']
+    print request.json['value']
 
 
 
