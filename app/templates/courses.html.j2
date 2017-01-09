@@ -19,8 +19,7 @@
 		            <tr>
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
-						<td>
-							<select class="js-example-data-array"></select>
+						<td><a href="#" class="js-example-data-array" id="courseexaminer{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a>
 						</td>
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
 		            </tr>
