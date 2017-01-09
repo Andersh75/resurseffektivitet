@@ -152,7 +152,7 @@ def myobject():
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
 def mycoursesexaminer():
-    testvar = db.session.query(Courses).join(Courses.examiner).filter(Teachers.email == session['user']).all()
+    testvar = db.session.query(Courses).options(joinedload(Courses.examiner), joinedload(Courses.responsible)).filter(Teachers.email == session['user']).all()
     print "ZZZZZZZZ"
     for item in testvar:
         print item.code
@@ -188,13 +188,18 @@ def amiexaminer(code):
     already = db.session.query(exists().where(and_(Courses.code==code, Courses.examiner==testvar))).scalar()
     return already
 
+def amiresponsible(code):
+    testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
+    already = db.session.query(exists().where(and_(Courses.code==code, Courses.responsible==testvar))).scalar()
+    return already
 
 
 
 
 
 
-app.jinja_env.globals.update(amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+
+app.jinja_env.globals.update(amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
