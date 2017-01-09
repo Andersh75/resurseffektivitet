@@ -213,7 +213,7 @@ def roomsonslot(slotid):
     return templist
 
 def teachersonslot(slotid):
-    templist = db.session.query(Teachers.akafirstname, Teachers.akalastname).join(Teachers.classes).filter(Classes.id == slotid).all()
+    templist = db.session.query(Teachers.initials).join(Teachers.classes).filter(Classes.id == slotid).all()
 
     return templist
 
