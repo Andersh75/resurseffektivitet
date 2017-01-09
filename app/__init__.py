@@ -1186,9 +1186,8 @@ def user_edit_slot_subject():
 
     print test.name
 
-    print tempobj.subjects
 
-    tempobj.subjects = db.session.query(Subjects).filter(Subjects.id == request.form["value"]).first()
+    tempobj.subjects.append(db.session.query(Subjects).filter(Subjects.id == request.form["value"]).first())
 
     db.session.commit()
 
