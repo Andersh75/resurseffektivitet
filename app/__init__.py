@@ -1179,7 +1179,7 @@ def user_edit_slot_subject():
     tempobj = db.session.query(Classes).get(id)
     print tempobj.id
 
-    print request.form["value"]
+    print request.form["value"][0]
 
     test = db.session.query(Subjects).filter(Subjects.id == request.form["value"]).first()
     print test.name
