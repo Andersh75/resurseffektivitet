@@ -148,12 +148,12 @@ def mycourses():
     return db.session.query(Courses).all()
 
 def mycourseslist():
-    testvar = db.session.query(Courses).all()
+    testvar = db.session.query(Courses.code).all()
 
     tempvar = "[{"
     id = 1
     for item in testvar:
-        tempvar = tempvar + " id: " + id + ", text: '" item.code "' }, "
+        tempvar = tempvar + " id: " + id + ", text: "item" }, "
 
     prin tempvar
     tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
