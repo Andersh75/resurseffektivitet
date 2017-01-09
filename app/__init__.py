@@ -149,12 +149,10 @@ def mycourses():
 
 def mycourseslist():
     #testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
-    templist = []
-    tempobjlist = db.session.query(Courses).all()
-    for item in tempobjlist:
-        templist.append(item.code)
+    
+     tempvar = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     #print testvar.password
-    return templist
+    return tempvar
 
 
 
