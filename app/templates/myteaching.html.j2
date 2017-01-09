@@ -76,7 +76,7 @@
 		                {% if item[4] < 10 %}
 		                <td class="text-left">0{{ item[4] }}-{{ item[5] }}</td>
 		                {% endif %}
-						{% if (amiresponsible(item.code) or amiexaminer(item.code)) %}
+						{% if (amiresponsible(item[8]) or amiexaminer(item[8])) %}
 		                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ item[6] }}</td>
 						{% else %}
 						<td class="text-left">{{ item[6] }}</td>
