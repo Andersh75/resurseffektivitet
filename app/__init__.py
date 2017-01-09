@@ -1162,7 +1162,7 @@ def user_edit_content(page):
     result = {}
     db.session.commit()
     return json.dumps(result)
-h
+
 
 
 
