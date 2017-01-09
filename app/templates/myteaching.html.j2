@@ -45,12 +45,12 @@
 		    <table class="table table-hover sorted_table">
 		        <tbody>
 		            <tr>
-						<th class="text-left">Kurs</th>
-		                <th class="text-left">Datum</th>
-		                <th class="text-left">Tid</th>
-		                <th class="text-left">Innehåll</th>
-		                <th class="text-left">Salar</th>
-		                <th class="text-left">Lärare</th>
+						<th class="text-left text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Kurs</th>
+		                <th class="text-left text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Datum</th>
+		                <th class="text-left text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Tid</th>
+		                <th class="text-left text-left col-lg-1 col-md-1 col-sm-1 col-xs-5">Innehåll</th>
+		                <th class="text-left text-left col-lg-1 col-md-1 col-sm-1 col-xs-2">Salar</th>
+		                <th class="text-left text-left col-lg-1 col-md-1 col-sm-1 col-xs-2">Lärare</th>
 		            </tr>
 		            {% for item in myslots(): %}
 		            {% set rowloop = loop %}
@@ -58,18 +58,18 @@
 						<td class="text-left">{{ item[8] }}</td>
 		                {% if item[2] > 9 %}
 		                    {% if item[3] > 9 %}
-		                    <td class="text-left">{{ item[1] }}-{{ item[2] }}-{{ item[3] }}</td>
+		                    <td class="text-left">{{ item[1][2:] }}-{{ item[2] }}-{{ item[3] }}</td>
 		                    {% endif %}
 		                    {% if item[3] < 10 %}
-		                    <td class="text-left">{{ item[1] }}-{{ item[2] }}-0{{ item[3] }}</td>
+		                    <td class="text-left">{{ item[1][2:] }}-{{ item[2] }}-0{{ item[3] }}</td>
 		                    {% endif %}
 		                {% endif %}
 		                {% if item[2] < 10 %}
 		                    {% if item[3] > 9 %}
-		                    <td class="text-left">{{ item[1] }}-0{{ item[2] }}-{{ item[3] }}</td>
+		                    <td class="text-left">{{ item[1][2:] }}-0{{ item[2] }}-{{ item[3] }}</td>
 		                    {% endif %}
 		                    {% if item[3] < 10 %}
-		                    <td class="text-left">{{ item[1] }}-0{{ item[2] }}-0{{ item[3] }}</td>
+		                    <td class="text-left">{{ item[1][2:] }}-0{{ item[2] }}-0{{ item[3] }}</td>
 		                    {% endif %}
 		                {% endif %}
 		                {% if item[4] > 9 %}
