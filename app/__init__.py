@@ -1173,6 +1173,7 @@ def user_edit_content(page):
 @app.route('/user_edit_slot/subject', methods=['GET', 'POST'])
 def user_edit_slot_subject():
     id = request.form["pk"]
+    print id
     tempobj = db.session.query(Classes).get(id)
     tempobj.subject = db.session.query(Subjects).filter(Subjects.id == request.form["value"]).first()
 
