@@ -152,8 +152,10 @@ def myobject():
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
 def mycourses():
-    testvar = db.session.query(Courses).filter(Courses.responsible.email == session['user']).first()
-    print testvar.firstname
+    testvar = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
+
+    for item in testvar:
+        print item.code
 
 
     return db.session.query(Courses).all()
