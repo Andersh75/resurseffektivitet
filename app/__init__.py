@@ -161,7 +161,7 @@ class RegistrationForm(Form):
 def scheduleInCourse(course):
 # Lista med kurstillfallen som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Subjects.id, Subjects.name).distinct().join(Dates.classes).join(Classes.courses).join(Classes.subjects).filter(Courses.id == course).order_by(Dates.date).order_by(Classes.starttime).all()
+    tempvar = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id).distinct().join(Dates.classes).join(Classes.courses).join(Classes.subjects).filter(Courses.id == course).order_by(Dates.date).order_by(Classes.starttime).all()
     for item in tempvar:
         templist.append(item)
     return templist
