@@ -158,7 +158,8 @@ def mycourses():
         print item.code
 
 
-    return db.session.query(Courses).all()
+    #return db.session.query(Courses).all()
+    return testvar
 
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
