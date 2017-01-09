@@ -19,7 +19,7 @@
 	            {% for item in allcourses() %}
 				{% if item.examiner.email %}
 		            <tr>
-		                <td><a class="btn btn-warning btn-xs" href="{{ url_for('onecourse_page', courseid=item.id) }}" role="button">{{ item.code }}</a></td>
+		                <td><a class="btn btn-primary btn-xs" href="{{ url_for('onecourse_page', courseid=item.id) }}" role="button">{{ item.code }}</a></td>
 			            <td>{{ item.name }}</td>
 						{% if amiexaminer(item.code) %}
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.responsible.email }}">{{ item.responsible.email }}</a></td>

@@ -1176,7 +1176,6 @@ def user_edit_content(page):
 
 
 
-
 @app.route('/')
 def index():
     print "HE"
