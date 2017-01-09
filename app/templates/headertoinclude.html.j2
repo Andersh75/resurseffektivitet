@@ -147,7 +147,18 @@
         $(document).ready(function() {
 
             //$.fn.editable.defaults.mode = 'inline';
+            $('select').select2();
 
+            var data = '[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item.code }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
+
+            $(".js-example-data-array").select2( {
+                theme: "bootstrap",
+                placeholder: "Select course responsible",
+                maximumSelectionSize: 6,
+                containerCssClass: ':all:'
+                data: data
+                }
+            } );
 
             $('#meinitials').editable({
                 title: 'Select C',
@@ -179,16 +190,7 @@
                 inputclass: 'some_class'
             });
 
-            var data = '[{% for item in mycourses() %}{value: {{ loop.index }}, text: \"{{ item.code }}\"}{% if not loop.last %}, {% endif %}{% endfor %}]';
 
-            $(".js-example-data-array").select2( {
-                theme: "bootstrap",
-                placeholder: "Select course responsible",
-                maximumSelectionSize: 6,
-                containerCssClass: ':all:'
-                data: data
-                }
-            } );
 
 
         	$( ":checkbox" ).on( "click", function() {
