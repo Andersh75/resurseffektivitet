@@ -1180,6 +1180,8 @@ def user_edit_slot_subject():
 
     test = db.session.query(Subjects).filter(Subjects.name == request.form["value"]).first()
 
+    print test
+
     for item in test:
         print item.name
 
