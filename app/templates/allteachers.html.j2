@@ -17,6 +17,7 @@
 					<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Undervisar</th>
 	            </tr>
 	            {% for item in allteachers() %}
+				{% if item.firstname %}
 		            <tr>
 			            <td>{{ item.akafirstname }}</td>
 						<td>{{ item.akalastname }}</td>
@@ -31,6 +32,7 @@
 		                    {% endfor %}
 						</td>
 					</tr>
+				{% endif %}
 	            {% endfor %}
 	        </tbody>
 	    </table>
