@@ -151,7 +151,7 @@ def myobject():
     #print testvar.password
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
-def mycoursesrxaminer():
+def mycoursesexaminer():
     testvar = db.session.query(Courses).join(Courses.examiner).filter(Teachers.email == session['user']).all()
     print "ZZZZZZZZ"
     for item in testvar:
