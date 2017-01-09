@@ -1175,10 +1175,6 @@ def user_edit_content(page):
 
 
 
-@app.route('/user_edit_slot/form/', methods=['GET', 'POST'])
-def user_edit_slot_form():
-
-
 
 
 
