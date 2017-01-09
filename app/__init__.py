@@ -206,6 +206,15 @@ def myslots():
 
     return templist
 
+def roomsonslot(slotid):
+    templist = db.session.query(Rooms.name).distinct().join(Rooms.classes).filter(Classes.id == slotid).all()
+
+    return templist
+
+def teachersonslot(slotid):
+    templist = db.session.query(Teachers.akafirstname, Teachers.akalastname).join(Teachers.classes).filter(Classes.id == slotid).all()
+
+    return templist
 
 
 
@@ -250,7 +259,7 @@ def amiteaching(code):
 
 
 
-app.jinja_env.globals.update(myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
