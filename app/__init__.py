@@ -166,6 +166,7 @@ def mycourseslist():
 
 
 
+
 app.jinja_env.globals.update(myobject=myobject, mycourses=mycourses, mycourseslist=mycourseslist)
 
 def login_required(f):
