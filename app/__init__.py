@@ -180,7 +180,7 @@ def idtocode(courseid):
 
 
 def allcourses():
-    templist = db.session.query(Courses).all()
+    templist = db.session.query(Courses).order_by(Courses.code).all()
     return templist
 
 def myobject():
