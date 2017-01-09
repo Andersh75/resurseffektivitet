@@ -277,6 +277,7 @@ def teachersincourse(courseid):
 
 
 
+
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
 
@@ -294,7 +295,7 @@ def mycourseslist():
     return tempvar
 
 def subjectslistjson():
-    templist = [["Subject 1"], ["Subject 2"], ["Subject 3"], ["Subject 4"], ["Subject 5"], ["Subject 6"]]
+    templist = db.session.query(Subjects.name).all()
 
     tempvar = "[{"
     id = 1
