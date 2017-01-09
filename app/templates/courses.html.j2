@@ -7,18 +7,26 @@
 
 		<h4>Kurser</h4>
 
-		<ul>
 
-
+	    <table class="table table-hover col-lg-12 col-md-12 col-sm-12 col-xs-12" id="testtable">
+	        <tbody id="tbodyid">
+	            <tr>
+	                <th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Kurskod</th>
+	                <th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Namn</th>
+	                <th class="text-left col-lg-5 col-md-5 col-sm-5 col-xs-5">Examinator</th>
+					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Kursansvarig</th>
+	            </tr>
 	            {% for item in mycourses() %}
-				<li>
-
-
-						<a href="#" id="courseexaminer{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username"></a>
-</li>
-						<!--<a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a>-->
+		            <tr>
+		                <td>{{ item.code }}</td>
+			            <td>{{ item.name }}</td>
+						<td><a href="#" id="courseexaminer{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username"></a>
+						</td>
+						<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
+		            </tr>
 	            {% endfor %}
-	</ul>
+	        </tbody>
+	    </table>
 	</div>
 
 
