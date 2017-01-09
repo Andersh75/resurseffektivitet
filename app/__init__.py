@@ -145,6 +145,7 @@ class RegistrationForm(Form):
 
 
 
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
