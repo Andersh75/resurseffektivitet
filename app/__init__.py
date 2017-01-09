@@ -902,6 +902,12 @@ def teachers_page(page=1):
 def courses_page(page=1):
     return render_template('courses.html.j2', page=page)
 
+
+@app.route('/myteaching')
+@app.route('/myteaching/<int:page>')
+def myteaching_page(page=1):
+    return render_template('myteaching.html.j2', page=page)
+
 @app.route('/myinfo')
 @app.route('/myinfo/<int:page>')
 def myinfo_page(page=1):
