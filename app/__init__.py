@@ -1058,6 +1058,12 @@ def allteachers_page(page=1):
     return render_template('allteachers.html.j2', page=page)
 
 
+
+@app.route('/oneteacher')
+@app.route('/onetecher/<int:teacherid>')
+def oneteacher_page(teacherid=1):
+    return render_template('onetache.html.j2', teacherid=teacherid)
+
 @app.route('/onecourse')
 @app.route('/onecourse/<int:courseid>')
 def onecourse_page(courseid=1):
