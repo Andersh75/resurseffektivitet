@@ -1166,7 +1166,9 @@ def user_edit_content(page):
 
 
 
-@app.route('/user_edit_slot/subject/<int:page>', methods=['GET', 'POST'])
+
+
+@app.route('/user_edit_slot/subject', methods=['GET', 'POST'])
 def user_edit_slot_subject(page):
     print "XXXXXX"
     id = request.form["pk"]
