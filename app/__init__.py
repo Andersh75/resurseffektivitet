@@ -1063,6 +1063,13 @@ def allteachers_page(page=1):
 def onecourse_page(courseid=1):
     return render_template('onecourse.html.j2', courseid=courseid)
 
+@app.route('/oneslot')
+@app.route('/oneslot/<int:slotid>')
+def oneslot_page(slotid=1):
+    return render_template('oneslot.html.j2', slotid=slotid)
+
+
+
 
 @app.route('/myteaching')
 @app.route('/myteaching/<int:page>')
