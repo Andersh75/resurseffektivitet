@@ -1175,33 +1175,8 @@ def user_edit_content(page):
 
 
 
-@app.route('/user_edit_slot/subject', methods=['GET', 'POST'])
-def user_edit_slot_subject():
-    print "XXXXXX"
-    id = request.form["pk"]
-    print id
-
-    print request.form["name"]
-
-
-
-
-
-
-    tempobj = db.session.query(Classes).get(id)
-
-
-    test = db.session.query(Subjects).filter(Subjects.name == request.form["value"]).first()
-
-    tempobj.subjects.append(test)
-
-
-    db.session.commit()
-
-    result = { 'id': id, 'text': request.form["value"] }
-
-    return json.dumps(result)
-
+@app.route('/user_edit_slot/form/', methods=['GET', 'POST'])
+def user_edit_slot_form():
 
 
 
