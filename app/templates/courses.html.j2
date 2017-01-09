@@ -6,6 +6,7 @@
 	<div class ="container">
 
 		<h4>Kurser</h4>
+		<a href="#" id="courseexaminer{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username"></a>
 
 	    <table class="table table-hover col-lg-12 col-md-12 col-sm-12 col-xs-12" id="testtable">
 	        <tbody id="tbodyid">
@@ -19,7 +20,7 @@
 		            <tr>
 		                <td>{{ item.code }}</td>
 			            <td>{{ item.name }}</td>
-						<td><a href="#" id="courseexaminer{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username"></a>
+						<td>
 						</td>
 						<td><a href="#" id="courseresponsibe{{ item.id }}" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username">{{ item.responsible }}</a></td>
 		            </tr>
