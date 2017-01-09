@@ -72,7 +72,7 @@
     </div> <!-- /container -->
 
 
-	<div class ="container">
+
 		{% if session.logged_in %}
 			<p>
 				{% block rooms %}
@@ -94,7 +94,7 @@
 			{% endblock %}
 
 		{% endif %}
-    </div>
+    
 
 
     {% with messages = get_flashed_messages() %}
