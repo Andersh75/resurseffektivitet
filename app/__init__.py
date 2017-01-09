@@ -144,29 +144,28 @@ class RegistrationForm(Form):
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
 
-
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
-def mycoursesexaminer():
+def mycoursesexaminerorresponsible():
     examiner = aliased(Teachers)
     responsible = aliased(Teachers)
-    testvar = db.session.query(Courses).join(examiner, Courses.examiner).join(responsible, Courses.responsible).filter(or_(examiner.email == session['user'], responsible.email == session['user'])).all()
-    print "QQQQQQQQQQQ"
-    for item in testvar:
-        print item.code
+    templist = db.session.query(Courses).join(examiner, Courses.examiner).join(responsible, Courses.responsible).filter(or_(examiner.email == session['user'], responsible.email == session['user'])).all()
 
-    return testvar
+    return templist
 
 def mycoursesresponsible():
-    testvar = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
-    #print "ZZZZZZZZ"
-    #for item in testvar:
-    #    print item.code
+    templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
 
-    return testvar
+    return templist
+
+def mycoursesexaminer():
+    templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
+
+    return templist
+
 
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
