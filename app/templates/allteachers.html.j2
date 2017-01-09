@@ -17,9 +17,17 @@
 					<th class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">Undervisar</th>
 	            </tr>
 	            {% for item in allteachers() %}
-				{% if item.firstname %}
 		            <tr>
+						{% if item.akafirstname %}
 			            <td>{{ item.akafirstname }}</td>
+						{% else %}
+						<td>{{ item.firstname }}</td>
+						{% endif %}
+						{% if item.akalastname %}
+						<td>{{ item.akalastname }}</td>
+						{% else %}
+						<td>{{ item.lastname }}</td>
+						{% endif %}
 						<td>{{ item.akalastname }}</td>
 						<td>
 							{% for subitem in onescoursesresponsible(item.id): %}
@@ -32,7 +40,7 @@
 		                    {% endfor %}
 						</td>
 					</tr>
-				{% endif %}
+		
 	            {% endfor %}
 	        </tbody>
 	    </table>
