@@ -18,7 +18,6 @@
 	            {% for item in allteachers() %}
 		            <tr>
 			            <td>{{ item.akafirstname }} {{ item.akalastname }}</td>
-						<td>{{ item.email }}</a></td>
 						<td>
 							{% for subitem in onescoursesresponsible(item.id): %}
 		                        <button type="button" class="btn btn-success btn-xs">{{ subitem.code }}</button>
