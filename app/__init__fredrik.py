@@ -32,7 +32,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f25'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/w1'
 db = SQLAlchemy(app)
 
 
@@ -1051,6 +1051,11 @@ def courses_page(page=1):
 @app.route('/allcourses/<int:page>')
 def allcourses_page(page=1):
     return render_template('allcourses.html.j2', page=page)
+
+@app.route('/allrooms')
+@app.route('/allrooms/<int:page>')
+def allrooms_page(page=1):
+    return render_template('allrooms.html.j2', page=page)
 
 @app.route('/allteachers')
 @app.route('/allteachers/<int:page>')

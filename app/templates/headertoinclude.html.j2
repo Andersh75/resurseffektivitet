@@ -44,6 +44,7 @@
 		        <li><a href="{{ url_for('login_page') }}">Start</a></li>
 				{% if session.logged_in %}
                 <li><a href="{{ url_for('allteachers_page')}}">All teachers</a></li>
+                <li><a href="{{ url_for('allrooms_page')}}">All rooms</a></li>
                 <li><a href="{{ url_for('allcourses_page')}}">All courses</a></li>
                 <li><a href="{{ url_for('courses_page')}}">My courses</a></li>
                 <li><a href="{{ url_for('myteaching_page')}}">My teaching</a></li>
@@ -132,6 +133,8 @@
                 {% block onecourse %}
                 {% endblock %}
                 {% block oneslot %}
+                {% endblock %}
+                {% block allrooms %}
                 {% endblock %}
                 {% block allcourses %}
                 {% endblock %}
