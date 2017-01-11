@@ -56,7 +56,7 @@
 		            {% for item in myslots(): %}
 		            {% set rowloop = loop %}
 		            <tr>
-						<td class="text-left"><a class="btn btn-success btn-xs" href="{{ url_for('onecourse_page', courseid=item[8]) }}" role="button">{{ item[8] }}</a></td>
+						<td class="text-left"><a class="btn btn-success btn-xs" href="{{ url_for('onecourse_page', courseid=item[9]) }}" role="button">{{ item[8] }}</a></td>
 
 		                {% if item[2] > 9 %}
 		                    {% if item[3] > 9 %}
