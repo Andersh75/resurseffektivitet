@@ -32,7 +32,7 @@ from sqlalchemy.sql import and_, or_, not_
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f25'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f27'
 db = SQLAlchemy(app)
 
 
@@ -119,8 +119,8 @@ class Teachers(db.Model):
     department = db.Column(db.String(100))
     examiner = db.relationship('Courses', backref='examiner', lazy='dynamic', foreign_keys='[Courses.examiner_id]')
     responsible = db.relationship('Courses', backref='responsible', lazy='dynamic', foreign_keys='[Courses.responsible_id]')
-#    assistantone = db.relationship('Courses', backref='assistantone', lazy='dynamic', foreign_keys='[Courses.assistantone_id]')
-#    assistanttwo = db.relationship('Courses', backref='assistanttwo', lazy='dynamic', foreign_keys='[Courses.assistanttwo_id]')
+    assistantone = db.relationship('Courses', backref='assistantone', lazy='dynamic', foreign_keys='[Courses.assistantone_id]')
+    assistanttwo = db.relationship('Courses', backref='assistanttwo', lazy='dynamic', foreign_keys='[Courses.assistanttwo_id]')
     classes = db.relationship('Classes', secondary=teachers_classes, backref=db.backref('teachers', lazy='dynamic'))
 
 
@@ -133,14 +133,14 @@ class Courses(db.Model):
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
     examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-#    assistantone_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-#    assistanttwo_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    assistantone_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    assistanttwo_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
 
 
-#class Classtypes(db.Model):
-#    id = db.Column(db.Integer, primary_key=True)
-#    classtype = db.Column(db.String(30))
-#    classes = db.relationship('Classes', backref='classtypes', lazy='dynamic')
+class Classtypes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    classtype = db.Column(db.String(30))
+    classes = db.relationship('Classes', backref='classtypes', lazy='dynamic')
 
 
 class Classes(db.Model):
@@ -150,7 +150,7 @@ class Classes(db.Model):
     endtime = db.Column(db.Integer)
     courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
-#    classtypes_id = db.Column(db.Integer, db.ForeignKey('classtypes.id'))
+    classtypes_id = db.Column(db.Integer, db.ForeignKey('classtypes.id'))
 
 
 
