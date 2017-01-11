@@ -168,10 +168,7 @@ class RegistrationForm(Form):
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
 
-def onesteachingincourse(courseid, teacherid):
-    templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id == teacherid)).all()
 
-    return templist
 
 def scheduleInCourse(course):
 # Lista med kurstillfallen som anvands i en kurs
@@ -235,6 +232,19 @@ def onescoursesexaminer(teacherid):
 
     return templist
 
+def onesteachingincourse(courseid, teacherid):
+    templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id == teacherid)).all()
+
+    return templist
+
+
+
+def roomtypesuseincourse(courseid, roomtypeid):
+    templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id == roomtypeid)).all()
+
+    return templist
+
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
@@ -293,6 +303,10 @@ def teachersincourse(courseid):
     return templist
 
 
+def roomtypesincourse(courseid):
+    templist = db.session.query(Roomtypes).join(Roomtypes.rooms).join(Rooms.classes).join(Classes.courses).distinct().filter(Courses.id == courseid).all()
+
+    return templist
 
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
@@ -347,7 +361,7 @@ def amiteaching(code):
         already = True
     return already
 
-app.jinja_env.globals.update(onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)

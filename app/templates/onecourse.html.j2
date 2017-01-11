@@ -5,6 +5,40 @@
 {% block onecourse %}
 	<div class ="container">
 
+		<h4>Lokalanvändning</h4>
+
+			<table class="table table-hover sorted_table">
+				<tbody>
+					<tr>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Lokaltyp</th>
+						<th class="text-left col-lg-10 col-md-10 col-sm-10 col-xs-10">Timmar</th>
+					</tr>
+
+
+
+					{% for item in roomtypesincourse(courseid): %}
+					<tr>
+						<td>
+							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.name }}</a>
+						</td>
+						<td>
+						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
+							<a class="btn btn-primary btn-xs" style="width:{{ subitem[0] * 10 }}px" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">&nbsp;</a>
+						</td>
+						{% endfor %}
+
+
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+			<br />
+			<br />
+			<br />
+			<br />
+
 		<h4>Undervisande lärare</h4>
 
 			<table class="table table-hover sorted_table">
@@ -48,8 +82,6 @@
 			<br />
 			<br />
 			<br />
-
-
 
 			<h4>Schema</h4>
 		    <table class="table table-hover sorted_table">
