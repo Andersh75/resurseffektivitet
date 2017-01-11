@@ -21,9 +21,7 @@
 					<td>
 						<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.code }}</a>
 					</td>
-					<td>
-						<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.name }}</a>
-					</td>
+					<td class="text-left">{{ item.name }}</td>
 
 					<td>
 					{% for subitem in onesteachingincourse(item.id, teacherid): %}
