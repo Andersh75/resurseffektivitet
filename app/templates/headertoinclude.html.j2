@@ -41,25 +41,25 @@
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 			<ul class="nav navbar-nav">
-		        <li><a href="{{ url_for('login_page') }}">Start</a></li>
+		        <!--<li><a href="{{ url_for('login_page') }}">Start</a></li>-->
 				{% if session.logged_in %}
-                <li><a href="{{ url_for('allteachers_page')}}">All teachers</a></li>
-                <li><a href="{{ url_for('allrooms_page')}}">All rooms</a></li>
-                <li><a href="{{ url_for('allcourses_page')}}">All courses</a></li>
-                <li><a href="{{ url_for('courses_page')}}">My courses</a></li>
-                <li><a href="{{ url_for('myteaching_page')}}">My teaching</a></li>
-                <li><a href="{{ url_for('myinfo_page')}}">My info</a></li>
+                <li><a href="{{ url_for('allteachers_page')}}">Lärare</a></li>
+                <li><a href="{{ url_for('allrooms_page')}}">Salar</a></li>
+                <li><a href="{{ url_for('allcourses_page')}}">Kurser</a></li>
+                <li><a href="{{ url_for('courses_page')}}">Mina utbildningsuppdrag</a></li>
+                <li><a href="{{ url_for('myteaching_page')}}">Min undervisning</a></li>
+                <li><a href="{{ url_for('myinfo_page')}}">Mina uppgifter</a></li>
 				{% endif %}
 			</ul>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			  <div class="nav navbar-nav navbar-right">
 			  	{% if session.logged_in %}
-					<a class="btn btn-default navbar-btn" href="{{ url_for('logout') }}">Sign out</a>
+					<a class="btn btn-default navbar-btn" href="{{ url_for('logout') }}">Logga ut</a>
 					<!--<button type="submit" class="btn btn-default navbar-btn">Sign out</button>-->
 			  	{% else %}
 					{%- if request.path != "/register/" %}
-						<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">Register</a>
+						<a class="btn btn-default navbar-btn" href="{{ url_for('register_page') }}">Registrering</a>
 						{% endif %}
 					{% block login %}{% endblock %}
 
