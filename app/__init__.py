@@ -362,7 +362,7 @@ def myslots():
     return templist
 
 def roomsonslot(slotid):
-    templist = db.session.query(Rooms.name).distinct().join(Rooms.classes).filter(Classes.id == slotid).all()
+    templist = db.session.query(Rooms.name, Rooms.id).distinct().join(Rooms.classes).filter(Classes.id == slotid).all()
 
     return templist
 
@@ -370,7 +370,6 @@ def teachersonslot(slotid):
     templist = db.session.query(Teachers.initials, Teachers.id).join(Teachers.classes).filter(Classes.id == slotid).all()
 
     return templist
-
 
 
 
