@@ -21,7 +21,7 @@
 					{% for item in roomtypesincourse(courseid): %}
 					<tr>
 						<td>
-							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.roomtype }}</a>
+							<a class="btn btn-success btn-xs" href="{{ url_for('allrooms_page') }}" role="button">{{ item.roomtype }}</a>
 						</td>
 						<td>
 							<button type="button" class="btn btn-primary btn-xs" style="width:{{ roomtypesuseincourse(courseid, item.id) * 10 }}px">&nbsp;</button>
