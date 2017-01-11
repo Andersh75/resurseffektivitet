@@ -21,16 +21,9 @@
 							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.roomtype }}</a>
 						</td>
 						<td>
-						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
-							<button type="button" class="btn btn-primary btn-xs" style="width:{{ subitem[0] * 10 }}px">&nbsp;</button>
-						{% endfor %}
+							<button type="button" class="btn btn-primary btn-xs" style="width:{{ roomtypesuseincourse(courseid, item.id) * 10 }}px">&nbsp;</button>
 						</td>
-						<td class="text-left">
-
-						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
-							{{ subitem[0] }}
-						{% endfor %}
-						</td>
+						<td class="text-left">{{ roomtypesuseincourse(courseid, item.id) }}</td>
 						<td>
 						{% for subitem in sumofonesteachingincourseperroomtype(courseid, item.id): %}
 							{{ subitem[0] }}
