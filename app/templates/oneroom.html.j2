@@ -53,12 +53,12 @@
 				<td class="text-left">{{ item[6] }}</td>
 				{% endif %}
 				<td class="text-left">
-					{% for subitem in roomsonslot(item[7]): %}
+					{% for subitem in roomsonslot(item[7]) %}
 						<button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
 					{% endfor %}
 				</td>
 				<td class="text-left">
-					{% for subitem in teachersonslot(item[7]): %}
+					{% for subitem in teachersonslot(item[7]) %}
 						<a class="btn btn-primary btn-xs" href="{{ url_for('oneteacher_page', teacherid={{ subitem[1] }}) }}" role="button">{{ subitem[0] }}</a>
 					{% endfor %}
 				</td>
