@@ -1174,6 +1174,7 @@ def myinfo_page(page=1):
     return render_template('myinfo.html.j2', page=page)
 
 
+
 @app.route('/user_edit_myinfo/akafirstname', methods=['GET', 'POST'])
 def user_edit_myinfo_akafirstname():
     id = request.form["pk"]

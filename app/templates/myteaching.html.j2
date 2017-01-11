@@ -20,7 +20,8 @@
 	            {% for item in allcourses() %}
 					{% if amiteaching(item.code) %}
 		            <tr>
-		                <td><a href="{{ url_for('onecourse_page', courseid=item.id) }}">{{ item.code }}</a></td>
+		                <td><a class="btn btn-success btn-xs" href="{{ url_for('onecourse_page', courseid=item.id) }}" role="button">{{ item.code }}</a>
+						</td>
 			            <td>{{ item.name }}</td>
 						<td>{{ item.examiner.email }}</a></td>
 						{% if amiexaminer(item.code) %}
@@ -55,7 +56,8 @@
 		            {% for item in myslots(): %}
 		            {% set rowloop = loop %}
 		            <tr>
-						<td class="text-left">{{ item[8] }}</td>
+						<td class="text-left"><a class="btn btn-success btn-xs" href="{{ url_for('onecourse_page', courseid=item[8]) }}" role="button">{{ item[8] }}</a></td>
+
 		                {% if item[2] > 9 %}
 		                    {% if item[3] > 9 %}
 		                    <td class="text-left">{{ item[1] }}-{{ item[2] }}-{{ item[3] }}</td>
