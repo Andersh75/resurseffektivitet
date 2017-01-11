@@ -25,10 +25,7 @@
 						</td>
 						<td class="text-left">{{ roomtypesuseincourse(courseid, item.id) }}</td>
 						<td>
-						{% for subitem in sumofonesteachingincourseperroomtype(courseid, item.id): %}
-							{{ subitem[0] }}
-						{% endfor %}
-
+							{{ sumofonesteachingincourseperroomtype(courseid, item.id) }}
 						</td>
 					</tr>
 					{% endfor %}

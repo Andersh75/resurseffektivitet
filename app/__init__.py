@@ -241,6 +241,7 @@ def onesteachingincourse(courseid, teacherid):
 
 
 
+
 def roomtypesuseincourse(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id == roomtypeid)).all()
 
@@ -261,7 +262,7 @@ def sumofonesteachingincourse(courseid):
 def sumofonesteachingincourseperroomtype(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id.isnot(None), Roomtypes.id == roomtypeid)).all()
 
-    return templist
+    return templist[0[0]]
 
 
 def myobject():
