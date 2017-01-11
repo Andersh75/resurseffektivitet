@@ -271,7 +271,9 @@ def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
     varx = sumofonesteachingincourseperroomtype(courseid, roomtypeid)
     vary = roomtypesuseincourse(courseid, roomtypeid)
     #varz = float(varx[0][0]) / vary[0][0]
+    print "varx"
     print varx
+    print "vary"
     print vary
 
     varz = 2
