@@ -7,6 +7,38 @@
 
 		<h4>Kurs</h4>
 
+			<table class="table table-hover sorted_table">
+				<tbody>
+					<tr>
+						<th class="text-left">Namn</th>
+						<th class="text-left"></th>
+						<th class="text-left">Timmar</th>
+					</tr>
+
+
+
+					{% for item in teachersincourse(courseid): %}
+					<tr>
+						<td>
+							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.akafirstname }}</a>
+						</td>
+
+						<td>
+							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.akalastname }}</a>
+						</td>
+
+						<td>
+							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.initials }}</a>
+						</td>
+
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+
+
 
 
 		    <table class="table table-hover sorted_table">
