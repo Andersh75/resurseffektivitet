@@ -147,12 +147,12 @@
 
 						<td class="text-left">
 		                    {% for subitem in roomsOnDate(item[0], courseid): %}
-		                        <button type="button" class="btn btn-success btn-xs">{{ subitem[0] }}</button>
+		                        <a class="btn btn-success btn-xs" href="{{ url_for('oneroom_page', roomid=subitem[1]) }}" role="button">{{ subitem[0] }}</a>
 		                    {% endfor %}
 		                </td>
 		                <td class="text-left">
 		                    {% for subitem in defteachersondate(item[0], courseid): %}
-		                        <button type="button" class="btn btn-success btn-xs">{{ subitem[2] }}</button>
+		                        <a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem[3]) }}" role="button">{{ subitem[2] }}</a>
 		                    {% endfor %}
 		                </td>
 						<td>

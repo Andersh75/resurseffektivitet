@@ -172,6 +172,7 @@ class RegistrationForm(Form):
 
 
 
+
 def scheduleInCourse(course):
 # Lista med kurstillfallen som anvands i en kurs
     templist = []
@@ -184,7 +185,7 @@ def scheduleInCourse(course):
 def roomsOnDate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Rooms.name).distinct().join(Rooms.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
+    tempvar = db.session.query(Rooms.name, Rooms.id).distinct().join(Rooms.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
     for item in tempvar:
         templist.append(item)
     return templist
@@ -192,7 +193,7 @@ def roomsOnDate(date, course):
 def defteachersondate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
-    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials, Teachers.id).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
     for item in tempvar:
         templist.append(item)
     return templist
