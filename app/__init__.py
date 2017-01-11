@@ -258,6 +258,7 @@ def mycoursesexaminer():
 
 
 
+
 def myslots():
     templist = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Courses.code, Courses.id).distinct().join(Dates.classes).join(Classes.teachers).join(Classes.courses).filter(Teachers.email == session['user']).order_by(Dates.date).order_by(Classes.starttime).all()
 
