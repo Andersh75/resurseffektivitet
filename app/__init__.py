@@ -249,7 +249,6 @@ def roomtypesuseincourse(courseid, roomtypeid):
 
 
 
-
 def sumofroomtypesuseincourse(courseid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id.isnot(None))).all()
 
@@ -265,6 +264,15 @@ def sumofonesteachingincourseperroomtype(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id.isnot(None), Roomtypes.id == roomtypeid)).all()
 
     return templist[0][0]
+
+
+def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
+
+    varx = sumofonesteachingincourseperroomtype(courseid, roomtypeid)
+    vary = roomtypesuseincourse(courseid, roomtype)
+    varz = float(varx) / vary
+
+    return varz
 
 
 def myobject():
