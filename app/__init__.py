@@ -216,7 +216,7 @@ def allteachers():
     return templist
 
 def roomsperroomtype(roomtypeid):
-    templist = db.session.query(Rooms).join(Rooms.roomtype).filter(Roomtypes.id == roomtypeid).order_by(Rooms.name).all()
+    templist = db.session.query(Rooms).join(Rooms.roomtypes).filter(Roomtypes.id == roomtypeid).order_by(Rooms.name).all()
     return templist
 
 def onescoursesexaminerorresponsible(teacherid):
