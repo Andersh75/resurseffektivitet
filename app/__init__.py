@@ -152,7 +152,6 @@ class Classes(db.Model):
 
 
 
-
 class RegistrationForm(Form):
     initials = TextField('Initials', [validators.Length(min=2, max=20)])
     firstname = TextField('First name', [validators.Length(min=2, max=20)])
