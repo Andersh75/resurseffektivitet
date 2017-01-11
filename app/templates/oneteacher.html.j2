@@ -5,7 +5,40 @@
 {% block oneteacher %}
 	<div class ="container">
 
-		<h4>{{ myobjectfromid(teacherid).akafirstname }} {{ myobjectfromid(teacherid).akalastname }}</h4>
+		<h2>{{ myobjectfromid(teacherid).akafirstname }} {{ myobjectfromid(teacherid).akalastname }}</h2>
+
+		<h4>Undervisning</h4>
+		<table class="table table-hover sorted_table">
+			<tbody>
+				<tr>
+					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Kurs</th>
+					<th class="text-left col-lg-7 col-md-7 col-sm-7 col-xs-7">Namn</th>
+					<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Timmar</th>
+				</tr>
+				{% for item in onescoursesteaching(teacherid): %}
+				<tr>
+					<td>
+						<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.code }}</a>
+					</td>
+					<td>
+						<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.name }}</a>
+					</td>
+
+					<td>
+						<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ onesteachingincourse(item.id, teacherid) }}</a>
+					</td>
+
+
+				</tr>
+				{% endfor %}
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
 
 
 

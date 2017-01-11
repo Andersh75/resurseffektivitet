@@ -248,6 +248,7 @@ def roomtypesuseincourse(courseid, roomtypeid):
 
 
 
+
 def sumofroomtypesuseincourse(courseid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id.isnot(None))).all()
 
