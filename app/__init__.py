@@ -309,7 +309,7 @@ def roomtypeobjectfromid(roomtypeid):
     return testvar
 
 def roomobjectfromid(roomid):
-    testvar = db.session.query(Room).filter(Room.id == roomid).first()
+    testvar = db.session.query(Rooms).filter(Rooms.id == roomid).first()
     #print testvar.password
     return testvar
 
