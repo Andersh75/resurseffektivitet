@@ -1203,6 +1203,7 @@ def myinfo_page(page=1):
 
 
 
+
 @app.route('/user_edit_myinfo/akafirstname', methods=['GET', 'POST'])
 def user_edit_myinfo_akafirstname():
     id = request.form["pk"]
