@@ -13,6 +13,7 @@
 						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Lokaltyp</th>
 						<th class="text-left col-lg-8 col-md-8 col-sm-8 col-xs-8">Timmar</th>
 						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
+						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Lärare per timme</th>
 					</tr>
 					{% for item in roomtypesincourse(courseid): %}
 					<tr>
@@ -30,6 +31,12 @@
 							{{ subitem[0] }}
 						{% endfor %}
 						</td>
+						<td>
+						{% for subitem in sumofonesteachingincourseperroomtype(courseid, item.id): %}
+							{{ subitem[0] }}
+						{% endfor %}
+
+						</td>
 					</tr>
 					{% endfor %}
 					<tr>
@@ -40,6 +47,7 @@
 							{{ subitem[0] }}
 						{% endfor %}
 						</td>
+						<td></td>
 					</tr>
 				</tbody>
 			</table>
