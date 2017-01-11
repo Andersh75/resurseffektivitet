@@ -207,9 +207,16 @@ def allcourses():
     templist = db.session.query(Courses).order_by(Courses.code).all()
     return templist
 
+def allrooms():
+    templist = db.session.query(Rooms).order_by(Rooms.name).all()
+    return templist
 
 def allteachers():
     templist = db.session.query(Teachers).order_by(Teachers.akalastname).all()
+    return templist
+
+def roomsperroomtype(roomtypeid):
+    templist = db.session.query(Rooms).join(Rooms.roomtype).filter(Roomtypes.id == roomtypeid).order_by(Rooms.name).all()
     return templist
 
 def onescoursesexaminerorresponsible(teacherid):
@@ -289,6 +296,11 @@ def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
     return str(varz)[:4]
 
 
+def roomtypeobjectfromid(roomtypeid):
+    testvar = db.session.query(Roomtypes).filter(Roomtypes.id == roomtypeid).first()
+    #print testvar.password
+    return testvar
+
 def courseobjectfromid(courseid):
     testvar = db.session.query(Courses).filter(Courses.id == courseid).first()
     #print testvar.password
@@ -342,6 +354,7 @@ def teachersonslot(slotid):
     templist = db.session.query(Teachers.initials).join(Teachers.classes).filter(Classes.id == slotid).all()
 
     return templist
+
 
 
 def subjectsinslot(slotid):
@@ -418,7 +431,7 @@ def amiteaching(code):
         already = True
     return already
 
-app.jinja_env.globals.update(courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype, sumofonesteachingincourse=sumofonesteachingincourse, sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(roomtypeobjectfromid=roomtypeobjectfromid, roomsperroomtype=roomsperroomtype, courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype, sumofonesteachingincourse=sumofonesteachingincourse, sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)

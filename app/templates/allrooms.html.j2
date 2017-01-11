@@ -12,26 +12,16 @@
 	        <tbody>
 	            <tr>
 	                <th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Rumsnamn</th>
-	                <th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Antal platse</th>
-					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Kursteam</th>
-					<th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Övriga lärare</th>
+	                <th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Antal platser</th>
+					<th class="text-left col-lg-3 col-md-3 col-sm-3 col-xs-3">Rumstyp</th>
+					<th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Kostnad per timme</th>
 	            </tr>
-	            {% for item in allcourses() %}
-				{% if item.examiner.email %}
+	            {% for item in roomsperroomtype(1) %}
 		            <tr>
-		                <td><a class="btn btn-primary btn-xs" href="{{ url_for('onecourse_page', courseid=item.id) }}" role="button">{{ item.code }}</a></td>
+		                <td><a class="btn btn-primary btn-xs" href="{{ url_for('onerooms_page', roomsid=item.id) }}" role="button">{{ item.code }}</a></td>
 			            <td>{{ item.name }}</td>
-						{% if amiexaminer(item.code) %}
-						<td><a href="#" id="courseresponsibe{{ item.id }}" data-type="select" data-pk="{{ item.id }}" data-url="/user_edit_course/responsible" data-title="Enter username" data-value="{{ item.responsible.email }}">{{ item.responsible.email }}</a></td>
-						{% else %}
-						<td>{{ item.responsible.email }}</a></td>
-						{% endif %}
-						<td>
-						{% for subitem in teachersincourse(item.id): %}
-
-							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem.id) }}" role="button">{{ subitem.initials }}</a>
-						{% endfor %}
-						</td>
+						<td>{{ roomtypeobjectfromid(1).roomtype }}</td>
+						<td>{{ roomtypeobjectfromid(1).cost }}</td>
 					</tr>
 				{% endif %}
 	            {% endfor %}
