@@ -1174,10 +1174,16 @@ def allteachers_page(page=1):
 def oneteacher_page(teacherid=1):
     return render_template('oneteacher.html.j2', teacherid=teacherid)
 
+
 @app.route('/onecourse')
 @app.route('/onecourse/<int:courseid>')
 def onecourse_page(courseid=1):
     return render_template('onecourse.html.j2', courseid=courseid)
+
+@app.route('/oneroom')
+@app.route('/oneroom/<int:roomid>')
+def oneroom_page(courseid=1):
+    return render_template('oneroom.html.j2', roomid=roomid)
 
 @app.route('/oneslot')
 @app.route('/oneslot/<int:slotid>')
