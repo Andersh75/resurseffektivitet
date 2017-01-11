@@ -25,7 +25,7 @@
 						</td>
 						<td class="text-left">{{ roomtypesuseincourse(courseid, item.id) }}</td>
 						<td>
-							{{ sumofonesteachingincourseperroomtype(courseid, item.id) }}
+							{{ sumofonesteachingincourseperroomtype(courseid, item.id) / roomtypesuseincourse(courseid, item.id) }}
 						</td>
 					</tr>
 					{% endfor %}
