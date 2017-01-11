@@ -1052,7 +1052,7 @@ def login_page():
 def register_page():
 
     form = RegistrationForm(request.form)
-    flash("Before IF")
+    #flash("Before IF")
 
     if request.method == "POST" and form.validate():
             initials  = form.initials.data
