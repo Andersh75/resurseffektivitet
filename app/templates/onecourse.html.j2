@@ -91,6 +91,15 @@
 
 					</tr>
 					{% endfor %}
+					<tr>
+						<td></td>
+						<td></td>
+						<td class="text-left">
+						{% for subitem in sumofonesteachingincourse(courseid): %}
+							{{ subitem[0] }}
+						{% endfor %}
+						</td>
+					</tr>
 				</tbody>
 			</table>
 
