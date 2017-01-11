@@ -220,6 +220,7 @@ def onescoursesexaminerorresponsible(teacherid):
     return templist
 
 
+
 def onescoursesresponsible(teacherid):
     templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == teacherid).all()
 
