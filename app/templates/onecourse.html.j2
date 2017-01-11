@@ -16,7 +16,7 @@
 					</tr>
 
 
-
+					{% set counter = 0 %}
 					{% for item in roomtypesincourse(courseid): %}
 					<tr>
 						<td>
@@ -28,14 +28,19 @@
 						{% endfor %}
 						</td>
 						<td class="text-left">
+
 						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
 							{{ subitem[0] }}
+							{% counter = counter + subitem[0] %}
 						{% endfor %}
 						</td>
-
-
 					</tr>
 					{% endfor %}
+					<tr>
+						<td></td>
+						<td></td>
+						<td>{{ counter }}</td>
+					</tr>
 				</tbody>
 			</table>
 
