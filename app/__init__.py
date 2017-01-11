@@ -281,7 +281,7 @@ def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
     if varx and vary:
         varz = float(varx) / float(vary)
 
-    return varz[:3]
+    return str(varz)[:3]
 
 
 def myobject():
