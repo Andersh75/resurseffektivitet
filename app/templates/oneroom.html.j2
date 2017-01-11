@@ -24,7 +24,7 @@
 			{% for item in roomsslots(roomid) %}
 			{% set rowloop = loop %}
 			<tr>
-				<td>{{ item[8] }}</td>
+				<td><a class="btn btn-primary btn-xs" href="{{ url_for('onetcourse_page', courseid=item[9]) }}" role="button">{{ item[8] }}</a></td>
 				{% if item[2] > 9 %}
 					{% if item[3] > 9 %}
 					<td class="text-left">{{ item[1] }}-{{ item[2] }}-{{ item[3] }}</td>
