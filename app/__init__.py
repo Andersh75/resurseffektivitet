@@ -255,6 +255,12 @@ def onesslots(teacherid):
     return templist
 
 
+def roomsslots(roomid):
+    templist = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Courses.code, Courses.id).distinct().join(Dates.classes).join(Classes.teachers).join(Classes.courses).join(Classes.rooms).filter(Rooms.id == roomid).order_by(Dates.date).order_by(Classes.starttime).all()
+
+    return templist
+
+
 def roomtypesuseincourse(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id == roomtypeid)).all()
 
@@ -299,6 +305,11 @@ def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
 
 def roomtypeobjectfromid(roomtypeid):
     testvar = db.session.query(Roomtypes).filter(Roomtypes.id == roomtypeid).first()
+    #print testvar.password
+    return testvar
+
+def roomobjectfromid(roomid):
+    testvar = db.session.query(Room).filter(Room.id == roomid).first()
     #print testvar.password
     return testvar
 
@@ -413,7 +424,6 @@ def subjectslistjson():
 
 
 
-
 def amiexaminer(code):
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     already = db.session.query(exists().where(and_(Courses.code==code, Courses.examiner==testvar))).scalar()
@@ -433,7 +443,7 @@ def amiteaching(code):
         already = True
     return already
 
-app.jinja_env.globals.update(roomtypeobjectfromid=roomtypeobjectfromid, roomsperroomtype=roomsperroomtype, courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype, sumofonesteachingincourse=sumofonesteachingincourse, sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(roomsslots=roomsslots, roomobjectfromid=roomobjectfromid, roomtypeobjectfromid=roomtypeobjectfromid, roomsperroomtype=roomsperroomtype, courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype, sumofonesteachingincourse=sumofonesteachingincourse, sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
@@ -1182,7 +1192,7 @@ def onecourse_page(courseid=1):
 
 @app.route('/oneroom')
 @app.route('/oneroom/<int:roomid>')
-def oneroom_page(courseid=1):
+def oneroom_page(roomid=1):
     return render_template('oneroom.html.j2', roomid=roomid)
 
 @app.route('/oneslot')
