@@ -32,15 +32,12 @@
 					<tr>
 						<td></td>
 						<td></td>
-						<td class="text-left">
-						{% for subitem in sumofroomtypesuseincourse(courseid): %}
-							{{ subitem[0] }}
-						{% endfor %}
-						</td>
+						<td class="text-left">{{ sumofroomtypesuseincourse(courseid) }}</td>
 						<td></td>
 					</tr>
 				</tbody>
 			</table>
+
 
 
 			<br />
