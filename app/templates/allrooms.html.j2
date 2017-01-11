@@ -18,8 +18,8 @@
 	            </tr>
 	            {% for item in roomsperroomtype(1) %}
 		            <tr>
-		                <td><a class="btn btn-primary btn-xs" href="{{ url_for('oneroom_page', roomid=item.id) }}" role="button">{{ item.code }}</a></td>
-			            <td>{{ item.name }}</td>
+		                <td><a class="btn btn-primary btn-xs" href="{{ url_for('oneroom_page', roomid=item.id) }}" role="button">{{ item.name }}</a></td>
+			            <td>{{ item.seats }}</td>
 						<td>{{ roomtypeobjectfromid(1).roomtype }}</td>
 						<td>{{ roomtypeobjectfromid(1).cost }}</td>
 					</tr>
