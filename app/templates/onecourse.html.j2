@@ -11,7 +11,8 @@
 				<tbody>
 					<tr>
 						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Lokaltyp</th>
-						<th class="text-left col-lg-10 col-md-10 col-sm-10 col-xs-10">Timmar</th>
+						<th class="text-left col-lg-9 col-md-9 col-sm-9 col-xs-9">Timmar</th>
+						<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1"></th>
 					</tr>
 
 
@@ -24,8 +25,13 @@
 						<td>
 						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
 							<button type="button" class="btn btn-primary btn-xs" style="width:{{ subitem[0] * 10 }}px">&nbsp;</button>
-						</td>
 						{% endfor %}
+						</td>
+						<td class="text-left">
+						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
+							{{ subitem[0] }}
+						{% endfor %}
+						</td>
 
 
 					</tr>
@@ -48,7 +54,8 @@
 						<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Namn</th>
 						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
 
-						<th class="text-left col-lg-8 col-md-8 col-sm-8 col-xs-8">Timmar</th>
+						<th class="text-left col-lg-7 col-md-7 col-sm-7 col-xs-7">Timmar</th>
+						<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1"></th>
 					</tr>
 
 
@@ -68,8 +75,13 @@
 						<td>
 						{% for subitem in onesteachingincourse(courseid, item.id): %}
 							<button type="button" class="btn btn-primary btn-xs" style="width:{{ subitem[0] * 10 }}px">&nbsp;</button>
-						</td>
 						{% endfor %}
+						</td>
+						<td class="text-left">
+						{% for subitem in onesteachingincourse(courseid, item.id): %}
+							{{ subitem[0] }}
+						{% endfor %}
+						</td>
 
 
 					</tr>
