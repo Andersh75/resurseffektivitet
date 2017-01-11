@@ -293,6 +293,7 @@ def mycoursesexaminerorresponsible():
     responsible = aliased(Teachers)
     #templist = db.session.query(Courses).join(examiner, Courses.examiner).join(responsible, Courses.responsible).filter(or_(examiner.email == session['user'], responsible.email == session['user'])).all()
     templist = db.session.query(Courses).join(examiner, Courses.examiner).join(responsible, Courses.responsible).filter(examiner.email == session['user']).all()
+    print templist
     return templist
 
 def mycoursesresponsible():
