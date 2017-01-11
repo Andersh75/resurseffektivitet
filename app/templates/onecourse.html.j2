@@ -14,9 +14,6 @@
 						<th class="text-left col-lg-8 col-md-8 col-sm-8 col-xs-8">Timmar</th>
 						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
 					</tr>
-
-
-					{% set counter = 0 %}
 					{% for item in roomtypesincourse(courseid): %}
 					<tr>
 						<td>
@@ -31,7 +28,6 @@
 
 						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
 							{{ subitem[0] }}
-							{% counter = counter + subitem[0] %}
 						{% endfor %}
 						</td>
 					</tr>
@@ -39,7 +35,11 @@
 					<tr>
 						<td></td>
 						<td></td>
-						<td>{{ counter }}</td>
+						<td class="text-left">
+						{% for subitem in sumofroomtypesuseincourse(courseid, item.id): %}
+							{{ subitem[0] }}
+						{% endfor %}
+						</td>
 					</tr>
 				</tbody>
 			</table>

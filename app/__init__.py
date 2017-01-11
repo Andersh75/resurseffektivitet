@@ -246,6 +246,11 @@ def roomtypesuseincourse(courseid, roomtypeid):
 
     return templist
 
+def sumofroomtypesuseincourse(courseid):
+    templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id.isnot(None))).all()
+
+    return templist
+
 
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
@@ -344,6 +349,7 @@ def subjectslistjson():
 
 
 
+
 def amiexaminer(code):
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     already = db.session.query(exists().where(and_(Courses.code==code, Courses.examiner==testvar))).scalar()
@@ -363,7 +369,7 @@ def amiteaching(code):
         already = True
     return already
 
-app.jinja_env.globals.update(roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
