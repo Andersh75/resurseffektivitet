@@ -30,7 +30,7 @@
 						{% else %}
 						<td>{{ item.lastname }}</td>
 						{% endif %}
-						<td><a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', courseid=item.id) }}" role="button">{{ item.initials }}</a></td>
+						<td><a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.initials }}</a></td>
 						<td>
 							{% for subitem in onescoursesresponsible(item.id): %}
 		                        <button type="button" class="btn btn-success btn-xs">{{ subitem.code }}</button>
