@@ -28,40 +28,40 @@
 					<tr>
 						<td><a class="btn btn-primary btn-xs" href="{{ url_for('oneroom_page', roomid=item.id) }}" role="button">{{ item.name }}</a></td>
 						<td>{{ item.seats }}</td>
-						<td>{{ roomtypeobjectfromid(1).roomtype }}</td>
-						<td>{{ roomtypeobjectfromid(1).cost }}</td>
+						<td>{{ roomtypeobjectfromid(2).roomtype }}</td>
+						<td>{{ roomtypeobjectfromid(2).cost }}</td>
 					</tr>
 				{% endfor %}
 				{% for item in roomsperroomtype(3) %}
 					<tr>
 						<td><a class="btn btn-primary btn-xs" href="{{ url_for('oneroom_page', roomid=item.id) }}" role="button">{{ item.name }}</a></td>
 						<td>{{ item.seats }}</td>
-						<td>{{ roomtypeobjectfromid(1).roomtype }}</td>
-						<td>{{ roomtypeobjectfromid(1).cost }}</td>
+						<td>{{ roomtypeobjectfromid(3).roomtype }}</td>
+						<td>{{ roomtypeobjectfromid(3).cost }}</td>
 					</tr>
 				{% endfor %}
 				{% for item in roomsperroomtype(4) %}
 					<tr>
 						<td><a class="btn btn-primary btn-xs" href="{{ url_for('oneroom_page', roomid=item.id) }}" role="button">{{ item.name }}</a></td>
 						<td>{{ item.seats }}</td>
-						<td>{{ roomtypeobjectfromid(1).roomtype }}</td>
-						<td>{{ roomtypeobjectfromid(1).cost }}</td>
+						<td>{{ roomtypeobjectfromid(4).roomtype }}</td>
+						<td>{{ roomtypeobjectfromid(4).cost }}</td>
 					</tr>
 				{% endfor %}
 				{% for item in roomsperroomtype(5) %}
 					<tr>
 						<td><a class="btn btn-primary btn-xs" href="{{ url_for('oneroom_page', roomid=item.id) }}" role="button">{{ item.name }}</a></td>
 						<td>{{ item.seats }}</td>
-						<td>{{ roomtypeobjectfromid(1).roomtype }}</td>
-						<td>{{ roomtypeobjectfromid(1).cost }}</td>
+						<td>{{ roomtypeobjectfromid(5).roomtype }}</td>
+						<td>{{ roomtypeobjectfromid(5).cost }}</td>
 					</tr>
 				{% endfor %}
 				{% for item in roomsperroomtype(6) %}
 					<tr>
 						<td><a class="btn btn-primary btn-xs" href="{{ url_for('oneroom_page', roomid=item.id) }}" role="button">{{ item.name }}</a></td>
 						<td>{{ item.seats }}</td>
-						<td>{{ roomtypeobjectfromid(1).roomtype }}</td>
-						<td>{{ roomtypeobjectfromid(1).cost }}</td>
+						<td>{{ roomtypeobjectfromid(6).roomtype }}</td>
+						<td>{{ roomtypeobjectfromid(6).cost }}</td>
 					</tr>
 				{% endfor %}
 	        </tbody>

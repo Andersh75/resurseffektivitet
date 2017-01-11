@@ -1175,6 +1175,7 @@ def oneteacher_page(teacherid=1):
     return render_template('oneteacher.html.j2', teacherid=teacherid)
 
 
+
 @app.route('/onecourse')
 @app.route('/onecourse/<int:courseid>')
 def onecourse_page(courseid=1):
