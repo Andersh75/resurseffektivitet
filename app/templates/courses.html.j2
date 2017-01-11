@@ -18,7 +18,8 @@
 	            </tr>
 	            {% for item in mycoursesexaminerorresponsible() %}
 		            <tr>
-		                <td><a href="{{ url_for('onecourse_page', courseid=item.id) }}">{{ item.code }}</a></td>
+		                <td><a class="btn btn-primary btn-xs"href="{{ url_for('onecourse_page', courseid=item.id) }}" role="button">{{ item.code }}</a>
+						</td>
 			            <td>{{ item.name }}</td>
 						<td>{{ item.examiner.email }}</a></td>
 						{% if amiexaminer(item.code) %}
