@@ -375,6 +375,7 @@ def teachersonslot(slotid):
 
 
 
+
 def subjectsinslot(slotid):
     templist = db.session.query(Subjects).join(Subjects.classes).filter(Classes.id == slotid).all()
     for item in templist:
