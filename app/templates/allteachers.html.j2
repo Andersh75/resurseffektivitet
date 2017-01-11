@@ -38,7 +38,7 @@
 						</td>
 						<td>
 							{% for subitem in onescoursesteaching(item.id): %}
-								<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem.id) }}" role="button">{{ subitem.code }}</a>
+								<a class="btn btn-success btn-xs" href="{{ url_for('onecourse_page', courseid=subitem.id) }}" role="button">{{ subitem.code }}</a>
 		                    {% endfor %}
 						</td>
 					</tr>
