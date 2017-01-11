@@ -74,6 +74,7 @@ subjects_classes = db.Table('subjects_classes',
 
 
 
+
 # One-to-many. Parent to Rooms
 class Roomtypes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
