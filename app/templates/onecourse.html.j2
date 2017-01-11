@@ -10,9 +10,10 @@
 			<table class="table table-hover sorted_table">
 				<tbody>
 					<tr>
+						<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1"></th>
 						<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Namn</th>
 						<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
-						<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Initialer</th>
+
 						<th class="text-left col-lg-8 col-md-8 col-sm-8 col-xs-8">Timmar</th>
 					</tr>
 
@@ -20,15 +21,16 @@
 
 					{% for item in teachersincourse(courseid): %}
 					<tr>
+						<td>
+							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.initials }}</a>
+						</td>
 						<td>{{ item.akafirstname }}
 						</td>
 
 						<td>{{ item.akalastname }}
 						</td>
 
-						<td>
-							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.initials }}</a>
-						</td>
+
 						<td>
 						{% for subitem in onesteachingincourse(courseid, item.id): %}
 							<a class="btn btn-success btn-xs" style="width:{{ subitem[0] * 10 }}px" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">&nbsp;</a>
