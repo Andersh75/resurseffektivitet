@@ -289,6 +289,11 @@ def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
     return str(varz)[:4]
 
 
+def courseobjectfromid(courseid):
+    testvar = db.session.query(Courses).filter(Courses.id == courseid).first()
+    #print testvar.password
+    return testvar
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
@@ -413,7 +418,7 @@ def amiteaching(code):
         already = True
     return already
 
-app.jinja_env.globals.update(onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype, sumofonesteachingincourse=sumofonesteachingincourse, sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
+app.jinja_env.globals.update(courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype, sumofonesteachingincourse=sumofonesteachingincourse, sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
 def login_required(f):
     @wraps(f)
@@ -425,7 +430,6 @@ def login_required(f):
             return redirect(url_for('login_page'))
 
     return wrap
-
 
 
 
