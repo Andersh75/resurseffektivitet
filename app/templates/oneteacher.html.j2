@@ -12,8 +12,9 @@
 			<tbody>
 				<tr>
 					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Kurs</th>
-					<th class="text-left col-lg-7 col-md-7 col-sm-7 col-xs-7">Namn</th>
-					<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Timmar</th>
+					<th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Namn</th>
+					<th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Timmar</th>
+					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
 				</tr>
 				{% for item in onescoursesteaching(teacherid): %}
 				<tr>
@@ -25,13 +26,21 @@
 					</td>
 
 					<td>
-						<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{% for item in onesteachingincourse(item.id, teacherid) %}{{ item[0] }}{% endfor %}</a>
+					{% for subitem in onesteachingincourse(item.id, teacherid): %}
+						<button type="button" class="btn btn-primary btn-xs" style="width:{{ subitem[0] * 10 }}px">&nbsp;</button>
+					{% endfor %}
+					</td>
+					<td class="text-left">
+					{% for subitem in onesteachingincourse(item.id, teacherid): %}
+						{{ subitem[0] }}
+					{% endfor %}
 					</td>
 
 
 				</tr>
 				{% endfor %}
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
