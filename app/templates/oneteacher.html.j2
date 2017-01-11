@@ -11,10 +11,10 @@
 		<table class="table table-hover sorted_table">
 			<tbody>
 				<tr>
-					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">Kurs</th>
-					<th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Namn</th>
-					<th class="text-left col-lg-4 col-md-4 col-sm-4 col-xs-4">Timmar</th>
-					<th class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
+					<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1">Kurs</th>
+					<th class="text-left col-lg-5 col-md-5 col-sm-5 col-xs-5">Namn</th>
+					<th class="text-left col-lg-5 col-md-5 col-sm-5 col-xs-5">Timmar</th>
+					<th class="text-left col-lg-1 col-md-1 col-sm-1 col-xs-1"></th>
 				</tr>
 				{% for item in onescoursesteaching(teacherid): %}
 				<tr>
@@ -25,7 +25,7 @@
 
 					<td>
 					{% for subitem in onesteachingincourse(item.id, teacherid): %}
-						<button type="button" class="btn btn-primary btn-xs" style="width:{{ subitem[0] * 10 }}px">&nbsp;</button>
+						<button type="button" class="btn btn-primary btn-xs" style="width:{{ subitem[0] * 7 }}px">&nbsp;</button>
 					{% endfor %}
 					</td>
 					<td class="text-left">
