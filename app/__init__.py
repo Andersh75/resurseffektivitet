@@ -262,7 +262,7 @@ def sumofonesteachingincourse(courseid):
 def sumofonesteachingincourseperroomtype(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id.isnot(None), Roomtypes.id == roomtypeid)).all()
 
-    return templist[0[0]]
+    return templist[0][0]]
 
 
 def myobject():
