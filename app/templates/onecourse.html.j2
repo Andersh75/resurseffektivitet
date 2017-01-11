@@ -19,7 +19,7 @@
 					{% for item in roomtypesincourse(courseid): %}
 					<tr>
 						<td>
-							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.name }}</a>
+							<a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=item.id) }}" role="button">{{ item.roomtype }}</a>
 						</td>
 						<td>
 						{% for subitem in roomtypesuseincourse(courseid, item.id): %}
