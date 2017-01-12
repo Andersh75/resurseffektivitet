@@ -50,6 +50,7 @@ dates_courses = db.Table('dates_courses',
     db.Column('courses_id', db.Integer, db.ForeignKey('courses.id'))
 )
 
+# Hepp
 dates_rooms = db.Table('dates_rooms',
     db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
     db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id'))
