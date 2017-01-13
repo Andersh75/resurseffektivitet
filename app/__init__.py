@@ -1405,16 +1405,17 @@ def testlogin():
             req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
             xml = BeautifulSoup(req)
 
+            templist = xml.find("courseRound")
+            templist = templist['startWeek']
+            print xml
+
         except Exception, e:
             varcode = "no name"
             print varcode
-            
+
     return 'Some response'
 
-        #templist = xml.find("courseRound")
-        #templist = templist['startWeek']
 
-            #print xml
 
     '''
         # Browser
