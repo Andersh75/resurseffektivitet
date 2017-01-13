@@ -991,6 +991,7 @@ def coursesfromdepartment2(item):
         tempdict['period'] = period
         tempdict['startweek'] = startweek
         tempdict['endweek'] = endweek
+        print tempdict['startweek']
         #tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
         print "BEFOR ENDWEEK"
         record = Courses(**tempdict)
