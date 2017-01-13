@@ -133,6 +133,8 @@ class Courses(db.Model):
     code = db.Column(db.String(30))
     schedule_exists = db.Column(db.Boolean, default=False)
     year = db.Column(db.Integer)
+    term = db.Column(db.Integer)
+    period = db.Column(db.Integer)
     semester = db.Column(db.Integer)
     studentsexpected = db.Column(db.Integer)
     studentsregistred = db.Column(db.Integer)
