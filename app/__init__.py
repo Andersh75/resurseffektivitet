@@ -1396,18 +1396,20 @@ def testlogin():
         else:
             roundid = period - 2
 
-        print coursecode
-        print year
-        print term
-        print roundid
+
 
         try:
             req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
             xml = BeautifulSoup(req)
 
-            templist = xml.find("courseRound")
-            templist = templist['startWeek']
-            print xml
+            print coursecode
+            print year
+            print term
+            print roundid
+
+            #templist = xml.find("courseRound")
+            #templist = templist['startWeek']
+            #print xml
 
         except Exception, e:
             varcode = "no name"
