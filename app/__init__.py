@@ -1363,7 +1363,11 @@ def testlogin():
 
     print "Success!\n"
 
-    return "HEJ"
+    url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1147&term=V17')
+
+    returnPage = url.read()
+
+    return returnPage
     '''
     with requests.Session() as c:
         url = 'https://login.kth.se/login'
