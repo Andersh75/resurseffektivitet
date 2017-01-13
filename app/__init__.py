@@ -1402,17 +1402,20 @@ def testlogin():
             req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
             xml = BeautifulSoup(req)
 
-            print coursecode
-            print year
-            print term
-            print roundid
+            #print coursecode
+            #print year
+            #print term
+            #print roundid
 
             courseround = xml.find('courseround')
 
             endweek = courseround['endweek']
             startweek = courseround['startweek']
 
-            startdate = courseround.find('courseResponsibleList')
+            print endweek
+            print startweek
+
+            startdate = xml.find('startdate')
             print startdate
 
             #f_user = courseround.find('courseresponsiblelist')
