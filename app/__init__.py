@@ -34,7 +34,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f27'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f28'
 db = SQLAlchemy(app)
 
 
@@ -965,6 +965,40 @@ def coursesfromdepartment(templist):
     print "DONE"
 
 
+def coursesfromdepartment2(item):
+
+    code = item['coursecode']
+    year = item['year']
+    term = item['term']
+    period = item['period']
+    responsible = item['emailcourseresponsible']
+    startweek = item['startweek']
+    endweek = item['endweek']
+
+
+    tempdict = {}
+    already = db.session.query(exists().where(and_(Courses.code==code, Courses.year==year))).scalar()
+
+    if (not already):
+        tempdict['code'] = code
+        tempdict['year'] = year
+        tempdict['term'] = term
+        tempdict['period'] = period
+        tempdict['startweek'] = startweek
+        tempdict['endweek'] = endweek
+        tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
+        record = Courses(**tempdict)
+        db.session.add(record)
+        db.session.commit()
+
+
+    if already:
+        tempobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+        tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
+        db.session.commit()
+
+
+
 
 def teachersfromdepartment(templist):
     for xitem in templist:
@@ -1419,15 +1453,9 @@ def testlogin():
             emailcourseresponsible = courseresponsible['primaryemail']
             print emailcourseresponsible
 
-            #f_user = courseround.find('courseresponsiblelist')
-            #print f_user
-            '''
-            f_user_dict = dict(f_user.attrs)
-            print "%s: %s [%s @ %s]" % (f_user_dict[u'friendlyname'],
-                                        message.find('text').decodeContents(),
-                                        msg_attrs[u'date'],
-                                        msg_attrs[u'time'])
-            '''
+
+
+
 
         except Exception, e:
             varcode = "no name"
@@ -1498,6 +1526,7 @@ def testlogin():
 def restartall():
 
     createtables()
+    '''
     csvimporter()
 
     tempdict = {}
@@ -1521,14 +1550,67 @@ def restartall():
         print tempdict2
         templist2.append(tempdict2)
 
-
-
     #ADD ALL TEACHERS TO DB
     teachersfromdepartment(templist2)
 
 
     #ADD ALL COURSES TO DB
     coursesfromdepartment(templist)
+
+    '''
+
+
+
+    tempdict3 = courseinfoperyearandterm(2017, 1)
+
+    for item in tempdict3['courseinfo']:
+        coursecode = item['coursecode']
+        year = item['year']
+        term = item['term']
+        period = item['period']
+        if period < 3:
+            roundid = period
+        else:
+            roundid = period - 2
+
+        try:
+            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
+            xml = BeautifulSoup(req)
+
+            #print coursecode
+            #print year
+            #print term
+            #print roundid
+
+            courseround = xml.find('courseround')
+
+            endweek = courseround['endweek']
+            startweek = courseround['startweek']
+
+            print endweek
+            print startweek
+
+            courseresponsible = xml.find('courseresponsible')
+            emailcourseresponsible = courseresponsible['primaryemail']
+            print emailcourseresponsible
+
+            item['emailcourseresponsible'] = emailcourseresponsible
+            item['startweek'] = startweek
+            item['endweek'] = endweek
+
+            coursesfromdepartment2(item)
+
+
+
+
+
+        except Exception, e:
+            varcode = "no name"
+            print varcode
+
+
+
+
 
     print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
 
