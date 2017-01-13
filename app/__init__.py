@@ -1408,7 +1408,7 @@ def testlogin():
             print roundid
 
             templist = xml.find("courseround")
-            templist = templist['startWeek']
+            #templist = templist['startWeek']
             print templist
 
         except Exception, e:
