@@ -994,7 +994,7 @@ def coursesfromdepartment2(item):
         tempdict['startweek'] = startweek
         tempdict['endweek'] = endweek
         print tempdict['startweek']
-        #tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
+        tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
         print "BEFOR ENDWEEK"
         record = Courses(**tempdict)
         db.session.add(record)
@@ -1006,7 +1006,7 @@ def coursesfromdepartment2(item):
     if already:
         print "ALREADY"
         tempobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
-        #tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
+        tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
         #db.session.commit()
 
 
@@ -1551,13 +1551,8 @@ def restartall():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
-
-
+    '''
     for item in departments:
-        #print item
-        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        #print tempdict
-        #templist.append(jsonifycoursesfromdepartment(tempdict))
 
         tempdict2 = staffperdepartment(item)
         print tempdict2
@@ -1566,9 +1561,8 @@ def restartall():
     #ADD ALL TEACHERS TO DB
     teachersfromdepartment(templist2)
 
+    '''
 
-    #ADD ALL COURSES TO DB
-    #coursesfromdepartment(templist)
 
     '''
 
@@ -1615,15 +1609,22 @@ def restartall():
 
             coursesfromdepartment2(item)
 
-
-
-
-
         except Exception, e:
             varcode = "no name"
             print varcode
 
 
+
+    for item in departments:
+        #print item
+        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        #print tempdict
+        #templist.append(jsonifycoursesfromdepartment(tempdict))
+
+
+
+    #ADD ALL COURSES TO DB
+    #coursesfromdepartment(templist)
 
 
 
