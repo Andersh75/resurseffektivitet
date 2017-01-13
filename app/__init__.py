@@ -1407,8 +1407,8 @@ def testlogin():
             print term
             print roundid
 
-            for courseround in xml.findAll('courseround'):
-                #print courseround
+            for courseround in xml.find('courseround'):
+                print courseround
                 courseround_attrs = dict(courseround.attrs)
                 for key, value in courseround_attrs:
                     print value
