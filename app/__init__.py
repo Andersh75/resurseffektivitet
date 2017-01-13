@@ -1412,7 +1412,7 @@ def testlogin():
             endweek = courseround['endweek']
             startweek = courseround['startweek']
 
-            startdate = courseround.find('startdate')
+            startdate = courseround.find('courseResponsibleList')
             print startdate
 
             #f_user = courseround.find('courseresponsiblelist')
