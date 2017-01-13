@@ -1332,8 +1332,8 @@ def testlogin():
         USERNAME = 'ahell'
         PASSWORD = '-Gre75kger-'
         c.get(url)
-        login_data = dict(username=USERNAME, password=PASSWORD)
-        c.post(url, data=login_data, headers={"Referer": "https://www.kth.se/"})
+        logindata = dict(username=USERNAME, password=PASSWORD)
+        c.post(url, data=logindata, headers={"Referer": "https://www.kth.se/"})
         page = c.get('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1147&term=V17')
 
     return page.content
