@@ -1415,8 +1415,8 @@ def testlogin():
             print endweek
             print startweek
 
-            startdate = xml.find('startdate')
-            print startdate
+            courseResponsible = xml.find('courseResponsible')
+            print courseResponsible
 
             #f_user = courseround.find('courseresponsiblelist')
             #print f_user
