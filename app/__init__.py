@@ -1011,6 +1011,23 @@ def coursesfromdepartment2(item):
 
 
 
+def coursesfromdepartment3(templist):
+    for itemlist in templist:
+        print itemlist
+        for item in itemlist:
+            #print item
+            name = item['name']
+            code = item['code']
+            examiner = item['examiner']
+            department = item['department']
+
+            latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(desc(Courses.code)).first()
+            latestcourse.name = name
+            latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
+            db.session.commit()
+            #print tempdict
+    #print "DONE"
+
 
 def teachersfromdepartment(templist):
     for xitem in templist:
@@ -1615,16 +1632,16 @@ def restartall():
 
 
 
-    #for item in departments:
+    for item in departments:
         #print item
-        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
         #print tempdict
-        #templist.append(jsonifycoursesfromdepartment(tempdict))
+        templist.append(jsonifycoursesfromdepartment(tempdict))
 
 
 
     #ADD ALL COURSES TO DB
-    #coursesfromdepartment(templist)
+    coursesfromdepartment3(templist)
 
 
 
