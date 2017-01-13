@@ -1538,8 +1538,8 @@ def testlogin():
 def restartall():
 
     createtables()
-    '''
-    csvimporter()
+
+    #csvimporter()
 
     tempdict = {}
     tempdict2 = {}
@@ -1552,11 +1552,12 @@ def restartall():
     departments = ["AIB", "AIC", "AID", "AIE"]
 
 
+
     for item in departments:
-        print item
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        print tempdict
-        templist.append(jsonifycoursesfromdepartment(tempdict))
+        #print item
+        #tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        #print tempdict
+        #templist.append(jsonifycoursesfromdepartment(tempdict))
 
         tempdict2 = staffperdepartment(item)
         print tempdict2
@@ -1567,11 +1568,11 @@ def restartall():
 
 
     #ADD ALL COURSES TO DB
-    coursesfromdepartment(templist)
+    #coursesfromdepartment(templist)
 
     '''
 
-
+    '''
 
     tempdict3 = courseinfoperyearandterm(2017, 1)
 
