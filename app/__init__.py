@@ -1357,8 +1357,8 @@ def testlogin():
     br.select_form(nr=0)
     # these two come from the code you posted
     # where you would normally put in your username and password
-    br[ "USERID" ] = 'ahell'
-    br[ "PASSWDTXT" ] = '-Gre75kger-'
+    br[ "username" ] = 'ahell'
+    br[ "password" ] = '-Gre75kger-'
     res = br.submit()
 
     print "Success!\n"
