@@ -1407,10 +1407,17 @@ def testlogin():
             print term
             print roundid
 
-            templist = xml.find("courseround")
-            print xml[u'courseCode']
-            #templist = templist['startWeek']
-            #print templist
+            for courseRound in soup.findAll('courseRound'):
+                print courseRound
+                '''
+                msg_attrs = dict(message.attrs)
+                f_user = message.find('from').user
+                f_user_dict = dict(f_user.attrs)
+                print "%s: %s [%s @ %s]" % (f_user_dict[u'friendlyname'],
+                                            message.find('text').decodeContents(),
+                                            msg_attrs[u'date'],
+                                            msg_attrs[u'time'])
+                '''
 
         except Exception, e:
             varcode = "no name"
