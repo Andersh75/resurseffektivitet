@@ -1615,7 +1615,7 @@ def restartall():
 
 
 
-    for item in departments:
+    #for item in departments:
         #print item
         #tempdict = fetchinglistofcodesfordepartmentcourses(item)
         #print tempdict
