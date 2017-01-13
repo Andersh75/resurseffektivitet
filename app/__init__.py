@@ -1411,7 +1411,7 @@ def testlogin():
                 #print courseround
                 courseround_attrs = dict(courseround.attrs)
 
-                f_user = courseround.find('courseResponsibleList').courseResponsible
+                f_user = courseround.find('courseresponsiblelist')
                 print f_user
                 '''
                 f_user_dict = dict(f_user.attrs)
