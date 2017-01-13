@@ -1382,7 +1382,7 @@ def testlogin():
         else:
             round = period - 2
 
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%2' % (coursecode, year, term, round))
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, round))
 
         xml = BeautifulSoup(req)
 
