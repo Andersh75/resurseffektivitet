@@ -1408,10 +1408,12 @@ def testlogin():
             print roundid
 
             for courseround in xml.findAll('courseround'):
-                print courseround
+                #print courseround
+                courseround_attrs = dict(courseround.attrs)
+
+                f_user = courseround.find('courseResponsibleList').courseResponsible
+                print f_user
                 '''
-                msg_attrs = dict(message.attrs)
-                f_user = message.find('from').user
                 f_user_dict = dict(f_user.attrs)
                 print "%s: %s [%s @ %s]" % (f_user_dict[u'friendlyname'],
                                             message.find('text').decodeContents(),
