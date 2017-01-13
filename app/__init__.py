@@ -993,14 +993,7 @@ def coursesfromdepartment2(item):
         tempdict['endweek'] = endweek
         #tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
         print "BEFOR ENDWEEK"
-        record = Courses(**{
-            'code' : code,
-            'year' : year,
-            'term' : term,
-            'period' : period,
-            'startweek' : startweek,
-            'endweek' : endweek
-        })
+        record = Courses(**tempdict)
         db.session.add(record)
         db.session.commit()
         print "ENDWEEK"
