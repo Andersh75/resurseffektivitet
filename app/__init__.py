@@ -34,7 +34,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f29'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f30'
 db = SQLAlchemy(app)
 
 
@@ -137,7 +137,7 @@ class Courses(db.Model):
     studentsexpected = db.Column(db.Integer)
     studentsregistred = db.Column(db.Integer)
     startweek = db.Column(db.String(30))
-    endweel = db.Column(db.String(30))
+    endweek = db.Column(db.String(30))
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
     examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
