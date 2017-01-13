@@ -17,6 +17,7 @@ import gc
 import urllib
 import urllib2
 from urllib2 import urlopen
+import requests
 import xmltodict
 import json
 from flask import json
