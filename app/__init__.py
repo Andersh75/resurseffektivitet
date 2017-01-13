@@ -1327,6 +1327,9 @@ def index():
 
 @app.route('/testlogin')
 def testlogin():
+
+    requests.get('https://login.kth.se/login', auth=('ahell', '-Gre75kger-'))
+    '''
     with requests.Session() as c:
         url = 'https://login.kth.se/login'
         USERNAME = 'ahell'
@@ -1337,6 +1340,8 @@ def testlogin():
         page = c.get('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1147&term=V17')
 
     return page.content
+    '''
+    return "HEJ"
 
 @app.route('/restartall')
 def restartall():
