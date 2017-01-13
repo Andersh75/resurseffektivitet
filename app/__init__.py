@@ -1407,21 +1407,18 @@ def testlogin():
             print term
             print roundid
 
-            for courseround in xml.find('courseround'):
-                print courseround
-                courseround_attrs = dict(courseround.attrs)
-                for key, value in courseround_attrs:
-                    print value
+            print xml.find('courseround')
 
-                #f_user = courseround.find('courseresponsiblelist')
-                #print f_user
-                '''
-                f_user_dict = dict(f_user.attrs)
-                print "%s: %s [%s @ %s]" % (f_user_dict[u'friendlyname'],
-                                            message.find('text').decodeContents(),
-                                            msg_attrs[u'date'],
-                                            msg_attrs[u'time'])
-                '''
+
+            #f_user = courseround.find('courseresponsiblelist')
+            #print f_user
+            '''
+            f_user_dict = dict(f_user.attrs)
+            print "%s: %s [%s @ %s]" % (f_user_dict[u'friendlyname'],
+                                        message.find('text').decodeContents(),
+                                        msg_attrs[u'date'],
+                                        msg_attrs[u'time'])
+            '''
 
         except Exception, e:
             varcode = "no name"
