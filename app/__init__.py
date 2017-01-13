@@ -1400,7 +1400,8 @@ def testlogin():
 
         xml = BeautifulSoup(req)
 
-        templist = xml['startWeek']
+        templist = xml.find("courseRound")
+        templist = templist['startWeek']
 
         print templist
     '''
