@@ -1408,8 +1408,9 @@ def testlogin():
             print roundid
 
             templist = xml.find("courseround")
+            print xml['coursecode']
             #templist = templist['startWeek']
-            print templist
+            #print templist
 
         except Exception, e:
             varcode = "no name"
