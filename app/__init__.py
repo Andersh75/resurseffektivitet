@@ -1407,8 +1407,8 @@ def testlogin():
             print term
             print roundid
 
-            for courseRound in soup.findAll('courseRound'):
-                print courseRound
+            for courseround in xml.findAll('courseround'):
+                print courseround
                 '''
                 msg_attrs = dict(message.attrs)
                 f_user = message.find('from').user
