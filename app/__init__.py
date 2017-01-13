@@ -133,6 +133,9 @@ class Courses(db.Model):
     code = db.Column(db.String(30))
     schedule_exists = db.Column(db.Boolean, default=False)
     year = db.Column(db.Integer)
+    semester = db.Column(db.Integer)
+    studentsexpected = db.Column(db.Integer)
+    studentsregistred = db.Column(db.Integer)
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
     examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
@@ -887,6 +890,43 @@ def courseinfoperyearandround(x, y):
     return tempdict2
 
 
+def courseinfoperyearandterm(x, y):
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
+
+    xml = BeautifulSoup(req)
+
+    templist = xml.findAll("courseround")
+
+    templist2 = []
+
+    for item in templist:
+        #print "1"
+        #print item['coursecode']
+        coursecode = item['coursecode']
+        if coursecode[:2] == "AI":
+
+            startterm = item['startterm']
+            roundid = item['roundid']
+
+            if int(startterm[-1:]) == 1:
+                period = int(roundid) + 2
+            else:
+                period = int(roundid)
+
+            year = startterm[:4]
+
+            #print coursecode, roundid, startterm, period, year
+            term = roundid
+
+            tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm}
+
+            templist2.append(tempdict)
+
+    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
+
+    return tempdict2
+
+
 def coursesfromdepartment(templist):
     for itemlist in templist:
         print itemlist
@@ -1329,7 +1369,27 @@ def index():
 
 @app.route('/testlogin')
 def testlogin():
+    tempdict3 = courseinfoperyearandterm(2017, 1)
 
+
+    for item in tempdict3['courseinfo']
+        coursecode = item['coursecode']
+        year = item['year']
+        term = item['term']
+        period = item['period']
+        if period < 3:
+            round = period
+        else:
+            round = period - 2
+
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%2' % (coursecode, year, term, round))
+
+        xml = BeautifulSoup(req)
+
+        templist = xml.find['startWeek']
+
+        print templist
+    '''
         # Browser
     br = mechanize.Browser()
 
@@ -1368,7 +1428,12 @@ def testlogin():
     returnPage = url.read()
 
     return returnPage
-    '''
+
+
+
+
+
+
     with requests.Session() as c:
         url = 'https://login.kth.se/login'
         USERNAME = 'ahell'
@@ -1408,10 +1473,6 @@ def restartall():
         print tempdict2
         templist2.append(tempdict2)
 
-
-        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
-
-    #tempdict3 = courseinfoperyearandround(2016, 1)
 
 
     #ADD ALL TEACHERS TO DB
