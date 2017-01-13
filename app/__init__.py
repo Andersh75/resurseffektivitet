@@ -1350,7 +1350,7 @@ def testlogin():
     br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
 
     # authenticate
-    br.open( 'https://login.kth.se/login' )
+    br.open( 'https://login.kth.se/login/' )
 
     for form in br.forms():
         print form.name
