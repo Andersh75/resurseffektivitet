@@ -1400,10 +1400,10 @@ def testlogin():
 
         xml = BeautifulSoup(req)
 
-        templist = xml.find("courseRound")
-        templist = templist['startWeek']
+        #templist = xml.find("courseRound")
+        #templist = templist['startWeek']
 
-        print templist
+        print xml
     '''
         # Browser
     br = mechanize.Browser()
