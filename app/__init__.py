@@ -1408,7 +1408,7 @@ def testlogin():
             print roundid
 
             templist = xml.find("courseround")
-            print xml['courseCode']
+            print xml[u'courseCode']
             #templist = templist['startWeek']
             #print templist
 
