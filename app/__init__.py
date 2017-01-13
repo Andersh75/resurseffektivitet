@@ -1365,7 +1365,21 @@ def index():
     print "HE"
     return redirect(url_for('login_page'))
 
+'''    templist = xml.find("table")
+    templist = templist.find("tbody")
+    templist = templist.findAll("tr")
 
+    templist2 = []
+    tempdict = {}
+
+    for tr in templist:
+        tdlist = tr.findAll("a")
+        #print tdlist[1]['href']
+        firstname = tdlist[2].text
+        lastname = tdlist[1].text
+        email = tdlist[3].text
+        username = tdlist[1]['href'][27:]
+'''
 
 @app.route('/testlogin')
 def testlogin():
@@ -1386,7 +1400,7 @@ def testlogin():
 
         xml = BeautifulSoup(req)
 
-        templist = xml.find['startWeek']
+        templist = xml['startWeek']
 
         print templist
     '''
