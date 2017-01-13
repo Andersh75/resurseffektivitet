@@ -984,6 +984,7 @@ def coursesfromdepartment2(item):
     already = db.session.query(exists().where(and_(Courses.code==code, Courses.year==year))).scalar()
 
     if (not already):
+        print "NOT ALREADY"
         tempdict['code'] = code
         tempdict['year'] = year
         tempdict['term'] = term
@@ -997,6 +998,7 @@ def coursesfromdepartment2(item):
 
 
     if already:
+        print "ALREADY"
         tempobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
         #tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
         #db.session.commit()
