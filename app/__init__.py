@@ -1007,7 +1007,7 @@ def coursesfromdepartment2(item):
         print "ALREADY"
         tempobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
         tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
-        #db.session.commit()
+        db.session.commit()
 
 
 
