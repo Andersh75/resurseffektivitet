@@ -1325,7 +1325,7 @@ def index():
 
 
 @app.route('/testlogin')
-def index():
+def testlogin():
     with requests.Session() as c:
         url = 'https://login.kth.se/login'
         USERNAME = 'ahell'
