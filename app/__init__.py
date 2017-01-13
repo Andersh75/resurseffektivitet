@@ -1567,6 +1567,8 @@ def restartall():
 
     for item in tempdict3['courseinfo']:
         coursecode = item['coursecode']
+        print "XXX"
+        print coursecode
         year = item['year']
         term = item['term']
         period = item['period']
