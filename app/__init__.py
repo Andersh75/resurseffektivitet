@@ -1351,7 +1351,10 @@ def testlogin():
 
     # authenticate
     br.open( 'https://login.kth.se/login' )
-    br.select_form( name="fm1" )
+
+    for form in br.forms():
+        print form.name
+    br.select_form(name='fm1')
     # these two come from the code you posted
     # where you would normally put in your username and password
     br[ "USERID" ] = 'ahell'
