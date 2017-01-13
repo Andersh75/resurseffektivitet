@@ -136,6 +136,8 @@ class Courses(db.Model):
     semester = db.Column(db.Integer)
     studentsexpected = db.Column(db.Integer)
     studentsregistred = db.Column(db.Integer)
+    startweek = db.Column(db.String(30))
+    endweel = db.Column(db.String(30))
     classes = db.relationship('Classes', backref='courses', lazy='dynamic')
     examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
