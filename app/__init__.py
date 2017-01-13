@@ -1372,7 +1372,7 @@ def testlogin():
     tempdict3 = courseinfoperyearandterm(2017, 1)
 
 
-    for item in tempdict3['courseinfo']
+    for item in tempdict3['courseinfo']:
         coursecode = item['coursecode']
         year = item['year']
         term = item['term']
