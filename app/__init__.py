@@ -1410,9 +1410,11 @@ def testlogin():
             for courseround in xml.findAll('courseround'):
                 #print courseround
                 courseround_attrs = dict(courseround.attrs)
+                for key, value in courseround_attrs:
+                    print value
 
-                f_user = courseround.find('courseresponsiblelist')
-                print f_user
+                #f_user = courseround.find('courseresponsiblelist')
+                #print f_user
                 '''
                 f_user_dict = dict(f_user.attrs)
                 print "%s: %s [%s @ %s]" % (f_user_dict[u'friendlyname'],
