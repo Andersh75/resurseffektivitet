@@ -1392,11 +1392,17 @@ def testlogin():
         term = item['term']
         period = item['period']
         if period < 3:
-            round = period
+            roundid = period
         else:
-            round = period - 2
+            roundid = period - 2
 
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, round))
+        print coursecode
+        print year
+        print term
+        print roundid
+
+
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
 
         xml = BeautifulSoup(req)
 
