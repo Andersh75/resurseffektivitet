@@ -34,7 +34,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f28'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f29'
 db = SQLAlchemy(app)
 
 
@@ -988,7 +988,7 @@ def coursesfromdepartment2(item):
         tempdict['period'] = period
         tempdict['startweek'] = startweek
         tempdict['endweek'] = endweek
-        tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
+        #tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
         record = Courses(**tempdict)
         db.session.add(record)
         db.session.commit()
@@ -996,8 +996,8 @@ def coursesfromdepartment2(item):
 
     if already:
         tempobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
-        tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
-        db.session.commit()
+        #tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
+        #db.session.commit()
 
 
 
