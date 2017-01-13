@@ -970,6 +970,8 @@ def coursesfromdepartment(templist):
 def coursesfromdepartment2(item):
 
     code = item['coursecode']
+    print "YYY"
+    print code
     year = item['year']
     term = item['term']
     period = item['period']
