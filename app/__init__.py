@@ -1407,9 +1407,13 @@ def testlogin():
             print term
             print roundid
 
-            testvar = xml.find('courseround')
+            courseround = xml.find('courseround')
 
-            print testvar['endweek']
+            endweek = courseround['endweek']
+            startweek = courseround['startweek']
+
+            startdate = courseround.find('courseround')
+            print startdate.text
 
             #f_user = courseround.find('courseresponsiblelist')
             #print f_user
