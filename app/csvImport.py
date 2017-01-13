@@ -105,8 +105,6 @@ for i in courses_list:
         'name' : i[1],
         'schedule_exists' : i[2],
         'year' : i[3]
-
-
     })
     db.session.add(record)
     db.session.commit()

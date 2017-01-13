@@ -1001,10 +1001,10 @@ def coursesfromdepartment2(item):
             'startweek' : startweek,
             'endweek' : endweek
         })
-        print "ENDWEEK"
-        print record.endweek
         db.session.add(record)
         db.session.commit()
+        print "ENDWEEK"
+
 
 
     if already:
