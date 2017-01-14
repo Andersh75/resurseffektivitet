@@ -1859,23 +1859,27 @@ def testscrape():
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
 
         except Exception, e:
-            varcode = "no primaryemail"
+            varcode = "no social"
             print varcode
+            print item.code
 
 
         try:
             xml = BeautifulSoup(url)
         except Exception, e:
-            varcode = "no primaryemail"
+            varcode = "no BS"
             print varcode
 
-        testvar = "/social/course/AI1147/subgroup/"
+        testvar = "/social/course/"
+
+        testvar = testvar + item.code
+        testvar = testvar + "/subgroup/"
 
         try:
             xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
 
         except Exception, e:
-            varcode = "no primaryemail"
+            varcode = "no startswith"
             print varcode
 
 
