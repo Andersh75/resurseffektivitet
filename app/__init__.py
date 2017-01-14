@@ -1055,7 +1055,7 @@ def addcoursestotables_first(tempdict):
             #print roundid
 
             try:
-            courseround = xml.find('courseround')
+                courseround = xml.find('courseround')
 
             except Exception, e:
                 varcode = "no courseround"
@@ -1063,9 +1063,9 @@ def addcoursestotables_first(tempdict):
 
 
             try:
-            endweek = courseround['endweek']
+                endweek = courseround['endweek']
 
-            item['endweek'] = endweek
+                item['endweek'] = endweek
 
             except Exception, e:
                 varcode = "no endweek"
@@ -1073,9 +1073,9 @@ def addcoursestotables_first(tempdict):
 
 
             try:
-            startweek = courseround['startweek']
+                startweek = courseround['startweek']
 
-            item['startweek'] = startweek
+                item['startweek'] = startweek
 
             except Exception, e:
                 varcode = "no startweek"
@@ -1084,16 +1084,16 @@ def addcoursestotables_first(tempdict):
             #print endweek
             #print startweek
             try:
-            courseresponsible = xml.find('courseresponsible')
+                courseresponsible = xml.find('courseresponsible')
 
             except Exception, e:
                 varcode = "no courseresponsible"
                 print varcode
 
             try:
-            emailcourseresponsible = courseresponsible['primaryemail']
-            #print emailcourseresponsible
-            item['emailcourseresponsible'] = emailcourseresponsible
+                emailcourseresponsible = courseresponsible['primaryemail']
+                #print emailcourseresponsible
+                item['emailcourseresponsible'] = emailcourseresponsible
 
             except Exception, e:
                 varcode = "no primaryemail"
