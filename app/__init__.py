@@ -1655,6 +1655,29 @@ def testlogin():
             varcode = "no primaryemail"
             print varcode
 
+        try:
+            xml = xml.find('caption').text
+
+            if xml[22:23] == ",":
+                studentexp = 0
+            if xml[23:24] == ",":
+                studentexp = int(xml[22:23])
+            if xml[24:25] == ":":
+                studentexp = int(xml[22:24])
+            if xml[25:26] == ":":
+                studentexp = int(xml[22:25])
+
+
+            #print item.code
+            print studentexp
+
+            item.studentsexpected = studentexp
+            db.session.commit()
+
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
+
 
 
 
