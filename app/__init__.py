@@ -2059,7 +2059,9 @@ def fetchslotfromsociallink():
 
     try:
         location = xml.find('span', itemprop=lambda value: value and value.startswith("location"))
+        print location
         location = location.find('a')
+        print location
         location = location.text
 
         print location
