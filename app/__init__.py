@@ -2071,7 +2071,7 @@ def fetchslotfromsociallink():
     #print archive_links
     print "HEJ"
 
-    '''
+
     browser = webdriver.PhantomJS('/usr/bin/phantomjs')
     #browser.get('http://raspberrypi.stackexchange.com/')
     browser.get(testlink)
@@ -2079,46 +2079,21 @@ def fetchslotfromsociallink():
     xml = BeautifulSoup(browser.page_source, "html.parser")
 
     #print xml
+    '''
     ghost = Ghost()
     ghost = Session(ghost)
-    ghost.open('https://www.kth.se/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/')
-
-    ghost.wait_timeout=25
-
-    page, resources = ghost.wait_for_page_loaded()
-
-    xml = BeautifulSoup(ghost.content)
-    print "HEJ"
-    print xml
-    '''
 
 
-
-    g = Ghost()
-    with g.start() as session:
-        page, extra_resources = session.open("https://www.debian.org")
-        session.wait_timeout=25
-        if page.http_status == 200 and 'The Universal Operating System' in page.content:
-            print("Good!")
-
-
-
-    ghost = Ghost()
-    session = Session(ghost)
-    session.wait_timeout=25
-
-    #Open Webpage
-    ghost.open("http://girhub.com")
-    print ("page Loaded")
-
-
-
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "fancybox"))) # waits till the element with the specific id appears
-    src = driver.page_source # gets the html source of the page
 
 
     try:
-        url = br.open(testlink)
+        #url = br.open(testlink)
+        ghost.open('https://www.kth.se/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/')
+
+        ghost.wait_timeout=25
+
+        page, resources = ghost.wait_for_page_loaded()
+
 
     except Exception, e:
         varcode = "no social"
@@ -2127,10 +2102,12 @@ def fetchslotfromsociallink():
 
 
     try:
-        xml = BeautifulSoup(src)
+        #xml = BeautifulSoup(src)
+        xml = BeautifulSoup(ghost.content)
         testlist = xml.find_all('a', { "class" : "fancybox" })
         for item in testlist:
             print item
+            
     except Exception, e:
         varcode = "no BS"
         print varcode
@@ -2164,7 +2141,7 @@ def fetchslotfromsociallink():
 
 
 
-    '''
+
     return "HHHHH"
 
 
