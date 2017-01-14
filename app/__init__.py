@@ -1908,7 +1908,7 @@ def testscrape():
 
             try:
                 xml = xml.find('a', text="Schema")
-                print xml
+                print xml['href']
 
             except Exception, e:
                 varcode = "no primaryemail"
