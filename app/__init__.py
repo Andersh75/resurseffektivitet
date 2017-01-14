@@ -34,7 +34,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f33'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f34'
 db = SQLAlchemy(app)
 
 
@@ -136,7 +136,6 @@ class Courses(db.Model):
     term = db.Column(db.Integer)
     period = db.Column(db.Integer)
     roundid = db.Column(db.Integer)
-    semester = db.Column(db.Integer)
     studentsexpected = db.Column(db.Integer)
     studentsregistred = db.Column(db.Integer)
     startweek = db.Column(db.String(30))
