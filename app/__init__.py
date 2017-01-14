@@ -2069,7 +2069,7 @@ def fetchslotfromsociallink():
     #Now using correct Xpath we are fetching URL of archives
     archive_links = tree.xpath('//divass="campaign"]/a/@href')
     print archive_links
-    
+    print "HEJ"
 
     '''
     browser = webdriver.PhantomJS('/usr/bin/phantomjs')
