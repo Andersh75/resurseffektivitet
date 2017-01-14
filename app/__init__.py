@@ -1599,7 +1599,16 @@ def testlogin():
 
     xml = xml.find('caption').text
 
-    print xml[22]
+    if xml[-1:] == ":":
+        studentreg = 0
+    if xml[-2:-1] == ":":
+        studentreg = xml[-1:]
+    if xml[-3:-2] == ":":
+        studentreg = xml[-2:]
+    if xml[-4:-3] == ":":
+        studentreg = xml[-3:]
+
+    print studentreg
 
 
 
