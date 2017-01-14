@@ -2037,7 +2037,8 @@ def fetchslotfromsociallink():
 
 
     browser = webdriver.PhantomJS('/usr/bin/phantomjs')
-    browser.get('http://raspberrypi.stackexchange.com/')
+    #browser.get('http://raspberrypi.stackexchange.com/')
+    browser.get(testlink)
 
     xml = BeautifulSoup(browser.page_source, "html.parser")
 
