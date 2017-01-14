@@ -1039,8 +1039,9 @@ def addcoursestotables_first(tempdict):
     for item in tempdict['courseinfo']:
         coursecode = item['coursecode']
         print coursecode
-        print year
+
         year = item['year']
+        print year
         term = item['term']
         period = item['period']
         if period < 3:
