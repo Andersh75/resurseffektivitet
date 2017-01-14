@@ -38,8 +38,7 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.by import By
 from pyvirtualdisplay import Display
 
-display = Display(visible=0, size=(800, 600))
-display.start()
+
 
 
 
@@ -2035,12 +2034,17 @@ def fetchslotfromsociallink():
     testlink = testlink + "/social/course/HS1700/subgroup/vt-2011-50454/event/ovning-2011-02-23-1000-17/"
 
 
+    display = Display(visible=0, size=(1024, 768))
+    display.start()
 
-    driver = webdriver.Firefox() # if you want to use chrome, replace Firefox() with Chrome()
-    driver.get(testlink) # load the web page
+    driver = webdriver.Firefox()
+    driver.get('http://raspberrypi.stackexchange.com/')
+    driver.quit()
+
+    display.stop()
 
 
-
+    '''
 
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "fancybox"))) # waits till the element with the specific id appears
     src = driver.page_source # gets the html source of the page
@@ -2093,7 +2097,7 @@ def fetchslotfromsociallink():
 
 
 
-
+    '''
     return "HO"
 
 
