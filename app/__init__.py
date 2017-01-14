@@ -2049,7 +2049,14 @@ def fetchslotfromsociallink():
     print xml
     ghost = Ghost()
     ghost = Session(ghost)
-    ghost.open('http://www.openstreetmap.org/')
+    ghost.open('https://www.kth.se')
+
+    page, resources = ghost.wait_for_page_loaded()
+
+    xml = BeautifulSoup(ghost.content)
+    print "HEJ"
+    print xml
+
     '''
     g = Ghost()
     with g.start() as session:
