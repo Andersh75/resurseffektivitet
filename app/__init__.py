@@ -2049,7 +2049,7 @@ def fetchslotfromsociallink():
     print xml
     ghost = Ghost()
     ghost = Session(ghost)
-    ghost.open('https://www.kth.se')
+    ghost.open(testlink)
 
     page, resources = ghost.wait_for_page_loaded()
 
