@@ -1592,6 +1592,7 @@ def testlogin():
     studentreg = 0
 
     for item in allcourses():
+        print item.code
         try:
             url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=V%s' % (item.code, item.year[-2]))
 
