@@ -1054,21 +1054,55 @@ def addcoursestotables_first(tempdict):
             #print term
             #print roundid
 
+            try:
             courseround = xml.find('courseround')
 
+            except Exception, e:
+                varcode = "no courseround"
+                print varcode
+
+
+            try:
             endweek = courseround['endweek']
+
+            item['endweek'] = endweek
+
+            except Exception, e:
+                varcode = "no endweek"
+                print varcode
+
+
+            try:
             startweek = courseround['startweek']
+
+            item['startweek'] = startweek
+
+            except Exception, e:
+                varcode = "no startweek"
+                print varcode
 
             #print endweek
             #print startweek
-
+            try:
             courseresponsible = xml.find('courseresponsible')
-            emailcourseresponsible = courseresponsible['primaryemail']
-            print emailcourseresponsible
 
+            except Exception, e:
+                varcode = "no courseresponsible"
+                print varcode
+
+            try:
+            emailcourseresponsible = courseresponsible['primaryemail']
+            #print emailcourseresponsible
             item['emailcourseresponsible'] = emailcourseresponsible
-            item['startweek'] = startweek
-            item['endweek'] = endweek
+
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+
+
+
+
 
             coursesfromdepartment2(item)
 
