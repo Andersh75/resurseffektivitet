@@ -2107,7 +2107,7 @@ def fetchslotfromsociallink():
         testlist = xml.find_all('a', { "class" : "fancybox" })
         for item in testlist:
             print item
-            
+
     except Exception, e:
         varcode = "no BS"
         print varcode
@@ -2142,7 +2142,7 @@ def fetchslotfromsociallink():
 
 
 
-    return "HHHHH"
+    return "XXXXX"
 
 
 @app.route('/restartall')
