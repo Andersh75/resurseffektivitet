@@ -1591,11 +1591,13 @@ def testlogin():
 
     url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1147&term=V17')
 
-    returnPage = url.read()
+    #returnPage = url.read()
 
     xml = BeautifulSoup(url)
 
-    print xml.find('table')
+    xml = xml.find('table')
+
+    xml = xml.find('caption')
 
 
 
