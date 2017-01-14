@@ -39,7 +39,7 @@ from selenium.webdriver.common.by import By
 from pyvirtualdisplay import Display
 import re, urlparse
 from time import sleep
-from ghost import Ghost
+from ghost import Ghost, Session
 
 
 
@@ -2045,32 +2045,13 @@ def fetchslotfromsociallink():
 
     print xml
 
-    ghost = Ghost(wait_timeout=50, download_images=False)
-    page, extra_resources = ghost.open('http://hcavirginia.com/home/',
-                                       headers={'User-Agent': 'Mozilla/4.0'})
+    ghost = Ghost()
+    session = Session(ghost)
+    session.wait_timeout=25
 
-    # Halt execution of the script until a span.ehc-er-digits is found in
-    # the document
-    page, resources = ghost.wait_for_selector("span.ehc-er-digits")
-
-    # It should be possible to simply evaluate
-    # "document.getElementsByClassName('ehc-er-digits');" and extract the data from
-    # the returned dictionary, but I didn't quite understand the
-    # data structure - hence this inline javascript.
-    nums, resources = ghost.evaluate(
-        """
-        elems = document.getElementsByClassName('ehc-er-digits');
-        nums = []
-        for (i = 0; i < elems.length; ++i) {
-            nums[i] = elems[i].innerHTML;
-        }
-        nums;
-        """)
-
-    wt_data = [int(x) for x in nums]
-    print wt_data
-    sleep(30) # Sleep a while to avoid the crashing of the script. Weird issue!
-
+    #Open Webpage
+    ghost.open("http://girhub.com")
+    print ("page Loaded")
 
     '''
 
