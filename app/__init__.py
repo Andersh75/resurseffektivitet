@@ -1595,7 +1595,8 @@ def testlogin():
         print item.code
 
         try:
-            print item.year
+            print str(item.year)[-2]
+
 
         except Exception, e:
             varcode = "no primaryemail"
@@ -1603,7 +1604,7 @@ def testlogin():
 
 
         try:
-            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=V%s' % (item.code, item.year[-2]))
+            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=V%s' % (item.code, str(item.year)[-2]))
 
         except Exception, e:
             varcode = "no primaryemail"
