@@ -1589,36 +1589,62 @@ def testlogin():
 
     print "Success!\n"
 
-    url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1128&term=V17')
+    studentreg = 0
 
-    #returnPage = url.read()
+    for item in allcourses():
+        try:
+            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=V%s' % (item.code, item.year[-2])
 
-    xml = BeautifulSoup(url)
+            #returnPage = url.read()
 
-    xml = xml.find('table')
-
-    xml = xml.find('caption').text
-
-    if xml[-1:] == ":":
-        studentreg = 0
-    if xml[-2:-1] == ":":
-        studentreg = 0
-    if xml[-3:-2] == ":":
-        studentreg = xml[-1:]
-    if xml[-4:-3] == ":":
-        studentreg = xml[-2:]
-    if xml[-5:-4] == ":":
-        studentreg = xml[-3:]
-
-    print studentreg
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
 
 
+        try:
+            xml = BeautifulSoup(url)
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
+
+
+        try:
+            xml = xml.find('table')
+
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
+
+
+        try:
+            xml = xml.find('caption').text
+
+            if xml[-1:] == ":":
+                studentreg = 0
+            if xml[-2:-1] == ":":
+                studentreg = 0
+            if xml[-3:-2] == ":":
+                studentreg = xml[-1:]
+            if xml[-4:-3] == ":":
+                studentreg = xml[-2:]
+            if xml[-5:-4] == ":":
+                studentreg = xml[-3:]
+
+            print item.code
+            print studentreg
+
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
 
 
 
 
 
-    return "Hopp"
+
+
+        return "Hopp"
 
 
 
