@@ -1064,7 +1064,7 @@ def addcoursestotables_first(tempdict):
 
             courseresponsible = xml.find('courseresponsible')
             emailcourseresponsible = courseresponsible['primaryemail']
-            #print emailcourseresponsible
+            print emailcourseresponsible
 
             item['emailcourseresponsible'] = emailcourseresponsible
             item['startweek'] = startweek
@@ -1074,7 +1074,7 @@ def addcoursestotables_first(tempdict):
 
         except Exception, e:
             varcode = "no name"
-            #print varcode
+            print varcode
 
 
 
