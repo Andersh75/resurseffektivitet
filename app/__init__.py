@@ -2031,7 +2031,7 @@ def fetchslotfromsociallink():
 
 
 
-    driver = webdriver.Chrome() # if you want to use chrome, replace Firefox() with Chrome()
+    driver = webdriver.Firefox() # if you want to use chrome, replace Firefox() with Chrome()
     driver.get(testlink) # load the web page
 
 
