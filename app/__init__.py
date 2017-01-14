@@ -848,7 +848,7 @@ def parselistofslotspercourse(tempdict):
 
             alreadyclass = db.session.query(exists().where(and_(Classes.content==info, Classes.starttime==starttime, Classes.endtime==endtime, Classes.courses_id==courseobj.id, Classes.dates_id==dateobj.id))).scalar()
 
-            if not alreadyclass
+            if not alreadyclass:
                 record = Classes(**{
                     #'date' : i[0],
                     'content' : info,
@@ -870,9 +870,9 @@ def parselistofslotspercourse(tempdict):
                 for location in locations:
                     name = location['name']
 
-                    already = db.session.query(exists().where(Rooms.name==name)).scalar()
+                    alreadyroom = db.session.query(exists().where(Rooms.name==name)).scalar()
 
-                    if not already:
+                    if not alreadyroom:
                         record = Rooms(**{
                             'name' : name
                         })
