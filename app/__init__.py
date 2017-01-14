@@ -2049,7 +2049,7 @@ def fetchslotfromsociallink():
     #print xml
     ghost = Ghost()
     ghost = Session(ghost)
-    ghost.open(testlink)
+    ghost.open('https://www.kth.se/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/')
 
     ghost.wait_timeout=25
 
