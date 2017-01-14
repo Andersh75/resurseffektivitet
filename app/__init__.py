@@ -2058,11 +2058,8 @@ def fetchslotfromsociallink():
         print varcode
 
     try:
-        locations = xml.find_all('span', itemprop=lambda value: value and value.startswith("location"))
-        for location in locations:
-            print location
-            location = location.text
-            print location
+        location = xml.find_all('span', itemprop=lambda value: value and value.startswith("location"))
+        print location
 
         print location
     except Exception, e:
