@@ -2046,7 +2046,7 @@ def fetchslotfromsociallink():
 
     xml = BeautifulSoup(browser.page_source, "html.parser")
 
-    print xml
+    #print xml
     ghost = Ghost()
     ghost = Session(ghost)
     ghost.open(testlink)
