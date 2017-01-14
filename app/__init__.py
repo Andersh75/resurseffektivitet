@@ -1039,6 +1039,7 @@ def coursesfromdepartment3(templist):
                 tempdict['code'] = code
                 tempdict['name'] = name
                 tempdict['department'] = department
+                print examiner
                 tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
                 #print "BEFOR ENDWEEK"
                 record = Courses(**tempdict)
