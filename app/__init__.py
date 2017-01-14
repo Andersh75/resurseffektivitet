@@ -34,7 +34,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f31'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f32'
 db = SQLAlchemy(app)
 
 
@@ -1021,6 +1021,7 @@ def coursesfromdepartment3(templist):
             examiner = item['examiner']
             department = item['department']
             print name
+            print code
             latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.code.desc()).first()
             print latestcourse
             latestcourse.name = name
@@ -1617,7 +1618,7 @@ def restartall():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
-    '''
+
     for item in departments:
 
         tempdict2 = staffperdepartment(item)
@@ -1627,10 +1628,9 @@ def restartall():
     #ADD ALL TEACHERS TO DB
     teachersfromdepartment(templist2)
 
-    '''
 
 
-    
+
 
     '''
 
@@ -1646,7 +1646,7 @@ def restartall():
     addcoursestotables_first(tempdict20162)
     addcoursestotables_first(tempdict20171)
     '''
-
+    '''
     for item in departments:
         #print item
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
@@ -1658,7 +1658,7 @@ def restartall():
     #ADD ALL COURSES TO DB
     coursesfromdepartment3(templist)
 
-
+    '''
 
     print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
 
