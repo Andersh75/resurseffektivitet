@@ -37,6 +37,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.by import By
 from pyvirtualdisplay import Display
+import re, urlparse
+from time import sleep
 
 
 
@@ -2034,14 +2036,12 @@ def fetchslotfromsociallink():
     testlink = testlink + "/social/course/HS1700/subgroup/vt-2011-50454/event/ovning-2011-02-23-1000-17/"
 
 
-    display = Display(visible=0, size=(1024, 768))
-    display.start()
+    browser = wedbriver.PhantomJS('/usr/bin/phantomjs')
+    browser.get('http://raspberrypi.stackexchange.com/')
 
-    driver = webdriver.Firefox()
-    driver.get('http://raspberrypi.stackexchange.com/')
-    driver.quit()
+    xml = BeautifulSoup(browser.page_source, "html.parser")
 
-    display.stop()
+    print xml
 
 
     '''
