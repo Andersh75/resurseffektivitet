@@ -2048,6 +2048,25 @@ def fetchslotfromsociallink():
         varcode = "no BS"
         print varcode
 
+    try:
+        enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+        enddate = enddate.text
+
+        print enddate
+    except Exception, e:
+        varcode = "no BS"
+        print varcode
+
+    try:
+        location = xml.find('span', itemprop=lambda value: value and value.startswith("location"))
+        location = location.find('a')
+        location = location.text
+
+        print location
+    except Exception, e:
+        varcode = "no BS"
+        print varcode
+
 
 
 
