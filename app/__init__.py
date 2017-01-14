@@ -2050,7 +2050,7 @@ def fetchslotfromsociallink():
 
 
 
-    g = ghost.Ghost()
+    g = Ghost()
     with g.start() as session:
         page, extra_resources = session.open("https://www.debian.org")
         if page.http_status == 200 and 'The Universal Operating System' in page.content:
