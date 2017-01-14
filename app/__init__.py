@@ -843,8 +843,11 @@ def parselistofslotspercourse(tempdict):
 
             dateobj = Dates.query.filter_by(date=date).first()
 
-            dateobj.courses.append(courseobj)
-            db.session.commit()
+
+            #KOLLA OM DET REDAN EXISTERAR!!!!
+            if not db.session.query(Courses).join(Courses.dates).filter(and_(Courses.id==courseobj.id, Dates.id==dateobj.id)).first():
+                dateobj.courses.append(courseobj)
+                db.session.commit()
 
             alreadyclass = db.session.query(exists().where(and_(Classes.content==info, Classes.starttime==starttime, Classes.endtime==endtime, Classes.courses_id==courseobj.id, Classes.dates_id==dateobj.id))).scalar()
 
