@@ -816,7 +816,7 @@ def parselistofslotspercourse(tempdict):
 
         year = int(date[:4])
 
-        if date[6:8] == "01":
+        if date[5:7] == "01":
             try:
                 day = str(date[-2:])
                 print "WORKED"
