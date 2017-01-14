@@ -1862,7 +1862,13 @@ def testscrape():
             varcode = "no social"
             print varcode
             print item.code
-            url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (item.code))
+
+            try:
+                url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (item.code))
+            except Exception, e:
+                varcode = "no other subgroups"
+                print varcode
+                print item.code
 
 
         try:
