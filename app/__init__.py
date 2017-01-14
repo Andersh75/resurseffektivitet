@@ -1817,6 +1817,79 @@ def testlogin():
 
 
 
+@app.route('/testscrape')
+def testscrape():
+
+    # Browser
+    br = mechanize.Browser()
+
+    # Enable cookie support for urllib2
+    cookiejar = cookielib.LWPCookieJar()
+    br.set_cookiejar( cookiejar )
+
+    # Broser options
+    br.set_handle_equiv( True )
+    br.set_handle_gzip( True )
+    br.set_handle_redirect( True )
+    br.set_handle_referer( True )
+    br.set_handle_robots( False )
+
+    # ??
+    br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
+
+    br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
+    print "heh"
+    # authenticate
+    br.open( 'https://login.kth.se/login/' )
+
+    br.select_form(nr=0)
+    # these two come from the code you posted
+    # where you would normally put in your username and password
+    br[ "username" ] = 'ahell'
+    br[ "password" ] = '-Gre75kger-'
+    res = br.submit()
+
+    print "Success!\n"
+
+    #for item in allcourses():
+
+
+
+
+    try:
+        url = br.open('https://www.kth.se/social/course/%s/subgroup/' % ("AI1147"))
+
+    except Exception, e:
+        varcode = "no primaryemail"
+        print varcode
+
+
+    try:
+        xml = BeautifulSoup(url)
+    except Exception, e:
+        varcode = "no primaryemail"
+        print varcode
+
+
+    try:
+        xml = xml.findAll('a')
+
+    except Exception, e:
+        varcode = "no primaryemail"
+        print varcode
+
+    try:
+        for item in xml:
+            print item['href'].text
+    except Exception, e:
+        varcode = "no primaryemail"
+        print varcode
+
+
+
+
+    return "HO"
+
 @app.route('/testslots')
 def testslots():
     tempdict = fetchinglistofslotspercourse("AI1147", "2015-01-01", "2017-06-30")
