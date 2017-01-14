@@ -2035,7 +2035,7 @@ def fetchslotfromsociallink():
 
     try:
         xml = BeautifulSoup(url)
-        testlist = xml.find_all('a')
+        testlist = xml.find_all['fancybox']
         for item in testlist:
             print item
     except Exception, e:
