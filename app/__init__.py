@@ -808,9 +808,9 @@ def parselistofslotspercourse(tempdict):
 
         date = start[:10]
         print date
-        starttime = start[12:14]
+        starttime = start[11:13]
         print starttime
-        endtime = end[12:14]
+        endtime = end[11:13]
         print endtime
         kind_name = kind_name['sv']
 
@@ -818,7 +818,9 @@ def parselistofslotspercourse(tempdict):
 
         if date[6:8] == "01":
             try:
-                day = str(date[9:11])
+                day = str(date[-2:])
+                print "WORKED"
+                print day
                 if day < 15:
                     year = year - 1
 
