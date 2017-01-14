@@ -1020,8 +1020,9 @@ def coursesfromdepartment3(templist):
             code = item['code']
             examiner = item['examiner']
             department = item['department']
-
+            print name
             latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(desc(Courses.code)).first()
+            print lastcourse
             latestcourse.name = name
             latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
             db.session.commit()
@@ -1645,7 +1646,7 @@ def restartall():
     addcoursestotables_first(tempdict20162)
     addcoursestotables_first(tempdict20171)
 
-    '''
+
     for item in departments:
         #print item
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
@@ -1660,7 +1661,7 @@ def restartall():
 
 
     print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
-    '''
+    
     return "restartall"
 
 
