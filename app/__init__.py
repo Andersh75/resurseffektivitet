@@ -1029,7 +1029,7 @@ def coursesfromdepartment3(templist):
             print code
             already = db.session.query(exists().where(Courses.code==code)).scalar()
             if already:
-                latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.code.desc()).first()
+                latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first()
                 print latestcourse
                 latestcourse.name = name
                 latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
@@ -1670,7 +1670,7 @@ def restartall():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
-
+    '''
     for item in departments:
 
         tempdict2 = staffperdepartment(item)
@@ -1682,7 +1682,7 @@ def restartall():
 
 
 
-
+    '''
 
     '''
 
