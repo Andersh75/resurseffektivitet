@@ -1872,7 +1872,7 @@ def testscrape():
 
 
     try:
-        xml = xml.findAll('Table')
+        xml = xml.find_all('a')
 
     except Exception, e:
         varcode = "no primaryemail"
