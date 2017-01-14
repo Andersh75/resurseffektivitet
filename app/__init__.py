@@ -777,7 +777,7 @@ def fetchinglistofcodesfordepartmentcourses(department):
 
 
 def fetchinglistofslotspercourse(course, starttime, endtime):
-    j = urllib2.urlopen('http://www.kth.se/api/schema/v2/course/%S?startTime=%s&endTime=%s' % (course, starttime, endtime))
+    j = urllib2.urlopen('http://www.kth.se/api/schema/v2/course/%s?startTime=%s&endTime=%s' % (course, starttime, endtime))
 
     j_obj = json.load(j)
 
