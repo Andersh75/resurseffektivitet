@@ -1872,7 +1872,7 @@ def testscrape():
 
 
     try:
-        xml = xml.findAll('a')
+        xml = xml.findAll('Table')
 
     except Exception, e:
         varcode = "no primaryemail"
@@ -1881,7 +1881,7 @@ def testscrape():
     try:
         for item in xml:
             print "HEJ"
-            print item['href']
+            print item
     except Exception, e:
         varcode = "no primaryemail"
         print varcode
