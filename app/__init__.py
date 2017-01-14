@@ -1593,6 +1593,7 @@ def testlogin():
 
     for item in allcourses():
         print item.code
+        print item.year[-2]
         try:
             url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=V%s' % (item.code, item.year[-2]))
 
