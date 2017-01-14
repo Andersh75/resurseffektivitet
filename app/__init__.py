@@ -2048,6 +2048,7 @@ def fetchslotfromsociallink():
 
     print xml
     ghost = Ghost()
+    ghost = Session(ghost)
     ghost.open('http://www.openstreetmap.org/')
     '''
     g = Ghost()
