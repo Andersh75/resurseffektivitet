@@ -2165,7 +2165,7 @@ def fetchslotfromsociallink():
 
 
     '''
-    return "HO"
+    return "HHHHH"
 
 
 @app.route('/restartall')
