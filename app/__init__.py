@@ -973,8 +973,8 @@ def coursesfromdepartment(templist):
 def coursesfromdepartment2(item):
 
     code = item['coursecode']
-    print "YYY"
-    print code
+    #print "YYY"
+    #print code
     year = item['year']
     term = item['term']
     period = item['period']
@@ -994,13 +994,13 @@ def coursesfromdepartment2(item):
         tempdict['period'] = period
         tempdict['startweek'] = startweek
         tempdict['endweek'] = endweek
-        print tempdict['startweek']
+        #print tempdict['startweek']
         tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
-        print "BEFOR ENDWEEK"
+        #print "BEFOR ENDWEEK"
         record = Courses(**tempdict)
         db.session.add(record)
         db.session.commit()
-        print "ENDWEEK"
+        #print "ENDWEEK"
 
 
 
@@ -1014,17 +1014,17 @@ def coursesfromdepartment2(item):
 
 def coursesfromdepartment3(templist):
     for itemlist in templist:
-        print itemlist
+        #print itemlist
         for item in itemlist:
             #print item
             name = item['name']
             code = item['code']
             examiner = item['examiner']
             department = item['department']
-            print name
-            print code
+            #print name
+            #print code
             latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.code.desc()).first()
-            print latestcourse
+            #print latestcourse
             latestcourse.name = name
             latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
             db.session.commit()
