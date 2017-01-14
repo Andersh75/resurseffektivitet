@@ -1595,7 +1595,7 @@ def testlogin():
 
         termvar = "H"
         print item.code
-        if item.term = 1:
+        if item.term == 1:
             termvar = "V"
 
 
