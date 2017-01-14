@@ -1944,7 +1944,7 @@ def testscrape():
 
             try:
                 for item in xml:
-                    print xml['href']
+                    print xml['href'].text
 
             except Exception, e:
                 varcode = "no 7"
