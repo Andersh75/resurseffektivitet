@@ -1673,17 +1673,17 @@ def restartall():
 
 
 
-    #tempdict20151 = courseinfoperyearandterm(2015, 1)
+    tempdict20151 = courseinfoperyearandterm(2015, 1)
     tempdict20152 = courseinfoperyearandterm(2015, 2)
-    #tempdict20161 = courseinfoperyearandterm(2016, 1)
-    #tempdict20162 = courseinfoperyearandterm(2016, 2)
-    #tempdict20171 = courseinfoperyearandterm(2017, 1)
+    tempdict20161 = courseinfoperyearandterm(2016, 1)
+    tempdict20162 = courseinfoperyearandterm(2016, 2)
+    tempdict20171 = courseinfoperyearandterm(2017, 1)
 
-    #addcoursestotables_first(tempdict20151)
+    addcoursestotables_first(tempdict20151)
     addcoursestotables_first(tempdict20152)
-    #addcoursestotables_first(tempdict20161)
-    #addcoursestotables_first(tempdict20162)
-    #addcoursestotables_first(tempdict20171)
+    addcoursestotables_first(tempdict20161)
+    addcoursestotables_first(tempdict20162)
+    addcoursestotables_first(tempdict20171)
     '''
     for item in departments:
         #print item
