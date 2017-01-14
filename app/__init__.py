@@ -1025,7 +1025,7 @@ def coursesfromdepartment3(templist):
             code = item['code']
             examiner = item['examiner']
             department = item['department']
-            print name
+            #print name
             print code
             already = db.session.query(exists().where(Courses.code==code)).scalar()
             if already:
