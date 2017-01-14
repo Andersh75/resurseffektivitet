@@ -1659,7 +1659,7 @@ def restartall():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
-    '''
+
     for item in departments:
 
         tempdict2 = staffperdepartment(item)
@@ -1673,7 +1673,7 @@ def restartall():
 
 
 
-
+    '''
 
     tempdict20151 = courseinfoperyearandterm(2015, 1)
     tempdict20152 = courseinfoperyearandterm(2015, 2)
