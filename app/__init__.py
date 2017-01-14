@@ -1557,56 +1557,8 @@ def index():
 
 @app.route('/testlogin')
 def testlogin():
-    tempdict3 = courseinfoperyearandterm(2017, 1)
-
-
-    for item in tempdict3['courseinfo']:
-        coursecode = item['coursecode']
-        year = item['year']
-        term = item['term']
-        period = item['period']
-        if period < 3:
-            roundid = period
-        else:
-            roundid = period - 2
-
-
-
-        try:
-            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
-            xml = BeautifulSoup(req)
-
-            #print coursecode
-            #print year
-            #print term
-            #print roundid
-
-            courseround = xml.find('courseround')
-
-            endweek = courseround['endweek']
-            startweek = courseround['startweek']
-
-            print endweek
-            print startweek
-
-            courseresponsible = xml.find('courseresponsible')
-            emailcourseresponsible = courseresponsible['primaryemail']
-            print emailcourseresponsible
-
-
-
-
-
-        except Exception, e:
-            varcode = "no name"
-            print varcode
-
-    return 'Some response'
-
-
-
-    '''
-        # Browser
+    
+    # Browser
     br = mechanize.Browser()
 
     # Enable cookie support for urllib2
@@ -1664,7 +1616,7 @@ def testlogin():
 
 @app.route('/restartall')
 def restartall():
-
+    '''
     createtables()
 
     #csvimporter()
@@ -1679,7 +1631,7 @@ def restartall():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
-    '''
+
     for item in departments:
 
         tempdict2 = staffperdepartment(item)
@@ -1708,7 +1660,7 @@ def restartall():
     addcoursestotables_first(tempdict20162)
     addcoursestotables_first(tempdict20171)
 
-    '''
+
     for item in departments:
         #print item
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
@@ -1722,7 +1674,7 @@ def restartall():
 
 
     print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
-
+    '''
     return "restartall"
 
 
