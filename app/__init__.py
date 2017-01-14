@@ -29,6 +29,12 @@ import string
 from sqlalchemy.sql import and_, or_, not_
 import cookielib
 import mechanize
+import wget
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 
@@ -2019,10 +2025,21 @@ def fetchslotfromsociallink():
 
     print "Success!\n"
 
-
     testlink = "https://www.kth.se"
 
     testlink = testlink + "/social/course/HS1700/subgroup/vt-2011-50454/event/ovning-2011-02-23-1000-17/"
+
+
+
+    driver = webdriver.Firefox() # if you want to use chrome, replace Firefox() with Chrome()
+    driver.get(testlink) # load the web page
+
+
+
+
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "fancybox"))) # waits till the element with the specific id appears
+    src = driver.page_source # gets the html source of the page
+
 
     try:
         url = br.open(testlink)
@@ -2034,7 +2051,7 @@ def fetchslotfromsociallink():
 
 
     try:
-        xml = BeautifulSoup(url)
+        xml = BeautifulSoup(src)
         testlist = xml.find_all('a', { "class" : "fancybox" })
         for item in testlist:
             print item
