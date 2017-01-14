@@ -2051,6 +2051,8 @@ def fetchslotfromsociallink():
     ghost = Session(ghost)
     ghost.open(testlink)
 
+    ghost.wait_timeout=25
+
     page, resources = ghost.wait_for_page_loaded()
 
     xml = BeautifulSoup(ghost.content)
