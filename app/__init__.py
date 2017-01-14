@@ -1595,8 +1595,6 @@ def testlogin():
         try:
             url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=V%s' % (item.code, item.year[-2])
 
-            #returnPage = url.read()
-
         except Exception, e:
             varcode = "no primaryemail"
             print varcode
