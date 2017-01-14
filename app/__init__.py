@@ -1879,6 +1879,7 @@ def testscrape():
         varcode = "no primaryemail"
         print varcode
 
+    linklist = []
     try:
         for item in xml:
             #print "HEJ"
@@ -1944,11 +1945,18 @@ def testscrape():
 
             try:
                 for item in xml:
-                    print item['href']
+                    #print item['href']
+
+                    if "event" in item['href']
+                    linklist.append(item['href'])
 
             except Exception, e:
                 varcode = "no 7"
                 print varcode
+
+        for item in linklist:
+            print item
+
 
 
 
