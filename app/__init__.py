@@ -2015,7 +2015,7 @@ def testslots():
 @app.route('/fetchslotfromsociallink')
 def fetchslotfromsociallink():
 
-    '''
+
     # Browser
     br = mechanize.Browser()
 
@@ -2052,8 +2052,8 @@ def fetchslotfromsociallink():
     testlink = "https://www.kth.se"
 
     testlink = testlink + "/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/"
-    '''
 
+    '''
     url = 'http://pycoders.com/archive/'
     #This does the magic.Loads everything
     r = Render(url)
@@ -2090,7 +2090,7 @@ def fetchslotfromsociallink():
     xml = BeautifulSoup(ghost.content)
     print "HEJ"
     print xml
-
+    '''
 
 
 
