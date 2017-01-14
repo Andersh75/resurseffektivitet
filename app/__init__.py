@@ -2036,7 +2036,7 @@ def fetchslotfromsociallink():
     testlink = testlink + "/social/course/HS1700/subgroup/vt-2011-50454/event/ovning-2011-02-23-1000-17/"
 
 
-    browser = wedbriver.PhantomJS('/usr/bin/phantomjs')
+    browser = webdriver.PhantomJS('/usr/bin/phantomjs')
     browser.get('http://raspberrypi.stackexchange.com/')
 
     xml = BeautifulSoup(browser.page_source, "html.parser")
