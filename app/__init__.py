@@ -834,59 +834,60 @@ def parselistofslotspercourse(tempdict):
         if alreadycourse:
             courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
 
-        if not Dates.query.filter_by(date=date).first():
-            record = Dates(**{
-                'date' : date
-                })
-            db.session.add(record)
+            if not Dates.query.filter_by(date=date).first():
+                record = Dates(**{
+                    'date' : date
+                    })
+                db.session.add(record)
+                db.session.commit()
+
+            dateobj = Dates.query.filter_by(date=date).first()
+
+            dateobj.courses.append(courseobj)
             db.session.commit()
 
-        dateobj = Dates.query.filter_by(date=date).first()
+            alreadyclass = db.session.query(exists().where(and_(Classes.content==info, Classes.starttime==starttime, Classes.endtime==endtime, Classes.courses_id==courseobj.id, Classes.dates_id==dateobj.id))).scalar()
 
-
-        record = Classes(**{
-            #'date' : i[0],
-            'content' : info,
-            'starttime' : starttime,
-            'endtime' : endtime,
-            'courses_id' : courseobj.id,
-            'dates_id' : dateobj.id
-        })
-
-        classobj = record
-        db.session.add(record)
-        db.session.commit()
-
-        dateobj.courses.append(courseobj)
-
-        db.session.commit()
-
-
-
-
-        for location in locations:
-            name = location['name']
-
-            already = db.session.query(exists().where(Rooms.name==name)).scalar()
-
-            if not already:
-                record = Rooms(**{
-                    'name' : name
+            if not alreadyclass
+                record = Classes(**{
+                    #'date' : i[0],
+                    'content' : info,
+                    'starttime' : starttime,
+                    'endtime' : endtime,
+                    'courses_id' : courseobj.id,
+                    'dates_id' : dateobj.id
                 })
 
+                classobj = record
                 db.session.add(record)
                 db.session.commit()
 
 
 
-            roomobj = Rooms.query.filter_by(name=name).first()
 
 
-            roomobj.classes.append(classobj)
-            roomobj.dates.append(dateobj)
+
+                for location in locations:
+                    name = location['name']
+
+                    already = db.session.query(exists().where(Rooms.name==name)).scalar()
+
+                    if not already:
+                        record = Rooms(**{
+                            'name' : name
+                        })
+
+                        db.session.add(record)
+                        db.session.commit()
 
 
-            db.session.commit()
+
+                    roomobj = Rooms.query.filter_by(name=name).first()
+
+                    roomobj.classes.append(classobj)
+                    roomobj.dates.append(dateobj)
+
+                    db.session.commit()
 
 
     return "HEJ"
