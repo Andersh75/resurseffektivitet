@@ -2047,7 +2047,7 @@ def fetchslotfromsociallink():
     xml = BeautifulSoup(browser.page_source, "html.parser")
 
     print xml
-
+    ghost = Ghost()
     ghost.open('http://www.openstreetmap.org/')
     '''
     g = Ghost()
