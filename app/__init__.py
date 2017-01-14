@@ -1557,7 +1557,7 @@ def index():
 
 @app.route('/testlogin')
 def testlogin():
-    
+
     # Browser
     br = mechanize.Browser()
 
@@ -1612,7 +1612,6 @@ def testlogin():
         page = c.get('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1147&term=V17')
 
     return page.content
-    '''
 
 @app.route('/restartall')
 def restartall():
@@ -1641,11 +1640,6 @@ def restartall():
     #ADD ALL TEACHERS TO DB
     teachersfromdepartment(templist2)
 
-
-
-    '''
-
-    '''
 
 
     tempdict20151 = courseinfoperyearandterm(2015, 1)
