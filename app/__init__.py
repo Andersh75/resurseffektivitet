@@ -1870,9 +1870,10 @@ def testscrape():
         varcode = "no primaryemail"
         print varcode
 
+    testvar = "/social/course/AI1147"
 
     try:
-        xml = xml.find_all('a', href=lambda value: value and value.startswith("/social/course%s" % ("AI1147")))
+        xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
 
     except Exception, e:
         varcode = "no primaryemail"
