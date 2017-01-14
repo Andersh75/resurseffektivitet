@@ -1895,7 +1895,7 @@ def testscrape():
                 url = br.open(tempvar)
 
             except Exception, e:
-                varcode = "no primaryemail"
+                varcode = "no 1"
                 print varcode
 
 
@@ -1903,7 +1903,7 @@ def testscrape():
                 xml = BeautifulSoup(url)
 
             except Exception, e:
-                varcode = "no primaryemail"
+                varcode = "no 2"
                 print varcode
 
             try:
@@ -1911,7 +1911,7 @@ def testscrape():
                 #print xml['href']
 
             except Exception, e:
-                varcode = "no primaryemail"
+                varcode = "no 3"
                 print varcode
 
             tempvar = "https://www.kth.se"
@@ -1923,7 +1923,7 @@ def testscrape():
                 url = br.open(tempvar)
 
             except Exception, e:
-                varcode = "no primaryemail"
+                varcode = "no 4"
                 print varcode
 
 
@@ -1931,21 +1931,21 @@ def testscrape():
                 xml = BeautifulSoup(url)
 
             except Exception, e:
-                varcode = "no primaryemail"
+                varcode = "no 5"
                 print varcode
 
             try:
                 xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
 
             except Exception, e:
-                varcode = "no primaryemail"
+                varcode = "no 6"
                 print varcode
 
             try:
                 for item in xml:
                     print xml['href']
             except Exception, e:
-                varcode = "no primaryemail"
+                varcode = "no 7"
                 print varcode
 
 
