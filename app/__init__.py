@@ -36,6 +36,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.by import By
+from pyvirtualdisplay import Display
+
+display = Display(visible=0, size=(800, 600))
+display.start()
 
 
 
