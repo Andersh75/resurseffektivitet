@@ -1870,7 +1870,7 @@ def testscrape():
         varcode = "no primaryemail"
         print varcode
 
-    testvar = "/social/course/AI1147"
+    testvar = "/social/course/AI1147/subgroup/"
 
     try:
         xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
