@@ -1673,7 +1673,7 @@ def restartall():
 
 
 
-    '''
+
 
     tempdict20151 = courseinfoperyearandterm(2015, 1)
     tempdict20152 = courseinfoperyearandterm(2015, 2)
@@ -1687,6 +1687,7 @@ def restartall():
     addcoursestotables_first(tempdict20162)
     addcoursestotables_first(tempdict20171)
 
+    '''
     for item in departments:
         #print item
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
