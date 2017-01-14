@@ -1599,11 +1599,13 @@ def testlogin():
 
     xml = xml.find('caption')
 
+    print xml
 
 
 
 
-    return returnPage
+
+    return "Hopp"
 
 
 
