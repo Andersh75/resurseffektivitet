@@ -1851,111 +1851,111 @@ def testscrape():
 
     print "Success!\n"
 
-    #for item in allcourses():
-
-
-
-
-    try:
-        url = br.open('https://www.kth.se/social/course/%s/subgroup/' % ("AI1147"))
-
-    except Exception, e:
-        varcode = "no primaryemail"
-        print varcode
-
-
-    try:
-        xml = BeautifulSoup(url)
-    except Exception, e:
-        varcode = "no primaryemail"
-        print varcode
-
-    testvar = "/social/course/AI1147/subgroup/"
-
-    try:
-        xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
-
-    except Exception, e:
-        varcode = "no primaryemail"
-        print varcode
-
     linklist = []
-    try:
-        for item in xml:
-            #print "HEJ"
-            #print item['href']
 
-            tempvar = "https://www.kth.se"
-
-            tempvar = tempvar + item['href']
+    for item in allcourses():
 
 
-            #print tempvar
+        try:
+            url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
 
-            try:
-                url = br.open(tempvar)
-
-            except Exception, e:
-                varcode = "no 1"
-                print varcode
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
 
 
-            try:
-                xml = BeautifulSoup(url)
+        try:
+            xml = BeautifulSoup(url)
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
 
-            except Exception, e:
-                varcode = "no 2"
-                print varcode
+        testvar = "/social/course/AI1147/subgroup/"
 
-            try:
-                xml = xml.find('a', text="Schema")
-                #print xml['href']
+        try:
+            xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
 
-            except Exception, e:
-                varcode = "no 3"
-                print varcode
-
-            tempvar = "https://www.kth.se"
-
-            tempvar = tempvar + xml['href']
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
 
 
-            try:
-                url = br.open(tempvar)
+        try:
+            for item in xml:
+                #print "HEJ"
+                #print item['href']
 
-            except Exception, e:
-                varcode = "no 4"
-                print varcode
+                tempvar = "https://www.kth.se"
+
+                tempvar = tempvar + item['href']
 
 
-            try:
-                xml = BeautifulSoup(url)
+                #print tempvar
 
-            except Exception, e:
-                varcode = "no 5"
-                print varcode
+                try:
+                    url = br.open(tempvar)
 
-            try:
-                xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
-                #print xml
+                except Exception, e:
+                    varcode = "no 1"
+                    print varcode
 
-            except Exception, e:
-                varcode = "no 6"
-                print varcode
 
-            try:
-                for item in xml:
-                    #print item['href']
+                try:
+                    xml = BeautifulSoup(url)
 
-                    if "event" in item['href']:
-                        linklist.append(item['href'])
+                except Exception, e:
+                    varcode = "no 2"
+                    print varcode
 
-            except Exception, e:
-                varcode = "no 7"
-                print varcode
+                try:
+                    xml = xml.find('a', text="Schema")
+                    #print xml['href']
 
-        for item in linklist:
-            print item
+                except Exception, e:
+                    varcode = "no 3"
+                    print varcode
+
+                tempvar = "https://www.kth.se"
+
+                tempvar = tempvar + xml['href']
+
+
+                try:
+                    url = br.open(tempvar)
+
+                except Exception, e:
+                    varcode = "no 4"
+                    print varcode
+
+
+                try:
+                    xml = BeautifulSoup(url)
+
+                except Exception, e:
+                    varcode = "no 5"
+                    print varcode
+
+                try:
+                    xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
+                    #print xml
+
+                except Exception, e:
+                    varcode = "no 6"
+                    print varcode
+
+                try:
+                    for item in xml:
+                        #print item['href']
+
+                        if "event" in item['href']:
+                            linklist.append(item['href'])
+
+                except Exception, e:
+                    varcode = "no 7"
+                    print varcode
+
+            for item in linklist:
+                print item
 
 
 
