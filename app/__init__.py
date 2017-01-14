@@ -921,9 +921,9 @@ def courseinfoperyearandterm(x, y):
             year = startterm[:4]
 
             #print coursecode, roundid, startterm, period, year
-            term = roundid
+            term = startterm[-1:]
 
-            tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm}
+            tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm, 'roundid':roundid}
 
             templist2.append(tempdict)
 
@@ -1045,10 +1045,8 @@ def addcoursestotables_first(tempdict):
         term = item['term']
         print term
         period = item['period']
-        if period < 3:
-            roundid = period
-        else:
-            roundid = period - 2
+
+        roundid = item['roundid']
 
         print roundid
         try:
