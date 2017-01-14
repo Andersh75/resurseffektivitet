@@ -43,8 +43,20 @@ from ghost import Ghost, Session
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PyQt4.QtWebKit import *
+import sys
+from lxml import html
 
+class Render(QWebPage):
+    def __init__(self, url):
+        self.app = QApplication(sys.argv)
+        QWebPage.__init__(self)
+        self.loadFinished.connect(self._loadFinished)
+        self.mainFrame().load(QUrl(url))
+        self.app.exec_()
 
+    def _loadFinished(self, result):
+        self.frame = self.mainFrame()
+        self.app.quit()
 
 
 
@@ -2035,11 +2047,31 @@ def fetchslotfromsociallink():
 
     print "Success!\n"
 
+
+
     testlink = "https://www.kth.se"
 
     testlink = testlink + "/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/"
 
 
+    url = 'http://pycoders.com/archive/'
+    #This does the magic.Loads everything
+    r = Render(url)
+    #result is a QString.
+    result = r.frame.toHtml()
+
+    #QString should be converted to string before processed by lxml
+    formatted_result = str(result.toAscii())
+
+    #Next build lxml tree from formatted_result
+    tree = html.fromstring(formatted_result)
+
+    #Now using correct Xpath we are fetching URL of archives
+    archive_links = tree.xpath('//divass="campaign"]/a/@href')
+    print archive_links
+    
+
+    '''
     browser = webdriver.PhantomJS('/usr/bin/phantomjs')
     #browser.get('http://raspberrypi.stackexchange.com/')
     browser.get(testlink)
@@ -2059,7 +2091,9 @@ def fetchslotfromsociallink():
     print "HEJ"
     print xml
 
-    '''
+
+
+
     g = Ghost()
     with g.start() as session:
         page, extra_resources = session.open("https://www.debian.org")
