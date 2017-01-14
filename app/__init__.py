@@ -1032,7 +1032,11 @@ def coursesfromdepartment3(templist):
                 latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first()
                 print latestcourse
                 latestcourse.name = name
-                latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
+                try:
+                    latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
+                except Exception, e:
+                    varcode = "no examiner"
+                    print varcode
                 db.session.commit()
             else:
                 tempdict = {}
@@ -1040,7 +1044,11 @@ def coursesfromdepartment3(templist):
                 tempdict['name'] = name
                 tempdict['department'] = department
                 print examiner
-                tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
+                try:
+                    tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
+                except Exception, e:
+                    varcode = "no examiner"
+                    print varcode
                 #print "BEFOR ENDWEEK"
                 record = Courses(**tempdict)
                 db.session.add(record)
