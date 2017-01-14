@@ -1954,8 +1954,8 @@ def testscrape():
                     varcode = "no 7"
                     print varcode
 
-            for item in linklist:
-                print item
+    for item in linklist:
+        print item
 
 
 
