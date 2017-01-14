@@ -1599,7 +1599,7 @@ def testlogin():
 
     xml = xml.find('caption').text
 
-    print xml
+    print xml[22:24]
 
 
 
