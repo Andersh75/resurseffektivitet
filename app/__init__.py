@@ -1592,7 +1592,12 @@ def testlogin():
     studentreg = 0
 
     for item in allcourses():
+
+        termvar = "H"
         print item.code
+        if item.term = 1:
+            termvar = "V"
+
 
         try:
             print str(item.year)[-2:]
@@ -1604,7 +1609,7 @@ def testlogin():
 
 
         try:
-            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=V%s' % (item.code, str(item.year)[-2]))
+            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=%s%s' % (item.code, termvar, str(item.year)[-2:]))
 
         except Exception, e:
             varcode = "no primaryemail"
