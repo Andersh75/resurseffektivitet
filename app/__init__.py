@@ -34,7 +34,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f35'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f36'
 db = SQLAlchemy(app)
 
 
@@ -156,6 +156,8 @@ class Classtypes(db.Model):
 class Classes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(100))
+    contentapi = db.Column(db.String(100))
+    info = db.Column(db.String(500))
     starttime = db.Column(db.Integer)
     endtime = db.Column(db.Integer)
     courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
@@ -854,7 +856,7 @@ def parselistofslotspercourse(tempdict):
             if not alreadyclass:
                 record = Classes(**{
                     #'date' : i[0],
-                    'content' : info,
+                    'contentapi' : info,
                     'starttime' : starttime,
                     'endtime' : endtime,
                     'courses_id' : courseobj.id,
@@ -1768,8 +1770,11 @@ def testlogin():
             #print item.code
             #print studentreg
 
-            item.studentsregistred = studentreg
-            db.session.commit()
+            if item.studentsregistred:
+                if item.studentsregistred < studentreg:
+                    item.studentsregistred = studentreg
+                    db.session.commit()
+
 
         except Exception, e:
             varcode = "no primaryemail"
@@ -1791,8 +1796,12 @@ def testlogin():
             #print item.code
             print studentexp
 
-            item.studentsexpected = studentexp
-            db.session.commit()
+
+            if item.studentsexpected:
+                if item.studentsexpected < studentexp:
+                    item.studentsexpected = studentexp
+                    db.session.commit()
+
 
         except Exception, e:
             varcode = "no primaryemail"
