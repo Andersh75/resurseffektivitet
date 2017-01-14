@@ -1778,7 +1778,7 @@ def testlogin():
 def testslots():
     tempdict = fetchinglistofslotspercourse("AI1147", "2015-01-01", "2017-06-30")
 
-    parselistofslotspercourse(tempdict):
+    parselistofslotspercourse(tempdict)
 
     return "HO"
 
