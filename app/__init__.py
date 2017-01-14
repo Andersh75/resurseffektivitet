@@ -2037,7 +2037,7 @@ def fetchslotfromsociallink():
 
     testlink = "https://www.kth.se"
 
-    testlink = testlink + "/social/course/HS1700/subgroup/vt-2011-50454/event/ovning-2011-02-23-1000-17/"
+    testlink = testlink + "/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/"
 
 
     browser = webdriver.PhantomJS('/usr/bin/phantomjs')
