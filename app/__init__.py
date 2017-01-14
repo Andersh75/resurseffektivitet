@@ -862,6 +862,28 @@ def parselistofslotspercourse(tempdict):
 
 
 
+        for location in locations:
+            room = location['name']
+
+            already = db.session.query(exists().where(Rooms.name==room)).scalar()
+
+            if not already:
+                record = Rooms(**{
+                    'name' : room
+                })
+
+                db.session.add(record)
+                db.session.commit()
+
+
+
+            roomobj = Rooms.query.filter_by(name=word).first()
+
+
+            roomobj.classes.append(courseobj)
+            roomvar.dates.append(dateobj)
+
+            db.session.commit()
 
 
     return "HEJ"
