@@ -2035,7 +2035,7 @@ def fetchslotfromsociallink():
 
     try:
         xml = BeautifulSoup(url)
-        print xml
+        print xml.find_All('a')
     except Exception, e:
         varcode = "no BS"
         print varcode
