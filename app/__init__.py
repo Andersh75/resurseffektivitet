@@ -1947,8 +1947,8 @@ def testscrape():
                 for item in xml:
                     #print item['href']
 
-                    if "event" in item['href']
-                    linklist.append(item['href'])
+                    if "event" in item['href']:
+                        linklist.append(item['href'])
 
             except Exception, e:
                 varcode = "no 7"
