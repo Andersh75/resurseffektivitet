@@ -1884,10 +1884,37 @@ def testscrape():
             print "HEJ"
             #print item['href']
 
-            tempvar = "https://www.kth.se/"
+            tempvar = "https://www.kth.se"
 
             tempvar = tempvar + item['href']
-            print tempvar
+
+
+            #print tempvar
+
+            try:
+                url = br.open(tempvar)
+
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+
+            try:
+                xml = BeautifulSoup(url)
+
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+            try:
+                xml = xml.find_all('a', text="Schema")
+                print xml
+
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+
     except Exception, e:
         varcode = "no primaryemail"
         print varcode
