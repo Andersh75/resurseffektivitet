@@ -1597,7 +1597,7 @@ def testlogin():
 
     xml = xml.find('table')
 
-    xml = xml.find('caption')
+    xml = xml.find('caption').text
 
     print xml
 
