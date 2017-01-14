@@ -1907,7 +1907,7 @@ def testscrape():
                 print varcode
 
             try:
-                xml = xml.find_all('a', text="Schema")
+                xml = xml.find('a', text="Schema")
                 print xml
 
             except Exception, e:
