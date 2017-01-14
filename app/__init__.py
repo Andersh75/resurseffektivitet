@@ -852,6 +852,8 @@ def parselistofslotspercourse(tempdict):
             'courses_id' : courseobj.id,
             'dates_id' : dateobj.id
         })
+
+        classobj = record
         db.session.add(record)
         db.session.commit()
 
@@ -880,8 +882,9 @@ def parselistofslotspercourse(tempdict):
             roomobj = Rooms.query.filter_by(name=name).first()
 
 
-            roomobj.classes.append(courseobj)
-            roomvar.dates.append(dateobj)
+            roomobj.classes.append(classobj)
+            roomobj.dates.append(dateobj)
+
 
             db.session.commit()
 
