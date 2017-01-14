@@ -1580,8 +1580,6 @@ def testlogin():
     # authenticate
     br.open( 'https://login.kth.se/login/' )
 
-    for form in br.forms():
-        print form.name
     br.select_form(nr=0)
     # these two come from the code you posted
     # where you would normally put in your username and password
