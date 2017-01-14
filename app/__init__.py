@@ -40,6 +40,9 @@ from pyvirtualdisplay import Display
 import re, urlparse
 from time import sleep
 from ghost import Ghost, Session
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
+from PyQt4.QtWebKit import *
 
 
 
@@ -2045,6 +2048,16 @@ def fetchslotfromsociallink():
 
     print xml
 
+
+
+    g = ghost.Ghost()
+    with g.start() as session:
+        page, extra_resources = session.open("https://www.debian.org")
+        if page.http_status == 200 and 'The Universal Operating System' in page.content:
+            print("Good!")
+
+
+        '''
     ghost = Ghost()
     session = Session(ghost)
     session.wait_timeout=25
@@ -2053,7 +2066,7 @@ def fetchslotfromsociallink():
     ghost.open("http://girhub.com")
     print ("page Loaded")
 
-    '''
+
 
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "fancybox"))) # waits till the element with the specific id appears
     src = driver.page_source # gets the html source of the page
