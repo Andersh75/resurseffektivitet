@@ -1595,7 +1595,7 @@ def testlogin():
         print item.code
 
         try:
-            print str(item.year)[-2]
+            print str(item.year)[-2:]
 
 
         except Exception, e:
