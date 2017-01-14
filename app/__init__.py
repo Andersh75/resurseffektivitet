@@ -807,8 +807,11 @@ def parselistofslotspercourse(tempdict):
 
 
         date = start[:10]
+        print date
         starttime = start[12:14]
+        print starttime
         endtime = end[12:14]
+        print endtime
         kind_name = kind_name['sv']
 
         year = int(date[:4])
@@ -823,7 +826,7 @@ def parselistofslotspercourse(tempdict):
                 varcode = "Day lower than 10"
                 print varcode
 
-
+        print year
         alreadycourse = db.session.query(exists().where(and_(Courses.code==code, Courses.year==year))).scalar()
 
         if alreadycourse:
