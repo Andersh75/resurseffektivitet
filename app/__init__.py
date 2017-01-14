@@ -1630,7 +1630,7 @@ def restartall():
     '''
 
 
-    '''
+    
 
     '''
 
@@ -1645,7 +1645,7 @@ def restartall():
     addcoursestotables_first(tempdict20161)
     addcoursestotables_first(tempdict20162)
     addcoursestotables_first(tempdict20171)
-
+    '''
 
     for item in departments:
         #print item
