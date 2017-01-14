@@ -1602,10 +1602,12 @@ def testlogin():
     if xml[-1:] == ":":
         studentreg = 0
     if xml[-2:-1] == ":":
-        studentreg = xml[-1:]
+        studentreg = 0
     if xml[-3:-2] == ":":
-        studentreg = xml[-2:]
+        studentreg = xml[-1:]
     if xml[-4:-3] == ":":
+        studentreg = xml[-2:]
+    if xml[-5:-4] == ":":
         studentreg = xml[-3:]
 
     print studentreg
