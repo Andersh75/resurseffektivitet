@@ -2048,16 +2048,17 @@ def fetchslotfromsociallink():
 
     print xml
 
-
-
+    ghost.open('http://www.openstreetmap.org/')
+    '''
     g = Ghost()
     with g.start() as session:
         page, extra_resources = session.open("https://www.debian.org")
+        session.wait_timeout=25
         if page.http_status == 200 and 'The Universal Operating System' in page.content:
             print("Good!")
 
 
-        '''
+
     ghost = Ghost()
     session = Session(ghost)
     session.wait_timeout=25
