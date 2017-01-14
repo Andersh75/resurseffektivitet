@@ -1881,7 +1881,7 @@ def testscrape():
 
     try:
         for item in xml:
-            print "HEJ"
+            #print "HEJ"
             #print item['href']
 
             tempvar = "https://www.kth.se"
@@ -1908,11 +1908,54 @@ def testscrape():
 
             try:
                 xml = xml.find('a', text="Schema")
-                print xml['href']
+                #print xml['href']
 
             except Exception, e:
                 varcode = "no primaryemail"
                 print varcode
+
+            tempvar = "https://www.kth.se"
+
+            tempvar = tempvar + xml['href']
+
+
+            try:
+                url = br.open(tempvar)
+
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+
+            try:
+                xml = BeautifulSoup(url)
+
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+            try:
+                xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
+
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+            try:
+                for item in xml:
+                    print xml['href']
+            except Exception, e:
+                varcode = "no primaryemail"
+                print varcode
+
+
+
+
+
+
+
+
+
 
 
     except Exception, e:
