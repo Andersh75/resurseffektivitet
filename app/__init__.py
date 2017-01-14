@@ -1029,6 +1029,54 @@ def coursesfromdepartment3(templist):
     #print "DONE"
 
 
+def addcoursestotables_first(tempdict):
+
+    for item in tempdict['courseinfo']:
+        coursecode = item['coursecode']
+        print "XXX"
+        print coursecode
+        year = item['year']
+        term = item['term']
+        period = item['period']
+        if period < 3:
+            roundid = period
+        else:
+            roundid = period - 2
+
+        try:
+            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
+            xml = BeautifulSoup(req)
+
+            #print coursecode
+            #print year
+            #print term
+            #print roundid
+
+            courseround = xml.find('courseround')
+
+            endweek = courseround['endweek']
+            startweek = courseround['startweek']
+
+            print endweek
+            print startweek
+
+            courseresponsible = xml.find('courseresponsible')
+            emailcourseresponsible = courseresponsible['primaryemail']
+            print emailcourseresponsible
+
+            item['emailcourseresponsible'] = emailcourseresponsible
+            item['startweek'] = startweek
+            item['endweek'] = endweek
+
+            coursesfromdepartment2(item)
+
+        except Exception, e:
+            varcode = "no name"
+            print varcode
+
+
+
+
 def teachersfromdepartment(templist):
     for xitem in templist:
         #print xitem
@@ -1585,52 +1633,17 @@ def restartall():
 
     '''
 
-    tempdict3 = courseinfoperyearandterm(2017, 1)
+    tempdict20151 = courseinfoperyearandterm(2015, 1)
+    tempdict20152 = courseinfoperyearandterm(2015, 2)
+    tempdict20161 = courseinfoperyearandterm(2016, 1)
+    tempdict20162 = courseinfoperyearandterm(2016, 2)
+    tempdict20171 = courseinfoperyearandterm(2017, 1)
 
-    for item in tempdict3['courseinfo']:
-        coursecode = item['coursecode']
-        print "XXX"
-        print coursecode
-        year = item['year']
-        term = item['term']
-        period = item['period']
-        if period < 3:
-            roundid = period
-        else:
-            roundid = period - 2
-
-        try:
-            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
-            xml = BeautifulSoup(req)
-
-            #print coursecode
-            #print year
-            #print term
-            #print roundid
-
-            courseround = xml.find('courseround')
-
-            endweek = courseround['endweek']
-            startweek = courseround['startweek']
-
-            print endweek
-            print startweek
-
-            courseresponsible = xml.find('courseresponsible')
-            emailcourseresponsible = courseresponsible['primaryemail']
-            print emailcourseresponsible
-
-            item['emailcourseresponsible'] = emailcourseresponsible
-            item['startweek'] = startweek
-            item['endweek'] = endweek
-
-            coursesfromdepartment2(item)
-
-        except Exception, e:
-            varcode = "no name"
-            print varcode
-
-
+    addcoursestotables_first(tempdict20151)
+    addcoursestotables_first(tempdict20152)
+    addcoursestotables_first(tempdict20161)
+    addcoursestotables_first(tempdict20162)
+    addcoursestotables_first(tempdict20171)
 
     for item in departments:
         #print item
