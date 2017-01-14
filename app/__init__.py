@@ -135,6 +135,7 @@ class Courses(db.Model):
     year = db.Column(db.Integer)
     term = db.Column(db.Integer)
     period = db.Column(db.Integer)
+    roundid = db.Column(db.Integer)
     semester = db.Column(db.Integer)
     studentsexpected = db.Column(db.Integer)
     studentsregistred = db.Column(db.Integer)
@@ -978,6 +979,7 @@ def coursesfromdepartment2(item):
     year = item['year']
     term = item['term']
     period = item['period']
+    roundid = item['roundid']
     responsible = item['emailcourseresponsible']
     startweek = item['startweek']
     endweek = item['endweek']
@@ -994,6 +996,7 @@ def coursesfromdepartment2(item):
         tempdict['year'] = year
         tempdict['term'] = term
         tempdict['period'] = period
+        tempdict['roundid'] = roundid
         tempdict['startweek'] = startweek
         tempdict['endweek'] = endweek
         #print tempdict['startweek']
