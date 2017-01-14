@@ -1027,13 +1027,24 @@ def coursesfromdepartment3(templist):
             department = item['department']
             print name
             print code
-            latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.code.desc()).first()
-            print latestcourse
-            latestcourse.name = name
-            latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
-            db.session.commit()
-            #print tempdict
-    #print "DONE"
+            already = db.session.query(exists().where(Courses.code==code)).scalar()
+            if already:
+                latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.code.desc()).first()
+                print latestcourse
+                latestcourse.name = name
+                latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
+                db.session.commit()
+            else:
+                tempdict = {}
+                tempdict['code'] = code
+                tempdict['name'] = name
+                tempdict['department'] = department
+                tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
+                #print "BEFOR ENDWEEK"
+                record = Courses(**tempdict)
+                db.session.add(record)
+                db.session.commit()
+
 
 
 def addcoursestotables_first(tempdict):
