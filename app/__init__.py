@@ -1042,7 +1042,7 @@ def coursesfromdepartment3(templist):
                 tempdict = {}
                 tempdict['code'] = code
                 tempdict['name'] = name
-                tempdict['department'] = department
+                #tempdict['department'] = department
                 print examiner
                 try:
                     tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
