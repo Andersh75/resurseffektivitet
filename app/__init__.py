@@ -2039,7 +2039,13 @@ def fetchslotfromsociallink():
         varcode = "no BS"
         print varcode
 
-    print xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+    try:
+        startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+        startdate = startdate.text
+    except Exception, e:
+        varcode = "no BS"
+        print varcode
+
 
 
 
