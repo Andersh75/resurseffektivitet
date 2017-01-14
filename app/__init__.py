@@ -1036,8 +1036,7 @@ def addcoursestotables_first(tempdict):
 
     for item in tempdict['courseinfo']:
         coursecode = item['coursecode']
-        print "XXX"
-        print coursecode
+        #print coursecode
         year = item['year']
         term = item['term']
         period = item['period']
@@ -1060,12 +1059,12 @@ def addcoursestotables_first(tempdict):
             endweek = courseround['endweek']
             startweek = courseround['startweek']
 
-            print endweek
-            print startweek
+            #print endweek
+            #print startweek
 
             courseresponsible = xml.find('courseresponsible')
             emailcourseresponsible = courseresponsible['primaryemail']
-            print emailcourseresponsible
+            #print emailcourseresponsible
 
             item['emailcourseresponsible'] = emailcourseresponsible
             item['startweek'] = startweek
@@ -1075,7 +1074,7 @@ def addcoursestotables_first(tempdict):
 
         except Exception, e:
             varcode = "no name"
-            print varcode
+            #print varcode
 
 
 
