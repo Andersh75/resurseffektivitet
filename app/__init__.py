@@ -1589,7 +1589,7 @@ def testlogin():
 
     print "Success!\n"
 
-    url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1147&term=V17')
+    url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=AI1128&term=V17')
 
     #returnPage = url.read()
 
