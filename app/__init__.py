@@ -1882,7 +1882,7 @@ def testscrape():
     try:
         for item in xml:
             print "HEJ"
-            print item
+            print item.text
     except Exception, e:
         varcode = "no primaryemail"
         print varcode
