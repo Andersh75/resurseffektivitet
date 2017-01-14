@@ -776,6 +776,92 @@ def fetchinglistofcodesfordepartmentcourses(department):
     return tempdict
 
 
+def fetchinglistofslotspercourse(course, starttime, endtime):
+    j = urllib2.urlopen('http://www.kth.se/api/schema/v2/course/%S?startTime=%s&endTime=%s' % (course, starttime, endtime))
+
+    j_obj = json.load(j)
+
+    templist = []
+    tempdict = {}
+
+    templist = j_obj['entries']
+
+    tempdict['code'] = course
+    tempdict['slots'] = templist
+
+
+    return tempdict
+
+
+def parselistofslotspercourse(tempdict):
+    code = tempdict['code']
+
+    for item in tempdict['slots']:
+        info = item['info']
+        start = item['start']
+        end = item['end']
+        title = item['title']
+        kind_name = item['type_name']
+        kind = item['type']
+        locations = item['locations']
+
+
+        date = start[:10]
+        starttime = start[12:14]
+        endtime = end[12:14]
+        kind_name = kind_name['sv']
+
+        year = int(date[:4])
+
+        if date[6:8] == "01":
+            try:
+                day = str(date[9:11])
+                if day < 15:
+                    year = year - 1
+
+            except Exception, e:
+                varcode = "Day lower than 10"
+                print varcode
+
+
+        alreadycourse = db.session.query(exists().where(and_(Courses.code==code, Courses.year==year))).scalar()
+
+        if alreadycourse:
+            courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+
+        if not Dates.query.filter_by(date=date).first():
+            record = Dates(**{
+                'date' : date
+                })
+            db.session.add(record)
+            db.session.commit()
+
+        dateobj = Dates.query.filter_by(date=date).first()
+
+
+        record = Classes(**{
+            #'date' : i[0],
+            'content' : info,
+            'starttime' : starttime,
+            'endtime' : endtime,
+            'courses_id' : courseobj.id,
+            'dates_id' : dateobj.id
+        })
+        db.session.add(record)
+        db.session.commit()
+
+        dateobj.courses.append(courseobj)
+
+        db.session.commit()
+
+
+
+
+
+
+    return "HEJ"
+
+
 def jsonifycoursesfromdepartment(tempdict):
 
     templist2 = []
@@ -1688,7 +1774,13 @@ def testlogin():
 
 
 
+@app.route('/testslots')
+def testslots():
+    tempdict = fetchinglistofslotspercourse("AI1147", "2015-01-01", "2017-06-30")
 
+    parselistofslotspercourse(tempdict):
+
+    return "HO"
 
 
 
