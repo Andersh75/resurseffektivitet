@@ -981,7 +981,9 @@ def coursesfromdepartment2(item):
     responsible = item['emailcourseresponsible']
     startweek = item['startweek']
     endweek = item['endweek']
-
+    print "XXXXX"
+    print code
+    print year
 
     tempdict = {}
     already = db.session.query(exists().where(and_(Courses.code==code, Courses.year==year))).scalar()
