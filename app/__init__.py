@@ -1880,7 +1880,8 @@ def testscrape():
 
     try:
         for item in xml:
-            print item['href'].text
+            print "HEJ"
+            print item['href']
     except Exception, e:
         varcode = "no primaryemail"
         print varcode
