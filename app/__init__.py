@@ -2058,10 +2058,9 @@ def fetchslotfromsociallink():
         print varcode
 
     try:
-        location = xml.find_all('span', itemprop=lambda value: value and value.startswith("location"))
+        location = xml.find('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
         print location
 
-        print location
     except Exception, e:
         varcode = "no BS"
         print varcode
