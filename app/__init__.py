@@ -908,6 +908,7 @@ def courseinfoperyearandterm(x, y):
         #print item['coursecode']
         coursecode = item['coursecode']
         if coursecode[:2] == "AI":
+            print coursecode
 
             startterm = item['startterm']
             roundid = item['roundid']
