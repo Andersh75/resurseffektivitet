@@ -1936,6 +1936,7 @@ def testscrape():
 
             try:
                 xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
+                print xml
 
             except Exception, e:
                 varcode = "no 6"
@@ -1944,6 +1945,7 @@ def testscrape():
             try:
                 for item in xml:
                     print xml['href']
+
             except Exception, e:
                 varcode = "no 7"
                 print varcode
