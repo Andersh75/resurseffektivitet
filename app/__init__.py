@@ -1872,7 +1872,7 @@ def testscrape():
 
 
     try:
-        xml = xml.find_all('a', href=lambda value: value and value.startswith("/social/course"))
+        xml = xml.find_all('a', href=lambda value: value and value.startswith("/social/course%s" % ("AI1147")))
 
     except Exception, e:
         varcode = "no primaryemail"
