@@ -1639,14 +1639,17 @@ def testlogin():
             if xml[-2:-1] == ":":
                 studentreg = 0
             if xml[-3:-2] == ":":
-                studentreg = xml[-1:]
+                studentreg = int(xml[-1:])
             if xml[-4:-3] == ":":
-                studentreg = xml[-2:]
+                studentreg = int(xml[-2:])
             if xml[-5:-4] == ":":
-                studentreg = xml[-3:]
+                studentreg = int(xml[-3:])
 
-            print item.code
-            print studentreg
+            #print item.code
+            #print studentreg
+
+            item.studentsregistred = studentreg
+            db.session.commit()
 
         except Exception, e:
             varcode = "no primaryemail"
