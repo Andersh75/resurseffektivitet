@@ -1595,8 +1595,8 @@ def testlogin():
         print item.code
 
         try:
-            print item.year[-2]
-            
+            print item.year
+
         except Exception, e:
             varcode = "no primaryemail"
             print varcode
