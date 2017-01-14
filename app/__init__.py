@@ -1043,6 +1043,7 @@ def addcoursestotables_first(tempdict):
         year = item['year']
         print year
         term = item['term']
+        print term
         period = item['period']
         if period < 3:
             roundid = period
@@ -1052,6 +1053,7 @@ def addcoursestotables_first(tempdict):
         print roundid
         try:
             req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
+            print "HEJ"
             xml = BeautifulSoup(req)
 
             #print coursecode
