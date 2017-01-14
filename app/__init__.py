@@ -1829,7 +1829,7 @@ def testslots():
 
 @app.route('/restartall')
 def restartall():
-    '''
+
     createtables()
 
     #csvimporter()
@@ -1882,7 +1882,7 @@ def restartall():
 
 
     print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
-    '''
+
     return "restartall"
 
 
