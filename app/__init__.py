@@ -1855,7 +1855,6 @@ def testscrape():
 
     for item in allcourses():
 
-
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
 
@@ -1954,25 +1953,13 @@ def testscrape():
                     varcode = "no 7"
                     print varcode
 
+
+        except Exception, e:
+            varcode = "no primaryemail"
+            print varcode
+
     for item in linklist:
         print item
-
-
-
-
-
-
-
-
-
-
-
-
-    except Exception, e:
-        varcode = "no primaryemail"
-        print varcode
-
-
 
 
     return "HO"
