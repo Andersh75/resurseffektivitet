@@ -2061,9 +2061,8 @@ def fetchslotfromsociallink():
         locations = xml.find_all('span', itemprop=lambda value: value and value.startswith("location"))
         for location in locations:
             print location
-            location = location.find('a')
-            print location
             location = location.text
+            print location
 
         print location
     except Exception, e:
