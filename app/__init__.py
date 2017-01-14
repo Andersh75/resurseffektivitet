@@ -1025,10 +1025,10 @@ def coursesfromdepartment3(templist):
             code = item['code']
             examiner = item['examiner']
             department = item['department']
-            #print name
-            #print code
+            print name
+            print code
             latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.code.desc()).first()
-            #print latestcourse
+            print latestcourse
             latestcourse.name = name
             latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
             db.session.commit()
@@ -1673,6 +1673,7 @@ def restartall():
 
 
 
+    '''
 
 
     tempdict20151 = courseinfoperyearandterm(2015, 1)
@@ -1698,7 +1699,7 @@ def restartall():
 
     #ADD ALL COURSES TO DB
     coursesfromdepartment3(templist)
-    '''
+
 
     print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
 
