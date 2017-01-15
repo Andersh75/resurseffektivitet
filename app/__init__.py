@@ -864,7 +864,7 @@ def create_or_fetch_teachereobj(email):
     teacherobj = None
 
     try:
-        teacherobj = db.session.query(Teachers).filter(Teachers.mail==email).first()
+        teacherobj = db.session.query(Teachers).filter(Teachers.email==email).first()
     except Exception, e:
         varcode = "no teacherobj"
         print varcode
