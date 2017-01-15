@@ -1850,170 +1850,6 @@ def fetchslotfromsociallink(linkvar):
 
 
 
-
-
-
-@app.route('/')
-def index():
-    print "HE"
-    return redirect(url_for('login_page'))
-
-'''    templist = xml.find("table")
-    templist = templist.find("tbody")
-    templist = templist.findAll("tr")
-
-    templist2 = []
-    tempdict = {}
-
-    for tr in templist:
-        tdlist = tr.findAll("a")
-        #print tdlist[1]['href']
-        firstname = tdlist[2].text
-        lastname = tdlist[1].text
-        email = tdlist[3].text
-        username = tdlist[1]['href'][27:]
-'''
-
-@app.route('/testlogin')
-def testlogin():
-
-    # Browser
-    br = mechanize.Browser()
-
-    # Enable cookie support for urllib2
-    cookiejar = cookielib.LWPCookieJar()
-    br.set_cookiejar( cookiejar )
-
-    # Broser options
-    br.set_handle_equiv( True )
-    br.set_handle_gzip( True )
-    br.set_handle_redirect( True )
-    br.set_handle_referer( True )
-    br.set_handle_robots( False )
-
-    # ??
-    br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
-
-    br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
-    print "heh"
-    # authenticate
-    br.open( 'https://login.kth.se/login/' )
-
-    br.select_form(nr=0)
-    # these two come from the code you posted
-    # where you would normally put in your username and password
-    br[ "username" ] = 'ahell'
-    br[ "password" ] = '-Gre75kger-'
-    res = br.submit()
-
-    print "Success!\n"
-
-    studentreg = 0
-
-    for item in allcourses():
-
-        termvar = "H"
-        print item.code
-        if item.term == 1:
-            termvar = "V"
-
-
-        try:
-            print str(item.year)[-2:]
-
-
-        except Exception, e:
-            varcode = "no primaryemail"
-            print varcode
-
-
-        try:
-            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=%s%s' % (item.code, termvar, str(item.year)[-2:]))
-
-        except Exception, e:
-            varcode = "no primaryemail"
-            print varcode
-
-
-        try:
-            xml = BeautifulSoup(url)
-        except Exception, e:
-            varcode = "no primaryemail"
-            print varcode
-
-
-        try:
-            xml = xml.find('table')
-
-        except Exception, e:
-            varcode = "no primaryemail"
-            print varcode
-
-
-        try:
-            xml = xml.find('caption').text
-
-            if xml[-1:] == ":":
-                studentreg = 0
-            if xml[-2:-1] == ":":
-                studentreg = 0
-            if xml[-3:-2] == ":":
-                studentreg = int(xml[-1:])
-            if xml[-4:-3] == ":":
-                studentreg = int(xml[-2:])
-            if xml[-5:-4] == ":":
-                studentreg = int(xml[-3:])
-
-            #print item.code
-            #print studentreg
-
-            if item.studentsregistred:
-                if item.studentsregistred < studentreg:
-                    item.studentsregistred = studentreg
-                    db.session.commit()
-
-
-        except Exception, e:
-            varcode = "no primaryemail"
-            print varcode
-
-        try:
-            xml = xml.find('caption').text
-
-            if xml[22:23] == ",":
-                studentexp = 0
-            if xml[23:24] == ",":
-                studentexp = int(xml[22:23])
-            if xml[24:25] == ":":
-                studentexp = int(xml[22:24])
-            if xml[25:26] == ":":
-                studentexp = int(xml[22:25])
-
-
-            #print item.code
-            print studentexp
-
-
-            if item.studentsexpected:
-                if item.studentsexpected < studentexp:
-                    item.studentsexpected = studentexp
-                    db.session.commit()
-
-
-        except Exception, e:
-            varcode = "no primaryemail"
-            print varcode
-
-
-
-
-
-
-
-    return "Hopp"
-
-
-
 def fetchinglistofslotspercourse(course, starttime, endtime):
 
     tempdict = {}
@@ -2079,8 +1915,102 @@ def parselistofslotspercourse(tempdict):
 
 
 
-@app.route('/testslots')
-def testslots():
+@app.route('/')
+def index():
+    print "HE"
+    return redirect(url_for('login_page'))
+
+'''    templist = xml.find("table")
+    templist = templist.find("tbody")
+    templist = templist.findAll("tr")
+
+    templist2 = []
+    tempdict = {}
+
+    for tr in templist:
+        tdlist = tr.findAll("a")
+        #print tdlist[1]['href']
+        firstname = tdlist[2].text
+        lastname = tdlist[1].text
+        email = tdlist[3].text
+        username = tdlist[1]['href'][27:]
+'''
+
+@app.route('/fetchregistredandexpectedstudents')
+def fetchregistredandexpectedstudents():
+
+    br = open_password_protected_site("https://login.kth.se/login/")
+
+    studentreg = 0
+
+    for item in allcourses():
+
+        termvar = "H"
+
+        if item.term == 1:
+            termvar = "V"
+
+        yearvar = str(item.year)[-2:]
+
+
+        try:
+            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=%s%s' % (item.code, termvar, yearvar))
+
+
+            xml = BeautifulSoup(url)
+
+            xml = xml.find('table')
+
+            xml = xml.find('caption').text
+
+            if xml[-1:] == ":":
+                studentreg = 0
+            if xml[-2:-1] == ":":
+                studentreg = 0
+            if xml[-3:-2] == ":":
+                studentreg = int(xml[-1:])
+            if xml[-4:-3] == ":":
+                studentreg = int(xml[-2:])
+            if xml[-5:-4] == ":":
+                studentreg = int(xml[-3:])
+
+
+            if item.studentsregistred:
+                if item.studentsregistred < studentreg:
+                    item.studentsregistred = studentreg
+                    db.session.commit()
+
+
+            xml = xml.find('caption').text
+
+            if xml[22:23] == ",":
+                studentexp = 0
+            if xml[23:24] == ",":
+                studentexp = int(xml[22:23])
+            if xml[24:25] == ":":
+                studentexp = int(xml[22:24])
+            if xml[25:26] == ":":
+                studentexp = int(xml[22:25])
+
+
+            if item.studentsexpected:
+                if item.studentsexpected < studentexp:
+                    item.studentsexpected = studentexp
+                    db.session.commit()
+
+
+        except Exception, e:
+            varcode = "FAILTO FETCH REGISTRED AND EXPECTED STUDENTS"
+            print varcode
+            print item.code
+
+
+    return "DONE"
+
+
+#Adding slots from schedule API for all courses
+@app.route('/slotsfromscheduleapi')
+def slotsfromscheduleapi():
 
     for item in allcourses():
         tempdict = fetchinglistofslotspercourse(item.code, "2011-01-01", "2018-06-30")
@@ -2090,11 +2020,9 @@ def testslots():
     return "HO"
 
 
-
-
-#Collects links to all slots in history
-@app.route('/linkstoeveryclassinsocial')
-def linkstoeveryclassinsocial():
+#Adding slots from Social for all courses
+@app.route('/slotsfromsocial')
+def slotsfromsocial():
 
     linklist = []
 
