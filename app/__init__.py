@@ -2081,9 +2081,11 @@ def parselistofslotspercourse(tempdict):
 
 @app.route('/testslots')
 def testslots():
-    tempdict = fetchinglistofslotspercourse("AI1147", "2015-01-01", "2017-06-30")
 
-    parselistofslotspercourse(tempdict)
+    for item in allcourses():
+        tempdict = fetchinglistofslotspercourse(item.code, "2011-01-01", "2017-06-30")
+
+        parselistofslotspercourse(tempdict)
 
     return "HO"
 
