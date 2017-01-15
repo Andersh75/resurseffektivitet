@@ -508,6 +508,13 @@ def login_required(f):
 
 
 
+
+
+
+
+
+
+
 ### CREATE TABLES
 def createtables():
     db.create_all()
@@ -789,776 +796,10 @@ def separate_rooms(list1):
 
 
 
-def fetchinglistofcodesfordepartmentcourses(department):
-    j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
 
-    j_obj = json.load(j)
 
-    tempdict = {}
-    templist =[]
 
-    for item in j_obj['courses']:
-        #print item['code']
-        templist.append(item['code'])
 
-    tempdict = {'department':j_obj['department'], 'courses':templist}
-
-    return tempdict
-
-
-
-
-def jsonifycoursesfromdepartment(tempdict):
-
-    templist2 = []
-    tempdict2 = {}
-
-    for item in tempdict['courses']:
-
-        try:
-            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
-
-            xml = BeautifulSoup(req)
-
-
-            #varname = xml.title.string
-            try:
-                varcode = xml.course['code']
-                #print varcode
-
-            except Exception, e:
-                varcode = "no name"
-                #print varcode
-
-
-            try:
-                varmail = xml.examiner['primaryemail']
-                #print varmail
-
-            except Exception, e:
-                varmail = "no email"
-                #print varmail
-
-
-            try:
-                varname = xml.title.string
-                #print varname.encode('utf-8')
-                #print varname
-
-            except Exception, e:
-                varname = "no name"
-                #print varname
-
-            tempdict2 = {'code':varcode, 'name':varname, 'examiner':varmail, 'department':tempdict['department']}
-
-            templist2.append(tempdict2)
-
-        except Exception, e:
-            varcode = "no URL"
-            print varcode + " " + item
-
-    return templist2
-
-
-def staffperdepartment(department):
-    req = urllib2.urlopen('https://www.kth.se/directory/a/%s' % (department))
-
-    xml = BeautifulSoup(req)
-
-    templist = xml.find("table")
-    templist = templist.find("tbody")
-    templist = templist.findAll("tr")
-
-    templist2 = []
-    tempdict = {}
-
-    for tr in templist:
-        tdlist = tr.findAll("a")
-        #print tdlist[1]['href']
-        firstname = tdlist[2].text
-        lastname = tdlist[1].text
-        email = tdlist[3].text
-        username = tdlist[1]['href'][27:]
-        #print username
-
-        tempdict = {'firstname':firstname, 'lastname':lastname, 'email':email, 'username':username}
-        templist2.append(tempdict)
-
-
-    tempdict2 = {'department':department, 'teacher':templist2}
-
-    return tempdict2
-
-
-def courseinfoperyearandround(x, y):
-    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
-
-    xml = BeautifulSoup(req)
-
-    templist = xml.findAll("courseround")
-
-    templist2 = []
-
-    for item in templist:
-        #print "1"
-        #print item['coursecode']
-        coursecode = item['coursecode']
-        if coursecode[:2] == "AI":
-
-            startterm = item['startterm']
-            roundid = item['roundid']
-
-            if int(startterm[-1:]) == 1:
-                period = int(roundid) + 2
-            else:
-                period = int(roundid)
-
-            year = startterm[:4]
-
-            print coursecode, roundid, startterm, period, year
-
-            tempdict = {'coursecode':coursecode, 'year':year, 'period':period, 'startterm':startterm, 'roundid':roundid}
-
-            templist2.append(tempdict)
-
-    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
-
-    return tempdict2
-
-
-def courseinfoperyearandterm(x, y):
-    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
-
-    xml = BeautifulSoup(req)
-
-    templist = xml.findAll("courseround")
-
-    templist2 = []
-
-    for item in templist:
-        #print "1"
-        #print item['coursecode']
-        coursecode = item['coursecode']
-        if coursecode[:2] == "AI":
-            print coursecode
-
-            startterm = item['startterm']
-            roundid = item['roundid']
-
-            if int(startterm[-1:]) == 1:
-                period = int(roundid) + 2
-            else:
-                period = int(roundid)
-
-            year = startterm[:4]
-
-            #print coursecode, roundid, startterm, period, year
-            term = startterm[-1:]
-
-            tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm, 'roundid':roundid}
-
-            templist2.append(tempdict)
-
-    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
-
-    return tempdict2
-
-
-def coursesfromdepartment(templist):
-    for itemlist in templist:
-        print itemlist
-        for item in itemlist:
-            print item
-            name = item['name']
-            code = item['code']
-            examiner = item['examiner']
-            department = item['department']
-
-            tempdict = {}
-            already = db.session.query(exists().where(Courses.code==code)).scalar()
-            print "already"
-            existingexamner = db.session.query(exists().where(Teachers.email==examiner)).scalar()
-            #print existingexamner
-            if (not already) and existingexamner:
-                print "(not already) and existingexamner"
-                #print examiner
-                if name and code and (examiner != "no email"):
-                    tempdict['name'] = name
-                    tempdict['code'] = code
-                    tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
-                    record = Courses(**tempdict)
-                    db.session.add(record)
-                    db.session.commit()
-                    print tempdict
-
-            if already and existingexamner:
-                #print code
-                print examiner
-                tempobj = db.session.query(Courses).filter(Courses.code==code).first()
-                tempobj.name = name
-                tempobj.examiner_id = Teachers.query.filter_by(email=examiner).first().id
-                db.session.commit()
-                #print tempdict
-    print "DONE"
-
-
-def coursesfromdepartment2(item):
-
-    code = item['coursecode']
-    #print "YYY"
-    #print code
-    year = item['year']
-    term = item['term']
-    period = item['period']
-    roundid = item['roundid']
-    responsible = item['emailcourseresponsible']
-    startweek = item['startweek']
-    endweek = item['endweek']
-    print "XXXXX"
-    print code
-    print year
-
-    tempdict = {}
-    already = db.session.query(exists().where(and_(Courses.code==code, Courses.year==year))).scalar()
-
-    if (not already):
-        print "NOT ALREADY"
-        tempdict['code'] = code
-        tempdict['year'] = year
-        tempdict['term'] = term
-        tempdict['period'] = period
-        tempdict['roundid'] = roundid
-        tempdict['startweek'] = startweek
-        tempdict['endweek'] = endweek
-        #print tempdict['startweek']
-        tempdict['responsible_id'] = Teachers.query.filter_by(email=responsible).first().id
-        #print "BEFOR ENDWEEK"
-        record = Courses(**tempdict)
-        db.session.add(record)
-        db.session.commit()
-        #print "ENDWEEK"
-
-
-
-    if already:
-        print "ALREADY"
-        tempobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
-        tempobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
-        db.session.commit()
-
-
-
-def coursesfromdepartment3(templist):
-    for itemlist in templist:
-        #print itemlist
-        for item in itemlist:
-            #print item
-            name = item['name']
-            code = item['code']
-            examiner = item['examiner']
-            department = item['department']
-            #print name
-            print code
-            already = db.session.query(exists().where(Courses.code==code)).scalar()
-            if already:
-                latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first()
-                print latestcourse
-                latestcourse.name = name
-                try:
-                    latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
-                except Exception, e:
-                    varcode = "no examiner"
-                    print varcode
-                db.session.commit()
-            else:
-                tempdict = {}
-                tempdict['code'] = code
-                tempdict['name'] = name
-                #tempdict['department'] = department
-                print examiner
-                try:
-                    tempdict['examiner_id'] = Teachers.query.filter_by(email=examiner).first().id
-                except Exception, e:
-                    varcode = "no examiner"
-                    print varcode
-                #print "BEFOR ENDWEEK"
-                record = Courses(**tempdict)
-                db.session.add(record)
-                db.session.commit()
-
-
-
-def addcoursestotables_first(tempdict):
-
-    for item in tempdict['courseinfo']:
-        coursecode = item['coursecode']
-        print coursecode
-
-        year = item['year']
-        print year
-        term = item['term']
-        print term
-        period = item['period']
-
-        roundid = item['roundid']
-
-        print roundid
-        try:
-            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
-            print "HEJ"
-            xml = BeautifulSoup(req)
-
-            #print coursecode
-            #print year
-            #print term
-            #print roundid
-
-            try:
-                courseround = xml.find('courseround')
-
-            except Exception, e:
-                varcode = "no courseround"
-                print varcode
-
-
-            try:
-                endweek = courseround['endweek']
-
-                item['endweek'] = endweek
-
-            except Exception, e:
-                varcode = "no endweek"
-                print varcode
-
-
-            try:
-                startweek = courseround['startweek']
-
-                item['startweek'] = startweek
-
-            except Exception, e:
-                varcode = "no startweek"
-                print varcode
-
-            #print endweek
-            #print startweek
-            try:
-                courseresponsible = xml.find('courseresponsible')
-
-            except Exception, e:
-                varcode = "no courseresponsible"
-                print varcode
-
-            try:
-                emailcourseresponsible = courseresponsible['primaryemail']
-                #print emailcourseresponsible
-                item['emailcourseresponsible'] = emailcourseresponsible
-
-            except Exception, e:
-                varcode = "no primaryemail"
-                print varcode
-
-
-
-
-
-
-            coursesfromdepartment2(item)
-
-        except Exception, e:
-            varcode = "no name"
-            print varcode
-
-
-
-
-def teachersfromdepartment(templist):
-    for xitem in templist:
-        #print xitem
-        #print xitem['department']
-
-        department = xitem['department']
-
-        for item in xitem['teacher']:
-            print item
-            firstname = item['firstname']
-            lastname = item['lastname']
-            email = item['email']
-            username = item['username']
-
-            if (email != "no email"):
-                print "XXXXX"
-                tempdict = {}
-                tempdict['firstname'] = firstname
-                tempdict['lastname'] = lastname
-                tempdict['email'] = email
-                tempdict['username'] = username
-                tempdict['department'] = department
-
-                already = db.session.query(exists().where(or_(Teachers.username==username, Teachers.email==email))).scalar()
-                if not already:
-                    print "ZZZZZ"
-                    record = Teachers(**tempdict)
-                    db.session.add(record)
-                    db.session.commit()
-                else:
-                    print "already"
-                    tempobj = db.session.query(Teachers).filter(or_(Teachers.username==username, Teachers.email==email)).first()
-                    print tempobj.firstname.encode('utf-8')
-                    tempobj.firstname = firstname
-                    tempobj.lastname = lastname
-                    tempobj.email = email
-                    tempobj.username = username
-                    tempobj.department = department
-                    print tempobj.department.encode('utf-8')
-                    db.session.commit()
-
-        print "YYYYYY"
-
-
-
-
-#NOT READY
-def jsonifylitteraturefromdepartment():
-
-    templist = []
-    item = "AI1128"
-    #for item in tempdict['courses']:
-        #varname = xml.title.string
-    try:
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
-        xml = BeautifulSoup(req)
-        templist = xml.findAll("literature")
-        for literature in templist:
-            print literature
-            print "######"
-            print literature.string
-            print "______"
-            for child in literature.children:
-                print child
-                print "######"
-                print child.string
-                print "______"
-                for child2 in child.children:
-                    print child2
-                    print "######"
-                    print child2.string
-                    print "______"
-
-
-    except Exception, e:
-        print "no literature"
-
-#NOT READY
-def calTest():
-    req = urllib2.Request('https://www.kth.se/social/course/AI1146/calendar/ical/?lang=sv')
-    response = urllib2.urlopen(req)
-    data = response.read()
-    for line in data.split('\n'):
-        #print line
-        print "######"
-        if line.startswith('SUMMARY:'):
-            print line
-        if line.startswith('LOCATION:'):
-            print line
-        if line.startswith('DTSTART;VALUE=DATE-TIME:'):
-            print line
-        if line.startswith('DTEND;VALUE=DATE-TIME:'):
-            print line
-
-
-    return
-
-#NOT READY
-def xrestartall():
-    tempdict = {}
-    tempdict2 = {}
-    tempdict3 = {}
-
-    templist = []
-    templist2 = []
-    templist3 = []
-
-    departments = ["AIB", "AIC", "AID", "AIE"]
-
-
-    for item in departments:
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist.append(jsonifycoursesfromdepartment(tempdict))
-
-        tempdict2 = staffperdepartment(item)
-        templist2.append(tempdict2)
-
-
-        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
-
-    #tempdict3 = courseinfoperyearandround(2016, 1)
-
-
-    #ADD ALL TEACHERS TO DB
-    teachersfromdepartment(templist2)
-
-    #ADD ALL COURSES TO DB
-    coursesfromdepartment(templist)
-
-
-
-
-    #FETCH ALL LITERATURE
-    #jsonifylitteraturefromdepartment()
-
-    #FETCH CALENDAR
-    #calTest()
-
-    #testv = jsonify(tempdict3)
-
-
-
-@app.route('/login/', methods=["GET","POST"])
-def login_page():
-
-    error = ''
-    try:
-
-        if request.method == "POST":
-
-            attempted_email = request.form['email']
-            attempted_password = request.form['password']
-
-            xrubrik = db.session.query(Teachers).filter(Teachers.email == attempted_email).first()
-
-            flash(xrubrik.email)
-            #flash(attempted_password)
-
-            if attempted_email == xrubrik.email and attempted_password == xrubrik.password:
-                session['logged_in'] = True
-                #session['username'] = request.form['initials']
-                session['user'] = request.form['email']
-                return redirect(url_for('login_page'))
-
-            else:
-                error = "Invalid credentials. Try Again."
-
-        return render_template("login.html", error = error)
-
-    except Exception as e:
-        #flash(e)
-        return render_template("login.html", error = error)
-
-
-@app.route('/register/', methods=["GET","POST"])
-def register_page():
-
-    form = RegistrationForm(request.form)
-    #flash("Before IF")
-
-    if request.method == "POST" and form.validate():
-            initials  = form.initials.data
-            akafirstname  = form.firstname.data
-            akalastname  = form.lastname.data
-            email = form.email.data
-            password = form.password.data
-            already = db.session.query(exists().where(Teachers.email==email)).scalar()
-            if not already:
-                flash("Your email is not in the db")
-                return render_template('register.html.j2', form=form)
-
-
-            alreadyregistred = db.session.query(exists().where(and_(Teachers.password!=None, Teachers.email==email))).scalar()
-
-            if alreadyregistred:
-                flash("Already registred!")
-                return redirect(url_for('login_page'))
-
-            existinginitials = db.session.query(exists().where(Teachers.initials==initials)).scalar()
-
-            if existinginitials:
-                tempobj = db.session.query(Teachers).filter(Teachers.email==email).first()
-                if tempobj.initials != initials:
-                    flash("Initials are already taken")
-                    return render_template('register.html.j2', form=form)
-
-
-
-            flash("Thanks for registering!")
-            flash(email)
-            tempobj = db.session.query(Teachers).filter(Teachers.email==email).first()
-            tempobj.akafirstname = akafirstname
-            tempobj.akalastname = akalastname
-            tempobj.password = password
-            tempobj.initials = initials
-            db.session.commit()
-            return redirect(url_for('login_page'))
-
-
-    flash("Please register!")
-    return render_template("register.html.j2", form=form)
-
-@app.route("/logout/")
-@login_required
-def logout():
-    session.pop('user', None)
-    session.clear()
-    flash("You have been logged out!")
-    gc.collect()
-    return redirect(url_for('login_page'))
-
-@app.route('/rooms')
-@app.route('/rooms/<int:page>')
-def rooms_page(page=1):
-    return render_template('rooms.html.j2', page=page)
-
-@app.route('/teachers')
-@app.route('/teachers/<int:page>')
-def teachers_page(page=1):
-    return render_template('teachers.html.j2', page=page)
-
-@app.route('/courses')
-@app.route('/courses/<int:page>')
-def courses_page(page=1):
-    return render_template('courses.html.j2', page=page)
-
-@app.route('/allcourses')
-@app.route('/allcourses/<int:page>')
-def allcourses_page(page=1):
-    return render_template('allcourses.html.j2', page=page)
-
-@app.route('/allrooms')
-@app.route('/allrooms/<int:page>')
-def allrooms_page(page=1):
-    return render_template('allrooms.html.j2', page=page)
-
-
-@app.route('/allteachers')
-@app.route('/allteachers/<int:page>')
-def allteachers_page(page=1):
-    return render_template('allteachers.html.j2', page=page)
-
-@app.route('/oneteacher')
-@app.route('/oneteacher/<int:teacherid>')
-def oneteacher_page(teacherid=1):
-    return render_template('oneteacher.html.j2', teacherid=teacherid)
-
-
-
-
-@app.route('/onecourse')
-@app.route('/onecourse/<int:courseid>')
-def onecourse_page(courseid=1):
-    return render_template('onecourse.html.j2', courseid=courseid)
-
-@app.route('/oneroom')
-@app.route('/oneroom/<int:roomid>')
-def oneroom_page(roomid=1):
-    return render_template('oneroom.html.j2', roomid=roomid)
-
-@app.route('/oneslot')
-@app.route('/oneslot/<int:slotid>')
-def oneslot_page(slotid=1):
-    return render_template('oneslot.html.j2', slotid=slotid)
-
-
-@app.route('/myteaching')
-@app.route('/myteaching/<int:page>')
-def myteaching_page(page=1):
-    return render_template('myteaching.html.j2', page=page)
-
-@app.route('/myinfo')
-@app.route('/myinfo/<int:page>')
-def myinfo_page(page=1):
-    return render_template('myinfo.html.j2', page=page)
-
-
-
-
-@app.route('/user_edit_myinfo/akafirstname', methods=['GET', 'POST'])
-def user_edit_myinfo_akafirstname():
-    id = request.form["pk"]
-    tempobj = db.session.query(Teachers).get(id)
-    tempobj.akafirstname = request.form["value"]
-
-    db.session.commit()
-
-    result = {}
-
-    return json.dumps(result)
-@app.route('/user_edit_myinfo/akalastname', methods=['GET', 'POST'])
-def user_edit_myinfo_akalastname():
-    id = request.form["pk"]
-    tempobj = db.session.query(Teachers).get(id)
-    tempobj.akalastname = request.form["value"]
-
-    db.session.commit()
-
-    result = {}
-
-    return json.dumps(result)
-@app.route('/user_edit_myinfo/initials', methods=['GET', 'POST'])
-def user_edit_myinfo_initials():
-    id = request.form["pk"]
-    tempobj = db.session.query(Teachers).get(id)
-    tempobj.initials = request.form["value"]
-
-    db.session.commit()
-
-    result = {}
-
-    return json.dumps(result)
-
-
-
-
-
-
-
-
-
-@app.route('/user_edit_course/responsible', methods=['GET', 'POST'])
-def user_edit_course_responsible():
-    id = request.form["pk"]
-    tempobj = db.session.query(Courses).get(id)
-    tempobj.responsible = db.session.query(Teachers).filter(Teachers.email == request.form["value"]).first()
-
-    db.session.commit()
-
-    result = { 'id': id, 'text': request.form["value"] }
-
-    return json.dumps(result)
-
-
-
-@app.route('/user_edit_content/<int:page>', methods=['GET', 'POST'])
-def user_edit_content(page):
-    id = request.form["pk"]
-
-    #varcode = id.split(',')[0]
-    #varclassid = id.split(',')[1]
-    #print varcode
-    #print varclassid
-    print id
-    print "hej"
-
-    #templist = []
-
-    #templist = scheduleInCourse(varcode)
-    #print templist
-
-    #for item in templist:
-    #   print item
-
-
-    varteacher = db.session.query(Classes).get(id)
-    print varteacher.content.encode('utf-8')
-    #print varteacher.firstname.encode('utf-8')
-    #print request.form["value"].encode('utf-8')
-    varteacher.content = request.form["value"]
-    print "Efter"
-    print varteacher.content.encode('utf-8')
-    #varteacher = Teachers.query.get(id)
-    #print varteacher.firstname.encode('utf-8')
-    result = {}
-    db.session.commit()
-    return json.dumps(result)
 
 
 
@@ -1616,6 +857,31 @@ def pass_courseyear_from_classdate(datevar):
             print varcode
 
     return yearvar
+
+
+def create_or_fetch_teachereobj(email):
+
+    teacherobj = None
+
+    try:
+        teacherobj = db.session.query(Teachers).filter(Teachers.mail==email).first()
+    except Exception, e:
+        varcode = "no teacherobj"
+        print varcode
+
+    if not teacherobj:
+        print "CREATING TEACHEROBJECT"
+        tempdict = {}
+        tempdict['email'] = email
+        record = Teachers(**tempdict)
+        teacherobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    else:
+        print "TEACHEROBJECT EXISTS"
+
+    return teacherobj
 
 
 def create_or_fetch_courseobj(code, year, date):
@@ -1918,27 +1184,655 @@ def parselistofslotspercourse(tempdict):
 
 
 
-@app.route('/')
-def index():
-    print "HE"
-    return redirect(url_for('login_page'))
 
-'''    templist = xml.find("table")
-    templist = templist.find("tbody")
-    templist = templist.findAll("tr")
 
-    templist2 = []
+
+#ADDING TEACHERS TO DB
+def staffperdepartment(department):
+    try:
+        req = urllib2.urlopen('https://www.kth.se/directory/a/%s' % (department))
+
+        xml = BeautifulSoup(req)
+
+        templist = xml.find("table")
+        templist = templist.find("tbody")
+        templist = templist.findAll("tr")
+
+        templist2 = []
+        tempdict = {}
+
+        for tr in templist:
+            tdlist = tr.findAll("a")
+            firstname = tdlist[2].text
+            lastname = tdlist[1].text
+            email = tdlist[3].text
+            username = tdlist[1]['href'][27:]
+
+            tempdict = {'firstname':firstname, 'lastname':lastname, 'email':email, 'username':username}
+            templist2.append(tempdict)
+
+
+        tempdict2 = {'department':department, 'teacher':templist2}
+
+    except Exception, e:
+        varcode = "no list of staff per department"
+        print varcode
+        print x
+        print y
+
+    return tempdict2
+def teachersfromdepartment(templist):
+    for items in templist:
+
+
+        department = items['department']
+
+        for item in items['teacher']:
+            firstname = item['firstname']
+            lastname = item['lastname']
+            email = item['email']
+            username = item['username']
+
+            if email:
+                teacherobj = create_or_fetch_teachereobj(email)
+
+                teacherobj.firstname = firstname
+                teacherobj.lastname = lastname
+                teacherobj.email = email
+                teacherobj.username = username
+                teacherobj.department = department
+
+                db.session.commit()
+
+
+
+
+
+        print "DONE"
+
+
+
+#ADDING COURSES TO DB
+def courseinfoperyearandterm(x, y):
+
+    tempdict2 = {}
+
+    try:
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
+
+        xml = BeautifulSoup(req)
+
+        items = xml.findAll("courseround")
+
+        templist = []
+
+        for item in items:
+
+            coursecode = item['coursecode']
+            if coursecode[:2] == "AI":
+                startterm = item['startterm']
+                roundid = item['roundid']
+
+                if int(startterm[-1:]) == 1:
+                    period = int(roundid) + 2
+                else:
+                    period = int(roundid)
+
+                year = startterm[:4]
+
+                term = startterm[-1:]
+
+                tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm, 'roundid':roundid}
+
+                templist.append(tempdict)
+
+        tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
+
+
+    except Exception, e:
+        varcode = "no list of courserounds"
+        print varcode
+        print x
+        print y
+
+    return tempdict2
+def addcoursestotables_first(tempdict):
+
+    for item in tempdict['courseinfo']:
+        coursecode = item['coursecode']
+
+        year = item['year']
+        term = item['term']
+        period = item['period']
+        roundid = item['roundid']
+
+        try:
+            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
+            xml = BeautifulSoup(req)
+
+
+            try:
+                courseround = xml.find('courseround')
+
+                endweek = courseround['endweek']
+                item['endweek'] = endweek
+
+                startweek = courseround['startweek']
+                item['startweek'] = startweek
+
+            except Exception, e:
+                item['endweek'] = None
+                item['startweek'] = None
+                varcode = "no courseround"
+                print varcode
+
+
+
+
+            try:
+                courseresponsible = xml.find('courseresponsible')
+
+                emailcourseresponsible = courseresponsible['primaryemail']
+
+                item['emailcourseresponsible'] = emailcourseresponsible
+
+            except Exception, e:
+                item['emailcourseresponsible'] = None
+                varcode = "no courseresponsible"
+                print varcode
+
+
+            coursesfromdepartment2(item)
+
+
+        except Exception, e:
+            varcode = "NOT FINDING COURSE"
+            print varcode
+            print coursecode
+def coursesfromdepartment2(item):
+
+    code = item['coursecode']
+    year = item['year']
+    term = item['term']
+    period = item['period']
+    roundid = item['roundid']
+    responsible = item['emailcourseresponsible']
+    startweek = item['startweek']
+    endweek = item['endweek']
+
+    date = "XXXX-01-XX"
+    if term = 2:
+        date = "XXXX-09-XX"
+
+    courseobj = create_or_fetch_courseobj(code, year, date)
+
+    courseobj.period
+
+    courseobj.period = period
+    courseobj.roundid = roundid
+    courseobj.startweek = startweek
+    courseobj.endweek = endweek
+    courseobj.responsible_id = Teachers.query.filter_by(email=responsible).first().id
+
+    db.session.commit()
+
+def fetchinglistofcodesfordepartmentcourses(department):
+
     tempdict = {}
 
-    for tr in templist:
-        tdlist = tr.findAll("a")
-        #print tdlist[1]['href']
-        firstname = tdlist[2].text
-        lastname = tdlist[1].text
-        email = tdlist[3].text
-        username = tdlist[1]['href'][27:]
-'''
+    try:
+        j = urllib2.urlopen('http://www.kth.se/api/kopps/v2/courses/%s.json' % (department))
 
+        j_obj = json.load(j)
+
+
+        templist =[]
+
+        for item in j_obj['courses']:
+            templist.append(item['code'])
+
+        tempdict = {'department':j_obj['department'], 'courses':templist}
+
+    except Exception, e:
+        varcode = "no list of codes for department courses"
+        print varcode
+
+    return tempdict
+def jsonifycoursesfromdepartment(tempdict):
+
+    templist2 = []
+    tempdict2 = {}
+
+    for item in tempdict['courses']:
+
+        try:
+            req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s' % (item))
+
+            xml = BeautifulSoup(req)
+
+
+            #varname = xml.title.string
+            try:
+                varcode = xml.course['code']
+                #print varcode
+
+            except Exception, e:
+                varcode = None
+                #print varcode
+
+
+            try:
+                varmail = xml.examiner['primaryemail']
+                #print varmail
+
+            except Exception, e:
+                varmail = None
+                #print varmail
+
+
+            try:
+                varname = xml.title.string
+                #print varname.encode('utf-8')
+                #print varname
+
+            except Exception, e:
+                varname = None
+                #print varname
+
+            tempdict2 = {'code':varcode, 'name':varname, 'examiner':varmail, 'department':tempdict['department']}
+
+            templist2.append(tempdict2)
+
+        except Exception, e:
+            varcode = "no URL"
+            print varcode + " " + item
+
+    return templist2
+def coursesfromdepartment3(templist):
+    for items in templist:
+        for item in items:
+            name = item['name']
+            code = item['code']
+            examiner = item['examiner']
+            department = item['department']
+
+
+            teacherobj = create_or_fetch_teachereobj(examiner)
+
+            try:
+                latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first()
+                latestcourse.name = name
+                latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
+                db.session.commit()
+
+            except Exception, e:
+                varcode = "COURSE NOT EXISTING"
+                print varcode
+                print code
+
+
+
+
+
+#NOT READY
+def jsonifylitteraturefromdepartment():
+
+    templist = []
+    item = "AI1128"
+    #for item in tempdict['courses']:
+        #varname = xml.title.string
+    try:
+        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
+        xml = BeautifulSoup(req)
+        templist = xml.findAll("literature")
+        for literature in templist:
+            print literature
+            print "######"
+            print literature.string
+            print "______"
+            for child in literature.children:
+                print child
+                print "######"
+                print child.string
+                print "______"
+                for child2 in child.children:
+                    print child2
+                    print "######"
+                    print child2.string
+                    print "______"
+
+
+    except Exception, e:
+        print "no literature"
+
+#NOT READY
+def calTest():
+    req = urllib2.Request('https://www.kth.se/social/course/AI1146/calendar/ical/?lang=sv')
+    response = urllib2.urlopen(req)
+    data = response.read()
+    for line in data.split('\n'):
+        #print line
+        print "######"
+        if line.startswith('SUMMARY:'):
+            print line
+        if line.startswith('LOCATION:'):
+            print line
+        if line.startswith('DTSTART;VALUE=DATE-TIME:'):
+            print line
+        if line.startswith('DTEND;VALUE=DATE-TIME:'):
+            print line
+
+
+    return
+
+#NOT READY
+def xrestartall():
+    tempdict = {}
+    tempdict2 = {}
+    tempdict3 = {}
+
+    templist = []
+    templist2 = []
+    templist3 = []
+
+    departments = ["AIB", "AIC", "AID", "AIE"]
+
+
+    for item in departments:
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
+
+        tempdict2 = staffperdepartment(item)
+        templist2.append(tempdict2)
+
+
+        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
+
+    #tempdict3 = courseinfoperyearandround(2016, 1)
+
+
+    #ADD ALL TEACHERS TO DB
+    teachersfromdepartment(templist2)
+
+    #ADD ALL COURSES TO DB
+    coursesfromdepartment(templist)
+
+
+
+
+    #FETCH ALL LITERATURE
+    #jsonifylitteraturefromdepartment()
+
+    #FETCH CALENDAR
+    #calTest()
+
+    #testv = jsonify(tempdict3)
+
+
+
+
+
+
+
+@app.route('/')
+def index():
+
+    return redirect(url_for('login_page'))
+
+@app.route('/login/', methods=["GET","POST"])
+def login_page():
+
+    error = ''
+    try:
+
+        if request.method == "POST":
+
+            attempted_email = request.form['email']
+            attempted_password = request.form['password']
+
+            xrubrik = db.session.query(Teachers).filter(Teachers.email == attempted_email).first()
+
+            flash(xrubrik.email)
+            #flash(attempted_password)
+
+            if attempted_email == xrubrik.email and attempted_password == xrubrik.password:
+                session['logged_in'] = True
+                #session['username'] = request.form['initials']
+                session['user'] = request.form['email']
+                return redirect(url_for('login_page'))
+
+            else:
+                error = "Invalid credentials. Try Again."
+
+        return render_template("login.html", error = error)
+
+    except Exception as e:
+        #flash(e)
+        return render_template("login.html", error = error)
+
+@app.route('/register/', methods=["GET","POST"])
+def register_page():
+
+    form = RegistrationForm(request.form)
+    #flash("Before IF")
+
+    if request.method == "POST" and form.validate():
+            initials  = form.initials.data
+            akafirstname  = form.firstname.data
+            akalastname  = form.lastname.data
+            email = form.email.data
+            password = form.password.data
+            already = db.session.query(exists().where(Teachers.email==email)).scalar()
+            if not already:
+                flash("Your email is not in the db")
+                return render_template('register.html.j2', form=form)
+
+
+            alreadyregistred = db.session.query(exists().where(and_(Teachers.password!=None, Teachers.email==email))).scalar()
+
+            if alreadyregistred:
+                flash("Already registred!")
+                return redirect(url_for('login_page'))
+
+            existinginitials = db.session.query(exists().where(Teachers.initials==initials)).scalar()
+
+            if existinginitials:
+                tempobj = db.session.query(Teachers).filter(Teachers.email==email).first()
+                if tempobj.initials != initials:
+                    flash("Initials are already taken")
+                    return render_template('register.html.j2', form=form)
+
+
+
+            flash("Thanks for registering!")
+            flash(email)
+            tempobj = db.session.query(Teachers).filter(Teachers.email==email).first()
+            tempobj.akafirstname = akafirstname
+            tempobj.akalastname = akalastname
+            tempobj.password = password
+            tempobj.initials = initials
+            db.session.commit()
+            return redirect(url_for('login_page'))
+
+
+    flash("Please register!")
+    return render_template("register.html.j2", form=form)
+
+@app.route('/logout/')
+@login_required
+def logout():
+    session.pop('user', None)
+    session.clear()
+    flash("You have been logged out!")
+    gc.collect()
+    return redirect(url_for('login_page'))
+
+
+
+
+@app.route('/rooms')
+@app.route('/rooms/<int:page>')
+def rooms_page(page=1):
+    return render_template('rooms.html.j2', page=page)
+
+@app.route('/teachers')
+@app.route('/teachers/<int:page>')
+def teachers_page(page=1):
+    return render_template('teachers.html.j2', page=page)
+
+@app.route('/courses')
+@app.route('/courses/<int:page>')
+def courses_page(page=1):
+    return render_template('courses.html.j2', page=page)
+
+
+
+
+@app.route('/allcourses')
+@app.route('/allcourses/<int:page>')
+def allcourses_page(page=1):
+    return render_template('allcourses.html.j2', page=page)
+
+@app.route('/allrooms')
+@app.route('/allrooms/<int:page>')
+def allrooms_page(page=1):
+    return render_template('allrooms.html.j2', page=page)
+
+@app.route('/allteachers')
+@app.route('/allteachers/<int:page>')
+def allteachers_page(page=1):
+    return render_template('allteachers.html.j2', page=page)
+
+
+
+
+@app.route('/oneteacher')
+@app.route('/oneteacher/<int:teacherid>')
+def oneteacher_page(teacherid=1):
+    return render_template('oneteacher.html.j2', teacherid=teacherid)
+
+@app.route('/onecourse')
+@app.route('/onecourse/<int:courseid>')
+def onecourse_page(courseid=1):
+    return render_template('onecourse.html.j2', courseid=courseid)
+
+@app.route('/oneroom')
+@app.route('/oneroom/<int:roomid>')
+def oneroom_page(roomid=1):
+    return render_template('oneroom.html.j2', roomid=roomid)
+
+@app.route('/oneslot')
+@app.route('/oneslot/<int:slotid>')
+def oneslot_page(slotid=1):
+    return render_template('oneslot.html.j2', slotid=slotid)
+
+
+
+
+@app.route('/myteaching')
+@app.route('/myteaching/<int:page>')
+def myteaching_page(page=1):
+    return render_template('myteaching.html.j2', page=page)
+
+@app.route('/myinfo')
+@app.route('/myinfo/<int:page>')
+def myinfo_page(page=1):
+    return render_template('myinfo.html.j2', page=page)
+
+
+
+
+@app.route('/user_edit_myinfo/akafirstname', methods=['GET', 'POST'])
+def user_edit_myinfo_akafirstname():
+    id = request.form["pk"]
+    tempobj = db.session.query(Teachers).get(id)
+    tempobj.akafirstname = request.form["value"]
+
+    db.session.commit()
+
+    result = {}
+
+    return json.dumps(result)
+@app.route('/user_edit_myinfo/akalastname', methods=['GET', 'POST'])
+def user_edit_myinfo_akalastname():
+    id = request.form["pk"]
+    tempobj = db.session.query(Teachers).get(id)
+    tempobj.akalastname = request.form["value"]
+
+    db.session.commit()
+
+    result = {}
+
+    return json.dumps(result)
+@app.route('/user_edit_myinfo/initials', methods=['GET', 'POST'])
+def user_edit_myinfo_initials():
+    id = request.form["pk"]
+    tempobj = db.session.query(Teachers).get(id)
+    tempobj.initials = request.form["value"]
+
+    db.session.commit()
+
+    result = {}
+
+    return json.dumps(result)
+
+
+
+
+@app.route('/user_edit_course/responsible', methods=['GET', 'POST'])
+def user_edit_course_responsible():
+    id = request.form["pk"]
+    tempobj = db.session.query(Courses).get(id)
+    tempobj.responsible = db.session.query(Teachers).filter(Teachers.email == request.form["value"]).first()
+
+    db.session.commit()
+
+    result = { 'id': id, 'text': request.form["value"] }
+
+    return json.dumps(result)
+
+@app.route('/user_edit_content/<int:page>', methods=['GET', 'POST'])
+def user_edit_content(page):
+    id = request.form["pk"]
+
+    #varcode = id.split(',')[0]
+    #varclassid = id.split(',')[1]
+    #print varcode
+    #print varclassid
+    print id
+    print "hej"
+
+    #templist = []
+
+    #templist = scheduleInCourse(varcode)
+    #print templist
+
+    #for item in templist:
+    #   print item
+
+
+    varteacher = db.session.query(Classes).get(id)
+    print varteacher.content.encode('utf-8')
+    #print varteacher.firstname.encode('utf-8')
+    #print request.form["value"].encode('utf-8')
+    varteacher.content = request.form["value"]
+    print "Efter"
+    print varteacher.content.encode('utf-8')
+    #varteacher = Teachers.query.get(id)
+    #print varteacher.firstname.encode('utf-8')
+    result = {}
+    db.session.commit()
+    return json.dumps(result)
+
+
+
+
+
+
+
+
+
+#Adding registred and expected students for all courses
 @app.route('/fetchregistredandexpectedstudents')
 def fetchregistredandexpectedstudents():
 
@@ -2135,28 +2029,24 @@ def restartall():
     #csvimporter()
 
     tempdict = {}
-    tempdict2 = {}
-    tempdict3 = {}
-
     templist = []
-    templist2 = []
-    templist3 = []
+
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
 
-    for item in departments:
-
-        tempdict2 = staffperdepartment(item)
-        print tempdict2
-        templist2.append(tempdict2)
-
     #ADD_ALL_TEACHERS_TO_DB
-    teachersfromdepartment(templist2)
+    for item in departments:
+        tempdict = staffperdepartment(item)
+        templist.append(tempdict)
+    teachersfromdepartment(templist)
+
+    tempdict = {}
+    templist = []
 
 
 
-
+    #ADD_ALL_COURSES_TO_DB
     tempdict20151 = courseinfoperyearandterm(2015, 1)
     tempdict20152 = courseinfoperyearandterm(2015, 2)
     tempdict20161 = courseinfoperyearandterm(2016, 1)
@@ -2170,13 +2060,10 @@ def restartall():
     addcoursestotables_first(tempdict20171)
 
 
-    for item in departments:
-        #print item
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        #print tempdict
-        templist.append(jsonifycoursesfromdepartment(tempdict))
-
     #ADD_ALL_COURSES_TO_DB
+    for item in departments:
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
     coursesfromdepartment3(templist)
 
 
@@ -2191,6 +2078,68 @@ def restartall():
 def page_not_found(e):
 
     return "fel"
+
+
+####TO DO
+def courseinfoperyearandround(x, y):
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
+
+    xml = BeautifulSoup(req)
+
+    templist = xml.findAll("courseround")
+
+    templist2 = []
+
+    for item in templist:
+        #print "1"
+        #print item['coursecode']
+        coursecode = item['coursecode']
+        if coursecode[:2] == "AI":
+
+            startterm = item['startterm']
+            roundid = item['roundid']
+
+            if int(startterm[-1:]) == 1:
+                period = int(roundid) + 2
+            else:
+                period = int(roundid)
+
+            year = startterm[:4]
+
+            print coursecode, roundid, startterm, period, year
+
+            tempdict = {'coursecode':coursecode, 'year':year, 'period':period, 'startterm':startterm, 'roundid':roundid}
+
+            templist2.append(tempdict)
+
+    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
+
+    return tempdict2
+
+####TO DO
+def coursesfromdepartment(templist):
+    for items in templist:
+
+        for item in items:
+            print item
+            name = item['name']
+            code = item['code']
+            examiner = item['examiner']
+            department = item['department']
+
+
+            teacherobj = create_or_fetch_teachereobj(examiner)
+
+            latestcourseobj = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first())
+
+            latestcourseobj.name = name
+            latestcourseobj.code = code
+            latestcourseobj. examiner_id = Teachers.query.filter_by(email=examiner).first().id
+
+            db.session.commit()
+
+
+    print "DONE"
 
 
 
