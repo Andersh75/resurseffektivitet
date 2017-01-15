@@ -1153,10 +1153,9 @@ def fetchslotfromsociallink(linklist):
             courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
             dateobj = create_or_fetch_dateobj(datevar, courseobj)
 
+            try:
+                locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
-            locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
-
-            if locations:
                 for location in locations:
                     location = location.text
                     print "FETCHING!!!!"
@@ -1167,7 +1166,9 @@ def fetchslotfromsociallink(linklist):
                     roomobj = create_or_fetch_roomobj(location, dateobj)
                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
-            else:
+            except Exception, e:
+                varcode = "NO ROOM"
+                print varcode
                 classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
 
@@ -1994,8 +1995,8 @@ def slotsfromsocial():
     br = open_password_protected_site("https://login.kth.se/login/")
 
     for item in allcourses():
-        print item.code
-
+        #print item.code
+        coursecode = item.code
         #url = br.open('https://www.kth.se/social/course/AI1146/subgroup/')
 
         try:
@@ -2009,7 +2010,7 @@ def slotsfromsocial():
         except Exception, e:
             varcode = "no subgroup on social"
             print varcode
-            print item.code
+            print coursecode
 
             try:
                 url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (item.code))
@@ -2055,25 +2056,25 @@ def slotsfromsocial():
                             if "event" in item['href']:
                                 linklist.append(item['href'])
                                 print "FETCHING"
-                                print item.code
+                                print coursecode
 
 
                     except Exception, e:
                         varcode = "no slot on social"
                         print varcode
-                        print item.code
+                        print coursecode
 
 
                 except Exception, e:
                     varcode = "no schedule on social"
                     print varcode
-                    print item.code
+                    print coursecode
 
 
         except Exception, e:
             varcode = "no course on social"
             print varcode
-            print item.code
+            print coursecode
 
 
 
