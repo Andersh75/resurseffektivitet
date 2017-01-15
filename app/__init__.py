@@ -2012,9 +2012,8 @@ def testslots():
     return "HO"
 
 
-@app.route('/fetchslotfromsociallink')
-def fetchslotfromsociallink():
 
+def open_password_protected_site(link):
 
     # Browser
     br = mechanize.Browser()
@@ -2036,7 +2035,7 @@ def fetchslotfromsociallink():
     br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
     print "heh"
     # authenticate
-    br.open( 'https://login.kth.se/login/' )
+    br.open(link)
 
     br.select_form(nr=0)
     # these two come from the code you posted
@@ -2048,193 +2047,155 @@ def fetchslotfromsociallink():
     print "Success!\n"
 
 
+def pass_courseyear_from_classdate(datevar):
+
+    yearvar = int(datevar[:4])
+    monthvar = datevar[5:7]
+
+    if  monthvar == "01":
+        try:
+            dayvar = str(datevar[-2:])
+            if dayvar < 15:
+                yearvar = yearvar - 1
+
+        except Exception, e:
+            varcode = "Day lower than 10"
+            print varcode
+
+    return yearvar
+
+
+def create_or_fetch_courseobj(code, year):
+    courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+
+    if not courseobj:
+        tempdict = {}
+        tempdict['code'] = code
+        tempdict['year'] = year
+        record = Courses(**tempdict)
+        courseobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    return courseobj
+
+
+def create_or_fetch_dateobj(datevar, courseobj):
+
+    dateobj = db.session.query(Dates).filter(Dates.date==datevar).first()
+
+    if not dateobj:
+        tempdict = {}
+        tempdict['date'] = datevar
+        record = Dates(**tempdict)
+        dateobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    alreadydate = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date==datevar, Courses.code==courseobj.code)).first()
+
+    if not alreadydate:
+        dateobj.courses.append(courseobj)
+        db.session.commit()
+
+    return dateobj
+
+
+def create_or_fetch_roomobj(roomvar):
+
+    roomobj = db.session.query(Rooms).filter(Rooms.name==roomvar).first()
+
+    if not roomobj:
+        tempdict = {}
+        tempdict['name'] = roomvar
+        record = Rooms(**tempdict)
+        roomobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    return roomobj
+
+def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj):
+
+    classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==dateobj.date, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+
+    if not classobj:
+        tempdict = {}
+        tempdict['starttime'] = starttimevar
+        tempdict['endtime'] = endtimevar
+        tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==codevar, Courses.year==yearvar)).first().id
+        tempdict['dates_id'] = Dates.query.filter_by(date=datevar).first().id
+
+        record = Classes(**tempdict)
+        classobj = record
+        db.session.add(record)
+        db.session.commit()
+
+        if roomobj:
+            roomobj.classes.append(classobj)
+            db.session.commit()
+
+    return classobj
+
+
+@app.route('/fetchslotfromsociallink')
+def fetchslotfromsociallink():
+
+    open_password_protected_site("https://login.kth.se/login/")
 
     testlink = "https://www.kth.se"
-
     testlink = testlink + "/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/"
 
-    '''
-    url = 'http://pycoders.com/archive/'
-    #This does the magic.Loads everything
-    r = Render(url)
-    #result is a QString.
-    result = r.frame.toHtml()
 
-    #QString should be converted to string before processed by lxml
-    formatted_result = str(result.toAscii())
-
-    #Next build lxml tree from formatted_result
-    tree = html.fromstring(formatted_result)
-
-    #Now using correct Xpath we are fetching URL of archives
-    archive_links = tree.xpath('//divass="campaign"]/a/@href')
-    #print archive_links
-    print "HEJ"
-
-
-    browser = webdriver.PhantomJS('/usr/bin/phantomjs')
-    #browser.get('http://raspberrypi.stackexchange.com/')
-    browser.get(testlink)
-
-    xml = BeautifulSoup(browser.page_source, "html.parser")
-
-    #print xml
-    '''
     ghost = Ghost()
     ghost = Session(ghost)
 
 
-
-
     try:
-        #url = br.open(testlink)
-        ghost.open('https://www.kth.se/social/course/AI1144/subgroup/ht-2013-50212/event/6979920/')
-
+        ghost.open(testlink)
         ghost.wait_timeout=25
-
         page, resources = ghost.wait_for_page_loaded()
 
-        code = "AI1142"
+        #xml = BeautifulSoup(src)
+        xml = BeautifulSoup(ghost.content)
+        #testlist = xml.find_all('a', { "class" : "fancybox" })
+
+        startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+        startdate = startdate.text
+
+        enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+        enddate = enddate.text
+
+        datevar = startdate[:10]
+
+        yearvar = pass_courseyear_from_classdate(datevar)
+
+        codevar = testlink[33:39]
+        starttimevar = startdate[11:13]
+        endtimevar = enddate[11:13]
+
+        courseobj = create_or_fetch_courseobj(codevar, yearvar)
+        dateobj = create_or_fetch_dateobj(datevar, courseobj)
+        roomobj = None
+
+        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+        if locations:
+            for location in locations:
+                location = location.text
+                print location
+
+                roomobj = create_or_fetch_roomobj(location)
+                classobj = create_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+        else:
+            classobj = create_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
 
     except Exception, e:
         varcode = "no social"
         print varcode
         print item.code
-
-
-    try:
-        #xml = BeautifulSoup(src)
-        xml = BeautifulSoup(ghost.content)
-        #testlist = xml.find_all('a', { "class" : "fancybox" })
-        #for item in testlist:
-        #    print item
-
-    except Exception, e:
-        varcode = "no BS"
-        print varcode
-
-
-    try:
-        startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
-        startdate = startdate.text
-
-        print startdate
-    except Exception, e:
-        varcode = "no BS"
-        print varcode
-
-    try:
-        enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
-        enddate = enddate.text
-
-        print enddate
-    except Exception, e:
-        varcode = "no BS"
-        print varcode
-
-    try:
-        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
-        for location in locations:
-            location = location.text
-            print location
-
-            vardate = startdate[:10]
-            varstarttime = startdate[11:13]
-            varendtime = enddate[11:13]
-
-            roomobj = db.session.query(Rooms).filter(Rooms.name==location).first()
-
-            if not roomobj:
-                tempdict = {}
-                tempdict['name'] = location
-                record = Rooms(**tempdict)
-                roomobj = record
-                db.session.add(record)
-                db.session.commit()
-
-
-
-            already = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==code, Rooms.name==location, Dates.date==vardate, Classes.starttime==varstarttime, Classes.endtime==varendtime)).first()
-            if not already:
-
-
-                year = int(vardate[:4])
-
-                if vardate[5:7] == "01":
-                    try:
-                        day = str(vardate[-2:])
-                        print "WORKED"
-                        print day
-                        if day < 15:
-                            year = year - 1
-
-                    except Exception, e:
-                        varcode = "Day lower than 10"
-                        print varcode
-
-
-                courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
-
-
-                if not courseobj:
-                    tempdict = {}
-                    tempdict['code'] = code
-                    tempdict['year'] = year
-                    record = Courses(**tempdict)
-                    courseobj = record
-                    db.session.add(record)
-                    db.session.commit()
-
-                dateobj = db.session.query(Dates).filter(Dates.date==vardate).first()
-
-                if not dateobj:
-                    tempdict = {}
-                    tempdict['date'] = vardate
-                    record = Dates(**tempdict)
-                    dateobj = record
-                    db.session.add(record)
-                    db.session.commit()
-
-
-
-
-
-                tempdict = {}
-                tempdict['starttime'] = varstarttime
-                tempdict['endtime'] = varendtime
-                tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first().id
-                tempdict['dates_id'] = Dates.query.filter_by(date=vardate).first().id
-
-                record = Classes(**tempdict)
-                classobj = record
-                db.session.add(record)
-                db.session.commit()
-
-                dateobj.courses.append(courseobj)
-
-                #datevar.classes.append(record)
-                db.session.commit()
-
-                roomobj.classes.append(classobj)
-                db.session.commit()
-
-
-
-
-
-    except Exception, e:
-        varcode = "no BS"
-        print varcode
-
-
-
-
-
-
-
-
-
-
 
 
     return "XXXXX"
@@ -2264,8 +2225,9 @@ def restartall():
         print tempdict2
         templist2.append(tempdict2)
 
-    #ADD ALL TEACHERS TO DB
+    #ADD_ALL_TEACHERS_TO_DB
     teachersfromdepartment(templist2)
+
 
 
 
@@ -2288,13 +2250,9 @@ def restartall():
         #print tempdict
         templist.append(jsonifycoursesfromdepartment(tempdict))
 
-
-
-    #ADD ALL COURSES TO DB
+    #ADD_ALL_COURSES_TO_DB
     coursesfromdepartment3(templist)
 
-
-    print "QQqqqqqqqqqqqqqqqqqqqqQQQ"
 
     return "restartall"
 
@@ -2305,14 +2263,8 @@ def restartall():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    #xrubrik = db.session.query(Courses.code).filter(Courses.id == 17).first()
-    #xkurskod = db.session.query(Courses.name).filter(Courses.id == 17).first()
-    #return render_template('blocks.html.j2', varia="TESTVARIABEL", varrubrik=xrubrik[0], xkurskod=xkurskod[0], courseid=17)
+
     return "fel"
-
-
-
-
 
 
 
