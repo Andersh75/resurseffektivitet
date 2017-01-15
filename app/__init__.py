@@ -2170,7 +2170,7 @@ def fetchslotfromsociallink():
                 print varcode
 
 
-        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first().id
+        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
 
         dateobj = db.session.query(Dates).filter(Dates.date==vardate).first()
 
