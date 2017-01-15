@@ -2094,6 +2094,7 @@ def fetchslotfromsociallink():
 
         page, resources = ghost.wait_for_page_loaded()
 
+        code = "AI1142"
 
     except Exception, e:
         varcode = "no social"
@@ -2169,7 +2170,7 @@ def fetchslotfromsociallink():
                 print varcode
 
 
-        courseobj = db.session.query(Courses).filter(and_(Courses.code==item.code, Courses.year==year)).first().id
+        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first().id
 
         dateobj = db.session.query(Dates).filter(Dates.date==vardate).first()
 
@@ -2188,7 +2189,7 @@ def fetchslotfromsociallink():
         tempdict = {}
         tempdict['starttime'] = varstarttime
         tempdict['endtime'] = varendtime
-        tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==item.code, Courses.year==year)).first().id
+        tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first().id
         tempdict['dates_id'] = Dates.query.filter_by(date=vardate).first().id
 
         record = Courses(**tempdict)
