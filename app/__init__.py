@@ -806,124 +806,6 @@ def fetchinglistofcodesfordepartmentcourses(department):
     return tempdict
 
 
-def fetchinglistofslotspercourse(course, starttime, endtime):
-    j = urllib2.urlopen('http://www.kth.se/api/schema/v2/course/%s?startTime=%s&endTime=%s' % (course, starttime, endtime))
-
-    j_obj = json.load(j)
-
-    templist = []
-    tempdict = {}
-
-    templist = j_obj['entries']
-
-    tempdict['code'] = course
-    tempdict['slots'] = templist
-
-
-    return tempdict
-
-
-def parselistofslotspercourse(tempdict):
-    code = tempdict['code']
-
-    for item in tempdict['slots']:
-        info = item['info']
-        start = item['start']
-        end = item['end']
-        title = item['title']
-        kind_name = item['type_name']
-        kind = item['type']
-        locations = item['locations']
-
-
-        date = start[:10]
-        print date
-        starttime = start[11:13]
-        print starttime
-        endtime = end[11:13]
-        print endtime
-        kind_name = kind_name['sv']
-
-        year = int(date[:4])
-
-        if date[5:7] == "01":
-            try:
-                day = str(date[-2:])
-                print "WORKED"
-                print day
-                if day < 15:
-                    year = year - 1
-
-            except Exception, e:
-                varcode = "Day lower than 10"
-                print varcode
-
-        print year
-        alreadycourse = db.session.query(exists().where(and_(Courses.code==code, Courses.year==year))).scalar()
-
-        if alreadycourse:
-            courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
-
-            if not Dates.query.filter_by(date=date).first():
-                record = Dates(**{
-                    'date' : date
-                    })
-                db.session.add(record)
-                db.session.commit()
-
-            dateobj = Dates.query.filter_by(date=date).first()
-
-
-            #KOLLA OM DET REDAN EXISTERAR!!!!
-            if not db.session.query(Courses).join(Courses.dates).filter(and_(Courses.id==courseobj.id, Dates.id==dateobj.id)).first():
-                dateobj.courses.append(courseobj)
-                db.session.commit()
-
-            alreadyclass = db.session.query(exists().where(and_(Classes.content==info, Classes.starttime==starttime, Classes.endtime==endtime, Classes.courses_id==courseobj.id, Classes.dates_id==dateobj.id))).scalar()
-
-            if not alreadyclass:
-                record = Classes(**{
-                    #'date' : i[0],
-                    'contentapi' : info,
-                    'starttime' : starttime,
-                    'endtime' : endtime,
-                    'courses_id' : courseobj.id,
-                    'dates_id' : dateobj.id
-                })
-
-                classobj = record
-                db.session.add(record)
-                db.session.commit()
-
-
-
-
-
-
-                for location in locations:
-                    name = location['name']
-
-                    alreadyroom = db.session.query(exists().where(Rooms.name==name)).scalar()
-
-                    if not alreadyroom:
-                        record = Rooms(**{
-                            'name' : name
-                        })
-
-                        db.session.add(record)
-                        db.session.commit()
-
-
-
-                    roomobj = Rooms.query.filter_by(name=name).first()
-
-                    roomobj.classes.append(classobj)
-                    roomobj.dates.append(dateobj)
-
-                    db.session.commit()
-
-
-    return "HEJ"
 
 
 def jsonifycoursesfromdepartment(tempdict):
@@ -2132,6 +2014,70 @@ def testlogin():
 
 
 
+def fetchinglistofslotspercourse(course, starttime, endtime):
+
+    tempdict = {}
+    templist = []
+    tempdict['code'] = course
+    tempdict['slots'] = templist
+
+    try:
+        j = urllib2.urlopen('http://www.kth.se/api/schema/v2/course/%s?startTime=%s&endTime=%s' % (course, starttime, endtime))
+
+        j_obj = json.load(j)
+
+        templist = j_obj['entries']
+
+        tempdict['slots'] = templist
+
+    except Exception, e:
+        varcode = "no json for course"
+        print varcode
+        print course
+        print starttime
+        print endtime
+
+    return tempdict
+
+
+def parselistofslotspercourse(tempdict):
+    code = tempdict['code']
+
+    for item in tempdict['slots']:
+        info = item['info']
+        start = item['start']
+        end = item['end']
+        title = item['title']
+        kind_name = item['type_name']
+        kind = item['type']
+        locations = item['locations']
+
+        date = start[:10]
+        starttime = start[11:13]
+        endtime = end[11:13]
+        kind_name = kind_name['sv']
+
+        year = pass_courseyear_from_classdate(date)
+
+        courseobj = create_or_fetch_courseobj(code, year)
+
+        dateobj = create_or_fetch_dateobj(date, courseobj)
+
+        for location in locations:
+            roomvar = location['name']
+            roomobj = create_or_fetch_roomobj(roomvar, dateobj)
+            classobj = create_or_fetch_classobj(starttime, endtime, code, year, date, roomobj)
+            classobj.contentapi = info
+            print "INFO ADDED TO CLASS"
+            db.session.commit()
+
+
+
+    return "DONE"
+
+
+
+
 
 @app.route('/testslots')
 def testslots():
@@ -2239,10 +2185,6 @@ def linkstoeveryclassinsocial():
 
 
     return "DONE"
-
-
-
-
 
 
 
