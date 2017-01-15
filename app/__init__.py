@@ -2072,6 +2072,7 @@ def linkstoeveryclassinsocial():
     linklist = []
 
     for item in allcourses():
+        print item.code
 
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
