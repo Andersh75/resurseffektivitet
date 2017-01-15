@@ -2085,6 +2085,9 @@ def create_or_fetch_courseobj(code, year):
         db.session.add(record)
         db.session.commit()
 
+    else:
+        print "COURSEOBJECT EXISTS"
+
     return courseobj
 
 
@@ -2108,6 +2111,9 @@ def create_or_fetch_dateobj(datevar, courseobj):
         dateobj = record
         db.session.add(record)
         db.session.commit()
+
+    else:
+        print "DATEOBJECT EXISTS"
 
     alreadydate = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date==datevar, Courses.code==courseobj.code)).first()
 
@@ -2136,6 +2142,9 @@ def create_or_fetch_roomobj(roomvar):
         roomobj = record
         db.session.add(record)
         db.session.commit()
+
+    else:
+        print "ROOMOBJECT EXISTS"
 
     return roomobj
 
