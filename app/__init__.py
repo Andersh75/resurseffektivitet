@@ -1978,15 +1978,6 @@ def fetchregistredandexpectedstudents():
             if xml[-5:-4] == ":":
                 studentreg = int(xml[-3:])
 
-
-            if item.studentsregistred:
-                if item.studentsregistred < studentreg:
-                    item.studentsregistred = studentreg
-                    db.session.commit()
-
-
-            xml = xml.find('caption').text
-
             if xml[22:23] == ",":
                 studentexp = 0
             if xml[23:24] == ",":
@@ -1996,6 +1987,11 @@ def fetchregistredandexpectedstudents():
             if xml[25:26] == ":":
                 studentexp = int(xml[22:25])
 
+
+            if item.studentsregistred:
+                if item.studentsregistred < studentreg:
+                    item.studentsregistred = studentreg
+                    db.session.commit()
 
             if item.studentsexpected:
                 if item.studentsexpected < studentexp:
