@@ -1002,21 +1002,13 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     alreadyroom = None
     classobj = None
 
-    if roomobj:
-        print "ROOM"
-        try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Courses.year==yearvar, Rooms.name==roomobj.name, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
-        except Exception, e:
-            varcode = "no classobj"
-            print varcode
 
-    else:
-        print "NO ROOM"
-        try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==None, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
-        except Exception, e:
-            varcode = "no classobj"
-            print varcode
+    try:
+        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Courses.year==yearvar, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+    except Exception, e:
+        varcode = "no classobj"
+        print varcode
+
 
     if not classobj:
         print "CREATING CLASSOBJECT"
@@ -1034,19 +1026,20 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     else:
         print "CLASSOBJECT EXISTS"
 
-    if roomobj:
-        try:
-            alreadyroom = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id==classobj.id, Rooms.name==roomobj.name)).first()
-        except Exception, e:
-            varcode = "no class-room"
-            print varcode
 
-        if not alreadyroom:
-            print "CREATING CLASS-ROOM"
-            roomobj.classes.append(classobj)
-            db.session.commit()
-        else:
-            print "CLASS-ROOM EXISTS"
+
+    try:
+        alreadyroom = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id==classobj.id, Rooms.name==roomobj.name)).first()
+    except Exception, e:
+        varcode = "no class-room"
+        print varcode
+
+    if not alreadyroom:
+        print "CREATING CLASS-ROOM"
+        roomobj.classes.append(classobj)
+        db.session.commit()
+    else:
+        print "CLASS-ROOM EXISTS"
 
 
 
