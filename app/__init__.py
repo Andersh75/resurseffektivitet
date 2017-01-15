@@ -1739,7 +1739,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     if roomobj:
         print "ROOM"
         try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Courses.year==yearvar, Rooms.name==roomobj.name, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
         except Exception, e:
             varcode = "no classobj"
             print varcode
