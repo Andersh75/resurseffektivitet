@@ -1992,11 +1992,18 @@ def fetchregistredandexpectedstudents():
                 if item.studentsregistred < studentreg:
                     item.studentsregistred = studentreg
                     db.session.commit()
+            else:
+                item.studentsregistred = studentreg
+                db.session.commit()
+
 
             if item.studentsexpected:
                 if item.studentsexpected < studentexp:
                     item.studentsexpected = studentexp
                     db.session.commit()
+            else:
+                item.studentsexpected = studentexp
+                db.session.commit()
 
 
         except Exception, e:
