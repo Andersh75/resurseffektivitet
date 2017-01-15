@@ -2147,12 +2147,19 @@ def fetchslotfromsociallink():
 
 
 
+    roomobj = db.session.query(Rooms).filter(Rooms.name==location).first()
 
+    if not roomobj:
+        tempdict = {}
+        tempdict['name'] = location
+        record = Rooms(**tempdict)
+        roomobj = record
+        db.session.add(record)
+        db.session.commit()
 
 
 
     already = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==code, Rooms.name==location, Dates.date==vardate, Classes.starttime==varstarttime, Classes.endtime==varendtime)).first()
-    print already.id
     if not already:
 
 
@@ -2194,11 +2201,16 @@ def fetchslotfromsociallink():
         tempdict['dates_id'] = Dates.query.filter_by(date=vardate).first().id
 
         record = Classes(**tempdict)
+        classobj = record
         db.session.add(record)
         db.session.commit()
 
         dateobj.courses.append(courseobj)
+
         #datevar.classes.append(record)
+        db.session.commit()
+
+        roomobj.classes.append(classobj)
         db.session.commit()
 
 
