@@ -2088,7 +2088,7 @@ def fetchslotfromsociallink():
 
     try:
         #url = br.open(testlink)
-        ghost.open('https://www.kth.se/social/course/AI1142/subgroup/vt-2016-60475/event/17cf7dee83e7ff0c753ea705aab4065f-1/')
+        ghost.open('https://www.kth.se/social/course/AI1142/subgroup/vt-2016-60475/event/28cc10b646f8762d4f8d54a14e487e30-1/')
 
         ghost.wait_timeout=25
 
