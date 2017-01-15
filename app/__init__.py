@@ -2152,6 +2152,9 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
             roomobj.classes.append(classobj)
             db.session.commit()
 
+    else:
+        print "CLASSOBJECT EXISTS"
+
     return classobj
 
 
