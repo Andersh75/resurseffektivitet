@@ -2083,7 +2083,7 @@ def parselistofslotspercourse(tempdict):
 def testslots():
 
     for item in allcourses():
-        tempdict = fetchinglistofslotspercourse(item.code, "2011-01-01", "2017-06-30")
+        tempdict = fetchinglistofslotspercourse(item.code, "2011-01-01", "2018-06-30")
 
         parselistofslotspercourse(tempdict)
 
