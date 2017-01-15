@@ -2152,6 +2152,7 @@ def fetchslotfromsociallink():
 
 
     already = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==code, Rooms.name==location, Dates.date==vardate, Classes.starttime==varstarttime, Classes.endtime==varendtime)).first()
+    print already.id
     if not already:
 
 
