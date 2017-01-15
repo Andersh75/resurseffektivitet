@@ -2155,6 +2155,7 @@ def linkstoeveryclassinsocial():
 
     return "DONE"
 
+
 @app.route('/testslots')
 def testslots():
     tempdict = fetchinglistofslotspercourse("AI1147", "2015-01-01", "2017-06-30")
@@ -2175,7 +2176,7 @@ def fetchslotfromsociallink():
     open_password_protected_site("https://login.kth.se/login/")
 
     testlink = "https://www.kth.se"
-    testlink = testlink + "/social/course/AI1144/subgroup/ht-2016-758/event/13168/"
+    testlink = testlink + "/social/course/AI1146/subgroup/ht-2014-50552/event/dbfb12af344391d04451c6a9d188c6c5-1/"
 
 
     ghost = Ghost()
