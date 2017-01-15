@@ -1361,7 +1361,7 @@ def coursesfromdepartment2(item):
     endweek = item['endweek']
 
     date = "XXXX-01-XX"
-    if term = 2:
+    if term == 2:
         date = "XXXX-09-XX"
 
     courseobj = create_or_fetch_courseobj(code, year, date)
