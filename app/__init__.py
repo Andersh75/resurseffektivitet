@@ -1955,9 +1955,10 @@ def fetchregistredandexpectedstudents():
 
         yearvar = str(item.year)[-2:]
 
+        url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=%s%s' % (item.code, termvar, yearvar))
 
         try:
-            url = br.open('https://www.kth.se/internt/minasidor/kurs/delt/?ccode=%s&term=%s%s' % (item.code, termvar, yearvar))
+
 
 
             xml = BeautifulSoup(url)
