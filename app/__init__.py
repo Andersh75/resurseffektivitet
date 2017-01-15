@@ -2069,46 +2069,14 @@ def testlogin():
 @app.route('/linkstoeveryclassinsocial')
 def linkstoeveryclassinsocial():
 
-    br = open_password_protected_site("https://login.kth.se/login/")
-
     linklist = []
 
-    '''
-    br = mechanize.Browser()
-
-    # Enable cookie support for urllib2
-    cookiejar = cookielib.LWPCookieJar()
-    br.set_cookiejar( cookiejar )
-
-    # Broser options
-    br.set_handle_equiv( True )
-    br.set_handle_gzip( True )
-    br.set_handle_redirect( True )
-    br.set_handle_referer( True )
-    br.set_handle_robots( False )
-
-    # ??
-    br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
-
-    br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
-
-    br.open("https://login.kth.se/login/")
-
-    br.select_form(nr=0)
-    # these two come from the code you posted
-    # where you would normally put in your username and password
-    br[ "username" ] = 'ahell'
-    br[ "password" ] = '-Gre75kger-'
-    res = br.submit()
-
-    print "Success!\n"
-    '''
-
+    br = open_password_protected_site("https://login.kth.se/login/")
 
     for item in allcourses():
         print item.code
 
-        url = br.open('https://www.kth.se/social/course/AI1146/subgroup/')
+        #url = br.open('https://www.kth.se/social/course/AI1146/subgroup/')
 
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
@@ -2213,7 +2181,7 @@ def fetchslotfromsociallink():
     open_password_protected_site("https://login.kth.se/login/")
 
     testlink = "https://www.kth.se"
-    testlink = testlink + "/social/course/AI1146/subgroup/ht-2014-50552/event/dbfb12af344391d04451c6a9d188c6c5-1/"
+    testlink = testlink + "/social/course/AI1147/subgroup/vt-2015-60376/event/3c39a30fef0a2deb130336a350b383b3-1/"
 
 
     ghost = Ghost()
