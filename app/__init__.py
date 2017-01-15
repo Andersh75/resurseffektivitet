@@ -2133,7 +2133,6 @@ def create_or_fetch_dateobj(datevar, courseobj):
 
 
 def create_or_fetch_roomobj(roomvar, dateobj):
-    print "X"
     roomobj = None
     alreadydate = None
 
@@ -2238,7 +2237,7 @@ def fetchslotfromsociallink():
     open_password_protected_site("https://login.kth.se/login/")
 
     testlink = "https://www.kth.se"
-    testlink = testlink + "/social/course/AI1144/subgroup/ht-2011-60112/event/ovning-2011-09-30-1000-6/"
+    testlink = testlink + "/social/course/AI1144/subgroup/ht-2011-60112/event/forelasning-2011-10-04-1000-18/"
 
 
     ghost = Ghost()
