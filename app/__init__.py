@@ -2192,7 +2192,7 @@ def fetchslotfromsociallink():
         tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first().id
         tempdict['dates_id'] = Dates.query.filter_by(date=vardate).first().id
 
-        record = Courses(**tempdict)
+        record = Classes(**tempdict)
         db.session.add(record)
         db.session.commit()
 
