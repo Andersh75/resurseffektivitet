@@ -1618,9 +1618,13 @@ def pass_courseyear_from_classdate(datevar):
     return yearvar
 
 
-def create_or_fetch_courseobj(code, year):
+def create_or_fetch_courseobj(code, year, date):
 
     courseobj = None
+    term = 1
+
+    if date[5:7] == "01":
+        term = 2
 
     try:
         courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
@@ -1633,6 +1637,7 @@ def create_or_fetch_courseobj(code, year):
         tempdict = {}
         tempdict['code'] = code
         tempdict['year'] = year
+        tempdict['term'] = term
         record = Courses(**tempdict)
         courseobj = record
         db.session.add(record)
@@ -1822,7 +1827,7 @@ def fetchslotfromsociallink(linkvar):
 
         roomobj = None
 
-        courseobj = create_or_fetch_courseobj(codevar, yearvar)
+        courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
         dateobj = create_or_fetch_dateobj(datevar, courseobj)
 
 
@@ -1846,8 +1851,6 @@ def fetchslotfromsociallink(linkvar):
 
 
     return "DONE"
-
-
 
 
 def fetchinglistofslotspercourse(course, starttime, endtime):
@@ -1895,7 +1898,7 @@ def parselistofslotspercourse(tempdict):
 
         year = pass_courseyear_from_classdate(date)
 
-        courseobj = create_or_fetch_courseobj(code, year)
+        courseobj = create_or_fetch_courseobj(code, year, date)
 
         dateobj = create_or_fetch_dateobj(date, courseobj)
 
@@ -2000,7 +2003,7 @@ def fetchregistredandexpectedstudents():
 
 
         except Exception, e:
-            varcode = "FAILTO FETCH REGISTRED AND EXPECTED STUDENTS"
+            varcode = "FAILED TO FETCH REGISTRED AND EXPECTED STUDENTS"
             print varcode
             print item.code
 
