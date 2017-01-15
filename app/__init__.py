@@ -1901,6 +1901,72 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     return classobj
 
 
+def fetchslotfromsociallink(linkvar):
+
+    createtables()
+
+    open_password_protected_site("https://login.kth.se/login/")
+
+    testlink = "https://www.kth.se"
+    testlink = testlink + linkvar
+
+
+    ghost = Ghost()
+    ghost = Session(ghost)
+
+
+    try:
+        ghost.open(testlink)
+        ghost.wait_timeout=25
+        page, resources = ghost.wait_for_page_loaded()
+
+        #xml = BeautifulSoup(src)
+        xml = BeautifulSoup(ghost.content)
+        #testlist = xml.find_all('a', { "class" : "fancybox" })
+
+        startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+        startdate = startdate.text
+
+        enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+        enddate = enddate.text
+
+        datevar = startdate[:10]
+
+        yearvar = pass_courseyear_from_classdate(datevar)
+
+        codevar = testlink[33:39]
+        starttimevar = startdate[11:13]
+        endtimevar = enddate[11:13]
+
+        roomobj = None
+
+        courseobj = create_or_fetch_courseobj(codevar, yearvar)
+        dateobj = create_or_fetch_dateobj(datevar, courseobj)
+
+
+        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+        if locations:
+            for location in locations:
+                location = location.text
+                print location
+
+                roomobj = create_or_fetch_roomobj(location, dateobj)
+                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+        else:
+            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+
+    except Exception, e:
+        varcode = "BROKEN"
+        print varcode
+
+
+    return "DONE"
+
+
+
 
 
 
@@ -2065,6 +2131,19 @@ def testlogin():
     return "Hopp"
 
 
+
+
+@app.route('/testslots')
+def testslots():
+    tempdict = fetchinglistofslotspercourse("AI1147", "2015-01-01", "2017-06-30")
+
+    parselistofslotspercourse(tempdict)
+
+    return "HO"
+
+
+
+
 #Collects links to all slots in history
 @app.route('/linkstoeveryclassinsocial')
 def linkstoeveryclassinsocial():
@@ -2134,6 +2213,7 @@ def linkstoeveryclassinsocial():
                         for item in xml:
                             if "event" in item['href']:
                                 linklist.append(item['href'])
+                                fetchslotfromsociallink(item['href'])
 
                     except Exception, e:
                         varcode = "no slot on social"
@@ -2161,82 +2241,11 @@ def linkstoeveryclassinsocial():
     return "DONE"
 
 
-@app.route('/testslots')
-def testslots():
-    tempdict = fetchinglistofslotspercourse("AI1147", "2015-01-01", "2017-06-30")
-
-    parselistofslotspercourse(tempdict)
-
-    return "HO"
 
 
 
 
 
-@app.route('/fetchslotfromsociallink')
-def fetchslotfromsociallink():
-
-    createtables()
-
-    open_password_protected_site("https://login.kth.se/login/")
-
-    testlink = "https://www.kth.se"
-    testlink = testlink + "/social/course/AI1147/subgroup/vt-2015-60376/event/3c39a30fef0a2deb130336a350b383b3-1/"
-
-
-    ghost = Ghost()
-    ghost = Session(ghost)
-
-
-    try:
-        ghost.open(testlink)
-        ghost.wait_timeout=25
-        page, resources = ghost.wait_for_page_loaded()
-
-        #xml = BeautifulSoup(src)
-        xml = BeautifulSoup(ghost.content)
-        #testlist = xml.find_all('a', { "class" : "fancybox" })
-
-        startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
-        startdate = startdate.text
-
-        enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
-        enddate = enddate.text
-
-        datevar = startdate[:10]
-
-        yearvar = pass_courseyear_from_classdate(datevar)
-
-        codevar = testlink[33:39]
-        starttimevar = startdate[11:13]
-        endtimevar = enddate[11:13]
-
-        roomobj = None
-
-        courseobj = create_or_fetch_courseobj(codevar, yearvar)
-        dateobj = create_or_fetch_dateobj(datevar, courseobj)
-
-
-        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
-
-        if locations:
-            for location in locations:
-                location = location.text
-                print location
-
-                roomobj = create_or_fetch_roomobj(location, dateobj)
-                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
-
-        else:
-            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
-
-
-    except Exception, e:
-        varcode = "BROKEN"
-        print varcode
-
-
-    return "DONE"
 
 
 @app.route('/restartall')
