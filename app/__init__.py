@@ -1627,7 +1627,7 @@ def create_or_fetch_courseobj(code, year, date):
         term = 2
 
     try:
-        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year, Courses.term==term)).first()
     except Exception, e:
         varcode = "no courseobj"
         print varcode
