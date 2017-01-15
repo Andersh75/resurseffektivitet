@@ -2180,6 +2180,16 @@ def fetchslotfromsociallink():
 
         courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
 
+
+        if not courseobj:
+            tempdict = {}
+            tempdict['code'] = code
+            tempdict['year'] = year
+            record = Courses(**tempdict)
+            courseobj = record
+            db.session.add(record)
+            db.session.commit()
+
         dateobj = db.session.query(Dates).filter(Dates.date==vardate).first()
 
         if not dateobj:
