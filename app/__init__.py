@@ -1095,6 +1095,7 @@ def fetchslotfromsociallink(linkvar):
         if locations:
             for location in locations:
                 location = location.text
+                print "FETCHING!!!!"
                 print location
 
                 roomobj = create_or_fetch_roomobj(location, dateobj)
@@ -1985,6 +1986,8 @@ def slotsfromsocial():
                         for item in xml:
                             if "event" in item['href']:
                                 linklist.append(item['href'])
+                                print "FETCHING"
+                                print item.code
                                 fetchslotfromsociallink(item['href'])
 
                     except Exception, e:
