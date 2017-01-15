@@ -2066,9 +2066,17 @@ def pass_courseyear_from_classdate(datevar):
 
 
 def create_or_fetch_courseobj(code, year):
-    courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+
+    courseobj = None
+
+    try:
+        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+    except Exception, e:
+        varcode = "no courseobj"
+        print varcode
 
     if not courseobj:
+        print "CREATING COURSEOBJECT"
         tempdict = {}
         tempdict['code'] = code
         tempdict['year'] = year
@@ -2082,9 +2090,18 @@ def create_or_fetch_courseobj(code, year):
 
 def create_or_fetch_dateobj(datevar, courseobj):
 
-    dateobj = db.session.query(Dates).filter(Dates.date==datevar).first()
+    dateobj = None
+
+    try:
+        dateobj = db.session.query(Dates).filter(Dates.date==datevar).first()
+
+    except Exception, e:
+        varcode = "no dateobj"
+        print varcode
+
 
     if not dateobj:
+        print "CREATING DATEOBJECT"
         tempdict = {}
         tempdict['date'] = datevar
         record = Dates(**tempdict)
@@ -2103,9 +2120,16 @@ def create_or_fetch_dateobj(datevar, courseobj):
 
 def create_or_fetch_roomobj(roomvar):
 
-    roomobj = db.session.query(Rooms).filter(Rooms.name==roomvar).first()
+    roomobj = None
+
+    try:
+        roomobj = db.session.query(Rooms).filter(Rooms.name==roomvar).first()
+    except Exception, e:
+        varcode = "no roomobj"
+        print varcode
 
     if not roomobj:
+        print "CREATING ROOMOBJECT"
         tempdict = {}
         tempdict['name'] = roomvar
         record = Rooms(**tempdict)
