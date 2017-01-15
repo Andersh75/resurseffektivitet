@@ -2133,7 +2133,7 @@ def create_or_fetch_dateobj(datevar, courseobj):
 
 
 def create_or_fetch_roomobj(roomvar, dateobj):
-
+    print "X"
     roomobj = None
     alreadydate = None
 
