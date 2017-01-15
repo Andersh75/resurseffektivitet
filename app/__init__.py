@@ -1256,45 +1256,48 @@ def teachersfromdepartment(templist):
 def courseinfoperyearandterm(x, y):
 
     tempdict2 = {}
+    tempdict2['year'] = None
+    tempdict2['round'] = None
+    tempdict2['courseinfo'] = []
 
-    try:
-        req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
+    #try:
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
 
-        xml = BeautifulSoup(req)
+    xml = BeautifulSoup(req)
 
-        items = xml.findAll("courseround")
+    items = xml.findAll("courseround")
 
-        templist = []
+    templist = []
 
-        for item in items:
+    for item in items:
 
-            coursecode = item['coursecode']
-            if coursecode[:2] == "AI":
-                startterm = item['startterm']
-                roundid = item['roundid']
+        coursecode = item['coursecode']
+        if coursecode[:2] == "AI":
+            startterm = item['startterm']
+            roundid = item['roundid']
 
-                if int(startterm[-1:]) == 1:
-                    period = int(roundid) + 2
-                else:
-                    period = int(roundid)
+            if int(startterm[-1:]) == 1:
+                period = int(roundid) + 2
+            else:
+                period = int(roundid)
 
-                year = startterm[:4]
+            year = startterm[:4]
 
-                term = startterm[-1:]
+            term = startterm[-1:]
 
-                tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm, 'roundid':roundid}
+            tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm, 'roundid':roundid}
 
-                templist.append(tempdict)
+            templist.append(tempdict)
 
-        tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
+    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
 
-
+    '''
     except Exception, e:
         varcode = "no list of courserounds"
         print varcode
         print x
         print y
-
+    '''
     return tempdict2
 def addcoursestotables_first(tempdict):
 
