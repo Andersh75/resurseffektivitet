@@ -2197,7 +2197,6 @@ def fetchslotfromsociallink():
     except Exception, e:
         varcode = "no social"
         print varcode
-        print item.code
 
 
     return "XXXXX"
