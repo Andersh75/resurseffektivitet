@@ -1097,6 +1097,8 @@ def fetchslotfromsociallink(linkvar):
                 location = location.text
                 print "FETCHING!!!!"
                 print location
+                print codevar
+                print yearvar
 
                 roomobj = create_or_fetch_roomobj(location, dateobj)
                 classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
