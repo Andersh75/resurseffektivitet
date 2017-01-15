@@ -2094,6 +2094,7 @@ def create_or_fetch_courseobj(code, year):
 def create_or_fetch_dateobj(datevar, courseobj):
 
     dateobj = None
+    alreadycourse = None
 
     try:
         dateobj = db.session.query(Dates).filter(Dates.date==datevar).first()
@@ -2115,18 +2116,26 @@ def create_or_fetch_dateobj(datevar, courseobj):
     else:
         print "DATEOBJECT EXISTS"
 
-    alreadydate = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date==datevar, Courses.code==courseobj.code)).first()
+    try:
+        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date==datevar, Courses.code==courseobj.code)).first()
+    except Exception, e:
+        varcode = "no course-date"
+        print varcode
 
-    if not alreadydate:
+    if not alreadycourse:
+        print "CREATING COURSE-DATE"
         dateobj.courses.append(courseobj)
         db.session.commit()
+    else:
+        print "COURSE-DATE EXISTS"
 
     return dateobj
 
 
-def create_or_fetch_roomobj(roomvar):
+def create_or_fetch_roomobj(roomvar, dateobj):
 
     roomobj = None
+    alreadydate = None
 
     try:
         roomobj = db.session.query(Rooms).filter(Rooms.name==roomvar).first()
@@ -2146,12 +2155,29 @@ def create_or_fetch_roomobj(roomvar):
     else:
         print "ROOMOBJECT EXISTS"
 
+
+    try:
+        alreadydate = db.session.query(Dates).join(Dates.Rooms).filter(and_(Dates.date==dateobj.date, Rooms.name==roomvar)).first()
+    except Exception, e:
+        varcode = "no room-date"
+        print varcode
+
+    if not alreadydate:
+        print "CREATING ROOM-DATE"
+        dateobj.courses.append(courseobj)
+        db.session.commit()
+
+    else:
+        print "ROOM-DATE EXISTS"
+
+
     return roomobj
 
 def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj):
-    print "createorfetchclassobj"
+
 
     classobj = None
+
     if roomobj:
         print "ROOM"
         try:
