@@ -1255,10 +1255,12 @@ def teachersfromdepartment(templist):
 #ADDING COURSES TO DB
 def courseinfoperyearandterm(x, y):
 
+    templist = []
     tempdict2 = {}
     tempdict2['year'] = None
     tempdict2['round'] = None
-    tempdict2['courseinfo'] = []
+    tempdict2['courseinfo'] = templist
+    
 
     #try:
     req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
@@ -1289,7 +1291,7 @@ def courseinfoperyearandterm(x, y):
 
             templist.append(tempdict)
 
-    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist2}
+    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist}
 
     '''
     except Exception, e:
