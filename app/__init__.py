@@ -2120,12 +2120,12 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     if roomobj:
         print "ROOM"
         classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==dateobj.date, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
-        print classobj
+        print classobj[0]
     else:
         print "NO ROOM"
         classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==None, Dates.date==dateobj.date, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
-        print classobj
-        
+        print classobj[0]
+
     if not classobj:
         print "CREATING CLASSOBJECT"
         tempdict = {}
