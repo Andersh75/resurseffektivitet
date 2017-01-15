@@ -2122,7 +2122,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     if roomobj:
         print "ROOM"
         try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==dateobj.date, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
         except Exception, e:
             varcode = "no classobj"
             print varcode
@@ -2130,7 +2130,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     else:
         print "NO ROOM"
         try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==None, Dates.date==dateobj.date, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==None, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
         except Exception, e:
             varcode = "no classobj"
             print varcode
