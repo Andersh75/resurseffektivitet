@@ -1046,7 +1046,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     return classobj
 
 
-def fetchslotfromsociallink(linkvar):
+def Xfetchslotfromsociallink(linkvar):
 
     createtables()
 
@@ -1112,6 +1112,72 @@ def fetchslotfromsociallink(linkvar):
 
 
     return "DONE"
+
+
+
+def fetchslotfromsociallink(linkvar):
+
+    createtables()
+
+    open_password_protected_site("https://login.kth.se/login/")
+
+    testlink = "https://www.kth.se"
+    testlink = testlink + linkvar
+
+
+
+    try:
+        req = urllib2.urlopen(testlink)
+
+        #xml = BeautifulSoup(src)
+        xml = BeautifulSoup(req)
+        #testlist = xml.find_all('a', { "class" : "fancybox" })
+
+        startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+        startdate = startdate.text
+
+        enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+        enddate = enddate.text
+
+        datevar = startdate[:10]
+
+        yearvar = pass_courseyear_from_classdate(datevar)
+
+        codevar = testlink[33:39]
+        starttimevar = startdate[11:13]
+        endtimevar = enddate[11:13]
+
+        roomobj = None
+
+        courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+        dateobj = create_or_fetch_dateobj(datevar, courseobj)
+
+
+        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+        if locations:
+            for location in locations:
+                location = location.text
+                print "FETCHING!!!!"
+                print location
+                print codevar
+                print yearvar
+
+                roomobj = create_or_fetch_roomobj(location, dateobj)
+                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+        else:
+            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+
+    except Exception, e:
+        varcode = "BROKEN"
+        print varcode
+
+
+    return "DONE"
+
+
 
 
 def fetchinglistofslotspercourse(course, starttime, endtime):
