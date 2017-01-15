@@ -2092,7 +2092,7 @@ def linkstoeveryclassinsocial():
     for item in allcourses():
         print item.code
 
-        url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
+        url = br.open('https://www.kth.se/social/course/AI1146/subgroup/')
 
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
