@@ -2133,95 +2133,103 @@ def fetchslotfromsociallink():
         print varcode
 
     try:
-        location = xml.find('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
-        location = location.text
-        print location
+        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+        for location in locations:
+            location = location.text
+            print location
+
+            vardate = startdate[:10]
+            varstarttime = startdate[11:13]
+            varendtime = enddate[11:13]
+
+            roomobj = db.session.query(Rooms).filter(Rooms.name==location).first()
+
+            if not roomobj:
+                tempdict = {}
+                tempdict['name'] = location
+                record = Rooms(**tempdict)
+                roomobj = record
+                db.session.add(record)
+                db.session.commit()
+
+
+
+            already = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==code, Rooms.name==location, Dates.date==vardate, Classes.starttime==varstarttime, Classes.endtime==varendtime)).first()
+            if not already:
+
+
+                year = int(vardate[:4])
+
+                if vardate[5:7] == "01":
+                    try:
+                        day = str(vardate[-2:])
+                        print "WORKED"
+                        print day
+                        if day < 15:
+                            year = year - 1
+
+                    except Exception, e:
+                        varcode = "Day lower than 10"
+                        print varcode
+
+
+                courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+
+
+                if not courseobj:
+                    tempdict = {}
+                    tempdict['code'] = code
+                    tempdict['year'] = year
+                    record = Courses(**tempdict)
+                    courseobj = record
+                    db.session.add(record)
+                    db.session.commit()
+
+                dateobj = db.session.query(Dates).filter(Dates.date==vardate).first()
+
+                if not dateobj:
+                    tempdict = {}
+                    tempdict['date'] = vardate
+                    record = Dates(**tempdict)
+                    dateobj = record
+                    db.session.add(record)
+                    db.session.commit()
+
+
+
+
+
+                tempdict = {}
+                tempdict['starttime'] = varstarttime
+                tempdict['endtime'] = varendtime
+                tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first().id
+                tempdict['dates_id'] = Dates.query.filter_by(date=vardate).first().id
+
+                record = Classes(**tempdict)
+                classobj = record
+                db.session.add(record)
+                db.session.commit()
+
+                dateobj.courses.append(courseobj)
+
+                #datevar.classes.append(record)
+                db.session.commit()
+
+                roomobj.classes.append(classobj)
+                db.session.commit()
+
+
+
+
 
     except Exception, e:
         varcode = "no BS"
         print varcode
 
-    vardate = startdate[:10]
-    varstarttime = startdate[11:13]
-    varendtime = enddate[11:13]
-
-
-
-    roomobj = db.session.query(Rooms).filter(Rooms.name==location).first()
-
-    if not roomobj:
-        tempdict = {}
-        tempdict['name'] = location
-        record = Rooms(**tempdict)
-        roomobj = record
-        db.session.add(record)
-        db.session.commit()
-
-
-
-    already = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==code, Rooms.name==location, Dates.date==vardate, Classes.starttime==varstarttime, Classes.endtime==varendtime)).first()
-    if not already:
-
-
-        year = int(vardate[:4])
-
-        if vardate[5:7] == "01":
-            try:
-                day = str(vardate[-2:])
-                print "WORKED"
-                print day
-                if day < 15:
-                    year = year - 1
-
-            except Exception, e:
-                varcode = "Day lower than 10"
-                print varcode
-
-
-        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
-
-
-        if not courseobj:
-            tempdict = {}
-            tempdict['code'] = code
-            tempdict['year'] = year
-            record = Courses(**tempdict)
-            courseobj = record
-            db.session.add(record)
-            db.session.commit()
-
-        dateobj = db.session.query(Dates).filter(Dates.date==vardate).first()
-
-        if not dateobj:
-            tempdict = {}
-            tempdict['date'] = vardate
-            record = Dates(**tempdict)
-            dateobj = record
-            db.session.add(record)
-            db.session.commit()
 
 
 
 
-
-        tempdict = {}
-        tempdict['starttime'] = varstarttime
-        tempdict['endtime'] = varendtime
-        tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first().id
-        tempdict['dates_id'] = Dates.query.filter_by(date=vardate).first().id
-
-        record = Classes(**tempdict)
-        classobj = record
-        db.session.add(record)
-        db.session.commit()
-
-        dateobj.courses.append(courseobj)
-
-        #datevar.classes.append(record)
-        db.session.commit()
-
-        roomobj.classes.append(classobj)
-        db.session.commit()
 
 
 
