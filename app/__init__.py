@@ -887,13 +887,13 @@ def create_or_fetch_teachereobj(email):
 def create_or_fetch_courseobj(code, year, date):
 
     courseobj = None
-    term = 1
+    term = 2
 
     if date[5:7] == "01":
-        term = 2
+        term = 1
 
     try:
-        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year, Courses.term==term)).first()
+        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year).first()
     except Exception, e:
         varcode = "no courseobj"
         print varcode
