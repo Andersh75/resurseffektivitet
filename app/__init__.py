@@ -2157,7 +2157,7 @@ def create_or_fetch_roomobj(roomvar, dateobj):
 
 
     try:
-        alreadydate = db.session.query(Dates).join(Dates.Rooms).filter(and_(Dates.date==dateobj.date, Rooms.name==roomvar)).first()
+        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date==dateobj.date, Rooms.name==roomvar)).first()
     except Exception, e:
         varcode = "no room-date"
         print varcode
