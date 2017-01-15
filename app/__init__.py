@@ -107,14 +107,14 @@ subjects_classes = db.Table('subjects_classes',
 # One-to-many. Parent to Rooms
 class Roomtypes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    roomtype = db.Column(db.String(30))
+    roomtype = db.Column(db.String(30), unique=True)
     cost = db.Column(db.Integer)
     rooms = db.relationship('Rooms', backref='roomtypes', lazy='dynamic')
 
 # One-to-many. Child to Roomtypes
 class Rooms(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30))
+    name = db.Column(db.String(30), unique=True)
     seats = db.Column(db.Integer)
     roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
     classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
@@ -129,7 +129,7 @@ class Subjects(db.Model):
 
 class Dates(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime)
+    date = db.Column(db.DateTime, unique=True)
     courses = db.relationship('Courses', secondary=dates_courses, backref=db.backref('dates', lazy='dynamic'))
     rooms = db.relationship('Rooms', secondary=dates_rooms, backref=db.backref('dates', lazy='dynamic'))
     teachers = db.relationship('Teachers', secondary=dates_teachers, backref=db.backref('dates', lazy='dynamic'))
@@ -158,7 +158,7 @@ class Teachers(db.Model):
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    code = db.Column(db.String(30))
+    code = db.Column(db.String(30), unique=True)
     schedule_exists = db.Column(db.Boolean, default=False)
     year = db.Column(db.Integer)
     term = db.Column(db.Integer)
