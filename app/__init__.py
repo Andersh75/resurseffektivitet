@@ -1682,6 +1682,225 @@ def user_edit_content(page):
 
 
 
+def open_password_protected_site(link):
+
+    # Browser
+    br = mechanize.Browser()
+
+    # Enable cookie support for urllib2
+    cookiejar = cookielib.LWPCookieJar()
+    br.set_cookiejar( cookiejar )
+
+    # Broser options
+    br.set_handle_equiv( True )
+    br.set_handle_gzip( True )
+    br.set_handle_redirect( True )
+    br.set_handle_referer( True )
+    br.set_handle_robots( False )
+
+    # ??
+    br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
+
+    br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
+    print "heh"
+    # authenticate
+    br.open(link)
+
+    br.select_form(nr=0)
+    # these two come from the code you posted
+    # where you would normally put in your username and password
+    br[ "username" ] = 'ahell'
+    br[ "password" ] = '-Gre75kger-'
+    res = br.submit()
+
+    print "Success!\n"
+
+
+def pass_courseyear_from_classdate(datevar):
+
+    yearvar = int(datevar[:4])
+    monthvar = datevar[5:7]
+
+    if  monthvar == "01":
+        try:
+            dayvar = str(datevar[-2:])
+            if dayvar < 15:
+                yearvar = yearvar - 1
+
+        except Exception, e:
+            varcode = "Day lower than 10"
+            print varcode
+
+    return yearvar
+
+
+def create_or_fetch_courseobj(code, year):
+
+    courseobj = None
+
+    try:
+        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+    except Exception, e:
+        varcode = "no courseobj"
+        print varcode
+
+    if not courseobj:
+        print "CREATING COURSEOBJECT"
+        tempdict = {}
+        tempdict['code'] = code
+        tempdict['year'] = year
+        record = Courses(**tempdict)
+        courseobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    else:
+        print "COURSEOBJECT EXISTS"
+
+    return courseobj
+
+
+def create_or_fetch_dateobj(datevar, courseobj):
+
+    dateobj = None
+    alreadycourse = None
+
+    try:
+        dateobj = db.session.query(Dates).filter(Dates.date==datevar).first()
+
+    except Exception, e:
+        varcode = "no dateobj"
+        print varcode
+
+
+    if not dateobj:
+        print "CREATING DATEOBJECT"
+        tempdict = {}
+        tempdict['date'] = datevar
+        record = Dates(**tempdict)
+        dateobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    else:
+        print "DATEOBJECT EXISTS"
+
+    try:
+        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date==datevar, Courses.code==courseobj.code)).first()
+    except Exception, e:
+        varcode = "no course-date"
+        print varcode
+
+    if not alreadycourse:
+        print "CREATING COURSE-DATE"
+        dateobj.courses.append(courseobj)
+        db.session.commit()
+    else:
+        print "COURSE-DATE EXISTS"
+
+    return dateobj
+
+
+def create_or_fetch_roomobj(roomvar, dateobj):
+    roomobj = None
+    alreadydate = None
+
+    try:
+        roomobj = db.session.query(Rooms).filter(Rooms.name==roomvar).first()
+    except Exception, e:
+        varcode = "no roomobj"
+        print varcode
+
+    if not roomobj:
+        print "CREATING ROOMOBJECT"
+        tempdict = {}
+        tempdict['name'] = roomvar
+        record = Rooms(**tempdict)
+        roomobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    else:
+        print "ROOMOBJECT EXISTS"
+
+
+    try:
+        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date==dateobj.date, Rooms.name==roomvar)).first()
+    except Exception, e:
+        varcode = "no room-date"
+        print varcode
+
+    if not alreadydate:
+        print "CREATING ROOM-DATE"
+        dateobj.rooms.append(roomobj)
+        db.session.commit()
+
+    else:
+        print "ROOM-DATE EXISTS"
+
+
+    return roomobj
+
+
+def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj):
+
+    alreadyroom = None
+    classobj = None
+
+    if roomobj:
+        print "ROOM"
+        try:
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+        except Exception, e:
+            varcode = "no classobj"
+            print varcode
+
+    else:
+        print "NO ROOM"
+        try:
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==None, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+        except Exception, e:
+            varcode = "no classobj"
+            print varcode
+
+    if not classobj:
+        print "CREATING CLASSOBJECT"
+        tempdict = {}
+        tempdict['starttime'] = starttimevar
+        tempdict['endtime'] = endtimevar
+        tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==codevar, Courses.year==yearvar)).first().id
+        tempdict['dates_id'] = Dates.query.filter_by(date=datevar).first().id
+
+        record = Classes(**tempdict)
+        classobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    else:
+        print "CLASSOBJECT EXISTS"
+
+    if roomobj:
+        try:
+            alreadyroom = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id==classobj.id, Rooms.name==roomobj.name)).first()
+        except Exception, e:
+            varcode = "no class-room"
+            print varcode
+
+        if not alreadyroom:
+            print "CREATING CLASS-ROOM"
+            roomobj.classes.append(classobj)
+            db.session.commit()
+        else:
+            print "CLASS-ROOM EXISTS"
+
+
+
+
+    return classobj
+
+
+
+
 
 
 @app.route('/')
@@ -1845,39 +2064,10 @@ def testlogin():
 
 
 #Collects links to all slots in history
-@app.route('/testscrape')
-def testscrape():
+@app.route('/linkstoeveryclassinsocial')
+def linkstoeveryclassinsocial():
 
-    # Browser
-    br = mechanize.Browser()
-
-    # Enable cookie support for urllib2
-    cookiejar = cookielib.LWPCookieJar()
-    br.set_cookiejar( cookiejar )
-
-    # Broser options
-    br.set_handle_equiv( True )
-    br.set_handle_gzip( True )
-    br.set_handle_redirect( True )
-    br.set_handle_referer( True )
-    br.set_handle_robots( False )
-
-    # ??
-    br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
-
-    br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
-    print "heh"
-    # authenticate
-    br.open( 'https://login.kth.se/login/' )
-
-    br.select_form(nr=0)
-    # these two come from the code you posted
-    # where you would normally put in your username and password
-    br[ "username" ] = 'ahell'
-    br[ "password" ] = '-Gre75kger-'
-    res = br.submit()
-
-    print "Success!\n"
+    open_password_protected_site("https://login.kth.se/login/")
 
     linklist = []
 
@@ -1886,122 +2076,84 @@ def testscrape():
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
 
+            courselink = "/social/course/"
+            courselink = courselink + item.code
+            courselink = courselink + "/subgroup/"
+
+
         except Exception, e:
-            varcode = "no social"
+            varcode = "no subgroup on social"
             print varcode
             print item.code
 
             try:
                 url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (item.code))
+
+                courselink = "/social/course/"
+                courselink = courselink + item.code
+                courselink = courselink + "/other_subgroups/"
+
             except Exception, e:
-                varcode = "no other subgroups"
+                varcode = "no other subgroups on social"
                 print varcode
                 print item.code
 
 
         try:
             xml = BeautifulSoup(url)
-        except Exception, e:
-            varcode = "no BS"
-            print varcode
+            xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
 
-        testvar = "/social/course/"
-
-        testvar = testvar + item.code
-        testvar = testvar + "/subgroup/"
-
-        try:
-            xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
-
-        except Exception, e:
-            varcode = "no startswith"
-            print varcode
-
-
-        try:
             for item in xml:
-                #print "HEJ"
-                #print item['href']
 
-                tempvar = "https://www.kth.se"
-
-                tempvar = tempvar + item['href']
-
-
-                #print tempvar
-
-                try:
-                    url = br.open(tempvar)
-
-                except Exception, e:
-                    varcode = "no 1"
-                    print varcode
+                fullcourselink = "https://www.kth.se"
+                fullcourselink = fullcourselink + item['href']
 
 
                 try:
+                    url = br.open(fullcourselink)
+
                     xml = BeautifulSoup(url)
-
-                except Exception, e:
-                    varcode = "no 2"
-                    print varcode
-
-                try:
                     xml = xml.find('a', text="Schema")
-                    #print xml['href']
+
+
+                    schedulelink = "https://www.kth.se"
+                    schedulelink = schedulelink + xml['href']
+
+
+                    try:
+                        url = br.open(schedulelink)
+
+                        xml = BeautifulSoup(url)
+                        xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
+
+                        for item in xml:
+                            if "event" in item['href']:
+                                linklist.append(item['href'])
+
+                    except Exception, e:
+                        varcode = "no slot on social"
+                        print varcode
+                        print item.code
+
 
                 except Exception, e:
-                    varcode = "no 3"
+                    varcode = "no schedule on social"
                     print varcode
-
-                tempvar = "https://www.kth.se"
-
-                tempvar = tempvar + xml['href']
-
-
-                try:
-                    url = br.open(tempvar)
-
-                except Exception, e:
-                    varcode = "no 4"
-                    print varcode
-
-
-                try:
-                    xml = BeautifulSoup(url)
-
-                except Exception, e:
-                    varcode = "no 5"
-                    print varcode
-
-                try:
-                    xml = xml.find_all('a', href=lambda value: value and value.startswith(testvar))
-                    #print xml
-
-                except Exception, e:
-                    varcode = "no 6"
-                    print varcode
-
-                try:
-                    for item in xml:
-                        #print item['href']
-
-                        if "event" in item['href']:
-                            linklist.append(item['href'])
-
-                except Exception, e:
-                    varcode = "no 7"
-                    print varcode
+                    print item.code
 
 
         except Exception, e:
-            varcode = "no primaryemail"
+            varcode = "no course on social"
             print varcode
+            print item.code
+
+
 
     for item in linklist:
         print item
 
 
-    return "HO"
+    return "DONE"
 
 @app.route('/testslots')
 def testslots():
@@ -2013,220 +2165,6 @@ def testslots():
 
 
 
-def open_password_protected_site(link):
-
-    # Browser
-    br = mechanize.Browser()
-
-    # Enable cookie support for urllib2
-    cookiejar = cookielib.LWPCookieJar()
-    br.set_cookiejar( cookiejar )
-
-    # Broser options
-    br.set_handle_equiv( True )
-    br.set_handle_gzip( True )
-    br.set_handle_redirect( True )
-    br.set_handle_referer( True )
-    br.set_handle_robots( False )
-
-    # ??
-    br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
-
-    br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
-    print "heh"
-    # authenticate
-    br.open(link)
-
-    br.select_form(nr=0)
-    # these two come from the code you posted
-    # where you would normally put in your username and password
-    br[ "username" ] = 'ahell'
-    br[ "password" ] = '-Gre75kger-'
-    res = br.submit()
-
-    print "Success!\n"
-
-
-def pass_courseyear_from_classdate(datevar):
-
-    yearvar = int(datevar[:4])
-    monthvar = datevar[5:7]
-
-    if  monthvar == "01":
-        try:
-            dayvar = str(datevar[-2:])
-            if dayvar < 15:
-                yearvar = yearvar - 1
-
-        except Exception, e:
-            varcode = "Day lower than 10"
-            print varcode
-
-    return yearvar
-
-
-def create_or_fetch_courseobj(code, year):
-
-    courseobj = None
-
-    try:
-        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
-    except Exception, e:
-        varcode = "no courseobj"
-        print varcode
-
-    if not courseobj:
-        print "CREATING COURSEOBJECT"
-        tempdict = {}
-        tempdict['code'] = code
-        tempdict['year'] = year
-        record = Courses(**tempdict)
-        courseobj = record
-        db.session.add(record)
-        db.session.commit()
-
-    else:
-        print "COURSEOBJECT EXISTS"
-
-    return courseobj
-
-
-def create_or_fetch_dateobj(datevar, courseobj):
-
-    dateobj = None
-    alreadycourse = None
-
-    try:
-        dateobj = db.session.query(Dates).filter(Dates.date==datevar).first()
-
-    except Exception, e:
-        varcode = "no dateobj"
-        print varcode
-
-
-    if not dateobj:
-        print "CREATING DATEOBJECT"
-        tempdict = {}
-        tempdict['date'] = datevar
-        record = Dates(**tempdict)
-        dateobj = record
-        db.session.add(record)
-        db.session.commit()
-
-    else:
-        print "DATEOBJECT EXISTS"
-
-    try:
-        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date==datevar, Courses.code==courseobj.code)).first()
-    except Exception, e:
-        varcode = "no course-date"
-        print varcode
-
-    if not alreadycourse:
-        print "CREATING COURSE-DATE"
-        dateobj.courses.append(courseobj)
-        db.session.commit()
-    else:
-        print "COURSE-DATE EXISTS"
-
-    return dateobj
-
-
-def create_or_fetch_roomobj(roomvar, dateobj):
-    roomobj = None
-    alreadydate = None
-
-    try:
-        roomobj = db.session.query(Rooms).filter(Rooms.name==roomvar).first()
-    except Exception, e:
-        varcode = "no roomobj"
-        print varcode
-
-    if not roomobj:
-        print "CREATING ROOMOBJECT"
-        tempdict = {}
-        tempdict['name'] = roomvar
-        record = Rooms(**tempdict)
-        roomobj = record
-        db.session.add(record)
-        db.session.commit()
-
-    else:
-        print "ROOMOBJECT EXISTS"
-
-
-    try:
-        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date==dateobj.date, Rooms.name==roomvar)).first()
-    except Exception, e:
-        varcode = "no room-date"
-        print varcode
-
-    if not alreadydate:
-        print "CREATING ROOM-DATE"
-        dateobj.rooms.append(roomobj)
-        db.session.commit()
-
-    else:
-        print "ROOM-DATE EXISTS"
-
-
-    return roomobj
-
-def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj):
-
-    alreadyroom = None
-    classobj = None
-
-    if roomobj:
-        print "ROOM"
-        try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
-        except Exception, e:
-            varcode = "no classobj"
-            print varcode
-
-    else:
-        print "NO ROOM"
-        try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==None, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
-        except Exception, e:
-            varcode = "no classobj"
-            print varcode
-
-    if not classobj:
-        print "CREATING CLASSOBJECT"
-        tempdict = {}
-        tempdict['starttime'] = starttimevar
-        tempdict['endtime'] = endtimevar
-        tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code==codevar, Courses.year==yearvar)).first().id
-        tempdict['dates_id'] = Dates.query.filter_by(date=datevar).first().id
-
-        record = Classes(**tempdict)
-        classobj = record
-        db.session.add(record)
-        db.session.commit()
-
-    else:
-        print "CLASSOBJECT EXISTS"
-
-    if roomobj:
-        try:
-            alreadyroom = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id==classobj.id, Rooms.name==roomobj.name)).first()
-        except Exception, e:
-            varcode = "no class-room"
-            print varcode
-
-        if not alreadyroom:
-            print "CREATING CLASS-ROOM"
-            roomobj.classes.append(classobj)
-            db.session.commit()
-        else:
-            print "CLASS-ROOM EXISTS"
-
-
-
-
-    return classobj
 
 
 @app.route('/fetchslotfromsociallink')
@@ -2288,11 +2226,11 @@ def fetchslotfromsociallink():
 
 
     except Exception, e:
-        varcode = "no social"
+        varcode = "BROKEN"
         print varcode
 
 
-    return "XXXXX"
+    return "DONE"
 
 
 @app.route('/restartall')
