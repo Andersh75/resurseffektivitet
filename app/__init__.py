@@ -2164,7 +2164,7 @@ def create_or_fetch_roomobj(roomvar, dateobj):
 
     if not alreadydate:
         print "CREATING ROOM-DATE"
-        dateobj.courses.append(courseobj)
+        dateobj.rooms.append(roomobj)
         db.session.commit()
 
     else:
@@ -2175,7 +2175,7 @@ def create_or_fetch_roomobj(roomvar, dateobj):
 
 def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj):
 
-
+    alreadyroom = None
     classobj = None
 
     if roomobj:
@@ -2207,12 +2207,25 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
         db.session.add(record)
         db.session.commit()
 
-        if roomobj:
-            roomobj.classes.append(classobj)
-            db.session.commit()
-
     else:
         print "CLASSOBJECT EXISTS"
+
+    if roomobj:
+        try:
+            alreadyroom = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id==classobj.id, Rooms.name==roomobj.name)).first()
+        except Exception, e:
+            varcode = "no class-room"
+            print varcode
+
+        if not alreadyroom:
+            print "CREATING CLASS-ROOM"
+            roomobj.classes.append(classobj)
+            db.session.commit()
+        else:
+            print "CLASS-ROOM EXISTS"
+
+
+
 
     return classobj
 
