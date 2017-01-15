@@ -1260,7 +1260,7 @@ def courseinfoperyearandterm(x, y):
     tempdict2['year'] = None
     tempdict2['round'] = None
     tempdict2['courseinfo'] = templist
-    
+
 
     #try:
     req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
@@ -1278,10 +1278,7 @@ def courseinfoperyearandterm(x, y):
             startterm = item['startterm']
             roundid = item['roundid']
 
-            if int(startterm[-1:]) == 1:
-                period = int(roundid) + 2
-            else:
-                period = int(roundid)
+            period = None
 
             year = startterm[:4]
 
