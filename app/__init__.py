@@ -1715,6 +1715,8 @@ def open_password_protected_site(link):
 
     print "Success!\n"
 
+    return br
+
 
 def pass_courseyear_from_classdate(datevar):
 
@@ -2067,9 +2069,11 @@ def testlogin():
 @app.route('/linkstoeveryclassinsocial')
 def linkstoeveryclassinsocial():
 
-    #open_password_protected_site("https://login.kth.se/login/")
+    br = open_password_protected_site("https://login.kth.se/login/")
 
     linklist = []
+
+    '''
     br = mechanize.Browser()
 
     # Enable cookie support for urllib2
@@ -2098,7 +2102,7 @@ def linkstoeveryclassinsocial():
     res = br.submit()
 
     print "Success!\n"
-
+    '''
 
 
     for item in allcourses():
