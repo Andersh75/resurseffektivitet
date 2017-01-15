@@ -62,7 +62,7 @@ class Render(QWebPage):
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f36'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f37'
 db = SQLAlchemy(app)
 
 
@@ -2140,6 +2140,8 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
 
 @app.route('/fetchslotfromsociallink')
 def fetchslotfromsociallink():
+
+    createtables()
 
     open_password_protected_site("https://login.kth.se/login/")
 
