@@ -2119,6 +2119,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     print "createorfetchclassobj"
     if roomobj:
         print "ROOM"
+        print "MMMM"
         classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Rooms.name==roomobj.name, Dates.date==dateobj.date, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
         print classobj[0]
         print "HHHH"
