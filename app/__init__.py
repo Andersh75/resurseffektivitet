@@ -2237,7 +2237,7 @@ def fetchslotfromsociallink():
     open_password_protected_site("https://login.kth.se/login/")
 
     testlink = "https://www.kth.se"
-    testlink = testlink + "/social/course/AI1144/subgroup/ht-2011-60112/event/forelasning-2011-10-04-1000-18/"
+    testlink = testlink + "/social/course/AI1144/subgroup/ht-2016-758/event/13168/"
 
 
     ghost = Ghost()
