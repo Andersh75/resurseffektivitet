@@ -2130,7 +2130,7 @@ def coursesfromdepartment(templist):
 
             teacherobj = create_or_fetch_teachereobj(examiner)
 
-            latestcourseobj = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first())
+            latestcourseobj = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first()
 
             latestcourseobj.name = name
             latestcourseobj.code = code
