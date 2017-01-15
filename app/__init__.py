@@ -244,7 +244,6 @@ def idtocode(courseid):
     return tempvar[0]
 
 
-
 def allcourses():
     templist = db.session.query(Courses).order_by(Courses.code).all()
     return templist
@@ -1990,7 +1989,7 @@ def slotsfromsocial():
                                 linklist.append(item['href'])
                                 print "FETCHING"
                                 print item.code
-                                fetchslotfromsociallink(item['href'])
+
 
                     except Exception, e:
                         varcode = "no slot on social"
@@ -2012,6 +2011,7 @@ def slotsfromsocial():
 
 
     for item in linklist:
+        fetchslotfromsociallink(item)
         print item
 
 
