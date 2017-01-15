@@ -158,7 +158,7 @@ class Teachers(db.Model):
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    code = db.Column(db.String(30), unique=True)
+    code = db.Column(db.String(30))
     schedule_exists = db.Column(db.Boolean, default=False)
     year = db.Column(db.Integer)
     term = db.Column(db.Integer)
