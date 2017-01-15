@@ -2100,18 +2100,18 @@ def fetchslotfromsociallink():
         print varcode
         print item.code
 
-    '''
+
     try:
         #xml = BeautifulSoup(src)
         xml = BeautifulSoup(ghost.content)
-        testlist = xml.find_all('a', { "class" : "fancybox" })
-        for item in testlist:
-            print item
+        #testlist = xml.find_all('a', { "class" : "fancybox" })
+        #for item in testlist:
+        #    print item
 
     except Exception, e:
         varcode = "no BS"
         print varcode
-    '''
+
 
     try:
         startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
