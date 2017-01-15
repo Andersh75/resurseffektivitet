@@ -2255,9 +2255,11 @@ def fetchslotfromsociallink():
         starttimevar = startdate[11:13]
         endtimevar = enddate[11:13]
 
+        roomobj = None
+
         courseobj = create_or_fetch_courseobj(codevar, yearvar)
         dateobj = create_or_fetch_dateobj(datevar, courseobj)
-        roomobj = None
+
 
         locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
