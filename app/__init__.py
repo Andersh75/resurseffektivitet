@@ -2054,9 +2054,64 @@ def slotsfromsocial():
 
                         for item in xml:
                             if "event" in item['href']:
-                                linklist.append(item['href'])
+                                #linklist.append(item['href'])
+                                linkvar = item['href']
                                 print "FETCHING"
                                 print coursecode
+                                testlink = "https://www.kth.se"
+                                testlink = testlink + linkvar
+
+
+
+                                try:
+                                    url = br.open(testlink)
+
+                                    #xml = BeautifulSoup(src)
+                                    xml = BeautifulSoup(url)
+                                    #testlist = xml.find_all('a', { "class" : "fancybox" })
+
+                                    startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+                                    startdate = startdate.text
+
+                                    enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+                                    enddate = enddate.text
+
+                                    datevar = startdate[:10]
+
+                                    yearvar = pass_courseyear_from_classdate(datevar)
+
+                                    codevar = testlink[33:39]
+                                    starttimevar = startdate[11:13]
+                                    endtimevar = enddate[11:13]
+
+                                    roomobj = None
+
+                                    courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+                                    dateobj = create_or_fetch_dateobj(datevar, courseobj)
+
+                                    try:
+                                        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+                                        for location in locations:
+                                            location = location.text
+                                            print "FETCHING!!!!"
+                                            print location
+                                            print codevar
+                                            print yearvar
+
+                                            roomobj = create_or_fetch_roomobj(location, dateobj)
+                                            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+                                    except Exception, e:
+                                        varcode = "NO ROOM"
+                                        print varcode
+                                        classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+
+                                except Exception, e:
+                                    varcode = "BROKEN"
+                                    print varcode
+
 
 
                     except Exception, e:
@@ -2079,7 +2134,7 @@ def slotsfromsocial():
 
 
 
-    fetchslotfromsociallink(linklist)
+    #fetchslotfromsociallink(linklist)
 
 
 
