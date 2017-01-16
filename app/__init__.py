@@ -2175,6 +2175,10 @@ def slotsfromsocial():
                             varcode = "NO ROOM"
                             print varcode
 
+        except Exception, e:
+            varcode = "NO ROOM"
+            print varcode
+
     return "DONE"
 
 
