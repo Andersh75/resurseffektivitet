@@ -2004,7 +2004,7 @@ def slotsfromsocial():
 
             courselink = "/social/course/"
             courselink = courselink + item.code
-            courselink = courselink + "/subgroup/"
+            courselink = courselink + "/other_subgroups/"
 
             xml = BeautifulSoup(url)
             xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
@@ -2092,7 +2092,7 @@ def slotsfromsocial():
 
                     courselink = "/social/course/"
                     courselink = courselink + item.code
-                    courselink = courselink + "/other_subgroups/"
+                    courselink = courselink + "/subgroup/"
 
                     xml = BeautifulSoup(url)
                     xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
