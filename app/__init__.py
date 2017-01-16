@@ -245,7 +245,7 @@ def idtocode(courseid):
 
 
 def allcourses():
-    templist = db.session.query(Courses).order_by(Courses.code).order_by(Courses.code.desc()).all()
+    templist = db.session.query(Courses).order_by(Courses.code.desc()).all()
     return templist
 
 def allrooms():
