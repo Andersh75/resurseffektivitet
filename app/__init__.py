@@ -2184,7 +2184,7 @@ def slotsfromsocial():
 
 #Adding slots from Social for all courses
 @app.route('/Xslotsfromsocial')
-def slotsfromsocial():
+def Xslotsfromsocial():
 
     linklist = []
 
