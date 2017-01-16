@@ -2006,6 +2006,204 @@ def slotsfromsocial():
             courselink = courselink + item.code
             courselink = courselink + "/subgroup/"
 
+            xml = BeautifulSoup(url)
+            xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
+
+            for item in xml:
+
+                fullcourselink = "https://www.kth.se"
+                fullcourselink = fullcourselink + item['href']
+
+
+                try:
+                    url = br.open(fullcourselink)
+
+                    xml = BeautifulSoup(url)
+                    xml = xml.find('a', text="Schema")
+
+
+                    schedulelink = "https://www.kth.se"
+                    schedulelink = schedulelink + xml['href']
+
+
+
+                    url = br.open(schedulelink)
+
+                    xml = BeautifulSoup(url)
+                    xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
+
+                    for item in xml:
+                        if "event" in item['href']:
+                            #linklist.append(item['href'])
+                            linkvar = item['href']
+                            print "FETCHING"
+                            print coursecode
+                            testlink = "https://www.kth.se"
+                            testlink = testlink + linkvar
+
+                            url = br.open(testlink)
+
+                            #xml = BeautifulSoup(src)
+                            xml = BeautifulSoup(url)
+                            #testlist = xml.find_all('a', { "class" : "fancybox" })
+
+                            startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+                            startdate = startdate.text
+
+                            enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+                            enddate = enddate.text
+
+                            datevar = startdate[:10]
+
+                            yearvar = pass_courseyear_from_classdate(datevar)
+
+                            codevar = testlink[33:39]
+                            starttimevar = startdate[11:13]
+                            endtimevar = enddate[11:13]
+
+                            roomobj = None
+
+                            courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+                            dateobj = create_or_fetch_dateobj(datevar, courseobj)
+
+                            try:
+                                locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+                                for location in locations:
+                                    location = location.text
+                                    print "FETCHING!!!!"
+                                    print location
+                                    print codevar
+                                    print yearvar
+
+                                    roomobj = create_or_fetch_roomobj(location, dateobj)
+                                    classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+                            except Exception, e:
+                                varcode = "NO ROOM"
+                                print varcode
+                                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+
+
+
+                except Exception, e:
+                    url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
+
+                    courselink = "/social/course/"
+                    courselink = courselink + item.code
+                    courselink = courselink + "/other_subgroups/"
+
+                    xml = BeautifulSoup(url)
+                    xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
+
+                    for item in xml:
+
+                        fullcourselink = "https://www.kth.se"
+                        fullcourselink = fullcourselink + item['href']
+
+
+                        try:
+                            url = br.open(fullcourselink)
+
+                            xml = BeautifulSoup(url)
+                            xml = xml.find('a', text="Schema")
+
+
+                            schedulelink = "https://www.kth.se"
+                            schedulelink = schedulelink + xml['href']
+
+
+
+                            url = br.open(schedulelink)
+
+                            xml = BeautifulSoup(url)
+                            xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
+
+                            for item in xml:
+                                if "event" in item['href']:
+                                    #linklist.append(item['href'])
+                                    linkvar = item['href']
+                                    print "FETCHING"
+                                    print coursecode
+                                    testlink = "https://www.kth.se"
+                                    testlink = testlink + linkvar
+
+                                    url = br.open(testlink)
+
+                                    #xml = BeautifulSoup(src)
+                                    xml = BeautifulSoup(url)
+                                    #testlist = xml.find_all('a', { "class" : "fancybox" })
+
+                                    startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+                                    startdate = startdate.text
+
+                                    enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+                                    enddate = enddate.text
+
+                                    datevar = startdate[:10]
+
+                                    yearvar = pass_courseyear_from_classdate(datevar)
+
+                                    codevar = testlink[33:39]
+                                    starttimevar = startdate[11:13]
+                                    endtimevar = enddate[11:13]
+
+                                    roomobj = None
+
+                                    courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+                                    dateobj = create_or_fetch_dateobj(datevar, courseobj)
+
+                                    try:
+                                        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+                                        for location in locations:
+                                            location = location.text
+                                            print "FETCHING!!!!"
+                                            print location
+                                            print codevar
+                                            print yearvar
+
+                                            roomobj = create_or_fetch_roomobj(location, dateobj)
+                                            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+                                    except Exception, e:
+                                        varcode = "NO ROOM"
+                                        print varcode
+                                        classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+
+
+
+
+
+    #fetchslotfromsociallink(linklist)
+
+
+
+    return "DONE"
+
+
+#Adding slots from Social for all courses
+@app.route('/Xslotsfromsocial')
+def slotsfromsocial():
+
+    linklist = []
+
+    br = open_password_protected_site("https://login.kth.se/login/")
+
+    for item in allcourses():
+        #print item.code
+        coursecode = item.code
+        #url = br.open('https://www.kth.se/social/course/AI1146/subgroup/')
+
+        try:
+            url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (item.code))
+
+            courselink = "/social/course/"
+            courselink = courselink + item.code
+            courselink = courselink + "/subgroup/"
+
 
         except Exception, e:
             varcode = "no subgroup on social"
