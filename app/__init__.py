@@ -2171,15 +2171,9 @@ def slotsfromsocial():
                                         varcode = "NO ROOM"
                                         print varcode
                                         classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
-
-
-
-
-
-
-    #fetchslotfromsociallink(linklist)
-
-
+                        except Exception, e:
+                            varcode = "NO ROOM"
+                            print varcode
 
     return "DONE"
 
