@@ -86,6 +86,7 @@ dates_rooms = db.Table('dates_rooms',
     db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id'))
 )
 
+
 dates_teachers = db.Table('dates_teachers',
     db.Column('dates_id', db.Integer, db.ForeignKey('dates.id')),
     db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id'))
@@ -98,16 +99,13 @@ subjects_classes = db.Table('subjects_classes',
 )
 
 
-
-
-
-
 # One-to-many. Parent to Rooms
 class Roomtypes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     roomtype = db.Column(db.String(30), unique=True)
     cost = db.Column(db.Integer)
     rooms = db.relationship('Rooms', backref='roomtypes', lazy='dynamic')
+
 
 # One-to-many. Child to Roomtypes
 class Rooms(db.Model):
@@ -116,7 +114,6 @@ class Rooms(db.Model):
     seats = db.Column(db.Integer)
     roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
     classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
-
 
 
 class Subjects(db.Model):
@@ -191,10 +188,6 @@ class Classes(db.Model):
     classtypes_id = db.Column(db.Integer, db.ForeignKey('classtypes.id'))
 
 
-
-
-
-
 class RegistrationForm(Form):
     initials = TextField('Initials', [validators.Length(min=2, max=20)])
     firstname = TextField('First name', [validators.Length(min=2, max=20)])
@@ -208,9 +201,6 @@ class RegistrationForm(Form):
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
 
-
-
-
 def scheduleInCourse(course):
 # Lista med kurstillfallen som anvands i en kurs
     templist = []
@@ -220,6 +210,7 @@ def scheduleInCourse(course):
         templist.append(item)
     return templist
 
+
 def roomsOnDate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
@@ -228,6 +219,7 @@ def roomsOnDate(date, course):
         templist.append(item)
     return templist
 
+
 def defteachersondate(date, course):
 # Lista med salar som anvands i en kurs
     templist = []
@@ -235,6 +227,7 @@ def defteachersondate(date, course):
     for item in tempvar:
         templist.append(item)
     return templist
+
 
 def idtocode(courseid):
     tempvar = db.session.query(Courses.code).filter(Courses.id == courseid).first()
@@ -246,89 +239,78 @@ def allcourses():
     templist = db.session.query(Courses).order_by(Courses.code.desc()).all()
     return templist
 
+
 def allrooms():
     templist = db.session.query(Rooms).order_by(Rooms.name).all()
     return templist
+
 
 def allteachers():
     templist = db.session.query(Teachers).order_by(Teachers.akalastname).all()
     return templist
 
+
 def roomsperroomtype(roomtypeid):
     templist = db.session.query(Rooms).join(Rooms.roomtypes).filter(Roomtypes.id == roomtypeid).order_by(Rooms.name).all()
     return templist
+
 
 def onescoursesexaminerorresponsible(teacherid):
     examiner = aliased(Teachers)
     responsible = aliased(Teachers)
     templist = db.session.query(Courses).join(examiner, Courses.examiner).join(responsible, Courses.responsible).filter(or_(examiner.id == teacherid, responsible.id == teacherid)).all()
-
     return templist
-
 
 
 def onescoursesresponsible(teacherid):
     templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == teacherid).all()
-
     return templist
+
 
 def onescoursesteaching(teacherid):
     templist = db.session.query(Courses).join(Courses.classes).join(Classes.teachers).distinct().filter(Teachers.id == teacherid).all()
-
     return templist
+
 
 def onescoursesexaminer(teacherid):
     templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.id == teacherid).all()
-
     return templist
 
 def onesteachingincourse(courseid, teacherid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id == teacherid)).all()
-
     return templist
 
 def onesslots(teacherid):
     templist = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Courses.code, Courses.id).distinct().join(Dates.classes).join(Classes.teachers).join(Classes.courses).filter(Teachers.id == teacherid).order_by(Dates.date).order_by(Classes.starttime).all()
-
     return templist
 
 
 def roomsslots(roomid):
     templist = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Courses.code, Courses.id).distinct().join(Dates.classes).join(Classes.teachers).join(Classes.courses).join(Classes.rooms).filter(Rooms.id == roomid).order_by(Dates.date).order_by(Classes.starttime).all()
-
     return templist
-
-
-
-
 
 
 def roomtypesuseincourse(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id == roomtypeid)).all()
-
     return templist[0][0]
-
 
 
 def sumofroomtypesuseincourse(courseid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id.isnot(None))).all()
-
     return templist[0][0]
 
 
 def sumofonesteachingincourse(courseid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id.isnot(None))).all()
-
     return templist
+
 
 def sumofonesteachingincourseperroomtype(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id.isnot(None), Roomtypes.id == roomtypeid)).all()
-
     return templist[0][0]
 
 
 def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
-
     varx = sumofonesteachingincourseperroomtype(courseid, roomtypeid)
     vary = roomtypesuseincourse(courseid, roomtypeid)
     #varz = float(varx[0][0]) / vary[0][0]
@@ -336,12 +318,9 @@ def sumofonesteachingincourseperroomtypeperhour(courseid, roomtypeid):
     print varx
     print "vary"
     print vary
-
     varz = 0
-
     if varx and vary:
         varz = float(varx) / float(vary)
-
     return str(varz)[:4]
 
 
@@ -350,25 +329,30 @@ def roomtypeobjectfromid(roomtypeid):
     #print testvar.password
     return testvar
 
+
 def roomobjectfromid(roomid):
     testvar = db.session.query(Rooms).filter(Rooms.id == roomid).first()
     #print testvar.password
     return testvar
+
 
 def courseobjectfromid(courseid):
     testvar = db.session.query(Courses).filter(Courses.id == courseid).first()
     #print testvar.password
     return testvar
 
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     #print testvar.password
     return db.session.query(Teachers).filter(Teachers.email == session['user']).first()
 
+
 def myobjectfromid(teacherid):
     testvar = db.session.query(Teachers).filter(Teachers.id == teacherid).first()
     #print testvar.password
     return testvar
+
 
 def mycoursesexaminerorresponsible():
     examiner = aliased(Teachers)
@@ -378,40 +362,35 @@ def mycoursesexaminerorresponsible():
     #print templist
     return templist
 
+
 def mycoursesresponsible():
     templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
-
     return templist
+
 
 def mycoursesteaching():
     templist = db.session.query(Courses).join(Courses.classes).join(Classes.teachers).distinct().filter(Teachers.email == session['user']).all()
-
     return templist
+
 
 def mycoursesexaminer():
     templist = db.session.query(Courses).join(Courses.responsible).filter(Teachers.email == session['user']).all()
-
     return templist
 
 
 def myslots():
     templist = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Courses.code, Courses.id).distinct().join(Dates.classes).join(Classes.teachers).join(Classes.courses).filter(Teachers.email == session['user']).order_by(Dates.date).order_by(Classes.starttime).all()
-
     return templist
+
 
 def roomsonslot(slotid):
     templist = db.session.query(Rooms.name, Rooms.id).distinct().join(Rooms.classes).filter(Classes.id == slotid).all()
-
     return templist
+
 
 def teachersonslot(slotid):
     templist = db.session.query(Teachers.initials, Teachers.id).join(Teachers.classes).filter(Classes.id == slotid).all()
-
     return templist
-
-
-
-
 
 
 def subjectsinslot(slotid):
@@ -420,20 +399,19 @@ def subjectsinslot(slotid):
         print item.id
     return templist
 
+
 def teachersincourse(courseid):
     templist = db.session.query(Teachers).join(Teachers.classes).join(Classes.courses).distinct().filter(Courses.id == courseid).all()
-
     return templist
 
 
 def roomtypesincourse(courseid):
     templist = db.session.query(Roomtypes).join(Roomtypes.rooms).join(Rooms.classes).join(Classes.courses).distinct().filter(Courses.id == courseid).all()
-
     return templist
+
 
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
-
     tempvar = "[{"
     id = 1
     for item in templist[:-1]:
@@ -441,11 +419,11 @@ def mycourseslist():
         tempvar = tempvar + " id: " + str(id) + ", text: '" + item[0] + "' }, {"
         id = id + 1
     tempvar = tempvar + " id: '" + str(id) + "', text: '" + templist[-1][0] + "' }]"
-
     #print tempvar
     #tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     #print testvar.password
     return tempvar
+
 
 def subjectslistjson():
     templist = db.session.query(Subjects.name).all()
@@ -489,6 +467,7 @@ def amiteaching(code):
 
 app.jinja_env.globals.update(roomsslots=roomsslots, roomobjectfromid=roomobjectfromid, roomtypeobjectfromid=roomtypeobjectfromid, roomsperroomtype=roomsperroomtype, courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype, sumofonesteachingincourse=sumofonesteachingincourse, sumofroomtypesuseincourse=sumofroomtypesuseincourse, roomtypesuseincourse=roomtypesuseincourse, roomtypesincourse=roomtypesincourse, onesteachingincourse=onesteachingincourse, subjectslistjson=subjectslistjson, subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible, mycoursesexaminer=mycoursesexaminer, mycoursesresponsible=mycoursesresponsible, mycourseslist=mycourseslist)
 
+
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -501,23 +480,13 @@ def login_required(f):
     return wrap
 
 
-
-
-
-
-
-
-
-
-
-
-
-### CREATE TABLES
+# CREATE TABLES
 def createtables():
     db.create_all()
     db.session.commit()
 
-###Import CSV-file and transform imported CSV to tables
+
+# Import CSV-file and transform imported CSV to tables
 def csvimporter():
     with open('static/teachers.csv', 'rb') as f:
         reader = csv.reader(f)
@@ -543,7 +512,6 @@ def csvimporter():
         reader = csv.reader(f)
         schedules_list = list(reader)
 
-
     schedules_list = remove_col(schedules_list, 0)
 
     schedules_list = reformat_date(schedules_list)
@@ -556,18 +524,10 @@ def csvimporter():
 
     schedules_list = remove_col(schedules_list, 1)
 
-
-
-
-
-
-    #for i in schedules_list:
+    # for i in schedules_list:
     #    print i
 
-
-
-
-    #Populate tables
+    # Populate tables
     for i in roomtypes_list:
         roomtype = db.session.query(exists().where(Roomtypes.roomtype==i[0])).scalar()
         if not roomtype:
@@ -578,9 +538,8 @@ def csvimporter():
             db.session.add(record)
             db.session.commit()
 
-
     for i in rooms_list:
-        #print i[0]
+        # print i[0]
         name = db.session.query(exists().where(Rooms.name==i[0])).scalar()
         if not name:
             record = Rooms(**{
@@ -592,7 +551,7 @@ def csvimporter():
             db.session.commit()
 
     for i in subjects_list:
-        #print i[0]
+        # print i[0]
         name = db.session.query(exists().where(Subjects.name==i[0])).scalar()
         if not name:
             record = Subjects(**{
@@ -600,7 +559,6 @@ def csvimporter():
             })
             db.session.add(record)
             db.session.commit()
-
 
     for i in teachers_list:
         already = db.session.query(exists().where(or_(Teachers.kthid==i[0], Teachers.initials==i[1], Teachers.email==i[2]))).scalar()
@@ -614,73 +572,67 @@ def csvimporter():
                 i[2] = None
             if i[0] or i[2]:
                 record = Teachers(**{
-                    'kthid' : i[0],
-                    'initials' : i[1],
-                    'email' : i[2],
-                    'firstname' : i[3],
-                    'akafirstname' : i[3],
-                    'akalastname' : i[4],
-                    'lastname' : i[4]
+                    'kthid': i[0],
+                    'initials': i[1],
+                    'email': i[2],
+                    'firstname': i[3],
+                    'akafirstname': i[3],
+                    'akalastname': i[4],
+                    'lastname': i[4]
                 })
                 db.session.add(record)
                 db.session.commit()
 
-
     for i in courses_list:
-        already = db.session.query(exists().where(and_(Courses.code==i[0], Courses.year==i[3]))).scalar()
+        already = db.session.query(exists().where(and_(Courses.code == i[0], Courses.year == i[3]))).scalar()
         if not already:
             record = Courses(**{
-                'code' : i[0],
-                'name' : i[1],
-                'schedule_exists' : i[2],
-                'year' : i[3]
+                'code': i[0],
+                'name': i[1],
+                'schedule_exists': i[2],
+                'year': i[3]
             })
             db.session.add(record)
             db.session.commit()
 
-
     for i in schedules_list:
         if not Dates.query.filter_by(date=i[0]).first():
-            #print "dubbel"
-        #else:
             record = Dates(**{
-                'date' : i[0]
+                'date': i[0]
                 })
             db.session.add(record)
             db.session.commit()
 
-
     for i in schedules_list:
-        already = db.session.query(exists().where(and_(Classes.content==i[3], Classes.starttime==i[7], Classes.endtime==i[8], Classes.courses_id==Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id==Dates.query.filter_by(date=i[0]).first().id))).scalar()
+        already = db.session.query(exists().where(and_(Classes.content == i[3], Classes.starttime == i[7], Classes.endtime == i[8], Classes.courses_id == Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id == Dates.query.filter_by(date=i[0]).first().id))).scalar()
         if (not already) and (len(i[3]) < 100):
             record = Classes(**{
-                #'date' : i[0],
-                'content' : i[3],
-                'starttime' : i[7],
-                'endtime' : i[8],
-                'courses_id' : Courses.query.filter_by(code=i[5]).first().id,
-                'dates_id' : Dates.query.filter_by(date=i[0]).first().id
+                # 'date' : i[0],
+                'content': i[3],
+                'starttime': i[7],
+                'endtime': i[8],
+                'courses_id': Courses.query.filter_by(code=i[5]).first().id,
+                'dates_id': Dates.query.filter_by(date=i[0]).first().id
             })
             db.session.add(record)
             db.session.commit()
 
             coursevar = Courses.query.filter_by(code=i[5]).first()
             datevar = Dates.query.filter_by(date=i[0]).first()
-            #print datevar.date
+            # print datevar.date
             datevar.courses.append(coursevar)
-            #datevar.classes.append(record)
+            # datevar.classes.append(record)
             db.session.commit()
-
 
             words = i[4].split()
             for word in words:
-                #print word
+                # print word
 
-                already = db.session.query(exists().where(Teachers.initials==word)).scalar()
+                already = db.session.query(exists().where(Teachers.initials == word)).scalar()
 
                 if already:
                     teachervar = Teachers.query.filter_by(initials=word).first()
-                    #print teachervar.firstname
+                    # print teachervar.firstname
                     teachervar.classes.append(record)
                     teachervar.dates.append(datevar)
                     db.session.commit()
@@ -688,18 +640,18 @@ def csvimporter():
             words = i[2].split()
             for word in words:
 
-                already = db.session.query(exists().where(Rooms.name==word)).scalar()
+                already = db.session.query(exists().where(Rooms.name == word)).scalar()
 
                 if already:
                     roomvar = Rooms.query.filter_by(name=word).first()
-                    #print roomvar.name
+                    # print roomvar.name
                     roomvar.classes.append(record)
                     roomvar.dates.append(datevar)
 
                     db.session.commit()
 
 
-### CLEAN THE CSV
+# CLEAN THE CSV
 # Remove Column from Table
 def remove_col(list1, i):
     temp_list_suf = []
@@ -711,6 +663,8 @@ def remove_col(list1, i):
     for index, item in enumerate(list1):
         temp_list.append(temp_list_pre[index] + temp_list_suf[index])
     return temp_list
+
+
 # Reformat date
 def reformat_date(list1):
     i = 0
@@ -718,88 +672,82 @@ def reformat_date(list1):
         year_var = "2016"
         if list1[p][i][2] == "/":
             day_var = list1[p][i][:2]
-            #print day_var
+            # print day_var
         else:
             day_var = "0" + list1[p][i][:1]
-            #print day_var
+            # print day_var
         if list1[p][i][-3] == "/":
-            #print "hej"
+            # print "hej"
             month_var = list1[p][i][-2:]
-            #print month_var
+            # print month_var
         else:
             month_var = "0" + list1[p][i][-1:]
-            #print month_var
+            # print month_var
 
-        #print list1[p][7]
+        # print list1[p][7]
         if list1[p][7]:
             year_var = list1[p][7]
 
         list1[p][i] = year_var + "-" + month_var + "-" + day_var
         year_var = "2016"
 
-        #print list1[p][7]
+        # print list1[p][7]
     return list1
+
+
 # Insert Column to Table
 def add_col(list1):
     for i in range(0, len(list1)):
         list1[i].append("")
     return list1
+
+
 # Extract beginning and end time
 def extract_start_slut_tid(list1):
-     i = 1
-     for p in range(0, len(list1)):
+    i = 1
+    for p in range(0, len(list1)):
         list1[p][-2] = list1[p][i][0:2]
         list1[p][-1] = list1[p][i][3:5]
         # print list1[p][i]
 
-     return list1
+    return list1
+
+
 # Separate teachers
 def separate_teachers(list1):
     temp_list = []
     for p in range(0, len(list1)):
         words = list1[p][4].split()
         for word in words:
-            #print word
+            # print word
             alist = []
             alist = list1[p]
             alist[4] = word
 
-            #print alist
+            # print alist
             temp_list.extend(alist)
-            #print "hej"
+            # print "hej"
 
-    #print temp_list
-
-
-
+    # print temp_list
     return temp_list
+
+
 # Separate teachers
 def separate_rooms(list1):
     temp_list = []
     for p in range(0, len(list1)):
         words = list1[p][2].split()
         for word in words:
-            #print word
+            # print word
             alist = []
             alist = list1[p]
             alist[2] = word
 
-            #print alist
+            # print alist
             temp_list.extend(alist)
-            #print "hej"
+            # print "hej"
 
     return temp_list
-
-
-
-
-
-
-
-
-
-
-
 
 
 def open_password_protected_site(link):
@@ -809,19 +757,19 @@ def open_password_protected_site(link):
 
     # Enable cookie support for urllib2
     cookiejar = cookielib.LWPCookieJar()
-    br.set_cookiejar( cookiejar )
+    br.set_cookiejar(cookiejar)
 
     # Broser options
-    br.set_handle_equiv( True )
-    br.set_handle_gzip( True )
-    br.set_handle_redirect( True )
-    br.set_handle_referer( True )
-    br.set_handle_robots( False )
+    br.set_handle_equiv(True)
+    br.set_handle_gzip(True)
+    br.set_handle_redirect(True)
+    br.set_handle_referer(True)
+    br.set_handle_robots(False)
 
     # ??
-    #br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
+    # br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
 
-    br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
+    br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
     print "heh"
     # authenticate
     br.open(link)
@@ -829,8 +777,8 @@ def open_password_protected_site(link):
     br.select_form(nr=0)
     # these two come from the code you posted
     # where you would normally put in your username and password
-    br[ "username" ] = 'ahell'
-    br[ "password" ] = '-Gre75kger-'
+    br["username"] = 'ahell'
+    br["password"] = '-Gre75kger-'
     res = br.submit()
 
     print "Success!\n"
@@ -843,7 +791,7 @@ def pass_courseyear_from_classdate(datevar):
     yearvar = int(datevar[:4])
     monthvar = datevar[5:7]
 
-    if  monthvar == "01":
+    if monthvar == "01":
         try:
             dayvar = str(datevar[-2:])
             if dayvar < 15:
@@ -861,7 +809,7 @@ def create_or_fetch_teachereobj(email):
     teacherobj = None
 
     try:
-        teacherobj = db.session.query(Teachers).filter(Teachers.email==email).first()
+        teacherobj = db.session.query(Teachers).filter(Teachers.email == email).first()
     except Exception, e:
         varcode = "no teacherobj"
         print varcode
@@ -890,7 +838,7 @@ def create_or_fetch_courseobj(code, year, date):
         term = 1
 
     try:
-        courseobj = db.session.query(Courses).filter(and_(Courses.code==code, Courses.year==year)).first()
+        courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
     except Exception, e:
         varcode = "no courseobj"
         print varcode
@@ -918,12 +866,11 @@ def create_or_fetch_dateobj(datevar, courseobj):
     alreadycourse = None
 
     try:
-        dateobj = db.session.query(Dates).filter(Dates.date==datevar).first()
+        dateobj = db.session.query(Dates).filter(Dates.date == datevar).first()
 
     except Exception, e:
         varcode = "no dateobj"
         print varcode
-
 
     if not dateobj:
         print "CREATING DATEOBJECT"
@@ -938,7 +885,7 @@ def create_or_fetch_dateobj(datevar, courseobj):
         print "DATEOBJECT EXISTS"
 
     try:
-        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date==datevar, Courses.code==courseobj.code)).first()
+        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date == datevar, Courses.code == courseobj.code)).first()
     except Exception, e:
         varcode = "no course-date"
         print varcode
@@ -958,7 +905,7 @@ def create_or_fetch_roomobj(roomvar, dateobj):
     alreadydate = None
 
     try:
-        roomobj = db.session.query(Rooms).filter(Rooms.name==roomvar).first()
+        roomobj = db.session.query(Rooms).filter(Rooms.name == roomvar).first()
     except Exception, e:
         varcode = "no roomobj"
         print varcode
@@ -975,9 +922,8 @@ def create_or_fetch_roomobj(roomvar, dateobj):
     else:
         print "ROOMOBJECT EXISTS"
 
-
     try:
-        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date==dateobj.date, Rooms.name==roomvar)).first()
+        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date == dateobj.date, Rooms.name == roomvar)).first()
     except Exception, e:
         varcode = "no room-date"
         print varcode
@@ -990,7 +936,6 @@ def create_or_fetch_roomobj(roomvar, dateobj):
     else:
         print "ROOM-DATE EXISTS"
 
-
     return roomobj
 
 
@@ -999,13 +944,11 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     alreadyroom = None
     classobj = None
 
-
     try:
-        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code==codevar, Courses.year==yearvar, Dates.date==datevar, Classes.starttime==starttimevar, Classes.endtime==endtimevar)).first()
+        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code == codevar, Courses.year == yearvar, Dates.date == datevar, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
     except Exception, e:
         varcode = "no classobj"
         print varcode
-
 
     if not classobj:
         print "CREATING CLASSOBJECT"
@@ -1023,8 +966,6 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     else:
         print "CLASSOBJECT EXISTS"
 
-
-
     try:
         alreadyroom = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id==classobj.id, Rooms.name==roomobj.name)).first()
     except Exception, e:
@@ -1038,9 +979,6 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
     else:
         print "CLASS-ROOM EXISTS"
 
-
-
-
     return classobj
 
 
@@ -1053,19 +991,17 @@ def Xfetchslotfromsociallink(linkvar):
     testlink = "https://www.kth.se"
     testlink = testlink + linkvar
 
-
     ghost = Ghost()
     ghost = Session(ghost)
 
-
     try:
         ghost.open(testlink)
-        ghost.wait_timeout=25
+        ghost.wait_timeout = 25
         page, resources = ghost.wait_for_page_loaded()
 
-        #xml = BeautifulSoup(src)
+        # xml = BeautifulSoup(src)
         xml = BeautifulSoup(ghost.content)
-        #testlist = xml.find_all('a', { "class" : "fancybox" })
+        # testlist = xml.find_all('a', { "class" : "fancybox" })
 
         startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
         startdate = startdate.text
@@ -1086,7 +1022,6 @@ def Xfetchslotfromsociallink(linkvar):
         courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
         dateobj = create_or_fetch_dateobj(datevar, courseobj)
 
-
         locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
         if locations:
@@ -1103,14 +1038,11 @@ def Xfetchslotfromsociallink(linkvar):
         else:
             classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
-
     except Exception, e:
         varcode = "BROKEN"
         print varcode
 
-
     return "DONE"
-
 
 
 def fetchslotfromsociallink(linklist):
@@ -1123,14 +1055,12 @@ def fetchslotfromsociallink(linklist):
         testlink = "https://www.kth.se"
         testlink = testlink + linkvar
 
-
-
         try:
             url = br.open(testlink)
 
-            #xml = BeautifulSoup(src)
+            # xml = BeautifulSoup(src)
             xml = BeautifulSoup(url)
-            #testlist = xml.find_all('a', { "class" : "fancybox" })
+            # testlist = xml.find_all('a', { "class" : "fancybox" })
 
             startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
             startdate = startdate.text
@@ -1169,15 +1099,11 @@ def fetchslotfromsociallink(linklist):
                 print varcode
                 classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
-
         except Exception, e:
             varcode = "BROKEN"
             print varcode
 
-
     return "DONE"
-
-
 
 
 def fetchinglistofslotspercourse(course, starttime, endtime):
@@ -1237,14 +1163,10 @@ def parselistofslotspercourse(tempdict):
             print "INFO ADDED TO CLASS"
             db.session.commit()
 
-
-
     return "DONE"
 
 
-
-
-#ADDING TEACHERS TO DB
+# ADDING TEACHERS TO DB
 def staffperdepartment(department):
     try:
         req = urllib2.urlopen('https://www.kth.se/directory/a/%s' % (department))
@@ -1265,11 +1187,10 @@ def staffperdepartment(department):
             email = tdlist[3].text
             username = tdlist[1]['href'][27:]
 
-            tempdict = {'firstname':firstname, 'lastname':lastname, 'email':email, 'username':username}
+            tempdict = {'firstname': firstname, 'lastname': lastname, 'email': email, 'username': username}
             templist2.append(tempdict)
 
-
-        tempdict2 = {'department':department, 'teacher':templist2}
+        tempdict2 = {'department': department, 'teacher': templist2}
 
     except Exception, e:
         varcode = "no list of staff per department"
@@ -1278,9 +1199,10 @@ def staffperdepartment(department):
         print y
 
     return tempdict2
+
+
 def teachersfromdepartment(templist):
     for items in templist:
-
 
         department = items['department']
 
@@ -1301,15 +1223,10 @@ def teachersfromdepartment(templist):
 
                 db.session.commit()
 
-
-
-
-
         print "DONE"
 
 
-
-#ADDING COURSES TO DB
+# ADDING COURSES TO DB
 def courseinfoperyearandterm(x, y):
 
     templist = []
@@ -1318,8 +1235,7 @@ def courseinfoperyearandterm(x, y):
     tempdict2['round'] = None
     tempdict2['courseinfo'] = templist
 
-
-    #try:
+    # try:
     req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
 
     xml = BeautifulSoup(req)
@@ -1341,11 +1257,11 @@ def courseinfoperyearandterm(x, y):
 
             term = startterm[-1:]
 
-            tempdict = {'coursecode':coursecode, 'year':year, 'term':term, 'period':period, 'startterm':startterm, 'roundid':roundid}
+            tempdict = {'coursecode': coursecode, 'year': year, 'term': term, 'period': period, 'startterm': startterm, 'roundid': roundid}
 
             templist.append(tempdict)
 
-    tempdict2 = {'year':x, 'round':y, 'courseinfo':templist}
+    tempdict2 = {'year': x, 'round': y, 'courseinfo': templist}
 
     '''
     except Exception, e:
@@ -1355,6 +1271,8 @@ def courseinfoperyearandterm(x, y):
         print y
     '''
     return tempdict2
+
+
 def addcoursestotables_first(tempdict):
 
     for item in tempdict['courseinfo']:
@@ -1368,7 +1286,6 @@ def addcoursestotables_first(tempdict):
         try:
             req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/round/%s:%s/%s' % (coursecode, year, term, roundid))
             xml = BeautifulSoup(req)
-
 
             try:
                 courseround = xml.find('courseround')
@@ -1385,9 +1302,6 @@ def addcoursestotables_first(tempdict):
                 varcode = "no courseround"
                 print varcode
 
-
-
-
             try:
                 courseresponsible = xml.find('courseresponsible')
 
@@ -1400,14 +1314,14 @@ def addcoursestotables_first(tempdict):
                 varcode = "no courseresponsible"
                 print varcode
 
-
             coursesfromdepartment2(item)
-
 
         except Exception, e:
             varcode = "NOT FINDING COURSE"
             print varcode
             print coursecode
+
+
 def coursesfromdepartment2(item):
 
     code = item['coursecode']
@@ -1435,6 +1349,7 @@ def coursesfromdepartment2(item):
 
     db.session.commit()
 
+
 def fetchinglistofcodesfordepartmentcourses(department):
 
     tempdict = {}
@@ -1444,19 +1359,20 @@ def fetchinglistofcodesfordepartmentcourses(department):
 
         j_obj = json.load(j)
 
-
-        templist =[]
+        templist = []
 
         for item in j_obj['courses']:
             templist.append(item['code'])
 
-        tempdict = {'department':j_obj['department'], 'courses':templist}
+        tempdict = {'department': j_obj['department'], 'courses': templist}
 
     except Exception, e:
         varcode = "no list of codes for department courses"
         print varcode
 
     return tempdict
+
+
 def jsonifycoursesfromdepartment(tempdict):
 
     templist2 = []
@@ -1470,35 +1386,33 @@ def jsonifycoursesfromdepartment(tempdict):
             xml = BeautifulSoup(req)
 
 
-            #varname = xml.title.string
+            # varname = xml.title.string
             try:
                 varcode = xml.course['code']
-                #print varcode
+                # print varcode
 
             except Exception, e:
                 varcode = None
-                #print varcode
-
+                # print varcode
 
             try:
                 varmail = xml.examiner['primaryemail']
-                #print varmail
+                # print varmail
 
             except Exception, e:
                 varmail = None
-                #print varmail
-
+                # print varmail
 
             try:
                 varname = xml.title.string
-                #print varname.encode('utf-8')
-                #print varname
+                # print varname.encode('utf-8')
+                # print varname
 
             except Exception, e:
                 varname = None
-                #print varname
+                # print varname
 
-            tempdict2 = {'code':varcode, 'name':varname, 'examiner':varmail, 'department':tempdict['department']}
+            tempdict2 = {'code': varcode, 'name': varname, 'examiner': varmail, 'department': tempdict['department']}
 
             templist2.append(tempdict2)
 
@@ -1507,6 +1421,8 @@ def jsonifycoursesfromdepartment(tempdict):
             print varcode + " " + item
 
     return templist2
+
+
 def coursesfromdepartment3(templist):
     for items in templist:
         for item in items:
@@ -1515,11 +1431,10 @@ def coursesfromdepartment3(templist):
             examiner = item['examiner']
             department = item['department']
 
-
             teacherobj = create_or_fetch_teachereobj(examiner)
 
             try:
-                latestcourse = db.session.query(Courses).filter(Courses.code==code).order_by(Courses.year.desc()).first()
+                latestcourse = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc()).first()
                 latestcourse.name = name
                 latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
                 db.session.commit()
@@ -1530,16 +1445,13 @@ def coursesfromdepartment3(templist):
                 print code
 
 
-
-
-
-#NOT READY
+# NOT READY
 def jsonifylitteraturefromdepartment():
 
     templist = []
     item = "AI1128"
-    #for item in tempdict['courses']:
-        #varname = xml.title.string
+    # for item in tempdict['courses']:
+    # varname = xml.title.string
     try:
         req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/course/%s/plan' % (item))
         xml = BeautifulSoup(req)
@@ -1560,17 +1472,17 @@ def jsonifylitteraturefromdepartment():
                     print child2.string
                     print "______"
 
-
     except Exception, e:
         print "no literature"
 
-#NOT READY
+
+# NOT READY
 def calTest():
     req = urllib2.Request('https://www.kth.se/social/course/AI1146/calendar/ical/?lang=sv')
     response = urllib2.urlopen(req)
     data = response.read()
     for line in data.split('\n'):
-        #print line
+        # print line
         print "######"
         if line.startswith('SUMMARY:'):
             print line
@@ -1581,10 +1493,10 @@ def calTest():
         if line.startswith('DTEND;VALUE=DATE-TIME:'):
             print line
 
-
     return
 
-#NOT READY
+
+# NOT READY
 def xrestartall():
     tempdict = {}
     tempdict2 = {}
@@ -1596,7 +1508,6 @@ def xrestartall():
 
     departments = ["AIB", "AIC", "AID", "AIE"]
 
-
     for item in departments:
         tempdict = fetchinglistofcodesfordepartmentcourses(item)
         templist.append(jsonifycoursesfromdepartment(tempdict))
@@ -1604,28 +1515,23 @@ def xrestartall():
         tempdict2 = staffperdepartment(item)
         templist2.append(tempdict2)
 
+        # templist3.append(jsonifylitteraturefromdepartment(tempdict))
 
-        #templist3.append(jsonifylitteraturefromdepartment(tempdict))
+        # tempdict3 = courseinfoperyearandround(2016, 1)
 
-    #tempdict3 = courseinfoperyearandround(2016, 1)
-
-
-    #ADD ALL TEACHERS TO DB
+    # ADD ALL TEACHERS TO DB
     teachersfromdepartment(templist2)
 
-    #ADD ALL COURSES TO DB
+    # ADD ALL COURSES TO DB
     coursesfromdepartment(templist)
 
+    # FETCH ALL LITERATURE
+    # jsonifylitteraturefromdepartment()
 
+    # FETCH CALENDAR
+    # calTest()
 
-
-    #FETCH ALL LITERATURE
-    #jsonifylitteraturefromdepartment()
-
-    #FETCH CALENDAR
-    #calTest()
-
-    #testv = jsonify(tempdict3)
+    # testv = jsonify(tempdict3)
 
 
 
