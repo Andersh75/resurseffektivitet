@@ -1246,7 +1246,6 @@ def parselistofslotspercourse(tempdict):
 
 
 
-
 #ADDING TEACHERS TO DB
 def staffperdepartment(department):
     try:
