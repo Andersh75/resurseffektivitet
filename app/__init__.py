@@ -2264,7 +2264,7 @@ def coursesfromdepartment(templist):
             db.session.commit()
 
 
-    print "DONE"
+    print "DONE!"
 
 if __name__ == "__main__":
     app.secret_key = 'asdasdasdasdasd'
