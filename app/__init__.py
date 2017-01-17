@@ -2241,7 +2241,7 @@ def courseinfoperyearandround(x, y):
 
     return tempdict2
 
-####TO DO
+# TO DO
 def coursesfromdepartment(templist):
     for items in templist:
 
