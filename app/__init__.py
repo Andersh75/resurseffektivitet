@@ -1879,11 +1879,11 @@ def slotsfromsocial():
 
     coursecode = "AI2807"
     print "HEJ"
-    url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
+    url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (coursecode))
 
     courselink = "/social/course/"
     courselink = courselink + coursecode
-    courselink = courselink + "/subgroup/"
+    courselink = courselink + "/other_subgroups/"
 
     xml = BeautifulSoup(url)
     xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
