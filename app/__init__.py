@@ -1878,9 +1878,9 @@ def slotsfromsocial():
     br = open_password_protected_site("https://login.kth.se/login/")
 
     coursecode = "AI2807"
-
-    url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
     print "HEJ"
+    url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
+
     courselink = "/social/course/"
     courselink = courselink + coursecode
     courselink = courselink + "/subgroup/"
