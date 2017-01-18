@@ -1888,11 +1888,12 @@ def slotsfromsocial():
     xml = BeautifulSoup(url)
     xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
 
-    for item in xml:
+    for idx, item in enumerate(xml):
 
         fullcourselink = "https://www.kth.se"
         fullcourselink = fullcourselink + item['href']
-
+        print idx
+        print fullcourselink
         url = br.open(fullcourselink)
 
         xml = BeautifulSoup(url)
