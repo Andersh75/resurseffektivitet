@@ -1906,9 +1906,10 @@ def slotsfromsocial():
 
         xml = BeautifulSoup(url)
         xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
-
+        print xml
         for idx, item in enumerate(xml):
             print idx
+            print item['href']
             if "event" in item['href']:
                 # linklist.append(item['href'])
                 linkvar = item['href']
