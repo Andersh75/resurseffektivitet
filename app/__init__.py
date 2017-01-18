@@ -1883,10 +1883,13 @@ def slotsfromsocial():
 
     courselink = "/social/course/"
     courselink = courselink + coursecode
-    courselink = courselink + "/other_subgroups/"
+    courselink1 = courselink + "/other_subgroups/"
+    courselink2 = courselink + "/subgroup/"
 
     xml = BeautifulSoup(url)
-    xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
+    xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
+    xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
+    xml = xml1 + xml2
 
     for idx, item in enumerate(xml):
 
@@ -1905,7 +1908,9 @@ def slotsfromsocial():
         url = br.open(schedulelink)
 
         xml = BeautifulSoup(url)
-        xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
+        xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
+        xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
+        xml = xml1 + xml2
         print xml
         for idx, item in enumerate(xml):
             print idx
