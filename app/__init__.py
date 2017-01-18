@@ -529,16 +529,23 @@ def csvimporter():
     # Populate tables
 
     for i in courses_list:
-        already = db.session.query(exists().where(and_(Courses.code == i[0], Courses.year == i[3]))).scalar()
-        if not already:
-            record = Courses(**{
-                'code': i[0],
-                'name': i[1],
-                'schedule_exists': i[2],
-                'year': i[3]
-            })
-            db.session.add(record)
-            db.session.commit()
+        monthvar=i[0][5:7]
+        if monthvar == "01" or "02" or "03" or "04" or "05" or "06":
+            datevar="01"
+        else:
+            datevar="09"
+
+        yearvar=i[3]
+
+        codevar=i[0]
+
+        courseobj = create_or_fetch_courseobj(coursevar, yearvar, datevar)
+
+        courseobj.name=i[1]
+        courseobj.schedule_exists=True
+
+        db.session.add(record)
+        db.session.commit()
 
 
     for i in schedules_list:
