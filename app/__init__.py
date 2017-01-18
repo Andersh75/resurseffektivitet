@@ -46,6 +46,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtWebKit import *
 import sys
 from lxml import html
+import time
 
 
 app = Flask(__name__)
@@ -526,15 +527,33 @@ def csvimporter():
     #    print i
 
     # Populate tables
-    for i in roomtypes_list:
-        roomtype = db.session.query(exists().where(Roomtypes.roomtype == i[0])).scalar()
-        if not roomtype:
-            record = Roomtypes(**{
-                'roomtype': i[0],
-                'cost': i[1]
+
+    for i in courses_list:
+        already = db.session.query(exists().where(and_(Courses.code == i[0], Courses.year == i[3]))).scalar()
+        if not already:
+            record = Courses(**{
+                'code': i[0],
+                'name': i[1],
+                'schedule_exists': i[2],
+                'year': i[3]
             })
             db.session.add(record)
             db.session.commit()
+
+
+    for i in schedules_list:
+        if not Dates.query.filter_by(date=i[0]).first():
+            record = Dates(**{
+                'date': i[0]
+                })
+            db.session.add(record)
+            db.session.commit()
+
+    for i in roomtypes_list:
+        roomtype = i[0]
+        roomtypeobj = create_or_fetch_roomtypeobj(roomtype)
+        roomtypeobj.cost = i[1]
+        db.session.commit()
 
     for i in rooms_list:
         # print i[0]
@@ -580,26 +599,6 @@ def csvimporter():
                 })
                 db.session.add(record)
                 db.session.commit()
-
-    for i in courses_list:
-        already = db.session.query(exists().where(and_(Courses.code == i[0], Courses.year == i[3]))).scalar()
-        if not already:
-            record = Courses(**{
-                'code': i[0],
-                'name': i[1],
-                'schedule_exists': i[2],
-                'year': i[3]
-            })
-            db.session.add(record)
-            db.session.commit()
-
-    for i in schedules_list:
-        if not Dates.query.filter_by(date=i[0]).first():
-            record = Dates(**{
-                'date': i[0]
-                })
-            db.session.add(record)
-            db.session.commit()
 
     for i in schedules_list:
         already = db.session.query(exists().where(and_(Classes.content == i[3], Classes.starttime == i[7], Classes.endtime == i[8], Classes.courses_id == Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id == Dates.query.filter_by(date=i[0]).first().id))).scalar()
@@ -802,7 +801,32 @@ def pass_courseyear_from_classdate(datevar):
     return yearvar
 
 
-def create_or_fetch_teachereobj(email):
+def create_or_fetch_roomtypeobj(roomtype):
+
+    roomtypeobj = None
+
+    try:
+        roomtypeobj = db.session.query(Roomtypes).filter(Roomtypes.roomtype == roomtype).first()
+    except Exception, e:
+        varcode = "no roomtypeobj"
+        print varcode
+
+    if not roomtypeobj:
+        print "CREATING ROOMTYPEOBJECT"
+        tempdict = {}
+        tempdict['roomtype'] = roomtype
+        record = Roomtypes(**tempdict)
+        roomtypeobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    else:
+        print "ROOMTYPEOBJECT EXISTS"
+
+    return roomtypeobj
+
+
+def create_or_fetch_teacherobj(email):
 
     teacherobj = None
 
@@ -1211,7 +1235,7 @@ def teachersfromdepartment(templist):
             username = item['username']
 
             if email:
-                teacherobj = create_or_fetch_teachereobj(email)
+                teacherobj = create_or_fetch_teacherobj(email)
 
                 teacherobj.firstname = firstname
                 teacherobj.lastname = lastname
@@ -1428,7 +1452,7 @@ def coursesfromdepartment3(templist):
             examiner = item['examiner']
             department = item['department']
 
-            teacherobj = create_or_fetch_teachereobj(examiner)
+            teacherobj = create_or_fetch_teacherobj(examiner)
 
             try:
                 latestcourse = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc()).first()
@@ -1858,32 +1882,24 @@ def fetchregistredandexpectedstudents():
 
 
 # Adding slots from schedule API for all courses
-@app.route('/slotsfromscheduleapi')
-def slotsfromscheduleapi():
-
-    for item in allcourses():
-        tempdict = fetchinglistofslotspercourse(item.code, "2011-01-01", "2018-06-30")
-
+def slotsfromscheduleapi(coursecode):
+        tempdict = fetchinglistofslotspercourse(coursecode, "2011-01-01", "2018-06-30")
         parselistofslotspercourse(tempdict)
-
-    return "HO"
 
 
 # Adding slots from Social for all courses
-@app.route('/slotsfromsocial')
+@app.route('/slotsfromapiandsocial')
 def slotsfromsocial():
     print "YO"
     linklist = []
 
     br = open_password_protected_site("https://login.kth.se/login/")
 
-
     for idx, item in enumerate(allcourses()):
-        # print item.code
         coursecode = item.code
 
-        #coursecode = "AI2807"
-        #print "HEJ"
+        # Fetching slots from schedule API
+        slotsfromscheduleapi(coursecode)
 
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
@@ -2005,6 +2021,16 @@ def slotsfromsocial():
             continue
 
     return "DONE"
+
+
+@app.route('/csvimport')
+def csvimport():
+    # csvimporter()
+    now = datetime.datetime.now()
+    thisyear = now.year
+    nextyear = str(1 + int(thisyear))
+    enddate = nextyear + "-12-31"
+    print enddate
 
 
 # Adding slots from Social for all courses
@@ -2242,7 +2268,7 @@ def coursesfromdepartment(templist):
             examiner = item['examiner']
             department = item['department']
 
-            teacherobj = create_or_fetch_teachereobj(examiner)
+            teacherobj = create_or_fetch_teacherobj(examiner)
 
             latestcourseobj = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc()).first()
 
