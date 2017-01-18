@@ -1879,93 +1879,123 @@ def slotsfromsocial():
 
     coursecode = "AI2807"
     print "HEJ"
-    url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (coursecode))
 
-    courselink = "/social/course/"
-    courselink = courselink + coursecode
-    courselink1 = courselink + "/other_subgroups/"
-    courselink2 = courselink + "/subgroup/"
+    try:
+        url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
 
-    xml = BeautifulSoup(url)
-    xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
-    xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
-    xml = xml1 + xml2
+        courselink = "/social/course/"
+        courselink = courselink + item.code
+        courselink = courselink + "/subgroup/"
 
-    for idx, item in enumerate(xml):
+    except Exception, e:
+        varcode = "no subgroup on social"
+        print varcode
+        print coursecode
 
-        fullcourselink = "https://www.kth.se"
-        fullcourselink = fullcourselink + item['href']
-        print idx
-        print fullcourselink
-        url = br.open(fullcourselink)
+        try:
+            url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (coursecode))
 
-        xml = BeautifulSoup(url)
-        xml = xml.find('a', text="Schema")
+            courselink = "/social/course/"
+            courselink = courselink + item.code
+            courselink = courselink + "/other_subgroups/"
 
-        schedulelink = "https://www.kth.se"
-        schedulelink = schedulelink + xml['href']
+        except Exception, e:
+            varcode = "no other subgroups on social"
+            print varcode
+            print item.code
 
-        url = br.open(schedulelink)
+    try:
+        # url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (coursecode))
+
+        courselink = "/social/course/"
+        courselink = courselink + coursecode
+        courselink1 = courselink + "/other_subgroups/"
+        courselink2 = courselink + "/subgroup/"
 
         xml = BeautifulSoup(url)
         xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
         xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
         xml = xml1 + xml2
-        print xml
+
         for idx, item in enumerate(xml):
+
+            fullcourselink = "https://www.kth.se"
+            fullcourselink = fullcourselink + item['href']
             print idx
-            print item['href']
-            if "event" in item['href']:
-                # linklist.append(item['href'])
-                linkvar = item['href']
-                print "FETCHING"
-                print coursecode
-                testlink = "https://www.kth.se"
-                testlink = testlink + linkvar
-                print testlink
-                url = br.open(testlink)
+            print fullcourselink
+            url = br.open(fullcourselink)
 
-                # xml = BeautifulSoup(src)
-                xml = BeautifulSoup(url)
-                # testlist = xml.find_all('a', { "class" : "fancybox" })
+            xml = BeautifulSoup(url)
+            xml = xml.find('a', text="Schema")
 
-                startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
-                startdate = startdate.text
+            schedulelink = "https://www.kth.se"
+            schedulelink = schedulelink + xml['href']
 
-                enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
-                enddate = enddate.text
+            url = br.open(schedulelink)
 
-                datevar = startdate[:10]
+            xml = BeautifulSoup(url)
+            xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
+            xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
+            xml = xml1 + xml2
+            print xml
+            for idx, item in enumerate(xml):
+                print idx
+                print item['href']
+                if "event" in item['href']:
+                    # linklist.append(item['href'])
+                    linkvar = item['href']
+                    print "FETCHING"
+                    print coursecode
+                    testlink = "https://www.kth.se"
+                    testlink = testlink + linkvar
+                    print testlink
+                    url = br.open(testlink)
 
-                yearvar = pass_courseyear_from_classdate(datevar)
+                    # xml = BeautifulSoup(src)
+                    xml = BeautifulSoup(url)
+                    # testlist = xml.find_all('a', { "class" : "fancybox" })
 
-                codevar = testlink[33:39]
-                starttimevar = startdate[11:13]
-                endtimevar = enddate[11:13]
+                    startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+                    startdate = startdate.text
 
-                roomobj = None
+                    enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+                    enddate = enddate.text
 
-                courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
-                dateobj = create_or_fetch_dateobj(datevar, courseobj)
+                    datevar = startdate[:10]
 
-                locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+                    yearvar = pass_courseyear_from_classdate(datevar)
 
-                for location in locations:
-                    try:
-                        location = location.text
-                        print "FETCHING!!!!"
-                        print location
-                        print codevar
-                        print yearvar
+                    codevar = testlink[33:39]
+                    starttimevar = startdate[11:13]
+                    endtimevar = enddate[11:13]
 
-                        roomobj = create_or_fetch_roomobj(location, dateobj)
-                        classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                    roomobj = None
 
-                    except Exception, e:
-                        varcode = "NO ROOM"
-                        print varcode
-                        classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
-                        continue
+                    courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+                    dateobj = create_or_fetch_dateobj(datevar, courseobj)
+
+                    locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+                    for location in locations:
+                        try:
+                            location = location.text
+                            print "FETCHING!!!!"
+                            print location
+                            print codevar
+                            print yearvar
+
+                            roomobj = create_or_fetch_roomobj(location, dateobj)
+                            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+
+                        except Exception, e:
+                            varcode = "NO ROOM"
+                            print varcode
+                            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                            continue
+
+    except Exception, e:
+        varcode = "No subgroup or other subgroups"
+        print varcode
 
     return "DONE"
 
