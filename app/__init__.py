@@ -1907,7 +1907,8 @@ def slotsfromsocial():
         xml = BeautifulSoup(url)
         xml = xml.find_all('a', href=lambda value: value and value.startswith(courselink))
 
-        for item in xml:
+        for idx, item in enumerate(xml):
+            print idx
             if "event" in item['href']:
                 # linklist.append(item['href'])
                 linkvar = item['href']
@@ -1915,7 +1916,7 @@ def slotsfromsocial():
                 print coursecode
                 testlink = "https://www.kth.se"
                 testlink = testlink + linkvar
-
+                print testlink
                 url = br.open(testlink)
 
                 # xml = BeautifulSoup(src)
@@ -1943,8 +1944,8 @@ def slotsfromsocial():
 
                 locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
-                if locations:
-                    for location in locations:
+                for location in locations:
+                    try:
                         location = location.text
                         print "FETCHING!!!!"
                         print location
@@ -1954,10 +1955,11 @@ def slotsfromsocial():
                         roomobj = create_or_fetch_roomobj(location, dateobj)
                         classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
-                    else:
+                    except Exception, e:
                         varcode = "NO ROOM"
                         print varcode
                         classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                        continue
 
     return "DONE"
 
