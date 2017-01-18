@@ -1884,7 +1884,7 @@ def slotsfromsocial():
         url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
 
         courselink = "/social/course/"
-        courselink = courselink + item.code
+        courselink = courselink + coursecode
         courselink = courselink + "/subgroup/"
 
     except Exception, e:
@@ -1896,13 +1896,13 @@ def slotsfromsocial():
             url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (coursecode))
 
             courselink = "/social/course/"
-            courselink = courselink + item.code
+            courselink = courselink + coursecode
             courselink = courselink + "/other_subgroups/"
 
         except Exception, e:
             varcode = "no other subgroups on social"
             print varcode
-            print item.code
+            print coursecode
 
     try:
         # url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (coursecode))
