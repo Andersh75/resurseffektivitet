@@ -1880,7 +1880,7 @@ def slotsfromsocial():
     coursecode = "AI2807"
 
     url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
-
+    print "HEJ"
     courselink = "/social/course/"
     courselink = courselink + coursecode
     courselink = courselink + "/subgroup/"
