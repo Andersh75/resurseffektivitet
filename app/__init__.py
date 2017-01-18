@@ -1872,7 +1872,7 @@ def slotsfromscheduleapi():
 # Adding slots from Social for all courses
 @app.route('/slotsfromsocial')
 def slotsfromsocial():
-
+    print "YO"
     linklist = []
 
     br = open_password_protected_site("https://login.kth.se/login/")
