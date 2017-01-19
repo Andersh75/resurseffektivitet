@@ -528,7 +528,7 @@ def csvimporter():
     #    print i
 
     # Populate tables
-
+    '''
     for i in courses_list:
         monthvar = i[0][5:7]
         if monthvar == "01" or "02" or "03" or "04" or "05" or "06":
@@ -537,113 +537,111 @@ def csvimporter():
             datevar = "09"
         yearvar = i[3]
         codevar = i[0]
-        courseobj = create_or_fetch_courseobj(coursevar, yearvar, datevar)
+        courseobj = create_or_fetch_courseobj(coursevar, yearvar)
+        term = what_term_is_this(datevar)
+        db.session.commit()
         courseobj.name = i[1]
         courseobj.schedule_exists = True
         db.session.add(record)
         db.session.commit()
+    '''
 
     for i in roomtypes_list:
         roomtype = i[0]
+        cost = i[1]
+        if len(roomtype) < 1:
+            roomtype = None
         roomtypeobj = create_or_fetch_roomtypeobj(roomtype)
-        roomtypeobj.cost = i[1]
+        roomtypeobj.cost = cost
         db.session.commit()
 
     for i in subjects_list:
-        subject = i[0]
-        create_or_fetch_subjectobj(subject)
+        name = i[0]
+        if len(name) < 1:
+            name = None
+        create_or_fetch_subjectobj(name)
 
     for i in teachers_list:
-        if len(i[0]) < 1:
-            i[0] = None
-        if len(i[1]) < 1:
-            i[1] = None
-        if len(i[2]) < 1:
-            i[2] = None
-        teacherobj = create_or_fetch_teacherobj(i[2])
-        teacherobj.kthid = i[0]
-        teacherobj.initials = i[1]
+        kthid = i[0]
+        initials = i[1]
+        email = i[2]
+        firstname = i[3]
+        akafirstname = i[3]
+        lastname = i[4]
+        akalastname = i[4]
+        if len(kthid) < 1:
+            kthid = None
+        if len(initials) < 1:
+            initials = None
+        if len(email) < 1:
+            email = None
+        if len(firstname) < 1:
+            firstname = None
+        if len(lastname) < 1:
+            lastname = None
+        if len(akafirstname) < 1:
+            akafirstname = None
+        if len(akalastname) < 1:
+            akalastname = None
+        teacherobj = create_or_fetch_teacherobj(email)
+        teacherobj.kthid = kthid
+        teacherobj.initials = initials
         if not teacherobj.firstname:
-            teacherobj.firstname = i[3]
+            teacherobj.firstname = firstname
         if not teacherobj.lastname:
-            teacherobj.lastname = i[4]
-        teacherobj.akafirstname = i[3]
-        teacherobj.akalastname = i[4]
-        db.session.add(record)
+            teacherobj.lastname = lastname
+        teacherobj.akafirstname = akafirstname
+        teacherobj.akalastname = akalastname
+        db.session.commit()
+
+    for i in rooms_list:
+        name = i[0]
+        seats = i[1]
+        roomtype = i[2]
+        roomobj = create_or_fetch_roomobj(name)
+        roomtypeobj = create_or_fetch_roomtypeobj(roomtype)
+        roomobj.seats = seats
+        roomobj.roomtypes_id = roomtypeobj.id
         db.session.commit()
 
     for i in schedules_list:
         datevar = i[0]
-        create_or_fetch_dateobj(datevar)
+        contentvar = i[3]
+        codevar = i[5]
+        yearvar = i[6]
+        starttimevar = i[7]
+        endtimevar = i[8]
+        roomsstring = i[2]
+        teachersstring = i[4]
 
-    for i in rooms_list:
-        roomvar = i[0]
-        roomobj = create_or_fetch_roomobj(roomvar)
-        roomobj.seats = i[1]
-        roomobj.roomtypes_id = Roomtypes.query.filter_by(id=i[2]).first().id
-        db.session.add(record)
+        courseobj = create_or_fetch_courseobj(codevar, yearvar)
+        dateobj = create_or_fetch_dateobj(datevar)
+        create_course_date_connection(courseobj, dateobj)
+
+        classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+        create_room_class_connection(roomobj, classobj)
+        classobj.content = contentvar
+        classobj.courses_id = courseobj.id
+        classobj.dates_id = dateobj.id
         db.session.commit()
 
+        if not classobj.content:
+            classobj.content = contentvar
 
+        teacherslist = teachersstring.split()
+        for initials in teacherslist:
+            already = db.session.query(exists().where(Teachers.initials == initials)).scalar()
 
+            if already:
+                teacherobj = Teachers.query.filter_by(initials=initials).first()
+                create_teacher_class_connection(teacherobj, classobj)
+                create_teacher_date_connection(teacherobj, dateobj)
 
-
-
-
-
-
-    for i in schedules_list:
-        already = db.session.query(exists().where(and_(Classes.content == i[3], Classes.starttime == i[7], Classes.endtime == i[8], Classes.courses_id == Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id == Dates.query.filter_by(date=i[0]).first().id))).scalar()
-        if (not already) and (len(i[3]) < 100):
-            record = Classes(**{
-                # 'date' : i[0],
-                'content': i[3],
-                'starttime': i[7],
-                'endtime': i[8],
-                'courses_id': Courses.query.filter_by(code=i[5]).first().id,
-                'dates_id': Dates.query.filter_by(date=i[0]).first().id
-            })
-            db.session.add(record)
-            db.session.commit()
-
-            coursevar = Courses.query.filter_by(code=i[5]).first()
-            datevar = Dates.query.filter_by(date=i[0]).first()
-            # print datevar.date
-            datevar.courses.append(coursevar)
-            # datevar.classes.append(record)
-            db.session.commit()
-
-            words = i[4].split()
-            for word in words:
-                # print word
-
-                already = db.session.query(exists().where(Teachers.initials == word)).scalar()
-
-                if already:
-                    teachervar = Teachers.query.filter_by(initials=word).first()
-                    # print teachervar.firstname
-                    teachervar.classes.append(record)
-                    teachervar.dates.append(datevar)
-                    db.session.commit()
-
-            words = i[2].split()
-            for word in words:
-
-                already = db.session.query(exists().where(Rooms.name == word)).scalar()
-
-                if already:
-                    roomvar = Rooms.query.filter_by(name=word).first()
-                    # print roomvar.name
-                    roomvar.classes.append(record)
-                    roomvar.dates.append(datevar)
-
-                    db.session.commit()
-
-
-
-
-
-
+        roomslist = roomsstring.split()
+        for name in roomslist:
+            roomobj = create_or_fetch_roomobj(name)
+            create_room_class_connection(roomobj, classobj)
+            create_room_date_connection(roomobj, dateobj)
 
 
 # CLEAN THE CSV
@@ -799,6 +797,16 @@ def pass_courseyear_from_classdate(datevar):
     return yearvar
 
 
+def what_term_is_this(startdatevar):
+    monthvar = startdatevar[5:7]
+    if monthvar == "01" or "02" or "03" or "04" or "05" or "06":
+        term = 1
+    else:
+        term = 2
+
+    return term
+
+
 def create_or_fetch_roomtypeobj(roomtype):
 
     roomtypeobj = None
@@ -874,13 +882,11 @@ def create_or_fetch_teacherobj(email):
     return teacherobj
 
 
-def create_or_fetch_courseobj(code, year, date):
+def create_or_fetch_courseobj(code, year, startdatevar):
 
     courseobj = None
-    term = 2
 
-    if date[5:7] == "01":
-        term = 1
+    term = what_term_is_this(startdatevar)
 
     try:
         courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
@@ -932,21 +938,6 @@ def create_or_fetch_dateobj(datevar):
     return dateobj
 
 
-def create_course_date_connection(courseobj, dateobj):
-    try:
-        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date == dateobj.date, Courses.code == courseobj.code)).first()
-    except Exception, e:
-        varcode = "no course-date"
-        print varcode
-
-    if not alreadycourse:
-        print "CREATING COURSE-DATE"
-        dateobj.courses.append(courseobj)
-        db.session.commit()
-    else:
-        print "COURSE-DATE EXISTS"
-
-
 def create_or_fetch_roomobj(roomvar):
     roomobj = None
     alreadydate = None
@@ -987,13 +978,73 @@ def create_room_date_connection(roomobj, dateobj):
         print "ROOM-DATE EXISTS"
 
 
-def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj):
+def create_room_class_connection(roomobj, classobj):
+    try:
+        alreadydate = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.id == roomobj.id)).first()
+    except Exception, e:
+        varcode = "no room-class"
+        print varcode
+
+    if not alreadydate:
+        print "CREATING ROOM-CLASS"
+        classobj.rooms.append(roomobj)
+        db.session.commit()
+    else:
+        print "ROOM-CLASS EXISTS"
+
+
+def create_teacher_class_connection(teacherobj, classobj):
+    try:
+        alreadydate = db.session.query(Classes).join(Classes.teachers).filter(and_(Classes.id == classobj.id, Teachers.id == teacherobj.id)).first()
+    except Exception, e:
+        varcode = "no teacher-class"
+        print varcode
+
+    if not alreadydate:
+        print "CREATING TEACHER-CLASS"
+        classobj.teachers.append(teacherobj)
+        db.session.commit()
+    else:
+        print "TEACHER-CLASS EXISTS"
+
+
+def create_teacher_date_connection(teacherobj, dateobj):
+    try:
+        alreadydate = db.session.query(Dates).join(Dates.teachers).filter(and_(Dates.id == dateobj.id, Teachers.id == teacherobj.id)).first()
+    except Exception, e:
+        varcode = "no teacher-date"
+        print varcode
+
+    if not alreadydate:
+        print "CREATING TEACHER-DATE"
+        dateobj.teachers.append(teacherobj)
+        db.session.commit()
+    else:
+        print "TEACHER-DATE EXISTS"
+
+
+def create_course_date_connection(courseobj, dateobj):
+    try:
+        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date == dateobj.date, Courses.code == courseobj.code)).first()
+    except Exception, e:
+        varcode = "no course-date"
+        print varcode
+
+    if not alreadycourse:
+        print "CREATING COURSE-DATE"
+        dateobj.courses.append(courseobj)
+        db.session.commit()
+    else:
+        print "COURSE-DATE EXISTS"
+
+
+def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
 
     alreadyroom = None
     classobj = None
 
     try:
-        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.code == codevar, Courses.year == yearvar, Dates.date == datevar, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
+        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
     except Exception, e:
         varcode = "no classobj"
         print varcode
@@ -1003,29 +1054,15 @@ def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar
         tempdict = {}
         tempdict['starttime'] = starttimevar
         tempdict['endtime'] = endtimevar
-        tempdict['courses_id'] = db.session.query(Courses).filter(and_(Courses.code == codevar, Courses.year == yearvar)).first().id
-        tempdict['dates_id'] = Dates.query.filter_by(date=datevar).first().id
+        tempdict['courses_id'] = courseobj.id
+        tempdict['dates_id'] = dateobj.id
 
         record = Classes(**tempdict)
         classobj = record
         db.session.add(record)
         db.session.commit()
-
     else:
         print "CLASSOBJECT EXISTS"
-
-    try:
-        alreadyroom = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.name == roomobj.name)).first()
-    except Exception, e:
-        varcode = "no class-room"
-        print varcode
-
-    if not alreadyroom:
-        print "CREATING CLASS-ROOM"
-        roomobj.classes.append(classobj)
-        db.session.commit()
-    else:
-        print "CLASS-ROOM EXISTS"
 
     return classobj
 
@@ -1067,7 +1104,7 @@ def Xfetchslotfromsociallink(linkvar):
 
         roomobj = None
 
-        courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+        courseobj = create_or_fetch_courseobj(codevar, yearvar)
         dateobj = create_or_fetch_dateobj(datevar)
         create_course_date_connection(courseobj, dateobj)
 
@@ -1083,10 +1120,12 @@ def Xfetchslotfromsociallink(linkvar):
 
                 roomobj = create_or_fetch_roomobj(location)
                 create_room_date_connection(roomobj, dateobj)
-                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                create_room_class_connection(roomobj, classobj)
 
         else:
-            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+            classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+            create_room_class_connection(roomobj, classobj)
 
     except Exception, e:
         varcode = "BROKEN"
@@ -1128,7 +1167,11 @@ def fetchslotfromsociallink(linklist):
 
             roomobj = None
 
-            courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+            courseobj = create_or_fetch_courseobj(codevar, yearvar)
+            term = what_term_is_this(datevar)
+            courseobj.term = term
+            db.session.commit()
+
             dateobj = create_or_fetch_dateobj(datevar)
             create_course_date_connection(courseobj, dateobj)
 
@@ -1144,12 +1187,14 @@ def fetchslotfromsociallink(linklist):
 
                     roomobj = create_or_fetch_roomobj(location)
                     create_room_date_connection(roomobj, dateobj)
-                    classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                    classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                    create_room_class_connection(roomobj, classobj)
 
             except Exception, e:
                 varcode = "NO ROOM"
                 print varcode
-                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                create_room_class_connection(roomobj, classobj)
 
         except Exception, e:
             varcode = "BROKEN"
@@ -1203,7 +1248,10 @@ def parselistofslotspercourse(tempdict):
 
         year = pass_courseyear_from_classdate(date)
 
-        courseobj = create_or_fetch_courseobj(code, year, date)
+        courseobj = create_or_fetch_courseobj(code, year)
+        term = what_term_is_this(date)
+        courseobj.term = term
+        db.session.commit()
 
         dateobj = create_or_fetch_dateobj(date)
         create_course_date_connection(courseobj, dateobj)
@@ -1212,7 +1260,8 @@ def parselistofslotspercourse(tempdict):
             roomvar = location['name']
             roomobj = create_or_fetch_roomobj(roomvar)
             create_room_date_connection(roomobj, dateobj)
-            classobj = create_or_fetch_classobj(starttime, endtime, code, year, date, roomobj)
+            classobj = create_or_fetch_classobj(starttime, endtime, courseobj, dateobj)
+            create_room_class_connection(roomobj, classobj)
             classobj.contentapi = info
             print "INFO ADDED TO CLASS"
             db.session.commit()
@@ -1391,7 +1440,9 @@ def coursesfromdepartment2(item):
     if term == 2:
         date = "XXXX-09-XX"
 
-    courseobj = create_or_fetch_courseobj(code, year, date)
+    courseobj = create_or_fetch_courseobj(code, year)
+    term = what_term_is_this(date)
+    db.session.commit()
 
     courseobj.period
 
@@ -2024,7 +2075,10 @@ def slotsfromsocial():
 
                         roomobj = None
 
-                        courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+                        courseobj = create_or_fetch_courseobj(codevar, yearvar)
+                        term = what_term_is_this(datevar)
+                        db.session.commit()
+
                         dateobj = create_or_fetch_dateobj(datevar)
                         create_course_date_connection(courseobj, dateobj)
 
@@ -2040,12 +2094,14 @@ def slotsfromsocial():
 
                                 roomobj = create_or_fetch_roomobj(location)
                                 create_room_date_connection(roomobj, dateobj)
-                                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                create_room_class_connection(roomobj, classobj)
 
                             except Exception, e:
                                 varcode = "NO ROOM"
                                 print varcode
-                                classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                create_room_class_connection(roomobj, classobj)
                                 continue
 
         except Exception, e:
@@ -2059,12 +2115,12 @@ def slotsfromsocial():
 
 @app.route('/csvimport')
 def csvimport():
-    # csvimporter()
-    now = datetime.datetime.now()
-    thisyear = now.year
-    nextyear = str(1 + int(thisyear))
-    enddate = nextyear + "-12-31"
-    print enddate
+    csvimporter()
+    # now = datetime.datetime.now()
+    # thisyear = now.year
+    # nextyear = str(1 + int(thisyear))
+    # enddate = nextyear + "-12-31"
+    # print enddate
 
 
 # Adding slots from Social for all courses
@@ -2160,7 +2216,10 @@ def Xslotsfromsocial():
 
                                     roomobj = None
 
-                                    courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
+                                    courseobj = create_or_fetch_courseobj(codevar, yearvar)
+                                    term = what_term_is_this(datevar)
+                                    db.session.commit()
+
                                     dateobj = create_or_fetch_dateobj(datevar)
                                     create_course_date_connection(courseobj, dateobj)
 
@@ -2176,12 +2235,14 @@ def Xslotsfromsocial():
 
                                             roomobj = create_or_fetch_roomobj(location)
                                             create_room_date_connection(roomobj, dateobj)
-                                            classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                                            classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                            create_room_class_connection(roomobj, classobj)
 
                                     except Exception, e:
                                         varcode = "NO ROOM"
                                         print varcode
-                                        classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
+                                        classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                        create_room_class_connection(roomobj, classobj)
 
                                 except Exception, e:
                                     varcode = "BROKEN"
