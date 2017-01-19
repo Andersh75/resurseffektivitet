@@ -242,6 +242,12 @@ def allcourses():
     return templist
 
 
+def allcourses_one_year(yearvar):
+    # templist = db.session.query(Courses).order_by(Courses.code.desc()).all()
+    templist = db.session.query(Courses).filter(Courses.year == yearvar).order_by(Courses.code).all()
+    return templist
+
+
 def allrooms():
     templist = db.session.query(Rooms).order_by(Rooms.name).all()
     return templist
@@ -1697,7 +1703,7 @@ def register_page():
             tempobj = db.session.query(Teachers).filter(Teachers.email == email).first()
             alreadyregistred = tempobj.password
             print alreadyregistred
-            #alreadyregistred = db.session.query(exists().where(and_(Teachers.password is not None, Teachers.email == email))).scalar()
+            # alreadyregistred = db.session.query(exists().where(and_(Teachers.password is not None, Teachers.email == email))).scalar()
 
             if alreadyregistred:
                 flash("Already registred!")
