@@ -2043,7 +2043,6 @@ def slotsfromsocial():
         # Fetching slots from schedule API
         slotsfromscheduleapi(coursecode)
 
-        '''
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
 
@@ -2170,7 +2169,6 @@ def slotsfromsocial():
             print coursecode
             continue
 
-        '''
     return "DONE"
 
 
