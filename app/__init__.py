@@ -624,32 +624,36 @@ def csvimporter():
 
         courseobj = fetch_courseobj(codevar, yearvar)
         dateobj = fetch_dateobj(datevar)
-        create_course_date_connection(courseobj, dateobj)
 
-        classobj = fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-        create_room_class_connection(roomobj, classobj)
-        classobj.content = contentvar
-        classobj.courses_id = courseobj.id
-        classobj.dates_id = dateobj.id
-        db.session.commit()
+        if dateobj:
+            create_course_date_connection(courseobj, dateobj)
 
-        if not classobj.content:
-            classobj.content = contentvar
+            classobj = fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
 
-        teacherslist = teachersstring.split()
-        for initials in teacherslist:
-            already = db.session.query(exists().where(Teachers.initials == initials)).scalar()
+            if classobj:
+                create_room_class_connection(roomobj, classobj)
+                classobj.content = contentvar
+                classobj.courses_id = courseobj.id
+                classobj.dates_id = dateobj.id
+                db.session.commit()
 
-            if already:
-                teacherobj = Teachers.query.filter_by(initials=initials).first()
-                create_teacher_class_connection(teacherobj, classobj)
-                create_teacher_date_connection(teacherobj, dateobj)
+                if not classobj.content:
+                    classobj.content = contentvar
 
-        roomslist = roomsstring.split()
-        for name in roomslist:
-            roomobj = create_or_fetch_roomobj(name)
-            create_room_class_connection(roomobj, classobj)
-            create_room_date_connection(roomobj, dateobj)
+                teacherslist = teachersstring.split()
+                for initials in teacherslist:
+                    already = db.session.query(exists().where(Teachers.initials == initials)).scalar()
+
+                    if already:
+                        teacherobj = Teachers.query.filter_by(initials=initials).first()
+                        create_teacher_class_connection(teacherobj, classobj)
+                        create_teacher_date_connection(teacherobj, dateobj)
+
+                roomslist = roomsstring.split()
+                for name in roomslist:
+                    roomobj = create_or_fetch_roomobj(name)
+                    create_room_class_connection(roomobj, classobj)
+                    create_room_date_connection(roomobj, dateobj)
 
 
 # CLEAN THE CSV
