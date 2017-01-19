@@ -188,7 +188,7 @@ class RegistrationForm(Form):
     confirm = PasswordField('Repeat Password')
     # accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', [validators.Required()])
 
-
+'''
 class Render(QWebPage):
     def __init__(self, url):
         self.app = QApplication(sys.argv)
@@ -200,6 +200,7 @@ class Render(QWebPage):
     def _loadFinished(self, result):
         self.frame = self.mainFrame()
         self.app.quit()
+'''
 
 
 # Lista med kurstillfallen som anvands i en kurs
