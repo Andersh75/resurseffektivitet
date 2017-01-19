@@ -2046,7 +2046,7 @@ def slotsfromsocial():
 
                 fullcourselink = "https://www.kth.se"
                 fullcourselink = fullcourselink + item['href']
-                print idx
+                # print idx
                 # print fullcourselink
                 url = br.open(fullcourselink)
 
@@ -2064,7 +2064,7 @@ def slotsfromsocial():
                 xml = xml1 + xml2
                 # print xml
                 for idx, item in enumerate(xml):
-                    print idx
+                    # print idx
                     # print item['href']
                     if "event" in item['href']:
                         # linklist.append(item['href'])
