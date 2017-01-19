@@ -911,7 +911,6 @@ def create_or_fetch_courseobj(code, year):
 def create_or_fetch_dateobj(datevar):
 
     dateobj = None
-    alreadycourse = None
 
     try:
         dateobj = db.session.query(Dates).filter(Dates.date == datevar).first()
@@ -937,7 +936,6 @@ def create_or_fetch_dateobj(datevar):
 
 def create_or_fetch_roomobj(roomvar):
     roomobj = None
-    alreadydate = None
 
     try:
         roomobj = db.session.query(Rooms).filter(Rooms.name == roomvar).first()
@@ -962,7 +960,7 @@ def create_or_fetch_roomobj(roomvar):
 
 def create_room_date_connection(roomobj, dateobj):
     try:
-        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date == dateobj.date, Rooms.name == roomobj.name)).first()
+        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.id == dateobj.id, Rooms.id == roomobj.id)).first()
     except Exception, e:
         varcode = "no room-date"
         print varcode
@@ -1022,7 +1020,7 @@ def create_teacher_date_connection(teacherobj, dateobj):
 
 def create_course_date_connection(courseobj, dateobj):
     try:
-        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date == dateobj.date, Courses.code == courseobj.code)).first()
+        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.id == dateobj.id, Courses.id == courseobj.id)).first()
     except Exception, e:
         varcode = "no course-date"
         print varcode
