@@ -622,11 +622,11 @@ def csvimporter():
         roomsstring = i[2]
         teachersstring = i[4]
 
-        courseobj = create_or_fetch_courseobj(codevar, yearvar)
-        dateobj = create_or_fetch_dateobj(datevar)
+        courseobj = fetch_courseobj(codevar, yearvar)
+        dateobj = fetch_dateobj(datevar)
         create_course_date_connection(courseobj, dateobj)
 
-        classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+        classobj = fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
         create_room_class_connection(roomobj, classobj)
         classobj.content = contentvar
         classobj.courses_id = courseobj.id
@@ -916,6 +916,19 @@ def create_or_fetch_courseobj(code, year):
     return courseobj
 
 
+def fetch_courseobj(code, year):
+
+    courseobj = None
+
+    try:
+        courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
+    except Exception, e:
+        varcode = "no courseobj"
+        print varcode
+
+    return courseobj
+
+
 def create_or_fetch_dateobj(datevar):
 
     dateobj = None
@@ -938,6 +951,20 @@ def create_or_fetch_dateobj(datevar):
 
     else:
         print "DATEOBJECT EXISTS"
+
+    return dateobj
+
+
+def fetch_dateobj(datevar):
+
+    dateobj = None
+
+    try:
+        dateobj = db.session.query(Dates).filter(Dates.date == datevar).first()
+
+    except Exception, e:
+        varcode = "no dateobj"
+        print varcode
 
     return dateobj
 
@@ -1043,7 +1070,6 @@ def create_course_date_connection(courseobj, dateobj):
 
 def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
 
-    alreadyroom = None
     classobj = None
 
     try:
@@ -1066,6 +1092,19 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
         db.session.commit()
     else:
         print "CLASSOBJECT EXISTS"
+
+    return classobj
+
+
+def fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
+
+    classobj = None
+
+    try:
+        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
+    except Exception, e:
+        varcode = "no classobj"
+        print varcode
 
     return classobj
 
@@ -1651,6 +1690,7 @@ app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year)
 def index():
 
     return redirect(url_for('login_page'))
+
 
 @app.route('/login/', methods=["GET", "POST"])
 def login_page():
