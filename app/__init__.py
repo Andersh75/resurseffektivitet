@@ -528,33 +528,21 @@ def csvimporter():
 
     # Populate tables
 
+
+
     for i in courses_list:
-        monthvar=i[0][5:7]
+        monthvar = i[0][5:7]
         if monthvar == "01" or "02" or "03" or "04" or "05" or "06":
-            datevar="01"
+            datevar = "01"
         else:
-            datevar="09"
-
-        yearvar=i[3]
-
-        codevar=i[0]
-
+            datevar = "09"
+        yearvar = i[3]
+        codevar = i[0]
         courseobj = create_or_fetch_courseobj(coursevar, yearvar, datevar)
-
-        courseobj.name=i[1]
-        courseobj.schedule_exists=True
-
+        courseobj.name = i[1]
+        courseobj.schedule_exists = True
         db.session.add(record)
         db.session.commit()
-
-
-    for i in schedules_list:
-        if not Dates.query.filter_by(date=i[0]).first():
-            record = Dates(**{
-                'date': i[0]
-                })
-            db.session.add(record)
-            db.session.commit()
 
     for i in roomtypes_list:
         roomtype = i[0]
@@ -562,50 +550,48 @@ def csvimporter():
         roomtypeobj.cost = i[1]
         db.session.commit()
 
-    for i in rooms_list:
-        # print i[0]
-        name = db.session.query(exists().where(Rooms.name == i[0])).scalar()
-        if not name:
-            record = Rooms(**{
-                'name': i[0],
-                'seats': i[1],
-                'roomtypes_id': Roomtypes.query.filter_by(id=i[2]).first().id
-            })
-            db.session.add(record)
-            db.session.commit()
-
     for i in subjects_list:
-        # print i[0]
-        name = db.session.query(exists().where(Subjects.name == i[0])).scalar()
-        if not name:
-            record = Subjects(**{
-                'name': i[0]
-            })
-            db.session.add(record)
-            db.session.commit()
+        subject = i[0]
+        create_or_fetch_subjectobj(subject)
 
     for i in teachers_list:
-        already = db.session.query(exists().where(or_(Teachers.kthid == i[0], Teachers.initials == i[1], Teachers.email == i[2]))).scalar()
+        if len(i[0]) < 1:
+            i[0] = None
+        if len(i[1]) < 1:
+            i[1] = None
+        if len(i[2]) < 1:
+            i[2] = None
+        teacherobj = create_or_fetch_teacherobj(i[2])
+        teacherobj.kthid = i[0]
+        teacherobj.initials = i[1]
+        if not teacherobj.firstname:
+            teacherobj.firstname = i[3]
+        if not teacherobj.lastname:
+            teacherobj.lastname = i[4]
+        teacherobj.akafirstname = i[3]
+        teacherobj.akalastname = i[4]
+        db.session.add(record)
+        db.session.commit()
 
-        if not already:
-            if len(i[0]) < 1:
-                i[0] = None
-            if len(i[1]) < 1:
-                i[1] = None
-            if len(i[2]) < 1:
-                i[2] = None
-            if i[0] or i[2]:
-                record = Teachers(**{
-                    'kthid': i[0],
-                    'initials': i[1],
-                    'email': i[2],
-                    'firstname': i[3],
-                    'akafirstname': i[3],
-                    'akalastname': i[4],
-                    'lastname': i[4]
-                })
-                db.session.add(record)
-                db.session.commit()
+    for i in schedules_list:
+        datevar = i[0]
+        create_or_fetch_dateobj(datevar)
+
+    for i in rooms_list:
+        roomvar = i[0]
+        roomobj = create_or_fetch_roomobj(roomvar)
+        roomobj.seats = i[1]
+        roomobj.roomtypes_id = Roomtypes.query.filter_by(id=i[2]).first().id
+        db.session.add(record)
+        db.session.commit()
+
+
+
+
+
+
+
+
 
     for i in schedules_list:
         already = db.session.query(exists().where(and_(Classes.content == i[3], Classes.starttime == i[7], Classes.endtime == i[8], Classes.courses_id == Courses.query.filter_by(code=i[5]).first().id, Classes.dates_id == Dates.query.filter_by(date=i[0]).first().id))).scalar()
@@ -653,6 +639,9 @@ def csvimporter():
                     roomvar.dates.append(datevar)
 
                     db.session.commit()
+
+
+
 
 
 # CLEAN THE CSV
@@ -833,6 +822,31 @@ def create_or_fetch_roomtypeobj(roomtype):
     return roomtypeobj
 
 
+def create_or_fetch_subjectobj(subject):
+
+    subjectobj = None
+
+    try:
+        subjectobj = db.session.query(Subjects).filter(Subjects.name == subject).first()
+    except Exception, e:
+        varcode = "no subjectobj"
+        print varcode
+
+    if not subjectobj:
+        print "CREATING SUBJECTOBJECT"
+        tempdict = {}
+        tempdict['name'] = subject
+        record = Subjects(**tempdict)
+        subjectobj = record
+        db.session.add(record)
+        db.session.commit()
+
+    else:
+        print "SUBJECTOBJECT EXISTS"
+
+    return subjectobj
+
+
 def create_or_fetch_teacherobj(email):
 
     teacherobj = None
@@ -889,7 +903,7 @@ def create_or_fetch_courseobj(code, year, date):
     return courseobj
 
 
-def create_or_fetch_dateobj(datevar, courseobj):
+def create_or_fetch_dateobj(datevar):
 
     dateobj = None
     alreadycourse = None
@@ -913,8 +927,12 @@ def create_or_fetch_dateobj(datevar, courseobj):
     else:
         print "DATEOBJECT EXISTS"
 
+    return dateobj
+
+
+def create_course_date_connection(courseobj, dateobj):
     try:
-        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date == datevar, Courses.code == courseobj.code)).first()
+        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.date == dateobj.date, Courses.code == courseobj.code)).first()
     except Exception, e:
         varcode = "no course-date"
         print varcode
@@ -926,10 +944,8 @@ def create_or_fetch_dateobj(datevar, courseobj):
     else:
         print "COURSE-DATE EXISTS"
 
-    return dateobj
 
-
-def create_or_fetch_roomobj(roomvar, dateobj):
+def create_or_fetch_roomobj(roomvar):
     roomobj = None
     alreadydate = None
 
@@ -951,8 +967,12 @@ def create_or_fetch_roomobj(roomvar, dateobj):
     else:
         print "ROOMOBJECT EXISTS"
 
+    return roomobj
+
+
+def create_room_date_connection(roomobj, dateobj):
     try:
-        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date == dateobj.date, Rooms.name == roomvar)).first()
+        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.date == dateobj.date, Rooms.name == roomobj.name)).first()
     except Exception, e:
         varcode = "no room-date"
         print varcode
@@ -961,11 +981,8 @@ def create_or_fetch_roomobj(roomvar, dateobj):
         print "CREATING ROOM-DATE"
         dateobj.rooms.append(roomobj)
         db.session.commit()
-
     else:
         print "ROOM-DATE EXISTS"
-
-    return roomobj
 
 
 def create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj):
@@ -1049,7 +1066,8 @@ def Xfetchslotfromsociallink(linkvar):
         roomobj = None
 
         courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
-        dateobj = create_or_fetch_dateobj(datevar, courseobj)
+        dateobj = create_or_fetch_dateobj(datevar)
+        create_course_date_connection(courseobj, dateobj)
 
         locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
@@ -1061,7 +1079,8 @@ def Xfetchslotfromsociallink(linkvar):
                 print codevar
                 print yearvar
 
-                roomobj = create_or_fetch_roomobj(location, dateobj)
+                roomobj = create_or_fetch_roomobj(location)
+                create_room_date_connection(roomobj, dateobj)
                 classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
         else:
@@ -1108,7 +1127,8 @@ def fetchslotfromsociallink(linklist):
             roomobj = None
 
             courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
-            dateobj = create_or_fetch_dateobj(datevar, courseobj)
+            dateobj = create_or_fetch_dateobj(datevar)
+            create_course_date_connection(courseobj, dateobj)
 
             try:
                 locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
@@ -1120,7 +1140,8 @@ def fetchslotfromsociallink(linklist):
                     print codevar
                     print yearvar
 
-                    roomobj = create_or_fetch_roomobj(location, dateobj)
+                    roomobj = create_or_fetch_roomobj(location)
+                    create_room_date_connection(roomobj, dateobj)
                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
             except Exception, e:
@@ -1182,11 +1203,13 @@ def parselistofslotspercourse(tempdict):
 
         courseobj = create_or_fetch_courseobj(code, year, date)
 
-        dateobj = create_or_fetch_dateobj(date, courseobj)
+        dateobj = create_or_fetch_dateobj(date)
+        create_course_date_connection(courseobj, dateobj)
 
         for location in locations:
             roomvar = location['name']
-            roomobj = create_or_fetch_roomobj(roomvar, dateobj)
+            roomobj = create_or_fetch_roomobj(roomvar)
+            create_room_date_connection(roomobj, dateobj)
             classobj = create_or_fetch_classobj(starttime, endtime, code, year, date, roomobj)
             classobj.contentapi = info
             print "INFO ADDED TO CLASS"
@@ -2000,7 +2023,8 @@ def slotsfromsocial():
                         roomobj = None
 
                         courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
-                        dateobj = create_or_fetch_dateobj(datevar, courseobj)
+                        dateobj = create_or_fetch_dateobj(datevar)
+                        create_course_date_connection(courseobj, dateobj)
 
                         locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
@@ -2012,7 +2036,8 @@ def slotsfromsocial():
                                 print codevar
                                 print yearvar
 
-                                roomobj = create_or_fetch_roomobj(location, dateobj)
+                                roomobj = create_or_fetch_roomobj(location)
+                                create_room_date_connection(roomobj, dateobj)
                                 classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
                             except Exception, e:
@@ -2134,7 +2159,8 @@ def Xslotsfromsocial():
                                     roomobj = None
 
                                     courseobj = create_or_fetch_courseobj(codevar, yearvar, datevar)
-                                    dateobj = create_or_fetch_dateobj(datevar, courseobj)
+                                    dateobj = create_or_fetch_dateobj(datevar)
+                                    create_course_date_connection(courseobj, dateobj)
 
                                     try:
                                         locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
@@ -2146,7 +2172,8 @@ def Xslotsfromsocial():
                                             print codevar
                                             print yearvar
 
-                                            roomobj = create_or_fetch_roomobj(location, dateobj)
+                                            roomobj = create_or_fetch_roomobj(location)
+                                            create_room_date_connection(roomobj, dateobj)
                                             classobj = create_or_fetch_classobj(starttimevar, endtimevar, codevar, yearvar, datevar, roomobj)
 
                                     except Exception, e:
