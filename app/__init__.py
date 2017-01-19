@@ -2116,6 +2116,7 @@ def csvimport():
     # nextyear = str(1 + int(thisyear))
     # enddate = nextyear + "-12-31"
     # print enddate
+    return "DONE"
 
 
 # Adding slots from Social for all courses
