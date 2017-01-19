@@ -528,8 +528,6 @@ def csvimporter():
 
     # Populate tables
 
-
-
     for i in courses_list:
         monthvar = i[0][5:7]
         if monthvar == "01" or "02" or "03" or "04" or "05" or "06":
@@ -639,6 +637,9 @@ def csvimporter():
                     roomvar.dates.append(datevar)
 
                     db.session.commit()
+
+
+
 
 
 
