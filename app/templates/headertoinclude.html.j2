@@ -221,7 +221,7 @@
             //$('select').select2();
 
             //var tempvar = "[{% for item in mycourseslist() %}{ id: {{ loop.index }}, text: '{{ item }}'}{% if not loop.last %}, {% endif %}{% endfor %}]";
-            var tempvar = {{ mycourseslist() }}
+            //var tempvar = {{ mycourseslist() }}
             var subjvar = {{ subjectslistjson() }}
 
 
@@ -242,7 +242,7 @@
                 title: 'Select C',
                 inputclass: 'some_class'
             });
-
+            /*
             $('[id^=courseresponsibe]').editable({
                 value: 2,
                 //source: [{ value: 0, text: 'enhancement' }, { value: 1, text: 'bug' }, { value: 2, text: 'duplicate' }, { value: 3, text: 'invalid' }, { value: 4, text: 'wontfix' }]
@@ -264,6 +264,7 @@
                     $(this).html(response);
                 }
             });
+            */
 
             $('[id^=content]').editable({
                 title: 'Select Course',
