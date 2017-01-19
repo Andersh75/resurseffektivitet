@@ -882,11 +882,9 @@ def create_or_fetch_teacherobj(email):
     return teacherobj
 
 
-def create_or_fetch_courseobj(code, year, startdatevar):
+def create_or_fetch_courseobj(code, year):
 
     courseobj = None
-
-    term = what_term_is_this(startdatevar)
 
     try:
         courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
@@ -899,7 +897,6 @@ def create_or_fetch_courseobj(code, year, startdatevar):
         tempdict = {}
         tempdict['code'] = code
         tempdict['year'] = year
-        tempdict['term'] = term
         record = Courses(**tempdict)
         courseobj = record
         db.session.add(record)
