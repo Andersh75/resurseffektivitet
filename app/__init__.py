@@ -413,7 +413,7 @@ def roomtypesincourse(courseid):
     templist = db.session.query(Roomtypes).join(Roomtypes.rooms).join(Rooms.classes).join(Classes.courses).distinct().filter(Courses.id == courseid).all()
     return templist
 
-
+'''
 def mycourseslist():
     templist = db.session.query(Teachers.email).all()
     tempvar = "[{"
@@ -427,7 +427,7 @@ def mycourseslist():
     # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     # print testvar.password
     return tempvar
-
+'''
 
 def subjectslistjson():
     templist = db.session.query(Subjects.name).all()
@@ -1642,7 +1642,6 @@ app.jinja_env.globals.update(subjectsinslot=subjectsinslot, teachersincourse=tea
 def index():
 
     return redirect(url_for('login_page'))
-
 
 
 @app.route('/login/', methods=["GET", "POST"])
