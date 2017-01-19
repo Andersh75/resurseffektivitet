@@ -994,6 +994,8 @@ def create_or_fetch_roomobj(roomvar):
 
 
 def create_room_date_connection(roomobj, dateobj):
+    alreadydate = Null
+
     try:
         alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.id == dateobj.id, Rooms.id == roomobj.id)).first()
     except Exception, e:
@@ -1009,6 +1011,8 @@ def create_room_date_connection(roomobj, dateobj):
 
 
 def create_room_class_connection(roomobj, classobj):
+    alreadydate = Null
+
     try:
         alreadydate = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.id == roomobj.id)).first()
     except Exception, e:
@@ -1024,6 +1028,8 @@ def create_room_class_connection(roomobj, classobj):
 
 
 def create_teacher_class_connection(teacherobj, classobj):
+    alreadydate = Null
+
     try:
         alreadydate = db.session.query(Classes).join(Classes.teachers).filter(and_(Classes.id == classobj.id, Teachers.id == teacherobj.id)).first()
     except Exception, e:
@@ -1039,6 +1045,8 @@ def create_teacher_class_connection(teacherobj, classobj):
 
 
 def create_teacher_date_connection(teacherobj, dateobj):
+    alreadydate = Null
+
     try:
         alreadydate = db.session.query(Dates).join(Dates.teachers).filter(and_(Dates.id == dateobj.id, Teachers.id == teacherobj.id)).first()
     except Exception, e:
@@ -1054,6 +1062,8 @@ def create_teacher_date_connection(teacherobj, dateobj):
 
 
 def create_course_date_connection(courseobj, dateobj):
+    alreadycourse = Null
+
     try:
         alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.id == dateobj.id, Courses.id == courseobj.id)).first()
     except Exception, e:
