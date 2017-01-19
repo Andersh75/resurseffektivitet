@@ -415,7 +415,7 @@ def roomtypesincourse(courseid):
 
 
 def mycourseslist():
-'''
+    '''
     templist = db.session.query(Teachers.email).all()
     tempvar = "[{"
     id = 1
@@ -428,7 +428,8 @@ def mycourseslist():
     # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     # print testvar.password
     return tempvar
-'''
+    '''
+
 
 def subjectslistjson():
     templist = db.session.query(Subjects.name).all()
