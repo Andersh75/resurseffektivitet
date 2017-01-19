@@ -1278,7 +1278,7 @@ def parselistofslotspercourse(tempdict):
 
         year = pass_courseyear_from_classdate(date)
 
-        fetch_courseobj(code, year)
+        courseobj = fetch_courseobj(code, year)
         dateobj = create_or_fetch_dateobj(date)
         create_course_date_connection(courseobj, dateobj)
 
