@@ -29,24 +29,24 @@ import string
 from sqlalchemy.sql import and_, or_, not_
 import cookielib
 import mechanize
-#import wget
-#from selenium import webdriver
-#from selenium.webdriver.common.keys import Keys
-#from selenium.webdriver.support.ui import WebDriverWait
-#from selenium.webdriver.support import expected_conditions as EC
-#from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-#from selenium.webdriver.common.by import By
-#from pyvirtualdisplay import Display
-#import re
-#import urlparse
-#from time import sleep
-#from ghost import Ghost, Session
-#from PyQt4.QtGui import *
-#from PyQt4.QtCore import *
-#from PyQt4.QtWebKit import *
-#import sys
-#from lxml import html
-#import time
+# import wget
+# from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+# from selenium.webdriver.common.by import By
+# from pyvirtualdisplay import Display
+# import re
+# import urlparse
+# from time import sleep
+# from ghost import Ghost, Session
+# from PyQt4.QtGui import *
+# from PyQt4.QtCore import *
+# from PyQt4.QtWebKit import *
+# import sys
+# from lxml import html
+# import time
 
 
 app = Flask(__name__)
@@ -560,6 +560,8 @@ def csvimporter():
         cost = i[1]
         if len(roomtype) < 1:
             roomtype = None
+        if len(cost) < 1:
+            cost = None
         roomtypeobj = create_or_fetch_roomtypeobj(roomtype)
         roomtypeobj.cost = cost
         db.session.commit()
@@ -592,21 +594,29 @@ def csvimporter():
             akafirstname = None
         if len(akalastname) < 1:
             akalastname = None
-        teacherobj = create_or_fetch_teacherobj(email)
-        teacherobj.kthid = kthid
-        teacherobj.initials = initials
-        if not teacherobj.firstname:
-            teacherobj.firstname = firstname
-        if not teacherobj.lastname:
-            teacherobj.lastname = lastname
-        teacherobj.akafirstname = akafirstname
-        teacherobj.akalastname = akalastname
-        db.session.commit()
+        teacherobj = fetch_teacherobj(email)
+
+        if teacherobj:
+            teacherobj.kthid = kthid
+            teacherobj.initials = initials
+            if not teacherobj.firstname:
+                teacherobj.firstname = firstname
+            if not teacherobj.lastname:
+                teacherobj.lastname = lastname
+            teacherobj.akafirstname = akafirstname
+            teacherobj.akalastname = akalastname
+            db.session.commit()
 
     for i in rooms_list:
         name = i[0]
         seats = i[1]
         roomtype = i[2]
+        if len(name) < 1:
+            name = None
+        if len(seats) < 1:
+            seats = None
+        if len(roomtype) < 1:
+            roomtype = None
         roomobj = create_or_fetch_roomobj(name)
         roomtypeobj = create_or_fetch_roomtypeobj(roomtype)
         roomobj.seats = seats
@@ -622,6 +632,23 @@ def csvimporter():
         endtimevar = i[8]
         roomsstring = i[2]
         teachersstring = i[4]
+
+        if len(datevar) < 1:
+            datevar = None
+        if len(contentvar) < 1:
+            contentvar = None
+        if len(codevar) < 1:
+            codevar = None
+        if len(yearvar) < 1:
+            yearvar = None
+        if len(starttimevar) < 1:
+            starttimevar = None
+        if len(endtimevar) < 1:
+            endtimevar = None
+        if len(roomsstring) < 1:
+            roomsstring = None
+        if len(teachersstring) < 1:
+            teachersstring = None
 
         courseobj = fetch_courseobj(codevar, yearvar)
         dateobj = fetch_dateobj(datevar)
@@ -891,6 +918,19 @@ def create_or_fetch_teacherobj(email):
 
     else:
         print "TEACHEROBJECT EXISTS"
+
+    return teacherobj
+
+
+def fetch_teacherobj(email):
+
+    teacherobj = None
+
+    try:
+        teacherobj = db.session.query(Teachers).filter(Teachers.email == email).first()
+    except Exception, e:
+        varcode = "no teacherobj"
+        print varcode
 
     return teacherobj
 
@@ -1238,11 +1278,7 @@ def parselistofslotspercourse(tempdict):
 
         year = pass_courseyear_from_classdate(date)
 
-        courseobj = create_or_fetch_courseobj(code, year)
-        term = what_term_is_this(date)
-        courseobj.term = term
-        db.session.commit()
-
+        fetch_courseobj(code, year)
         dateobj = create_or_fetch_dateobj(date)
         create_course_date_connection(courseobj, dateobj)
 
@@ -1426,16 +1462,8 @@ def coursesfromdepartment2(item):
     startweek = item['startweek']
     endweek = item['endweek']
 
-    date = "XXXX-01-XX"
-    if term == 2:
-        date = "XXXX-09-XX"
-
     courseobj = create_or_fetch_courseobj(code, year)
-    term = what_term_is_this(date)
-    db.session.commit()
-
-    courseobj.period
-
+    courseobj.term = term
     courseobj.period = period
     courseobj.roundid = roundid
     courseobj.startweek = startweek
@@ -1966,7 +1994,7 @@ def slotsfromscheduleapi(coursecode):
 # Adding slots from Social for all courses
 @app.route('/slotsfromapiandsocial')
 def slotsfromsocial():
-    print "YO"
+    # print "YO"
     linklist = []
 
     br = open_password_protected_site("https://login.kth.se/login/")
@@ -2019,7 +2047,7 @@ def slotsfromsocial():
                 fullcourselink = "https://www.kth.se"
                 fullcourselink = fullcourselink + item['href']
                 print idx
-                print fullcourselink
+                # print fullcourselink
                 url = br.open(fullcourselink)
 
                 xml = BeautifulSoup(url)
@@ -2034,18 +2062,18 @@ def slotsfromsocial():
                 xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
                 xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
                 xml = xml1 + xml2
-                print xml
+                # print xml
                 for idx, item in enumerate(xml):
                     print idx
-                    print item['href']
+                    # print item['href']
                     if "event" in item['href']:
                         # linklist.append(item['href'])
                         linkvar = item['href']
-                        print "FETCHING"
+                        print "FETCHING SLOT"
                         print coursecode
                         testlink = "https://www.kth.se"
                         testlink = testlink + linkvar
-                        print testlink
+                        # print testlink
                         url = br.open(testlink)
 
                         # xml = BeautifulSoup(src)
@@ -2080,7 +2108,7 @@ def slotsfromsocial():
                         for location in locations:
                             try:
                                 location = location.text
-                                print "FETCHING!!!!"
+                                print "FETCHING ROOM"
                                 print location
                                 print codevar
                                 print yearvar
