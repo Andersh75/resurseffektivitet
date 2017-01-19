@@ -1652,6 +1652,7 @@ def index():
     return redirect(url_for('login_page'))
 
 
+
 @app.route('/login/', methods=["GET", "POST"])
 def login_page():
 
