@@ -29,24 +29,24 @@ import string
 from sqlalchemy.sql import and_, or_, not_
 import cookielib
 import mechanize
-import wget
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from selenium.webdriver.common.by import By
-from pyvirtualdisplay import Display
-import re
-import urlparse
-from time import sleep
-from ghost import Ghost, Session
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtWebKit import *
-import sys
-from lxml import html
-import time
+#import wget
+#from selenium import webdriver
+#from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver.support.ui import WebDriverWait
+#from selenium.webdriver.support import expected_conditions as EC
+#from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+#from selenium.webdriver.common.by import By
+#from pyvirtualdisplay import Display
+#import re
+#import urlparse
+#from time import sleep
+#from ghost import Ghost, Session
+#from PyQt4.QtGui import *
+#from PyQt4.QtCore import *
+#from PyQt4.QtWebKit import *
+#import sys
+#from lxml import html
+#import time
 
 
 app = Flask(__name__)
