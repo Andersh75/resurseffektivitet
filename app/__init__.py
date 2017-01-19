@@ -1682,7 +1682,6 @@ def login_page():
 def register_page():
 
     form = RegistrationForm(request.form)
-    # flash("Before IF")
 
     if request.method == "POST" and form.validate():
             initials = form.initials.data
@@ -1695,7 +1694,10 @@ def register_page():
                 flash("Your email is not in the db")
                 return render_template('register.html.j2', form=form)
 
-            alreadyregistred = db.session.query(exists().where(and_(Teachers.password is not None, Teachers.email == email))).scalar()
+            tempobj = db.session.query(Teachers).filter(Teachers.email == email).first()
+            alreadyregistred = tempobj.password
+            print alreadyregistred
+            #alreadyregistred = db.session.query(exists().where(and_(Teachers.password is not None, Teachers.email == email))).scalar()
 
             if alreadyregistred:
                 flash("Already registred!")
