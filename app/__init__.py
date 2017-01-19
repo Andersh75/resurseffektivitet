@@ -1646,11 +1646,11 @@ app.jinja_env.globals.update(teachersonslot=teachersonslot, roomsonslot=roomsons
 app.jinja_env.globals.update(subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, mycoursesexaminer=mycoursesexaminer)
 app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year)
 
+
 @app.route('/')
 def index():
 
     return redirect(url_for('login_page'))
-
 
 @app.route('/login/', methods=["GET", "POST"])
 def login_page():
