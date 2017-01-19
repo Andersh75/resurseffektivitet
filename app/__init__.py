@@ -413,8 +413,9 @@ def roomtypesincourse(courseid):
     templist = db.session.query(Roomtypes).join(Roomtypes.rooms).join(Rooms.classes).join(Classes.courses).distinct().filter(Courses.id == courseid).all()
     return templist
 
-'''
+
 def mycourseslist():
+'''
     templist = db.session.query(Teachers.email).all()
     tempvar = "[{"
     id = 1
