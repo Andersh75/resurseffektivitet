@@ -2034,8 +2034,8 @@ def slotsfromsocial():
                 varcode = "no other subgroups on social"
                 print varcode
                 print coursecode
-                session.rollback()
-                raise
+                # session.rollback()
+                # raise
                 continue
 
         try:
@@ -2053,86 +2053,93 @@ def slotsfromsocial():
 
             for idx, item in enumerate(xml):
 
-                fullcourselink = "https://www.kth.se"
-                fullcourselink = fullcourselink + item['href']
-                # print idx
-                # print fullcourselink
-                url = br.open(fullcourselink)
 
-                xml = BeautifulSoup(url)
-                xml = xml.find('a', text="Schema")
-
-                schedulelink = "https://www.kth.se"
-                schedulelink = schedulelink + xml['href']
-
-                url = br.open(schedulelink)
-
-                xml = BeautifulSoup(url)
-                xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
-                xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
-                xml = xml1 + xml2
-                # print xml
-                for idx, item in enumerate(xml):
+                try:
+                    fullcourselink = "https://www.kth.se"
+                    fullcourselink = fullcourselink + item['href']
                     # print idx
-                    # print item['href']
-                    if "event" in item['href']:
-                        # linklist.append(item['href'])
-                        linkvar = item['href']
-                        print "FETCHING SLOT"
-                        print coursecode
-                        testlink = "https://www.kth.se"
-                        testlink = testlink + linkvar
-                        # print testlink
-                        url = br.open(testlink)
+                    # print fullcourselink
+                    url = br.open(fullcourselink)
 
-                        # xml = BeautifulSoup(src)
-                        xml = BeautifulSoup(url)
-                        # testlist = xml.find_all('a', { "class" : "fancybox" })
+                    xml = BeautifulSoup(url)
+                    xml = xml.find('a', text="Schema")
 
-                        startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
-                        startdate = startdate.text
+                    schedulelink = "https://www.kth.se"
+                    schedulelink = schedulelink + xml['href']
 
-                        enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
-                        enddate = enddate.text
+                    url = br.open(schedulelink)
 
-                        datevar = startdate[:10]
+                    xml = BeautifulSoup(url)
+                    xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
+                    xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
+                    xml = xml1 + xml2
+                    # print xml
+                    for idx, item in enumerate(xml):
+                        # print idx
+                        # print item['href']
+                        if "event" in item['href']:
+                            # linklist.append(item['href'])
+                            linkvar = item['href']
+                            print "FETCHING SLOT"
+                            print coursecode
+                            testlink = "https://www.kth.se"
+                            testlink = testlink + linkvar
+                            # print testlink
+                            url = br.open(testlink)
 
-                        yearvar = pass_courseyear_from_classdate(datevar)
+                            # xml = BeautifulSoup(src)
+                            xml = BeautifulSoup(url)
+                            # testlist = xml.find_all('a', { "class" : "fancybox" })
 
-                        codevar = testlink[33:39]
-                        starttimevar = startdate[11:13]
-                        endtimevar = enddate[11:13]
+                            startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+                            startdate = startdate.text
 
-                        roomobj = None
+                            enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+                            enddate = enddate.text
 
-                        courseobj = create_or_fetch_courseobj(codevar, yearvar)
-                        term = what_term_is_this(datevar)
-                        db.session.commit()
+                            datevar = startdate[:10]
 
-                        dateobj = create_or_fetch_dateobj(datevar)
-                        create_course_date_connection(courseobj, dateobj)
+                            yearvar = pass_courseyear_from_classdate(datevar)
 
-                        locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+                            codevar = testlink[33:39]
+                            starttimevar = startdate[11:13]
+                            endtimevar = enddate[11:13]
 
-                        for location in locations:
-                            try:
-                                location = location.text
-                                print "FETCHING ROOM"
-                                print location
-                                print codevar
-                                print yearvar
+                            roomobj = None
 
-                                roomobj = create_or_fetch_roomobj(location)
-                                create_room_date_connection(roomobj, dateobj)
-                                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-                                create_room_class_connection(roomobj, classobj)
+                            courseobj = create_or_fetch_courseobj(codevar, yearvar)
+                            term = what_term_is_this(datevar)
+                            db.session.commit()
 
-                            except Exception, e:
-                                varcode = "NO ROOM"
-                                print varcode
-                                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-                                create_room_class_connection(roomobj, classobj)
-                                continue
+                            dateobj = create_or_fetch_dateobj(datevar)
+                            create_course_date_connection(courseobj, dateobj)
+
+                            locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+                            for location in locations:
+                                try:
+                                    location = location.text
+                                    print "FETCHING ROOM"
+                                    print location
+                                    print codevar
+                                    print yearvar
+
+                                    roomobj = create_or_fetch_roomobj(location)
+                                    create_room_date_connection(roomobj, dateobj)
+                                    classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                    create_room_class_connection(roomobj, classobj)
+
+                                except Exception, e:
+                                    varcode = "NO ROOM"
+                                    print varcode
+                                    classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                    create_room_class_connection(roomobj, classobj)
+                                    continue
+                except Exception, e:
+                    varcode = "No schedule"
+                    print varcode
+                    print coursecode
+                    continue
 
         except Exception, e:
             varcode = "No subgroup or other subgroups"
