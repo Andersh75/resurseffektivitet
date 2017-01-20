@@ -1041,69 +1041,80 @@ def create_or_fetch_roomobj(roomvar):
 def create_room_date_connection(roomobj, dateobj):
     alreadydate = None
 
-    try:
-        alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.id == dateobj.id, Rooms.id == roomobj.id)).first()
-    except Exception, e:
-        varcode = "no room-date"
-        print varcode
+    if roomobj and dateobj:
+        try:
+            alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.id == dateobj.id, Rooms.id == roomobj.id)).first()
+        except Exception, e:
+            varcode = "no room-date"
+            print varcode
 
-    if not alreadydate:
-        print "CREATING ROOM-DATE"
-        dateobj.rooms.append(roomobj)
-        db.session.commit()
+        if not alreadydate:
+            print "CREATING ROOM-DATE"
+            dateobj.rooms.append(roomobj)
+            db.session.commit()
+        else:
+            print "ROOM-DATE EXISTS"
     else:
-        print "ROOM-DATE EXISTS"
+        print "NO ROOMOBJ OR DATEOBJ"
 
 
 def create_room_class_connection(roomobj, classobj):
     alreadydate = None
+    if roomobj and classobj:
+        try:
+            alreadydate = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.id == roomobj.id)).first()
+        except Exception, e:
+            varcode = "no room-class"
+            print varcode
 
-    try:
-        alreadydate = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.id == roomobj.id)).first()
-    except Exception, e:
-        varcode = "no room-class"
-        print varcode
-
-    if not alreadydate:
-        print "CREATING ROOM-CLASS"
-        classobj.rooms.append(roomobj)
-        db.session.commit()
+        if not alreadydate:
+            print "CREATING ROOM-CLASS"
+            classobj.rooms.append(roomobj)
+            db.session.commit()
+        else:
+            print "ROOM-CLASS EXISTS"
     else:
-        print "ROOM-CLASS EXISTS"
+        print "NO ROOMOBJ OR CLASSOBJ"
 
 
 def create_teacher_class_connection(teacherobj, classobj):
     alreadydate = None
 
-    try:
-        alreadydate = db.session.query(Classes).join(Classes.teachers).filter(and_(Classes.id == classobj.id, Teachers.id == teacherobj.id)).first()
-    except Exception, e:
-        varcode = "no teacher-class"
-        print varcode
+    if teacherobj and classobj:
+        try:
+            alreadydate = db.session.query(Classes).join(Classes.teachers).filter(and_(Classes.id == classobj.id, Teachers.id == teacherobj.id)).first()
+        except Exception, e:
+            varcode = "no teacher-class"
+            print varcode
 
-    if not alreadydate:
-        print "CREATING TEACHER-CLASS"
-        classobj.teachers.append(teacherobj)
-        db.session.commit()
+        if not alreadydate:
+            print "CREATING TEACHER-CLASS"
+            classobj.teachers.append(teacherobj)
+            db.session.commit()
+        else:
+            print "TEACHER-CLASS EXISTS"
     else:
-        print "TEACHER-CLASS EXISTS"
+        print "NO TEACHEROBJ OR CLASSOBJ"
 
 
 def create_teacher_date_connection(teacherobj, dateobj):
     alreadydate = None
 
-    try:
-        alreadydate = db.session.query(Dates).join(Dates.teachers).filter(and_(Dates.id == dateobj.id, Teachers.id == teacherobj.id)).first()
-    except Exception, e:
-        varcode = "no teacher-date"
-        print varcode
+    if teacherobj and dateobj:
+        try:
+            alreadydate = db.session.query(Dates).join(Dates.teachers).filter(and_(Dates.id == dateobj.id, Teachers.id == teacherobj.id)).first()
+        except Exception, e:
+            varcode = "no teacher-date"
+            print varcode
 
-    if not alreadydate:
-        print "CREATING TEACHER-DATE"
-        dateobj.teachers.append(teacherobj)
-        db.session.commit()
+        if not alreadydate:
+            print "CREATING TEACHER-DATE"
+            dateobj.teachers.append(teacherobj)
+            db.session.commit()
+        else:
+            print "TEACHER-DATE EXISTS"
     else:
-        print "TEACHER-DATE EXISTS"
+        print "NO TEACHEROBJ OR DATEOBJ"
 
 
 def create_course_date_connection(courseobj, dateobj):
