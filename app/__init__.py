@@ -1109,18 +1109,21 @@ def create_teacher_date_connection(teacherobj, dateobj):
 def create_course_date_connection(courseobj, dateobj):
     alreadycourse = None
 
-    try:
-        alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.id == dateobj.id, Courses.id == courseobj.id)).first()
-    except Exception, e:
-        varcode = "no course-date"
-        print varcode
+    if courseobj and dateobj:
+        try:
+            alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.id == dateobj.id, Courses.id == courseobj.id)).first()
+        except Exception, e:
+            varcode = "no course-date"
+            print varcode
 
-    if not alreadycourse:
-        print "CREATING COURSE-DATE"
-        dateobj.courses.append(courseobj)
-        db.session.commit()
+        if not alreadycourse:
+            print "CREATING COURSE-DATE"
+            dateobj.courses.append(courseobj)
+            db.session.commit()
+        else:
+            print "COURSE-DATE EXISTS"
     else:
-        print "COURSE-DATE EXISTS"
+        print "NO COURSOBJ OR DATEOBJ"
 
 
 def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
