@@ -942,7 +942,7 @@ def create_or_fetch_courseobj(code, year):
     try:
         courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
     except Exception, e:
-        varcode = "no courseobj"
+        varcode = "NO PREVIOUS COURSOBJECT"
         print varcode
 
     if not courseobj:
@@ -956,7 +956,7 @@ def create_or_fetch_courseobj(code, year):
         db.session.commit()
 
     else:
-        print "COURSEOBJECT EXISTS"
+        print "COURSEOBJECT EXISTS ALREADY"
 
     return courseobj
 
@@ -2005,7 +2005,10 @@ def slotsfromsocial():
 
     br = open_password_protected_site("https://login.kth.se/login/")
 
-    for idx, item in enumerate(allcourses()):
+    testcourse = ["AI2808"]
+
+    # for idx, item in enumerate(allcourses()):
+    for idx, item in enumerate(testcourse):
         coursecode = item.code
 
         # Fetching slots from schedule API
@@ -2108,8 +2111,8 @@ def slotsfromsocial():
                             roomobj = None
 
                             courseobj = create_or_fetch_courseobj(codevar, yearvar)
-                            term = what_term_is_this(datevar)
-                            db.session.commit()
+                            # term = what_term_is_this(datevar)
+                            # db.session.commit()
 
                             dateobj = create_or_fetch_dateobj(datevar)
                             create_course_date_connection(courseobj, dateobj)
