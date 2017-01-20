@@ -2007,10 +2007,10 @@ def slotsfromsocial():
 
     testcourse = ["AI2808"]
 
-    # for idx, item in enumerate(allcourses()):
-    for idx, item in enumerate(testcourse):
-        #coursecode = item.code
-        coursecode = "AI2808"
+    for idx, item in enumerate(allcourses()):
+    # for idx, item in enumerate(testcourse):
+        coursecode = item.code
+        # coursecode = "AI2808"
         # Fetching slots from schedule API
         slotsfromscheduleapi(coursecode)
 
