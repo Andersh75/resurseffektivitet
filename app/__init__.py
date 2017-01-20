@@ -939,24 +939,25 @@ def create_or_fetch_courseobj(code, year):
 
     courseobj = None
 
-    try:
-        courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
-    except Exception, e:
-        varcode = "NO PREVIOUS COURSOBJECT"
-        print varcode
+    if code and year:
+        try:
+            courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
+        except Exception, e:
+            varcode = "NO PREVIOUS COURSOBJECT"
+            print varcode
 
-    if not courseobj:
-        print "CREATING COURSEOBJECT"
-        tempdict = {}
-        tempdict['code'] = code
-        tempdict['year'] = year
-        record = Courses(**tempdict)
-        courseobj = record
-        db.session.add(record)
-        db.session.commit()
+        if not courseobj:
+            print "CREATING COURSEOBJECT"
+            tempdict = {}
+            tempdict['code'] = code
+            tempdict['year'] = year
+            record = Courses(**tempdict)
+            courseobj = record
+            db.session.add(record)
+            db.session.commit()
 
-    else:
-        print "COURSEOBJECT EXISTS ALREADY"
+        else:
+            print "COURSEOBJECT EXISTS ALREADY"
 
     return courseobj
 
@@ -1031,7 +1032,7 @@ def create_or_fetch_roomobj(roomvar):
         roomobj = record
         db.session.add(record)
         db.session.commit()
-
+ 
     else:
         print "ROOMOBJECT EXISTS"
 
@@ -1141,26 +1142,27 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
 
     classobj = None
 
-    try:
-        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
-    except Exception, e:
-        varcode = "no classobj"
-        print varcode
+    if starttimevar and endtimevar and courseobj and dateobj:
+        try:
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
+        except Exception, e:
+            varcode = "no classobj"
+            print varcode
 
-    if not classobj:
-        print "CREATING CLASSOBJECT"
-        tempdict = {}
-        tempdict['starttime'] = starttimevar
-        tempdict['endtime'] = endtimevar
-        tempdict['courses_id'] = courseobj.id
-        tempdict['dates_id'] = dateobj.id
+        if not classobj:
+            print "CREATING CLASSOBJECT"
+            tempdict = {}
+            tempdict['starttime'] = starttimevar
+            tempdict['endtime'] = endtimevar
+            tempdict['courses_id'] = courseobj.id
+            tempdict['dates_id'] = dateobj.id
 
-        record = Classes(**tempdict)
-        classobj = record
-        db.session.add(record)
-        db.session.commit()
-    else:
-        print "CLASSOBJECT EXISTS"
+            record = Classes(**tempdict)
+            classobj = record
+            db.session.add(record)
+            db.session.commit()
+        else:
+            print "CLASSOBJECT EXISTS"
 
     return classobj
 
@@ -1304,9 +1306,10 @@ def parselistofslotspercourse(tempdict):
             create_room_date_connection(roomobj, dateobj)
             classobj = create_or_fetch_classobj(starttime, endtime, courseobj, dateobj)
             create_room_class_connection(roomobj, classobj)
-            classobj.contentapi = info
-            print "INFO ADDED TO CLASS"
-            db.session.commit()
+            if classobj:
+                classobj.contentapi = info
+                print "INFO ADDED TO CLASS"
+                db.session.commit()
 
     return "DONE"
 
