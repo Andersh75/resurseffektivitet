@@ -994,7 +994,6 @@ def create_or_fetch_dateobj(datevar):
         dateobj = record
         db.session.add(record)
         db.session.commit()
-
     else:
         print "DATEOBJECT EXISTS"
 
@@ -1032,7 +1031,6 @@ def create_or_fetch_roomobj(roomvar):
         roomobj = record
         db.session.add(record)
         db.session.commit()
- 
     else:
         print "ROOMOBJECT EXISTS"
 
