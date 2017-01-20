@@ -854,7 +854,7 @@ def create_or_fetch_roomtypeobj(roomtype):
     try:
         roomtypeobj = db.session.query(Roomtypes).filter(Roomtypes.roomtype == roomtype).first()
     except Exception, e:
-        varcode = "no roomtypeobj"
+        varcode = "NO PREVIOUS ROOMTYPEOBJECT"
         print varcode
 
     if not roomtypeobj:
@@ -879,7 +879,7 @@ def create_or_fetch_subjectobj(subject):
     try:
         subjectobj = db.session.query(Subjects).filter(Subjects.name == subject).first()
     except Exception, e:
-        varcode = "no subjectobj"
+        varcode = "NO PREVIOUS SUBJECTOBJECT"
         print varcode
 
     if not subjectobj:
@@ -904,7 +904,7 @@ def create_or_fetch_teacherobj(email):
     try:
         teacherobj = db.session.query(Teachers).filter(Teachers.email == email).first()
     except Exception, e:
-        varcode = "no teacherobj"
+        varcode = "NO PREVIOUS TEACHEROBJECT"
         print varcode
 
     if not teacherobj:
@@ -929,7 +929,7 @@ def fetch_teacherobj(email):
     try:
         teacherobj = db.session.query(Teachers).filter(Teachers.email == email).first()
     except Exception, e:
-        varcode = "no teacherobj"
+        varcode = "NO TEACHEROBJECT TO FETCH"
         print varcode
 
     return teacherobj
@@ -943,7 +943,7 @@ def create_or_fetch_courseobj(code, year):
         try:
             courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
         except Exception, e:
-            varcode = "NO PREVIOUS COURSOBJECT"
+            varcode = "NO PREVIOUS COURSEOBJECT"
             print varcode
 
         if not courseobj:
@@ -983,7 +983,7 @@ def create_or_fetch_dateobj(datevar):
         dateobj = db.session.query(Dates).filter(Dates.date == datevar).first()
 
     except Exception, e:
-        varcode = "no dateobj"
+        varcode = "NO PREVIOUS DATEOBJECT"
         print varcode
 
     if not dateobj:
@@ -1008,7 +1008,7 @@ def fetch_dateobj(datevar):
         dateobj = db.session.query(Dates).filter(Dates.date == datevar).first()
 
     except Exception, e:
-        varcode = "no dateobj"
+        varcode = "NO DATEOBJECT TO FETCH"
         print varcode
 
     return dateobj
@@ -1020,7 +1020,7 @@ def create_or_fetch_roomobj(roomvar):
     try:
         roomobj = db.session.query(Rooms).filter(Rooms.name == roomvar).first()
     except Exception, e:
-        varcode = "no roomobj"
+        varcode = "NO PREVIOUS ROOMOBJECT"
         print varcode
 
     if not roomobj:
@@ -1044,7 +1044,7 @@ def create_room_date_connection(roomobj, dateobj):
         try:
             alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.id == dateobj.id, Rooms.id == roomobj.id)).first()
         except Exception, e:
-            varcode = "no room-date"
+            varcode = "NO PREVIOUS ROOM-DATE"
             print varcode
 
         if not alreadydate:
@@ -1063,7 +1063,7 @@ def create_room_class_connection(roomobj, classobj):
         try:
             alreadydate = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.id == roomobj.id)).first()
         except Exception, e:
-            varcode = "no room-class"
+            varcode = "NO PREVIOUS ROOM-CLASS"
             print varcode
 
         if not alreadydate:
@@ -1083,7 +1083,7 @@ def create_teacher_class_connection(teacherobj, classobj):
         try:
             alreadydate = db.session.query(Classes).join(Classes.teachers).filter(and_(Classes.id == classobj.id, Teachers.id == teacherobj.id)).first()
         except Exception, e:
-            varcode = "no teacher-class"
+            varcode = "NO PREVIOUS TEACHER-CLASS"
             print varcode
 
         if not alreadydate:
@@ -1103,7 +1103,7 @@ def create_teacher_date_connection(teacherobj, dateobj):
         try:
             alreadydate = db.session.query(Dates).join(Dates.teachers).filter(and_(Dates.id == dateobj.id, Teachers.id == teacherobj.id)).first()
         except Exception, e:
-            varcode = "no teacher-date"
+            varcode = "NO PREVIOUS TEACHER-DATE"
             print varcode
 
         if not alreadydate:
@@ -1123,7 +1123,7 @@ def create_course_date_connection(courseobj, dateobj):
         try:
             alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.id == dateobj.id, Courses.id == courseobj.id)).first()
         except Exception, e:
-            varcode = "no course-date"
+            varcode = "NO PREVIOUS COURSE-DATE"
             print varcode
 
         if not alreadycourse:
@@ -1144,7 +1144,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
         try:
             classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
         except Exception, e:
-            varcode = "no classobj"
+            varcode = "NO PREVIOUS CLASSOBJECT"
             print varcode
 
         if not classobj:
@@ -1172,7 +1172,7 @@ def fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
     try:
         classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
     except Exception, e:
-        varcode = "no classobj"
+        varcode = "NO CLASSOBJECT TO FETCH"
         print varcode
 
     return classobj
@@ -2159,8 +2159,8 @@ def slotsfromsocial():
                     varcode = "No schedule"
                     print varcode
                     print coursecode
-                    session.rollback()
-                    raise
+                    # session.rollback()
+                    # raise
                     continue
 
         except Exception, e:
