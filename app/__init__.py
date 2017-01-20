@@ -2138,7 +2138,7 @@ def slotsfromsocial():
                                     varcode = "NO ROOM"
                                     print varcode
                                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-                                    create_room_class_connection(roomobj, classobj)
+                                    # create_room_class_connection(roomobj, classobj)
                                     continue
                 except Exception, e:
                     varcode = "No schedule"
