@@ -2055,8 +2055,8 @@ def slotsfromsocial():
             xml = xml1 + xml2
 
             for idx, item in enumerate(xml):
-
-
+                print "outer"
+                print idx
                 try:
                     fullcourselink = "https://www.kth.se"
                     fullcourselink = fullcourselink + item['href']
@@ -2078,7 +2078,8 @@ def slotsfromsocial():
                     xml = xml1 + xml2
                     # print xml
                     for idx, item in enumerate(xml):
-                        # print idx
+                        print "inner"
+                        print idx
                         # print item['href']
                         if "event" in item['href']:
                             # linklist.append(item['href'])
@@ -2142,6 +2143,8 @@ def slotsfromsocial():
                     varcode = "No schedule"
                     print varcode
                     print coursecode
+                    session.rollback()
+                    raise
                     continue
 
         except Exception, e:
