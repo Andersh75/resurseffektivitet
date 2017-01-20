@@ -1225,10 +1225,12 @@ def fetchslotfromsociallink(linklist):
                 print varcode
                 classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
                 create_room_class_connection(roomobj, classobj)
+                continue
 
         except Exception, e:
             varcode = "BROKEN"
             print varcode
+            continue
 
     return "DONE"
 
@@ -1449,6 +1451,7 @@ def addcoursestotables_first(tempdict):
             varcode = "NOT FINDING COURSE"
             print varcode
             print coursecode
+            continue
 
 
 def coursesfromdepartment2(item):
@@ -1541,6 +1544,7 @@ def jsonifycoursesfromdepartment(tempdict):
         except Exception, e:
             varcode = "no URL"
             print varcode + " " + item
+            continue
 
     return templist2
 
@@ -1565,6 +1569,7 @@ def coursesfromdepartment3(templist):
                 varcode = "COURSE NOT EXISTING"
                 print varcode
                 print code
+                continue
 
 
 # NOT READY
@@ -1981,6 +1986,7 @@ def fetchregistredandexpectedstudents():
             varcode = "FAILED TO FETCH REGISTRED AND EXPECTED STUDENTS"
             print varcode
             print item.code
+            continue
 
     return "DONE"
 
@@ -2028,6 +2034,7 @@ def slotsfromsocial():
                 varcode = "no other subgroups on social"
                 print varcode
                 print coursecode
+                continue
 
         try:
             # url = br.open('https://www.kth.se/social/course/%s/other_subgroups/' % (coursecode))
