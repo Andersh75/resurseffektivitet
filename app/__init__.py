@@ -238,8 +238,8 @@ def idtocode(courseid):
 
 
 def allcourses():
-    templist = db.session.query(Courses).order_by(Courses.code.desc()).all()
-    # templist = db.session.query(Courses).order_by(Courses.code).all()
+    #templist = db.session.query(Courses).order_by(Courses.code.desc()).all()
+    templist = db.session.query(Courses).order_by(Courses.code).all()
     return templist
 
 
@@ -563,8 +563,9 @@ def csvimporter():
         if len(cost) < 1:
             cost = None
         roomtypeobj = create_or_fetch_roomtypeobj(roomtype)
-        roomtypeobj.cost = cost
-        db.session.commit()
+        if roomtypeobj:
+            roomtypeobj.cost = cost
+            db.session.commit()
 
     for i in subjects_list:
         name = i[0]
@@ -619,9 +620,10 @@ def csvimporter():
             roomtype = None
         roomobj = create_or_fetch_roomobj(name)
         roomtypeobj = create_or_fetch_roomtypeobj(roomtype)
-        roomobj.seats = seats
-        roomobj.roomtypes_id = roomtypeobj.id
-        db.session.commit()
+        if roomobj and roomtypeobj:
+            roomobj.seats = seats
+            roomobj.roomtypes_id = roomtypeobj.id
+            db.session.commit()
 
     for i in schedules_list:
         datevar = i[0]
@@ -653,7 +655,7 @@ def csvimporter():
         courseobj = fetch_courseobj(codevar, yearvar)
         dateobj = fetch_dateobj(datevar)
 
-        if dateobj:
+        if dateobj and courseobj:
             create_course_date_connection(courseobj, dateobj)
 
             classobj = fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
@@ -969,7 +971,7 @@ def fetch_courseobj(code, year):
     try:
         courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
     except Exception, e:
-        varcode = "no courseobj"
+        varcode = "NO COURSEOBJECT TO FETCH"
         print varcode
 
     return courseobj
@@ -1176,77 +1178,6 @@ def fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
         print varcode
 
     return classobj
-
-
-def fetchslotfromsociallink(linklist):
-
-    createtables()
-
-    br = open_password_protected_site("https://login.kth.se/login/")
-
-    for linkvar in linklist:
-        testlink = "https://www.kth.se"
-        testlink = testlink + linkvar
-
-        try:
-            url = br.open(testlink)
-
-            # xml = BeautifulSoup(src)
-            xml = BeautifulSoup(url)
-            # testlist = xml.find_all('a', { "class" : "fancybox" })
-
-            startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
-            startdate = startdate.text
-
-            enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
-            enddate = enddate.text
-
-            datevar = startdate[:10]
-
-            yearvar = pass_courseyear_from_classdate(datevar)
-
-            codevar = testlink[33:39]
-            starttimevar = startdate[11:13]
-            endtimevar = enddate[11:13]
-
-            roomobj = None
-
-            courseobj = create_or_fetch_courseobj(codevar, yearvar)
-            term = what_term_is_this(datevar)
-            courseobj.term = term
-            db.session.commit()
-
-            dateobj = create_or_fetch_dateobj(datevar)
-            create_course_date_connection(courseobj, dateobj)
-
-            try:
-                locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
-
-                for location in locations:
-                    location = location.text
-                    print "FETCHING!!!!"
-                    print location
-                    print codevar
-                    print yearvar
-
-                    roomobj = create_or_fetch_roomobj(location)
-                    create_room_date_connection(roomobj, dateobj)
-                    classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-                    create_room_class_connection(roomobj, classobj)
-
-            except Exception, e:
-                varcode = "NO ROOM"
-                print varcode
-                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-                create_room_class_connection(roomobj, classobj)
-                continue
-
-        except Exception, e:
-            varcode = "BROKEN"
-            print varcode
-            continue
-
-    return "DONE"
 
 
 def fetchinglistofslotspercourse(course, starttime, endtime):
@@ -2023,7 +1954,7 @@ def slotsfromsocial():
     testcourse = ["AI2808"]
 
     for idx, item in enumerate(allcourses()):
-    # for idx, item in enumerate(testcourse):
+        # for idx, item in enumerate(testcourse):
         coursecode = item.code
         # coursecode = "AI2808"
         # Fetching slots from schedule API
@@ -2183,6 +2114,188 @@ def csvimport():
     return "DONE"
 
 
+@app.route('/restartall')
+def restartall():
+
+    createtables()
+
+    # csvimporter()
+
+    tempdict = {}
+    templist = []
+
+    departments = ["AIB", "AIC", "AID", "AIE"]
+
+    # ADD_ALL_TEACHERS_TO_DB
+    for item in departments:
+        tempdict = staffperdepartment(item)
+        templist.append(tempdict)
+    teachersfromdepartment(templist)
+
+    tempdict = {}
+    templist = []
+
+    # ADD_ALL_COURSES_TO_DB
+    tempdict20151 = courseinfoperyearandterm(2015, 1)
+    tempdict20152 = courseinfoperyearandterm(2015, 2)
+    tempdict20161 = courseinfoperyearandterm(2016, 1)
+    tempdict20162 = courseinfoperyearandterm(2016, 2)
+    tempdict20171 = courseinfoperyearandterm(2017, 1)
+
+    addcoursestotables_first(tempdict20151)
+    addcoursestotables_first(tempdict20152)
+    addcoursestotables_first(tempdict20161)
+    addcoursestotables_first(tempdict20162)
+    addcoursestotables_first(tempdict20171)
+
+    # ADD_ALL_COURSES_TO_DB
+    for item in departments:
+        tempdict = fetchinglistofcodesfordepartmentcourses(item)
+        templist.append(jsonifycoursesfromdepartment(tempdict))
+    coursesfromdepartment3(templist)
+
+    return "restartall"
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+
+    return "fel"
+
+
+# TO DO
+def courseinfoperyearandround(x, y):
+    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
+
+    xml = BeautifulSoup(req)
+
+    templist = xml.findAll("courseround")
+
+    templist2 = []
+
+    for item in templist:
+        # print "1"
+        # print item['coursecode']
+        coursecode = item['coursecode']
+        if coursecode[:2] == "AI":
+
+            startterm = item['startterm']
+            roundid = item['roundid']
+
+            if int(startterm[-1:]) == 1:
+                period = int(roundid) + 2
+            else:
+                period = int(roundid)
+
+            year = startterm[:4]
+
+            print coursecode, roundid, startterm, period, year
+
+            tempdict = {'coursecode': coursecode, 'year': year, 'period': period, 'startterm': startterm, 'roundid': roundid}
+
+            templist2.append(tempdict)
+
+    tempdict2 = {'year': x, 'round': y, 'courseinfo': templist2}
+
+    return tempdict2
+
+
+# TO DO
+def coursesfromdepartment(templist):
+    for items in templist:
+
+        for item in items:
+            print item
+            name = item['name']
+            code = item['code']
+            examiner = item['examiner']
+            department = item['department']
+
+            teacherobj = create_or_fetch_teacherobj(examiner)
+
+            latestcourseobj = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc()).first()
+
+            latestcourseobj.name = name
+            latestcourseobj.code = code
+            latestcourseobj. examiner_id = Teachers.query.filter_by(email=examiner).first().id
+
+            db.session.commit()
+
+    print "DONE!"
+
+
+'''
+def fetchslotfromsociallink(linklist):
+
+    createtables()
+
+    br = open_password_protected_site("https://login.kth.se/login/")
+
+    for linkvar in linklist:
+        testlink = "https://www.kth.se"
+        testlink = testlink + linkvar
+
+        try:
+            url = br.open(testlink)
+
+            # xml = BeautifulSoup(src)
+            xml = BeautifulSoup(url)
+            # testlist = xml.find_all('a', { "class" : "fancybox" })
+
+            startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
+            startdate = startdate.text
+
+            enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
+            enddate = enddate.text
+
+            datevar = startdate[:10]
+
+            yearvar = pass_courseyear_from_classdate(datevar)
+
+            codevar = testlink[33:39]
+            starttimevar = startdate[11:13]
+            endtimevar = enddate[11:13]
+
+            roomobj = None
+
+            courseobj = create_or_fetch_courseobj(codevar, yearvar)
+            term = what_term_is_this(datevar)
+            courseobj.term = term
+            db.session.commit()
+
+            dateobj = create_or_fetch_dateobj(datevar)
+            create_course_date_connection(courseobj, dateobj)
+
+            try:
+                locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
+
+                for location in locations:
+                    location = location.text
+                    print "FETCHING!!!!"
+                    print location
+                    print codevar
+                    print yearvar
+
+                    roomobj = create_or_fetch_roomobj(location)
+                    create_room_date_connection(roomobj, dateobj)
+                    classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                    create_room_class_connection(roomobj, classobj)
+
+            except Exception, e:
+                varcode = "NO ROOM"
+                print varcode
+                classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                create_room_class_connection(roomobj, classobj)
+                continue
+
+        except Exception, e:
+            varcode = "BROKEN"
+            print varcode
+            continue
+
+    return "DONE"
+
+
 # Adding slots from Social for all courses
 @app.route('/Xslotsfromsocial')
 def Xslotsfromsocial():
@@ -2323,119 +2436,11 @@ def Xslotsfromsocial():
             print varcode
             print coursecode
 
-    # fetchslotfromsociallink(linklist)
+    fetchslotfromsociallink(linklist)
 
     return "DONE"
+'''
 
-
-@app.route('/restartall')
-def restartall():
-
-    createtables()
-
-    # csvimporter()
-
-    tempdict = {}
-    templist = []
-
-    departments = ["AIB", "AIC", "AID", "AIE"]
-
-    # ADD_ALL_TEACHERS_TO_DB
-    for item in departments:
-        tempdict = staffperdepartment(item)
-        templist.append(tempdict)
-    teachersfromdepartment(templist)
-
-    tempdict = {}
-    templist = []
-
-    # ADD_ALL_COURSES_TO_DB
-    tempdict20151 = courseinfoperyearandterm(2015, 1)
-    tempdict20152 = courseinfoperyearandterm(2015, 2)
-    tempdict20161 = courseinfoperyearandterm(2016, 1)
-    tempdict20162 = courseinfoperyearandterm(2016, 2)
-    tempdict20171 = courseinfoperyearandterm(2017, 1)
-
-    addcoursestotables_first(tempdict20151)
-    addcoursestotables_first(tempdict20152)
-    addcoursestotables_first(tempdict20161)
-    addcoursestotables_first(tempdict20162)
-    addcoursestotables_first(tempdict20171)
-
-    # ADD_ALL_COURSES_TO_DB
-    for item in departments:
-        tempdict = fetchinglistofcodesfordepartmentcourses(item)
-        templist.append(jsonifycoursesfromdepartment(tempdict))
-    coursesfromdepartment3(templist)
-
-    return "restartall"
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-
-    return "fel"
-
-
-# TO DO
-def courseinfoperyearandround(x, y):
-    req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
-
-    xml = BeautifulSoup(req)
-
-    templist = xml.findAll("courseround")
-
-    templist2 = []
-
-    for item in templist:
-        # print "1"
-        # print item['coursecode']
-        coursecode = item['coursecode']
-        if coursecode[:2] == "AI":
-
-            startterm = item['startterm']
-            roundid = item['roundid']
-
-            if int(startterm[-1:]) == 1:
-                period = int(roundid) + 2
-            else:
-                period = int(roundid)
-
-            year = startterm[:4]
-
-            print coursecode, roundid, startterm, period, year
-
-            tempdict = {'coursecode': coursecode, 'year': year, 'period': period, 'startterm': startterm, 'roundid': roundid}
-
-            templist2.append(tempdict)
-
-    tempdict2 = {'year': x, 'round': y, 'courseinfo': templist2}
-
-    return tempdict2
-
-
-# TO DO
-def coursesfromdepartment(templist):
-    for items in templist:
-
-        for item in items:
-            print item
-            name = item['name']
-            code = item['code']
-            examiner = item['examiner']
-            department = item['department']
-
-            teacherobj = create_or_fetch_teacherobj(examiner)
-
-            latestcourseobj = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc()).first()
-
-            latestcourseobj.name = name
-            latestcourseobj.code = code
-            latestcourseobj. examiner_id = Teachers.query.filter_by(email=examiner).first().id
-
-            db.session.commit()
-
-    print "DONE!"
 
 if __name__ == "__main__":
     app.secret_key = 'asdasdasdasdasd'
