@@ -2034,6 +2034,8 @@ def slotsfromsocial():
                 varcode = "no other subgroups on social"
                 print varcode
                 print coursecode
+                session.rollback()
+                raise
                 continue
 
         try:
