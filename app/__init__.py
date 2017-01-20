@@ -2121,6 +2121,7 @@ def slotsfromsocial():
                             locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
                             for location in locations:
+                                print "location"
                                 try:
                                     location = location.text
                                     print "FETCHING ROOM"
