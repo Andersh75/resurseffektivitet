@@ -1951,9 +1951,11 @@ def slotsfromsocial():
 
     br = open_password_protected_site("https://login.kth.se/login/")
 
-    testcourse = ["AI2808"]
+    # testcourse = ["AI2808"]
 
-    for idx, item in enumerate(allcourses()):
+    templist = allcourses()
+    templist = templist[50:]
+    for idx, item in enumerate(templist):
         # for idx, item in enumerate(testcourse):
         coursecode = item.code
         # coursecode = "AI2808"
