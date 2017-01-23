@@ -50,7 +50,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f37'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f38'
 db = SQLAlchemy(app)
 
 
@@ -106,7 +106,7 @@ class Rooms(db.Model):
 
 class Subjects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30))
+    name = db.Column(db.String(30), unique=True)
     classes = db.relationship('Classes', secondary=subjects_classes, backref=db.backref('subjects', lazy='dynamic'))
 
 
@@ -156,11 +156,12 @@ class Courses(db.Model):
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     assistantone_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     assistanttwo_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    UniqueConstraint('code', 'year')
 
 
 class Classtypes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    classtype = db.Column(db.String(30))
+    classtype = db.Column(db.String(30), unique=True)
     classes = db.relationship('Classes', backref='classtypes', lazy='dynamic')
 
 
@@ -174,6 +175,7 @@ class Classes(db.Model):
     courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
     classtypes_id = db.Column(db.Integer, db.ForeignKey('classtypes.id'))
+    UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
 
 
 class RegistrationForm(Form):
