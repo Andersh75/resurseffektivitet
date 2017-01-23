@@ -1956,14 +1956,14 @@ def slotsfromsocial():
     # testcourse = ["AI2808"]
 
     templist = allcourses()
-    templist = templist[400:520]
+    #templist = templist[:100]
     for idx, item in enumerate(templist):
         # for idx, item in enumerate(testcourse):
         coursecode = item.code
         # coursecode = "AI2808"
         # Fetching slots from schedule API
         slotsfromscheduleapi(coursecode)
-
+        '''
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
 
@@ -2103,6 +2103,7 @@ def slotsfromsocial():
             print varcode
             print coursecode
             continue
+        '''
 
     return "DONE"
 
