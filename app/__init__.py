@@ -1962,6 +1962,7 @@ def slotsfromsocial():
         coursecode = item.code
         # coursecode = "AI2808"
         # Fetching slots from schedule API
+        ''''
         slotsfromscheduleapi(coursecode)
         '''
         try:
@@ -2103,7 +2104,6 @@ def slotsfromsocial():
             print varcode
             print coursecode
             continue
-        '''
 
     return "DONE"
 
