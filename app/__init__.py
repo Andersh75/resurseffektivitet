@@ -158,7 +158,7 @@ class Courses(db.Model):
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     assistantone_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     assistanttwo_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    UniqueConstraint('code', 'year')
+    # UniqueConstraint('code', 'year')
 
 
 class Classtypes(db.Model):
@@ -177,7 +177,8 @@ class Classes(db.Model):
     courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
     classtypes_id = db.Column(db.Integer, db.ForeignKey('classtypes.id'))
-    UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
+    __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id, 'name='_classes_uc'),)
+    # UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
 
 
 class RegistrationForm(Form):
@@ -1149,10 +1150,11 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
     if starttimevar and endtimevar and courseobj and dateobj:
         try:
             classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
-            print "CLASSOBJECT EXISTS"
         except Exception, e:
             varcode = "NO PREVIOUS CLASSOBJECT"
             print varcode
+
+        if not classobj:
             print "CREATING CLASSOBJECT"
             tempdict = {}
             tempdict['starttime'] = starttimevar
@@ -1164,6 +1166,8 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
             classobj = record
             db.session.add(record)
             db.session.commit()
+        else:
+            print "CLASSOBJECT EXISTS"
 
     return classobj
 
