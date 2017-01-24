@@ -168,6 +168,8 @@ class Classtypes(db.Model):
 
 
 class Classes(db.Model):
+    __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id'),
+                      )
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(100))
     contentapi = db.Column(db.String(100))
@@ -177,7 +179,7 @@ class Classes(db.Model):
     courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
     classtypes_id = db.Column(db.Integer, db.ForeignKey('classtypes.id'))
-    __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id),)
+    # __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id),)
     # UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
 
 
