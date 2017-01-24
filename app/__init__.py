@@ -50,7 +50,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f38'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f39'
 db = SQLAlchemy(app)
 
 
@@ -141,6 +141,8 @@ class Teachers(db.Model):
 
 
 class Courses(db.Model):
+    __table_args__ = (db.UniqueConstraint('code', 'year'),
+                      )
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     code = db.Column(db.String(30))
