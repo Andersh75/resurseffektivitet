@@ -1149,11 +1149,10 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
     if starttimevar and endtimevar and courseobj and dateobj:
         try:
             classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
+            print "CLASSOBJECT EXISTS"
         except Exception, e:
             varcode = "NO PREVIOUS CLASSOBJECT"
             print varcode
-
-        if not classobj:
             print "CREATING CLASSOBJECT"
             tempdict = {}
             tempdict['starttime'] = starttimevar
@@ -1165,8 +1164,6 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
             classobj = record
             db.session.add(record)
             db.session.commit()
-        else:
-            print "CLASSOBJECT EXISTS"
 
     return classobj
 
