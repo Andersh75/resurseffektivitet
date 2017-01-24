@@ -177,7 +177,7 @@ class Classes(db.Model):
     courses_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     dates_id = db.Column(db.Integer, db.ForeignKey('dates.id'))
     classtypes_id = db.Column(db.Integer, db.ForeignKey('classtypes.id'))
-    __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id, 'name='_classes_uc'),)
+    __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id),)
     # UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
 
 
