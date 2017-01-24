@@ -50,7 +50,7 @@ import mechanize
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f40'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f41'
 db = SQLAlchemy(app)
 
 
@@ -1154,6 +1154,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
     if starttimevar and endtimevar and courseobj and dateobj:
         try:
             classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
+            print "zzz"
             tempvar = classobj.starttime
             print "CLASSOBJECT EXISTS"
         except Exception, e:
@@ -2089,12 +2090,16 @@ def slotsfromsocial():
                                     roomobj = create_or_fetch_roomobj(location)
                                     create_room_date_connection(roomobj, dateobj)
                                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                    print "xxx"
+                                    print classobj.starttime
                                     create_room_class_connection(roomobj, classobj)
 
                                 except Exception, e:
                                     varcode = "NO ROOM"
                                     print varcode
                                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
+                                    print "yyy"
+                                    print classobj.starttime
                                     # create_room_class_connection(roomobj, classobj)
                                     continue
                 except Exception, e:
