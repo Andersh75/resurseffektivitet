@@ -56,12 +56,14 @@ db = SQLAlchemy(app)
 
 teachers_classes = db.Table('teachers_classes',
                             db.Column('teachers_id', db.Integer, db.ForeignKey('teachers.id')),
-                            db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
+                            db.Column('classes_id', db.Integer, db.ForeignKey('classes.id')),
+                            UniqueConstraint('teachers_id', 'classes_id')
                             )
 
 rooms_classes = db.Table('rooms_classes',
                          db.Column('rooms_id', db.Integer, db.ForeignKey('rooms.id')),
-                         db.Column('classes_id', db.Integer, db.ForeignKey('classes.id'))
+                         db.Column('classes_id', db.Integer, db.ForeignKey('classes.id')),
+                         UniqueConstraint('rooms_id', 'classes_id')
                          )
 
 dates_courses = db.Table('dates_courses',
