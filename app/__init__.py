@@ -948,6 +948,9 @@ def fetch_teacherobj(email):
 
 def create_or_fetch_courseobj(code, year):
 
+    print code
+    print year
+
     courseobj = None
 
     if code and year:
@@ -962,10 +965,11 @@ def create_or_fetch_courseobj(code, year):
             tempdict = {}
             tempdict['code'] = code
             tempdict['year'] = year
-            record = Courses(**tempdict)
-            courseobj = record
-            db.session.add(record)
+            courseobj = Courses(**tempdict)
+            # courseobj = record
+            db.session.add(courseobj)
             db.session.commit()
+            print courseobj.code
 
         else:
             print "COURSEOBJECT EXISTS ALREADY"
