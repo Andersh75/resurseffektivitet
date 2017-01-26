@@ -963,6 +963,7 @@ def create_or_fetch_courseobj(code, year):
 
         if not courseobj:
             print "CREATING_COURSEOBJECT"
+            print db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
             tempdict = {}
             tempdict['code'] = code
             tempdict['year'] = year
