@@ -961,11 +961,13 @@ def create_or_fetch_courseobj(code, year):
             print varcode
 
         if not courseobj:
-            print "CREATING COURSEOBJECT"
+            print "CREATING_COURSEOBJECT"
             tempdict = {}
             tempdict['code'] = code
             tempdict['year'] = year
+            print "XXX"
             courseobj = Courses(**tempdict)
+            print "YYY"
             # courseobj = record
             db.session.add(courseobj)
             db.session.commit()
