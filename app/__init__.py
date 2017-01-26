@@ -959,7 +959,7 @@ def create_or_fetch_courseobj(code, year):
         except Exception, e:
             varcode = "NO PREVIOUS COURSEOBJECT"
             print varcode
-            print courseobj.code
+            print courseobj
 
         if not courseobj:
             print "CREATING_COURSEOBJECT"
