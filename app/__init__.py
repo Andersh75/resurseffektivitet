@@ -970,15 +970,16 @@ def create_or_fetch_courseobj(code, year):
             tempdict = {}
             tempdict['code'] = code
             tempdict['year'] = year
+            templist = db.session.query(Courses).all()
+            for item in templist:
+                print item.year
             print "XXX"
             courseobj = Courses(**tempdict)
 
             # courseobj = record
             db.session.add(courseobj)
             print courseobj.code
-            templist = db.session.query(Courses).all()
-            for item in templist:
-                print item.year
+
 
             print "YYY"
             db.session.commit()
