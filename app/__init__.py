@@ -2055,17 +2055,22 @@ def slotsfromsocial():
 
                             startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
                             startdate = startdate.text
-
+                            print startdate
                             enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
                             enddate = enddate.text
+                            print enddate
 
                             datevar = startdate[:10]
+                            print datevar
 
                             yearvar = pass_courseyear_from_classdate(datevar)
-
+                            print yearvar
                             codevar = testlink[33:39]
+                            print codevar
                             starttimevar = startdate[11:13]
+                            print starttimevar
                             endtimevar = enddate[11:13]
+                            print endtimevar
 
                             roomobj = None
 
