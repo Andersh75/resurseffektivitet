@@ -1963,7 +1963,7 @@ def slotsfromsocial():
     # testcourse = ["AI2808"]
 
     templist = allcourses()
-    templist = templist[19:20]
+    templist = templist[18:19]
     for idx, item in enumerate(templist):
         # for idx, item in enumerate(testcourse):
         coursecode = item.code
