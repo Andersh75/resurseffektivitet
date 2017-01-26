@@ -977,7 +977,7 @@ def create_or_fetch_courseobj(code, year):
             db.session.add(courseobj)
             print "YYY"
             db.session.commit()
-            pring "QQQ"
+            print "QQQ"
             print courseobj.code
 
         else:
