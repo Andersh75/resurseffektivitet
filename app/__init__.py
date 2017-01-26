@@ -2113,6 +2113,7 @@ def slotsfromsocial():
                             for location in locations:
                                 print "location"
                                 try:
+                                    print location
                                     location = location.text
                                     print "FETCHING ROOM"
                                     print location
