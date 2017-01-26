@@ -2094,6 +2094,10 @@ def slotsfromsocial():
                             endtimevar = enddate[11:13]
                             print endtimevar
 
+                            templist = db.session.query(Courses).all()
+                            for item in templist:
+                                print item.year
+
                             roomobj = None
 
                             courseobj = create_or_fetch_courseobj(codevar, yearvar)
