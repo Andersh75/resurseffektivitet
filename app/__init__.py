@@ -972,10 +972,12 @@ def create_or_fetch_courseobj(code, year):
             tempdict['year'] = year
             print "XXX"
             courseobj = Courses(**tempdict)
-            print "YYY"
+
             # courseobj = record
             db.session.add(courseobj)
+            print "YYY"
             db.session.commit()
+            pring "QQQ"
             print courseobj.code
 
         else:
