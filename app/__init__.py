@@ -976,6 +976,10 @@ def create_or_fetch_courseobj(code, year):
             # courseobj = record
             db.session.add(courseobj)
             print courseobj.code
+            templist = db.session.query(Courses).filter(Courses.code == code).all()
+            for item in templist:
+                print item.year
+
             print "YYY"
             db.session.commit()
             print "QQQ"
