@@ -2116,7 +2116,7 @@ def slotsfromsocial():
                                     print location
                                     location = location.text
                                     print "FETCHING ROOM"
-                                    print location
+                                    # print location
                                     print codevar
                                     print yearvar
 
