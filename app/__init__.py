@@ -2013,13 +2013,13 @@ def slotsfromsocial():
             xml = xml1 + xml2
 
             for idx, item in enumerate(xml):
-                # print "outer"
-                # print idx
+                print "outer"
+                print idx
                 try:
                     fullcourselink = "https://www.kth.se"
                     fullcourselink = fullcourselink + item['href']
-                    # print idx
-                    # print fullcourselink
+                    print idx
+                    print fullcourselink
                     url = br.open(fullcourselink)
 
                     xml = BeautifulSoup(url)
@@ -2034,11 +2034,11 @@ def slotsfromsocial():
                     xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
                     xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
                     xml = xml1 + xml2
-                    # print xml
+                    print xml
                     for idx, item in enumerate(xml):
-                        # print "inner"
-                        # print idx
-                        # print item['href']
+                        print "inner"
+                        print idx
+                        print item['href']
                         if "event" in item['href']:
                             # linklist.append(item['href'])
                             linkvar = item['href']
@@ -2046,7 +2046,7 @@ def slotsfromsocial():
                             print coursecode
                             testlink = "https://www.kth.se"
                             testlink = testlink + linkvar
-                            # print testlink
+                            print testlink
                             url = br.open(testlink)
 
                             # xml = BeautifulSoup(src)
@@ -2079,7 +2079,7 @@ def slotsfromsocial():
                             locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
                             for location in locations:
-                                # print "location"
+                                print "location"
                                 try:
                                     location = location.text
                                     print "FETCHING ROOM"
