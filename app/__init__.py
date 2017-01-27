@@ -858,133 +858,143 @@ def what_term_is_this(startdatevar):
     return term
 
 
-def create_or_fetch_roomtypeobj(roomtype):
+def create_or_fetch_roomtypeobj(roomtypevar):
 
     roomtypeobj = None
 
-    try:
-        roomtypeobj = db.session.query(Roomtypes).filter(Roomtypes.roomtype == roomtype).first()
-    except Exception, e:
-        varcode = "NO PREVIOUS ROOMTYPEOBJECT"
-        print varcode
+    if roomtypevar:
+        roomtypesubq = db.session.query(Roomtypes).filter(Roomtypes.roomtype == roomtypevar)
+        alreadyroomtype = db.session.query(roomtypesubq.exists()).scalar()
 
-    if not roomtypeobj:
-        print "CREATING ROOMTYPEOBJECT"
-        tempdict = {}
-        tempdict['roomtype'] = roomtype
-        record = Roomtypes(**tempdict)
-        roomtypeobj = record
-        db.session.add(record)
-        db.session.commit()
-
+        if alreadyroomtype:
+            print "ROOMTYPEOBJECT EXISTS"
+            roomtypeobj = roomtypesubq.first()
+        else:
+            print "NO PREVIOUS ROOMTYPEOBJECT"
+            print "CREATING ROOMTYPEOBJECT"
+            tempdict = {}
+            tempdict['roomtype'] = roomtypevar
+            record = Roomtypes(**tempdict)
+            roomtypeobj = record
+            db.session.add(record)
+            db.session.commit()
     else:
-        print "ROOMTYPEOBJECT EXISTS"
+        print "NO ROOMTYPEVAR"
 
     return roomtypeobj
 
 
-def create_or_fetch_subjectobj(subject):
+def create_or_fetch_subjectobj(subjectvar):
 
     subjectobj = None
 
-    try:
-        subjectobj = db.session.query(Subjects).filter(Subjects.name == subject).first()
-    except Exception, e:
-        varcode = "NO PREVIOUS SUBJECTOBJECT"
-        print varcode
+    if subjectvar:
+        subjectsubq = db.session.query(Subjects).filter(Subjects.name == subjectvar)
+        alreadysubject = db.session.query(subjectsubq.exists()).scalar()
 
-    if not subjectobj:
-        print "CREATING SUBJECTOBJECT"
-        tempdict = {}
-        tempdict['name'] = subject
-        record = Subjects(**tempdict)
-        subjectobj = record
-        db.session.add(record)
-        db.session.commit()
-
+        if alreadysubject:
+            print "SUBJECTOBJECT EXISTS"
+            subjectobj = subjectsubq.first()
+        else:
+            print "NO PREVIOUS SUBJECTOBJECT"
+            print "CREATING SUBJECTOBJECT"
+            tempdict = {}
+            tempdict['name'] = subjectvar
+            record = Subjects(**tempdict)
+            subjectobj = record
+            db.session.add(record)
+            db.session.commit()
     else:
-        print "SUBJECTOBJECT EXISTS"
+        print "NO SUBJECTVAR"
 
     return subjectobj
 
 
-def create_or_fetch_teacherobj(email):
+def create_or_fetch_teacherobj(emailvar):
 
     teacherobj = None
 
-    try:
-        teacherobj = db.session.query(Teachers).filter(Teachers.email == email).first()
-    except Exception, e:
-        varcode = "NO PREVIOUS TEACHEROBJECT"
-        print varcode
+    if emailvar:
+        teachersubq = db.session.query(Teachers).filter(Teachers.email == emailvar)
+        alreadyteacher = db.session.query(teachersubq.exists()).scalar()
 
-    if not teacherobj:
-        print "CREATING TEACHEROBJECT"
-        tempdict = {}
-        tempdict['email'] = email
-        record = Teachers(**tempdict)
-        teacherobj = record
-        db.session.add(record)
-        db.session.commit()
-
+        if alreadyteacher:
+            print "TEACHEROBJECT EXISTS"
+            teacherobj = teachersubq.first()
+        else:
+            print "NO PREVIOUS TEACHEROBJECT"
+            print "CREATING TEACHEROBJECT"
+            tempdict = {}
+            tempdict['email'] = emailvar
+            record = Teachers(**tempdict)
+            teacherobj = record
+            db.session.add(record)
+            db.session.commit()
     else:
-        print "TEACHEROBJECT EXISTS"
+        print "NO EMAILVAR"
 
     return teacherobj
 
 
-def fetch_teacherobj(email):
+def fetch_teacherobj(emailvar):
 
     teacherobj = None
 
-    try:
-        teacherobj = db.session.query(Teachers).filter(Teachers.email == email).first()
-    except Exception, e:
-        varcode = "NO TEACHEROBJECT TO FETCH"
-        print varcode
+    if emailvar:
+        teachersubq = db.session.query(Teachers).filter(Teachers.email == emailvar)
+        alreadyteacher = db.session.query(teachersubq.exists()).scalar()
+
+        if alreadyteacher:
+            teacherobj = teachersubq.first()
+        else:
+            print "NO TEACHEROBJECT TO FETCH"
+    else:
+        print "NO EMAILVAR"
 
     return teacherobj
 
 
-def create_or_fetch_courseobj(code, year):
-
-    print code
-    print year
+def create_or_fetch_courseobj(codevar, yearvar):
 
     courseobj = None
 
-    if code and year:
-        print "code and year"
-        courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year))
-        print "subquery"
-        alreadycourse = db.session.query(courseobj.exists()).scalar()
+    if codevar and yearvar:
+        coursesubq = db.session.query(Courses).filter(and_(Courses.code == codevar, Courses.year == yearvar))
+        alreadycourse = db.session.query(coursesubq.exists()).scalar()
 
         if alreadycourse:
             print "COURSEOBJECT EXISTS ALREADY"
-            courseobj = courseobj.first()
+            courseobj = coursesubq.first()
         else:
             print "NO PREVIOUS COURSEOBJECT"
             print "CREATING_COURSEOBJECT"
             tempdict = {}
-            tempdict['code'] = code
-            tempdict['year'] = year
+            tempdict['code'] = codevar
+            tempdict['year'] = yearvar
             record = Courses(**tempdict)
             courseobj = record
             db.session.add(record)
             db.session.commit()
+    else:
+        print "NO CODEVAR OR YEARVAR"
 
     return courseobj
 
 
-def fetch_courseobj(code, year):
+def fetch_courseobj(codevar, yearvar):
 
     courseobj = None
 
-    try:
-        courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
-    except Exception, e:
-        varcode = "NO COURSEOBJECT TO FETCH"
-        print varcode
+    if codevar and yearvar:
+        coursesubq = db.session.query(Courses).filter(and_(Courses.code == codevar, Courses.year == yearvar))
+        alreadycourse = db.session.query(coursesubq.exists()).scalar()
+
+        if alreadycourse:
+            courseobj = coursesubq.first()
+        else:
+            print "NO COURSEOBJECT TO FETCH"
+    else:
+        print "NO CODEVAR OR YEARVAR"
 
     return courseobj
 
@@ -993,23 +1003,24 @@ def create_or_fetch_dateobj(datevar):
 
     dateobj = None
 
-    try:
-        dateobj = db.session.query(Dates).filter(Dates.date == datevar).first()
+    if datevar:
+        datesubq = db.session.query(Dates).filter(Dates.date == datevar)
+        alreadydate = db.session.query(datesubq.exists()).scalar()
 
-    except Exception, e:
-        varcode = "NO PREVIOUS DATEOBJECT"
-        print varcode
-
-    if not dateobj:
-        print "CREATING DATEOBJECT"
-        tempdict = {}
-        tempdict['date'] = datevar
-        record = Dates(**tempdict)
-        dateobj = record
-        db.session.add(record)
-        db.session.commit()
+        if alreadydate:
+            print "DATEOBJECT EXISTS"
+            dateobj = datesubq.first()
+        else:
+            print "NO PREVIOUS DATEOBJECT"
+            print "CREATING DATEOBJECT"
+            tempdict = {}
+            tempdict['date'] = datevar
+            record = Dates(**tempdict)
+            dateobj = record
+            db.session.add(record)
+            db.session.commit()
     else:
-        print "DATEOBJECT EXISTS"
+        print "NO DATEVAR"
 
     return dateobj
 
@@ -1018,12 +1029,16 @@ def fetch_dateobj(datevar):
 
     dateobj = None
 
-    try:
-        dateobj = db.session.query(Dates).filter(Dates.date == datevar).first()
+    if datevar:
+        datesubq = db.session.query(Dates).filter(Dates.date == datevar)
+        alreadydate = db.session.query(datesubq.exists()).scalar()
 
-    except Exception, e:
-        varcode = "NO DATEOBJECT TO FETCH"
-        print varcode
+        if alreadydate:
+            dateobj = datesubq.first()
+        else:
+            print "NO DATEOBJECT TO FETCH"
+    else:
+        print "NO DATEVAR"
 
     return dateobj
 
@@ -1031,123 +1046,26 @@ def fetch_dateobj(datevar):
 def create_or_fetch_roomobj(roomvar):
     roomobj = None
 
-    try:
-        roomobj = db.session.query(Rooms).filter(Rooms.name == roomvar).first()
-    except Exception, e:
-        varcode = "NO PREVIOUS ROOMOBJECT"
-        print varcode
+    if roomvar:
+        roomsubq = db.session.query(Rooms).filter(Rooms.name == roomvar)
+        alreadyroom = db.session.query(roomsubq.exists()).scalar()
 
-    if not roomobj:
-        print "CREATING ROOMOBJECT"
-        tempdict = {}
-        tempdict['name'] = roomvar
-        record = Rooms(**tempdict)
-        roomobj = record
-        db.session.add(record)
-        db.session.commit()
+        if alreadyroom:
+            print "ROOMOBJECT EXISTS"
+            roomobj = roomsubq.first()
+        else:
+            print "NO PREVIOUS ROOMOBJECT"
+            print "CREATING ROOMOBJECT"
+            tempdict = {}
+            tempdict['name'] = roomvar
+            record = Rooms(**tempdict)
+            roomobj = record
+            db.session.add(record)
+            db.session.commit()
     else:
-        print "ROOMOBJECT EXISTS"
+        print "NO ROOMVAR"
 
     return roomobj
-
-
-def create_room_date_connection(roomobj, dateobj):
-    alreadydate = None
-
-    if roomobj and dateobj:
-        try:
-            alreadydate = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.id == dateobj.id, Rooms.id == roomobj.id)).first()
-        except Exception, e:
-            varcode = "NO PREVIOUS ROOM-DATE"
-            print varcode
-
-        if not alreadydate:
-            print "CREATING ROOM-DATE"
-            dateobj.rooms.append(roomobj)
-            db.session.commit()
-        else:
-            print "ROOM-DATE EXISTS"
-    else:
-        print "NO ROOMOBJ OR DATEOBJ"
-
-
-def create_room_class_connection(roomobj, classobj):
-    alreadydate = None
-    if roomobj and classobj:
-        try:
-            alreadydate = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.id == roomobj.id)).first()
-        except Exception, e:
-            varcode = "NO PREVIOUS ROOM-CLASS"
-            print varcode
-
-        if not alreadydate:
-            print "CREATING ROOM-CLASS"
-            classobj.rooms.append(roomobj)
-            db.session.commit()
-        else:
-            print "ROOM-CLASS EXISTS"
-    else:
-        print "NO ROOMOBJ OR CLASSOBJ"
-
-
-def create_teacher_class_connection(teacherobj, classobj):
-    alreadydate = None
-
-    if teacherobj and classobj:
-        try:
-            alreadydate = db.session.query(Classes).join(Classes.teachers).filter(and_(Classes.id == classobj.id, Teachers.id == teacherobj.id)).first()
-        except Exception, e:
-            varcode = "NO PREVIOUS TEACHER-CLASS"
-            print varcode
-
-        if not alreadydate:
-            print "CREATING TEACHER-CLASS"
-            classobj.teachers.append(teacherobj)
-            db.session.commit()
-        else:
-            print "TEACHER-CLASS EXISTS"
-    else:
-        print "NO TEACHEROBJ OR CLASSOBJ"
-
-
-def create_teacher_date_connection(teacherobj, dateobj):
-    alreadydate = None
-
-    if teacherobj and dateobj:
-        try:
-            alreadydate = db.session.query(Dates).join(Dates.teachers).filter(and_(Dates.id == dateobj.id, Teachers.id == teacherobj.id)).first()
-        except Exception, e:
-            varcode = "NO PREVIOUS TEACHER-DATE"
-            print varcode
-
-        if not alreadydate:
-            print "CREATING TEACHER-DATE"
-            dateobj.teachers.append(teacherobj)
-            db.session.commit()
-        else:
-            print "TEACHER-DATE EXISTS"
-    else:
-        print "NO TEACHEROBJ OR DATEOBJ"
-
-
-def create_course_date_connection(courseobj, dateobj):
-    alreadycourse = None
-
-    if courseobj and dateobj:
-        try:
-            alreadycourse = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.id == dateobj.id, Courses.id == courseobj.id)).first()
-        except Exception, e:
-            varcode = "NO PREVIOUS COURSE-DATE"
-            print varcode
-
-        if not alreadycourse:
-            print "CREATING COURSE-DATE"
-            dateobj.courses.append(courseobj)
-            db.session.commit()
-        else:
-            print "COURSE-DATE EXISTS"
-    else:
-        print "NO COURSOBJ OR DATEOBJ"
 
 
 def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
@@ -1155,29 +1073,27 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
     classobj = None
 
     if starttimevar and endtimevar and courseobj and dateobj:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar))
-            alreadyclass = db.session.query(classobj.exists()).scalar()
+        classsubq = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar))
+        alreadyclass = db.session.query(classsubq.exists()).scalar()
 
-            if alreadyclass:
-                print "CLASSOBJECT EXISTS ALREADY"
-                print varcode
-                classobj = classobj.first()
+        if alreadyclass:
+            print "CLASSOBJECT EXISTS"
+            classobj = classsubq.first()
+        else:
+            print "NO PREVIOUS CLASSOBJECT"
+            print "CREATING CLASSOBJECT"
+            tempdict = {}
+            tempdict['starttime'] = starttimevar
+            tempdict['endtime'] = endtimevar
+            tempdict['courses_id'] = courseobj.id
+            tempdict['dates_id'] = dateobj.id
 
-            else:
-                varcode = "NO PREVIOUS CLASSOBJECT"
-                print varcode
-
-                print "CREATING CLASSOBJECT"
-                tempdict = {}
-                tempdict['starttime'] = starttimevar
-                tempdict['endtime'] = endtimevar
-                tempdict['courses_id'] = courseobj.id
-                tempdict['dates_id'] = dateobj.id
-
-                record = Classes(**tempdict)
-                classobj = record
-                db.session.add(record)
-                db.session.commit()
+            record = Classes(**tempdict)
+            classobj = record
+            db.session.add(record)
+            db.session.commit()
+    else:
+        print "NO STARTTIMEVAR OR ENDTIMEVAR OR COURSEOBJ OR DATEOBJ"
 
     return classobj
 
@@ -1186,13 +1102,103 @@ def fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
 
     classobj = None
 
-    try:
-        classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
-    except Exception, e:
-        varcode = "NO CLASSOBJECT TO FETCH"
-        print varcode
+    if starttimevar and endtimevar and courseobj and dateobj:
+        classsubq = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar))
+        alreadyclass = db.session.query(classsubq.exists()).scalar()
+
+        if alreadyclass:
+            classobj = classsubq.first()
+        else:
+            print "NO CLASSOBJECT TO FETCH"
+    else:
+        print "NO STARTTIMEVAR OR ENDTIMEVAR OR COURSEOBJ OR DATEOBJ"
 
     return classobj
+
+
+def create_room_date_connection(roomobj, dateobj):
+
+    if roomobj and dateobj:
+        roomdatesubq = db.session.query(Dates).join(Dates.rooms).filter(and_(Dates.id == dateobj.id, Rooms.id == roomobj.id))
+        alreadyroomdate = db.session.query(roomdatesubq.exists()).scalar()
+
+        if alreadyroomdate:
+            print "ROOM-DATE EXISTS"
+        else:
+            print "NO PREVIOUS ROOM-DATE"
+            print "CREATING ROOM-DATE"
+            dateobj.rooms.append(roomobj)
+            db.session.commit()
+    else:
+        print "NO ROOMOBJ OR DATEOBJ"
+
+
+def create_room_class_connection(roomobj, classobj):
+
+    if roomobj and classobj:
+        roomclasssubq = db.session.query(Classes).join(Classes.rooms).filter(and_(Classes.id == classobj.id, Rooms.id == roomobj.id))
+        alreadyroomclass = db.session.query(roomclasssubq.exists()).scalar()
+
+        if alreadyroomclass:
+            print "ROOM-CLASS EXISTS"
+        else:
+            print "NO PREVIOUS ROOM-CLASS"
+            print "CREATING ROOM-CLASS"
+            classobj.rooms.append(roomobj)
+            db.session.commit()
+    else:
+        print "NO ROOMOBJ OR CLASSOBJ"
+
+
+def create_teacher_class_connection(teacherobj, classobj):
+
+    if teacherobj and classobj:
+        teacherclasssubq = db.session.query(Classes).join(Classes.teachers).filter(and_(Classes.id == classobj.id, Teachers.id == teacherobj.id))
+        alreadyteacherclass = db.session.query(teacherclasssubq.exists()).scalar()
+
+        if alreadyteacherclass:
+            print "TEACHER-CLASS EXISTS"
+        else:
+            print "NO PREVIOUS TEACHER-CLASS"
+            print "CREATING TEACHER-CLASS"
+            classobj.teachers.append(teacherobj)
+            db.session.commit()
+    else:
+        print "NO TEACHEROBJ OR CLASSOBJ"
+
+
+def create_teacher_date_connection(teacherobj, dateobj):
+
+    if teacherobj and dateobj:
+        teacherdatesubq = db.session.query(Dates).join(Dates.teachers).filter(and_(Dates.id == dateobj.id, Teachers.id == teacherobj.id))
+        alreadyteacherdate = db.session.query(teacherdatesubq.exists()).scalar()
+
+        if alreadyteacherdate:
+            print "TEACHER-DATE EXISTS"
+        else:
+            print "NO PREVIOUS TEACHER-DATE"
+            print "CREATING TEACHER-DATE"
+            dateobj.teachers.append(teacherobj)
+            db.session.commit()
+    else:
+        print "NO TEACHEROBJ OR DATEOBJ"
+
+
+def create_course_date_connection(courseobj, dateobj):
+
+    if courseobj and dateobj:
+        coursedatesubq = db.session.query(Dates).join(Dates.courses).filter(and_(Dates.id == dateobj.id, Courses.id == courseobj.id))
+        alreadycoursedate = db.session.query(coursedatesubq.exists()).scalar()
+
+        if alreadycoursedate:
+            print "COURSE-DATE EXISTS"
+        else:
+            print "NO PREVIOUS COURSE-DATE"
+            print "CREATING COURSE-DATE"
+            dateobj.courses.append(courseobj)
+            db.session.commit()
+    else:
+        print "NO COURSOBJ OR DATEOBJ"
 
 
 def fetchinglistofslotspercourse(course, starttime, endtime):
