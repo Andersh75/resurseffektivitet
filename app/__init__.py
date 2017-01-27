@@ -2086,6 +2086,7 @@ def slotsfromsocial():
                             # term = what_term_is_this(datevar)
                             # db.session.commit()
                             print courseobj.code
+                            print "hej"
 
                             dateobj = create_or_fetch_dateobj(datevar)
                             create_course_date_connection(courseobj, dateobj)
