@@ -954,6 +954,7 @@ def create_or_fetch_courseobj(code, year):
     courseobj = None
 
     if code and year:
+        print "code and year"
         courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year))
         alreadycourse = session.query(courseobj.exists()).scalar()
 
