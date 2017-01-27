@@ -1177,6 +1177,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
         try:
             classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
             print "zzz"
+            print classobj
             tempvar = classobj.starttime
             print "CLASSOBJECT EXISTS"
         except Exception, e:
