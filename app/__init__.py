@@ -954,43 +954,22 @@ def create_or_fetch_courseobj(code, year):
     courseobj = None
 
     if code and year:
-        try:
-            courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
-        except Exception, e:
-            varcode = "NO PREVIOUS COURSEOBJECT"
-            print varcode
-            print courseobj
+        courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year))
+        alreadycourse = session.query(courseobj.exists()).scalar()
 
-        if not courseobj:
+        if alreadycourse:
+            print = "COURSEOBJECT EXISTS ALREADY"
+            courseobj = courseobj.first()
+        else:
+            print "NO PREVIOUS COURSEOBJECT"
             print "CREATING_COURSEOBJECT"
-            print code
-            print year
-            print "ZZZ"
-            # print db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).first()
             tempdict = {}
             tempdict['code'] = code
             tempdict['year'] = year
-
-            print "QQQ"
+            record = Courses(**tempdict)
+            courseobj = record
+            db.session.add(record)
             db.session.commit()
-            templist = db.session.query(Courses).all()
-            for item in templist:
-                print item.year
-            print "XXX"
-            courseobj = Courses(**tempdict)
-
-            # courseobj = record
-            db.session.add(courseobj)
-            print courseobj.code
-
-
-            print "YYY"
-            db.session.commit()
-
-            print courseobj.code
-
-        else:
-            print "COURSEOBJECT EXISTS ALREADY"
 
     return courseobj
 
@@ -1178,7 +1157,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
             alreadyclass = session.query(classobj.exists()).scalar()
 
             if alreadyclass:
-                print "CLASSOBJECT EXISTS"
+                print "CLASSOBJECT EXISTS ALREADY"
                 print varcode
                 classobj = classobj.first()
 
