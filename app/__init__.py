@@ -1174,27 +1174,29 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
     classobj = None
 
     if starttimevar and endtimevar and courseobj and dateobj:
-        try:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).first()
-            print "zzz"
-            print classobj
-            tempvar = classobj.starttime
-            print "CLASSOBJECT EXISTS"
-        except Exception, e:
-            varcode = "NO PREVIOUS CLASSOBJECT"
-            print varcode
-            print "CREATING CLASSOBJECT"
-            tempdict = {}
-            tempdict['starttime'] = starttimevar
-            tempdict['endtime'] = endtimevar
-            tempdict['courses_id'] = courseobj.id
-            tempdict['dates_id'] = dateobj.id
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar))
+            alreadyclass = session.query(classobj.exists()).scalar()
 
-            record = Classes(**tempdict)
-            classobj = record
-            db.session.add(record)
-            db.session.commit()
+            if alreadyclass:
+                print "CLASSOBJECT EXISTS"
+                print varcode
+                classobj = classobj.first()
 
+            else:
+                varcode = "NO PREVIOUS CLASSOBJECT"
+                print varcode
+
+                print "CREATING CLASSOBJECT"
+                tempdict = {}
+                tempdict['starttime'] = starttimevar
+                tempdict['endtime'] = endtimevar
+                tempdict['courses_id'] = courseobj.id
+                tempdict['dates_id'] = dateobj.id
+
+                record = Classes(**tempdict)
+                classobj = record
+                db.session.add(record)
+                db.session.commit()
 
     return classobj
 
