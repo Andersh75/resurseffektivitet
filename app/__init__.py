@@ -2122,6 +2122,8 @@ def slotsfromsocial():
 
                                     roomobj = create_or_fetch_roomobj(location)
                                     create_room_date_connection(roomobj, dateobj)
+
+                                    #### kolla vidare på classobject där det ballar ur
                                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
                                     print "xxx"
                                     print classobj.starttime
