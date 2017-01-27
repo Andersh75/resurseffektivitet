@@ -2123,7 +2123,7 @@ def slotsfromsocial():
                                     roomobj = create_or_fetch_roomobj(location)
                                     create_room_date_connection(roomobj, dateobj)
 
-                                    # kolla vidare på classobject - det ballar ur
+                                    # kolla vidare classobject - det ballar ur
                                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
                                     print "xxx"
                                     print classobj.starttime
