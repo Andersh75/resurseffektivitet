@@ -1155,7 +1155,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
     classobj = None
 
     if starttimevar and endtimevar and courseobj and dateobj:
-            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).subquery()
+            classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar))
             alreadyclass = db.session.query(classobj.exists()).scalar()
 
             if alreadyclass:
