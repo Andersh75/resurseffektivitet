@@ -968,7 +968,7 @@ def create_or_fetch_courseobj(codevar, yearvar):
             courseobj = coursesubq.first()
         else:
             print "NO PREVIOUS COURSEOBJECT"
-            print "CREATING_COURSEOBJECT"
+            print "CREATING COURSEOBJECT"
             tempdict = {}
             tempdict['code'] = codevar
             tempdict['year'] = yearvar
@@ -1048,6 +1048,8 @@ def fetch_dateobj(datevar):
 
 def create_or_fetch_roomobj(roomvar):
     roomobj = None
+
+    roomvar = roomvar.split()
 
     if roomvar:
         roomsubq = db.session.query(Rooms).filter(Rooms.name == roomvar)
