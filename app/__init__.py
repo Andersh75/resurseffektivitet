@@ -1533,17 +1533,17 @@ def coursesfromdepartment3(templist):
 
             teacherobj = create_or_fetch_teacherobj(examiner)
 
-            try:
-                latestcourse = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc()).first()
+            latestcoursesubq = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc())
+            existscourse = db.session.query(latestcoursesubq.exists()).scalar()
+
+            if existscourse:
+                latestcourse = latestcoursesubq.first()
                 latestcourse.name = name
                 latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
                 db.session.commit()
-
-            except Exception, e:
-                varcode = "COURSE NOT EXISTING"
-                print varcode
+            else:
+                print "COURSE NOT EXISTING"
                 print code
-                continue
 
 
 # NOT READY
