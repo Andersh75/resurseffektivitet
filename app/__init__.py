@@ -958,7 +958,7 @@ def create_or_fetch_courseobj(code, year):
         alreadycourse = session.query(courseobj.exists()).scalar()
 
         if alreadycourse:
-            print = "COURSEOBJECT EXISTS ALREADY"
+            print "COURSEOBJECT EXISTS ALREADY"
             courseobj = courseobj.first()
         else:
             print "NO PREVIOUS COURSEOBJECT"
