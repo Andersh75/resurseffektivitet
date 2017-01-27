@@ -867,7 +867,7 @@ def create_or_fetch_roomtypeobj(roomtypevar):
         alreadyroomtype = db.session.query(roomtypesubq.exists()).scalar()
 
         if alreadyroomtype:
-            print "ROOMTYPEOBJECT EXISTS"
+            print "ROOMTYPEOBJECT FETCHED"
             roomtypeobj = roomtypesubq.first()
         else:
             print "NO PREVIOUS ROOMTYPEOBJECT"
@@ -893,7 +893,7 @@ def create_or_fetch_subjectobj(subjectvar):
         alreadysubject = db.session.query(subjectsubq.exists()).scalar()
 
         if alreadysubject:
-            print "SUBJECTOBJECT EXISTS"
+            print "SUBJECTOBJECT FETCHED"
             subjectobj = subjectsubq.first()
         else:
             print "NO PREVIOUS SUBJECTOBJECT"
@@ -919,7 +919,7 @@ def create_or_fetch_teacherobj(emailvar):
         alreadyteacher = db.session.query(teachersubq.exists()).scalar()
 
         if alreadyteacher:
-            print "TEACHEROBJECT EXISTS"
+            print "TEACHEROBJECT FETCHED"
             teacherobj = teachersubq.first()
         else:
             print "NO PREVIOUS TEACHEROBJECT"
@@ -945,6 +945,7 @@ def fetch_teacherobj(emailvar):
         alreadyteacher = db.session.query(teachersubq.exists()).scalar()
 
         if alreadyteacher:
+            print "TEACHEROBJECT FETCHED"
             teacherobj = teachersubq.first()
         else:
             print "NO TEACHEROBJECT TO FETCH"
@@ -963,7 +964,7 @@ def create_or_fetch_courseobj(codevar, yearvar):
         alreadycourse = db.session.query(coursesubq.exists()).scalar()
 
         if alreadycourse:
-            print "COURSEOBJECT EXISTS ALREADY"
+            print "COURSEOBJECT FETCHED"
             courseobj = coursesubq.first()
         else:
             print "NO PREVIOUS COURSEOBJECT"
@@ -990,6 +991,7 @@ def fetch_courseobj(codevar, yearvar):
         alreadycourse = db.session.query(coursesubq.exists()).scalar()
 
         if alreadycourse:
+            print "COURSEOBJECT FETCHED"
             courseobj = coursesubq.first()
         else:
             print "NO COURSEOBJECT TO FETCH"
@@ -1008,7 +1010,7 @@ def create_or_fetch_dateobj(datevar):
         alreadydate = db.session.query(datesubq.exists()).scalar()
 
         if alreadydate:
-            print "DATEOBJECT EXISTS"
+            print "DATEOBJECT FETCHED"
             dateobj = datesubq.first()
         else:
             print "NO PREVIOUS DATEOBJECT"
@@ -1034,6 +1036,7 @@ def fetch_dateobj(datevar):
         alreadydate = db.session.query(datesubq.exists()).scalar()
 
         if alreadydate:
+            print "DATEOBJECT FETCHED"
             dateobj = datesubq.first()
         else:
             print "NO DATEOBJECT TO FETCH"
@@ -1051,7 +1054,7 @@ def create_or_fetch_roomobj(roomvar):
         alreadyroom = db.session.query(roomsubq.exists()).scalar()
 
         if alreadyroom:
-            print "ROOMOBJECT EXISTS"
+            print "ROOMOBJECT FETCHED"
             roomobj = roomsubq.first()
         else:
             print "NO PREVIOUS ROOMOBJECT"
@@ -1077,7 +1080,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
         alreadyclass = db.session.query(classsubq.exists()).scalar()
 
         if alreadyclass:
-            print "CLASSOBJECT EXISTS"
+            print "CLASSOBJECT FETCHED"
             classobj = classsubq.first()
         else:
             print "NO PREVIOUS CLASSOBJECT"
@@ -1107,6 +1110,7 @@ def fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
         alreadyclass = db.session.query(classsubq.exists()).scalar()
 
         if alreadyclass:
+            print "CLASSOBJECT FETCHED"
             classobj = classsubq.first()
         else:
             print "NO CLASSOBJECT TO FETCH"
@@ -1123,7 +1127,7 @@ def create_room_date_connection(roomobj, dateobj):
         alreadyroomdate = db.session.query(roomdatesubq.exists()).scalar()
 
         if alreadyroomdate:
-            print "ROOM-DATE EXISTS"
+            print "ROOM-DATE EXISTS ALREADY"
         else:
             print "NO PREVIOUS ROOM-DATE"
             print "CREATING ROOM-DATE"
@@ -1140,7 +1144,7 @@ def create_room_class_connection(roomobj, classobj):
         alreadyroomclass = db.session.query(roomclasssubq.exists()).scalar()
 
         if alreadyroomclass:
-            print "ROOM-CLASS EXISTS"
+            print "ROOM-CLASS EXISTS ALREADY"
         else:
             print "NO PREVIOUS ROOM-CLASS"
             print "CREATING ROOM-CLASS"
@@ -1157,7 +1161,7 @@ def create_teacher_class_connection(teacherobj, classobj):
         alreadyteacherclass = db.session.query(teacherclasssubq.exists()).scalar()
 
         if alreadyteacherclass:
-            print "TEACHER-CLASS EXISTS"
+            print "TEACHER-CLASS EXISTS ALREADY"
         else:
             print "NO PREVIOUS TEACHER-CLASS"
             print "CREATING TEACHER-CLASS"
@@ -1174,7 +1178,7 @@ def create_teacher_date_connection(teacherobj, dateobj):
         alreadyteacherdate = db.session.query(teacherdatesubq.exists()).scalar()
 
         if alreadyteacherdate:
-            print "TEACHER-DATE EXISTS"
+            print "TEACHER-DATE EXISTS ALREADY"
         else:
             print "NO PREVIOUS TEACHER-DATE"
             print "CREATING TEACHER-DATE"
@@ -1191,7 +1195,7 @@ def create_course_date_connection(courseobj, dateobj):
         alreadycoursedate = db.session.query(coursedatesubq.exists()).scalar()
 
         if alreadycoursedate:
-            print "COURSE-DATE EXISTS"
+            print "COURSE-DATE EXISTS ALREADY"
         else:
             print "NO PREVIOUS COURSE-DATE"
             print "CREATING COURSE-DATE"
