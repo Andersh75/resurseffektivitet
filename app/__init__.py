@@ -2032,12 +2032,12 @@ def slotsfromsocial():
             xml = xml1 + xml2
 
             for idx, item in enumerate(xml):
-                print "outer"
-                print idx
+                # print "outer"
+                # print idx
                 try:
                     fullcourselink = "https://www.kth.se"
                     fullcourselink = fullcourselink + item['href']
-                    print idx
+                    # print idx
                     # print fullcourselink
                     url = br.open(fullcourselink)
 
@@ -2055,9 +2055,9 @@ def slotsfromsocial():
                     xml = xml1 + xml2
                     # print xml
                     for idx, item in enumerate(xml):
-                        print "inner"
-                        print idx
-                        print item['href']
+                        # print "inner"
+                        # print idx
+                        # print item['href']
                         if "event" in item['href']:
                             # linklist.append(item['href'])
                             linkvar = item['href']
@@ -2065,7 +2065,7 @@ def slotsfromsocial():
                             print coursecode
                             testlink = "https://www.kth.se"
                             testlink = testlink + linkvar
-                            print testlink
+                            # print testlink
                             url = br.open(testlink)
 
                             # xml = BeautifulSoup(src)
@@ -2074,22 +2074,22 @@ def slotsfromsocial():
 
                             startdate = xml.find('span', itemprop=lambda value: value and value.startswith("startDate"))
                             startdate = startdate.text
-                            print startdate
+                            # print startdate
                             enddate = xml.find('span', itemprop=lambda value: value and value.startswith("endDate"))
                             enddate = enddate.text
-                            print enddate
+                            # print enddate
 
                             datevar = startdate[:10]
-                            print datevar
+                            # print datevar
 
                             yearvar = pass_courseyear_from_classdate(datevar)
-                            print yearvar
+                            # print yearvar
                             codevar = testlink[33:39]
-                            print codevar
+                            # print codevar
                             starttimevar = startdate[11:13]
-                            print starttimevar
+                            # print starttimevar
                             endtimevar = enddate[11:13]
-                            print endtimevar
+                            # print endtimevar
 
                             #templist = db.session.query(Courses).all()
                             # for item in templist:
@@ -2100,8 +2100,8 @@ def slotsfromsocial():
                             courseobj = create_or_fetch_courseobj(codevar, yearvar)
                             # term = what_term_is_this(datevar)
                             # db.session.commit()
-                            print courseobj.code
-                            print "hej"
+                            # print courseobj.code
+                            # print "hej"
 
                             dateobj = create_or_fetch_dateobj(datevar)
                             create_course_date_connection(courseobj, dateobj)
@@ -2109,30 +2109,30 @@ def slotsfromsocial():
                             locations = xml.find_all('a', href=lambda value: value and value.startswith("https://www.kth.se/places/room"))
 
                             for location in locations:
-                                print "location"
+                                # print "location"
                                 try:
-                                    print location
+                                    # print location
                                     location = location.text
                                     print "FETCHING ROOM"
                                     # print location
-                                    print codevar
-                                    print yearvar
+                                    # print codevar
+                                    # print yearvar
 
                                     roomobj = create_or_fetch_roomobj(location)
                                     create_room_date_connection(roomobj, dateobj)
 
                                     # kolla vidare classobject - det ballar ur
                                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-                                    print "xxx"
-                                    print classobj.starttime
+                                    # print "xxx"
+                                    # print classobj.starttime
                                     create_room_class_connection(roomobj, classobj)
 
                                 except Exception, e:
                                     varcode = "NO ROOM"
                                     print varcode
                                     classobj = create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj)
-                                    print "yyy"
-                                    print classobj.starttime
+                                    # print "yyy"
+                                    # print classobj.starttime
                                     # create_room_class_connection(roomobj, classobj)
                                     continue
                 except Exception, e:
