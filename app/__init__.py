@@ -957,7 +957,7 @@ def create_or_fetch_courseobj(code, year):
         print "code and year"
         courseobj = db.session.query(Courses).filter(and_(Courses.code == code, Courses.year == year)).subquery()
         print "subquery"
-        alreadycourse = session.query(courseobj.exists()).scalar()
+        alreadycourse = db.session.query(courseobj.exists()).scalar()
 
         if alreadycourse:
             print "COURSEOBJECT EXISTS ALREADY"
@@ -1156,7 +1156,7 @@ def create_or_fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
 
     if starttimevar and endtimevar and courseobj and dateobj:
             classobj = db.session.query(Classes).join(Classes.courses).join(Classes.rooms).join(Classes.dates).filter(and_(Courses.id == courseobj.id, Dates.id == dateobj.id, Classes.starttime == starttimevar, Classes.endtime == endtimevar)).subquery()
-            alreadyclass = session.query(classobj.exists()).scalar()
+            alreadyclass = db.session.query(classobj.exists()).scalar()
 
             if alreadyclass:
                 print "CLASSOBJECT EXISTS ALREADY"
