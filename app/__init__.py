@@ -2023,7 +2023,7 @@ def slotsfromsocial():
                     fullcourselink = "https://www.kth.se"
                     fullcourselink = fullcourselink + item['href']
                     print idx
-                    print fullcourselink
+                    # print fullcourselink
                     url = br.open(fullcourselink)
 
                     xml = BeautifulSoup(url)
@@ -2038,7 +2038,7 @@ def slotsfromsocial():
                     xml1 = xml.find_all('a', href=lambda value: value and value.startswith(courselink1))
                     xml2 = xml.find_all('a', href=lambda value: value and value.startswith(courselink2))
                     xml = xml1 + xml2
-                    print xml
+                    # print xml
                     for idx, item in enumerate(xml):
                         print "inner"
                         print idx
