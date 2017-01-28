@@ -447,7 +447,6 @@ def mycourseslist():
     '''
 
 
-
 def subjectslistjson():
     templist = db.session.query(Subjects.name).all()
 
