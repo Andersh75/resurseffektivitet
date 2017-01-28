@@ -1969,9 +1969,11 @@ def editslot():
             idvar = request.form['entity_key']
 
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
+            print classobj.id
             classobj.content = contentvar
             #classobj.info = infovar
             db.session.commit()
+            print "zzzz"
 
             courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
             print courseobj.id
