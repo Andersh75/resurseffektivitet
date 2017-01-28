@@ -1974,7 +1974,7 @@ def editslot():
             for item in teacherlist:
                 print item
 
-            teacherobj = db.session.query(Teachers).filter(Teacher.id == item).first()
+            teacherobj = db.session.query(Teachers).filter(Teachers.id == item).first()
             print teacherobj.email
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
             print classobj.id
