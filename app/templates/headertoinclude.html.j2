@@ -221,7 +221,13 @@
 
             $(".edit-movie-quote").click( function() {
                 $("#edit-slot-modal .modal-title").html("Edit content for slot");
-                $("#edit-slot-modal button[type=submit]").html("Add quote");
+                $("#edit-slot-modal button[type=submit]").html("Save");
+
+                quote = $(this).find(".quote").htlm();
+                entityKey = $(this).find(".entity-key").htlm();
+
+                $("#edit-slot-modal input[name=quote]").val(quote);
+                $("#edit-slot-modal input[name=entity_key]").val(entityKey)
             });
 
             //$.fn.editable.defaults.mode = 'inline';

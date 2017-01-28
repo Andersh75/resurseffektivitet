@@ -1905,7 +1905,6 @@ def user_edit_content(page):
 
 
 
-
 @app.route('/deleteclass/<int:idvar>', methods=['GET', 'POST'])
 def deleteclass(idvar):
 
