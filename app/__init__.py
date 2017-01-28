@@ -1701,6 +1701,7 @@ def login_page():
 
 
 
+
 @app.route('/register/', methods=["GET", "POST"])
 def register_page():
 
