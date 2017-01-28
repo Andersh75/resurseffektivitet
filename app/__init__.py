@@ -1972,7 +1972,7 @@ def editslot():
             print idvar
             teacherlist = request.form['tags']
             print "XXXX"
-            print teacherlist
+            #print teacherlist
 
             for item in teacherlist:
                 print "HEJ"
