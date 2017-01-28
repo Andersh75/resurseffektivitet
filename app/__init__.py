@@ -1970,7 +1970,7 @@ def editslot():
 
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
             classobj.content = contentvar
-            classobj.info = infovar
+            #classobj.info = infovar
             db.session.commit()
 
             courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
