@@ -12,6 +12,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
 
@@ -114,12 +116,9 @@
                     <div class="form-group">
                       <label class="col-sm-2 ">About the class</label>
                       <div class="col-sm-10">
-                          <select multiple class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="js-example-data-array"></select>
+                          <select class="js-example-data-array-selected">
+                              <option value="2" selected="selected">duplicate</option>
                           </select>
                       </div>
                     </div>
@@ -242,6 +241,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('select').select2();
 
 
             $(".edit-slots").click( function() {
@@ -341,7 +341,15 @@
 
 
 
+            var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
 
+            $(".js-example-data-array").select2({
+                data: data
+            });
+
+            $(".js-example-data-array-selected").select2({
+                data: data
+            });
 
 
         });
