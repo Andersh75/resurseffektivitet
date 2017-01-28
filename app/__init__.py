@@ -311,6 +311,15 @@ def roomsslots(roomid):
     return templist
 
 
+def slotsrooms(classid):
+    templist = []
+    tempvar = db.session.query(Rooms.name, Rooms.id).join(Rooms.classes).filter(Classes.id == classid).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
+
+
 def roomtypesuseincourse(courseid, roomtypeid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.rooms).join(Rooms.roomtypes).join(Classes.courses).filter(and_(Courses.id == courseid, Roomtypes.id == roomtypeid)).all()
     return templist[0][0]
