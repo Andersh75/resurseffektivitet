@@ -1963,11 +1963,13 @@ def editslot():
 
         if request.method == "POST":
 
+            infovar = request.form['info']
             contentvar = request.form['quote']
             idvar = request.form['entity_key']
 
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
             classobj.content = contentvar
+            classobj.info = infovar
             db.session.commit()
 
             courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
