@@ -1894,6 +1894,42 @@ def user_edit_content(page):
     return json.dumps(result)
 
 
+
+
+
+@app.route('/deleteclass/<int:idvar>', methods=['GET', 'POST'])
+def user_edit_content(idvar):
+
+    error = ''
+    try:
+
+        if request.method == "POST":
+
+            courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
+
+            classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
+            db.session.delete(classobj)
+            db.session.commit()
+
+
+        return redirect(url_for('onecourse_page', courseid=courseobj.id))
+
+    except Exception as e:
+        # flash(e)
+        return render_template("login.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Adding registred and expected students for all courses
 @app.route('/fetchregistredandexpectedstudents')
 def fetchregistredandexpectedstudents():

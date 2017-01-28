@@ -161,7 +161,9 @@
 							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
 						</td>
 						<td>
-							<a class="btn btn-danger btn-xs" href="#" role="button">Edit</a>
+							<form action="/deleteclass/{{ item[7] }}" method="post">
+    						<button type="submit" class="btn btn-danger">Delete</button>
+							</form>
 							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
 						</td>
 		            </tr>
