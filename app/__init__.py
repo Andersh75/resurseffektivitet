@@ -1969,7 +1969,7 @@ def editslot():
             print contentvar
             idvar = request.form['entity_key']
             print idvar
-            teacherlist = request.form['tags']
+            teacherlist = request.form['tags[]']
             print "XXXX"
             for item in teacherlist:
                 print "ITEM"
