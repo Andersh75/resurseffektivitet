@@ -84,12 +84,12 @@
       </div>
 
       <form action="/editslot" method="POST" class="form-horizontal" role="form">
-        <input type="text" name="quote">
+        <input type="text" name="entity_key" class="hidden">
         <div class="modal-body">
           <div class="form-group">
             <label class="col-sm-2 control-label">Content</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" />
+              <input type="text" name="quote" class="form-control">
             </div>
           </div>
         </div>
@@ -201,8 +201,17 @@
 
             $(".edit-movie-quote").click( function() {
                 $("#edit-slot-modal .modal-title").html("Edit content for slot");
-                $("#edit-slot-modal input[name=quote]").val("Edit content for input");
-                $("#edit-slot-modal button[type=submit]").html("working");
+
+
+
+
+                quote = $(this).find(".quote").htlm();
+                entityKey = $(this).find(".entity-key").htlm();
+
+                $("#edit-slot-modal button[type=submit]").val(quote)
+                $("#edit-slot-modal input[name=quote]").val("My value");
+                $("#edit-slot-modal input[name=entity_key]").val(entityKey)
+
             });
 
             //$.fn.editable.defaults.mode = 'inline';
