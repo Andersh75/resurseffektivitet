@@ -112,6 +112,7 @@
 		                <th class="text-left">Innehåll</th>
 		                <th class="text-left">Salar</th>
 		                <th class="text-left">Lärare</th>
+						<th class="text-left">Classes.id</th>
 						<th class="text-left">Edit</th>
 						<th class="text-left">Delete</th>
 		            </tr>
@@ -141,7 +142,7 @@
 		                <td class="text-left">0{{ item[4] }}-{{ item[5] }}</td>
 		                {% endif %}
 						{% if (amiresponsible(idtocode(courseid)) or amiexaminer(idtocode(courseid))) %}
-		                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ item[7] }}</a></td>
+		                <td class="text-left"><a href="#" id="content{{ rowloop.index }}" data-url="/user_edit_content/{{ rowloop.index }}" data-pk="{{ item[7] }}" data-title="Change your fullname">{{ item[6] }}</a></td>
 						{% else %}
 						<td class="text-left">{{ item[6] }}</td>
 						{% endif %}
@@ -156,6 +157,10 @@
 		                        <a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem[3]) }}" role="button">{{ subitem[2] }}</a>
 		                    {% endfor %}
 		                </td>
+						<td>
+							<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit-slot-modal" href="#" role="button">{{ item[7] }}</a>
+							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
+						</td>
 						<td>
 							<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit-slot-modal" href="#" role="button">Edit</a>
 							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
