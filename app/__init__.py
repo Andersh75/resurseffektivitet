@@ -1962,7 +1962,7 @@ def editslot():
     try:
 
         if request.method == "POST":
-            print "XXXX"
+
             infovar = request.form['info']
             print infovar
             contentvar = request.form['content']
@@ -1970,8 +1970,9 @@ def editslot():
             idvar = request.form['entity_key']
             print idvar
             teacherlist = request.form['tags']
+            print "XXXX"
             for item in teacherlist:
-                print item
+                print "ITEM"
 
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
             print classobj.id
