@@ -201,7 +201,7 @@
 
             $(".edit-movie-quote").click( function() {
                 $("#edit-slot-modal .modal-title").html("Edit content for slot");
-
+                $("#edit-slot-modal input[name=quote]").val("My value");
 
 
 
@@ -209,7 +209,7 @@
                 entityKey = $(this).find(".entity-key").htlm();
 
                 $("#edit-slot-modal button[type=submit]").val(quote)
-                $("#edit-slot-modal input[name=quote]").val("My value");
+
                 $("#edit-slot-modal input[name=entity_key]").val(entityKey)
 
             });
