@@ -1693,6 +1693,7 @@ app.jinja_env.globals.update(subjectsinslot=subjectsinslot, teachersincourse=tea
 app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year, slotsrooms=slotsrooms, classobjectfromid=classobjectfromid, roomslistjson=roomslistjson, teacherslistjson=teacherslistjson)
 
 
+
 @app.route('/')
 def index():
 
