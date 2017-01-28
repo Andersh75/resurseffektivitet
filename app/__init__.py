@@ -1973,6 +1973,9 @@ def editslot():
             print "XXXX"
             print teacherlist
 
+            for item in teacherlist:
+                print "HEJ"
+
 
 
             # teacherobj = db.session.query(Teachers).filter(Teachers.id == item).first()
