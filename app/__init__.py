@@ -1972,13 +1972,13 @@ def editslot():
             teacherlist = request.form['tags[]']
             print "XXXX"
             print teacherlist
-            
+
 
 
             # teacherobj = db.session.query(Teachers).filter(Teachers.id == item).first()
             # print teacherobj.email
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
-            print classobj.id
+            #print classobj.id
             classobj.content = contentvar
             #classobj.info = infovar
             db.session.commit()
