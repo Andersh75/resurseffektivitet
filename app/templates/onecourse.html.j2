@@ -116,7 +116,7 @@
 		                <th class="text-left">Salar</th>
 		                <th class="text-left">Lärare</th>
 						<th class="text-left">Classes.id</th>
-						<th class="text-left">Edit</th>
+						<th class="text-left edit-actions">Edit</th>
 						<th class="text-left">Delete</th>
 		            </tr>
 		            {% for item in scheduleInCourse(courseid): %}
@@ -164,8 +164,10 @@
 							<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit-slot-modal" href="#" role="button">{{ item[7] }}</a>
 							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
 						</td>
-						<td>
-							<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit-slot-modal" href="#" role="button">Edit</a>
+						<td class="edit-actions">
+							<button data-toggle="modal" data-target="#edit-slot-modal" type="button" class="edit-movie-quote  btn btn-warning btn-xs">Edit
+								<div class="hidden entity-key">{{ item[7] }}</div>
+							</button>
 							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
 						</td>
 						<td>

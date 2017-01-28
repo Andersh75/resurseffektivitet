@@ -1930,7 +1930,6 @@ def deleteclass(idvar):
 
 
 
-
 @app.route('/deletecourse/<int:idvar>', methods=['GET', 'POST'])
 def deletecourse(idvar):
 
