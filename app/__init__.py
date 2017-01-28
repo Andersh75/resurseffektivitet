@@ -1898,7 +1898,7 @@ def user_edit_content(page):
 
 
 @app.route('/deleteclass/<int:idvar>', methods=['GET', 'POST'])
-def user_edit_content(idvar):
+def deleteclass(idvar):
 
     error = ''
     try:
