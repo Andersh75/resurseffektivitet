@@ -1974,6 +1974,7 @@ def editslot():
             db.session.commit()
 
             courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
+            print courseobj.id
 
         return redirect(url_for('onecourse_page', courseid=courseobj.id))
 
