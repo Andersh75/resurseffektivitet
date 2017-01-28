@@ -201,7 +201,7 @@
 
             $(".edit-movie-quote").click( function() {
                 $("#edit-slot-modal .modal-title").html("Edit content for slot");
-                $("#edit-slot-modal button[type=submit]").html("Saving");
+
                 $("#edit-slot-modal input[name=quote]").html("Edit content for slot");
 
                 quote = $(this).find(".quote").htlm();
@@ -209,6 +209,7 @@
 
 
                 $("#edit-slot-modal input[name=entity_key]").val(entityKey)
+                $("#edit-slot-modal button[type=submit]").val(quote)
             });
 
             //$.fn.editable.defaults.mode = 'inline';
