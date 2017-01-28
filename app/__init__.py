@@ -1546,14 +1546,15 @@ def coursesfromdepartment3(templist):
             latestcoursesubq = db.session.query(Courses).filter(Courses.code == code).order_by(Courses.year.desc())
             existscourse = db.session.query(latestcoursesubq.exists()).scalar()
 
-            if existscourse:
+            if existscourse and teacherobj:
                 latestcourse = latestcoursesubq.first()
                 latestcourse.name = name
-                latestcourse.examiner_id = Teachers.query.filter_by(email=examiner).first().id
+                latestcourse.examiner_id = teacherobj.id
                 db.session.commit()
             else:
-                print "COURSE NOT EXISTING"
+                print "COURSE OR EXAMINER NOT EXISTING"
                 print code
+                print examiner
 
 
 # NOT READY
