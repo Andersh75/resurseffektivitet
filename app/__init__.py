@@ -1976,7 +1976,7 @@ def editslot():
 
             for item in teacherlist:
                 print "HEJ"
-                print item[
+                print item
 
             #print list(teacherlist)
             #print list(teacherlist[0])
