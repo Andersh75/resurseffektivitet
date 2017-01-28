@@ -4,10 +4,14 @@
 
 {% block onecourse %}
 	<div class ="container">
-		<h2 class="text-left col-lg-10 col-md-10 col-sm-10 col-xs-10">{{ courseobjectfromid(courseid).code }} {{ courseobjectfromid(courseid).name }}</h2>
-		<form action="/deletecourse/{{ courseid }}" method="post" class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">
-		<button type="submit" class="btn btn-danger">Delete {{ courseid }}</button>
-		</form>
+		<div class="text-left col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		<h2>{{ courseobjectfromid(courseid).code }} {{ courseobjectfromid(courseid).name }}</h2>
+		</div>
+		<div class="text-left col-lg-2 col-md-2 col-sm-2 col-xs-2">
+			<form action="/deletecourse/{{ courseid }}" method="post">
+				<button type="submit" class="btn btn-danger">Delete {{ courseid }}</button>
+			</form>
+		</div>
 		<br />
 
 
