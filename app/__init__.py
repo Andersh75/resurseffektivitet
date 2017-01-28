@@ -1967,6 +1967,7 @@ def editslot():
             print infovar
             contentvar = request.form['quote']
             idvar = request.form['entity_key']
+            print idvar
 
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
             print classobj.id
