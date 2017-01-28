@@ -498,6 +498,23 @@ def roomslistjson():
     return tempvar
 
 
+def teacherslistjson():
+    templist = db.session.query(Teachers.email).all()
+
+    tempvar = "[{"
+    id = 1
+    for item in templist[:-1]:
+        # print item
+        tempvar = tempvar + " id: " + str(id) + ", text: '" + item[0] + "' }, {"
+        id = id + 1
+    tempvar = tempvar + " id: '" + str(id) + "', text: '" + templist[-1][0] + "' }]"
+
+    # print tempvar
+    # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
+    # print testvar.password
+    return tempvar
+
+
 def amiexaminer(code):
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     already = db.session.query(exists().where(and_(Courses.code == code, Courses.examiner == testvar))).scalar()
@@ -1673,7 +1690,7 @@ app.jinja_env.globals.update(sumofonesteachingincourse=sumofonesteachingincourse
 app.jinja_env.globals.update(roomsslots=roomsslots, roomobjectfromid=roomobjectfromid, roomtypeobjectfromid=roomtypeobjectfromid, roomsperroomtype=roomsperroomtype, courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype)
 app.jinja_env.globals.update(teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible)
 app.jinja_env.globals.update(subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, mycoursesexaminer=mycoursesexaminer)
-app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year, slotsrooms=slotsrooms, classobjectfromid=classobjectfromid, roomslistjson=roomslistjson)
+app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year, slotsrooms=slotsrooms, classobjectfromid=classobjectfromid, roomslistjson=roomslistjson, teacherslistjson=teacherslistjson)
 
 
 @app.route('/')
