@@ -345,12 +345,12 @@
             var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
 
             $(".js-example-data-array").select2({
-                maximumSelectionLength: 2,
+                tags: true,
                 data: data
             });
 
             $(".js-example-data-array-selected").select2({
-                maximumSelectionLength: 2,
+                tags: true,
                 data: data
             });
 
