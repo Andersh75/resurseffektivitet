@@ -2034,6 +2034,7 @@ def fetchregistredandexpectedstudents():
 
 
 
+
 # Adding slots from schedule API for all courses
 def slotsfromscheduleapi(coursecode):
         tempdict = fetchinglistofslotspercourse(coursecode, "2011-01-01", "2018-06-30")
