@@ -1978,8 +1978,8 @@ def editslot():
                 print "HEJ"
                 print item[
 
-            print list(teacherlist)
-            print list(teacherlist[0])
+            #print list(teacherlist)
+            #print list(teacherlist[0])
 
             # teacherobj = db.session.query(Teachers).filter(Teachers.id == item).first()
             # print teacherobj.email
