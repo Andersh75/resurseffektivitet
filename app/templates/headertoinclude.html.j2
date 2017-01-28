@@ -117,9 +117,6 @@
                       <label class="col-sm-2 ">About the class</label>
                       <div class="col-sm-10">
                           <select class="js-example-data-array"></select>
-                          <select class="js-example-data-array-selected">
-                              <option value="2" selected="selected">duplicate</option>
-                          </select>
                       </div>
                     </div>
 
@@ -344,6 +341,7 @@
             var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
 
             $(".js-example-data-array").select2({
+                maximumSelectionLength: 2
                 data: data
             });
 
