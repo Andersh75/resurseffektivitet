@@ -1700,6 +1700,7 @@ def login_page():
         return render_template("login.html", error=error)
 
 
+
 @app.route('/register/', methods=["GET", "POST"])
 def register_page():
 
