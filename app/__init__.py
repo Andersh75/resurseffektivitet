@@ -1931,6 +1931,27 @@ def deleteclass(idvar):
 
 
 
+@app.route('/deletecourse/<int:idvar>', methods=['GET', 'POST'])
+def deleteclass(idvar):
+
+    error = ''
+    try:
+
+        if request.method == "POST":
+
+            courseobj = db.session.query(Courses).filter(Courses.id == idvar).first()
+            db.session.delete(courseobj)
+            db.session.commit()
+
+
+        return redirect(url_for('allcourses_page'))
+
+    except Exception as e:
+        flash(e)
+
+    return render_template("login.html")
+
+
 
 
 

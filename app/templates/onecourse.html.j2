@@ -5,6 +5,9 @@
 {% block onecourse %}
 	<div class ="container">
 		<h2>{{ courseobjectfromid(courseid).code }} {{ courseobjectfromid(courseid).name }}</h2>
+		<form action="/deletecourse/{{ courseid }}" method="post">
+		<button type="submit" class="btn btn-danger">Delete {{ courseid }}</button>
+		</form>
 		<br />
 
 
