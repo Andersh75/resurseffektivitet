@@ -1962,8 +1962,9 @@ def editslot():
     try:
 
         if request.method == "POST":
-
+            print "XXXX"
             infovar = request.form['info']
+            print infovar
             contentvar = request.form['quote']
             idvar = request.form['entity_key']
 
