@@ -1969,6 +1969,9 @@ def editslot():
             print contentvar
             idvar = request.form['entity_key']
             print idvar
+            teacherlist = request.form['tags']
+            for item in teacherlist:
+                print item
 
             classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
             print classobj.id
