@@ -1932,7 +1932,7 @@ def deleteclass(idvar):
 
 
 @app.route('/deletecourse/<int:idvar>', methods=['GET', 'POST'])
-def deleteclass(idvar):
+def deletecourse(idvar):
 
     error = ''
     try:
