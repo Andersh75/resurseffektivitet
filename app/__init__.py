@@ -2039,7 +2039,6 @@ def slotsfromscheduleapi(coursecode):
         parselistofslotspercourse(tempdict)
 
 
-
 # Adding slots from Social for all courses
 @app.route('/slotsfromapiandsocial')
 def slotsfromsocial():
