@@ -113,6 +113,7 @@
 		                <th class="text-left">Salar</th>
 		                <th class="text-left">Lärare</th>
 						<th class="text-left">Edit</th>
+						<th class="text-left">Delete</th>
 		            </tr>
 		            {% for item in scheduleInCourse(courseid): %}
 		            {% set rowloop = loop %}
@@ -157,6 +158,10 @@
 		                </td>
 						<td>
 							<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit-slot-modal" href="#" role="button">Edit</a>
+							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
+						</td>
+						<td>
+							<a class="btn btn-danger btn-xs" href="#" role="button">Edit</a>
 							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
 						</td>
 		            </tr>

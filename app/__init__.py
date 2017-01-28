@@ -49,6 +49,7 @@ import mechanize
 # import time
 
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1111111111@localhost/f43'
 db = SQLAlchemy(app)
