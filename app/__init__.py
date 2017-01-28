@@ -156,7 +156,7 @@ class Courses(db.Model):
     studentsregistred = db.Column(db.Integer)
     startweek = db.Column(db.String(30))
     endweek = db.Column(db.String(30))
-    classes = db.relationship('Classes', backref='courses', lazy='dynamic')
+    classes = db.relationship('Classes', cascade='all, delete, delete-orphan', backref='courses', lazy='dynamic')
     examiner_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     responsible_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     assistantone_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
