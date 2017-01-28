@@ -372,6 +372,12 @@ def courseobjectfromid(courseid):
     return testvar
 
 
+def classobjectfromid(classid):
+    testvar = db.session.query(Classes).filter(Classes.id == classid).first()
+    # print testvar.password
+    return testvar
+
+
 def myobject():
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     # print testvar.password
@@ -1649,13 +1655,14 @@ app.jinja_env.globals.update(sumofonesteachingincourse=sumofonesteachingincourse
 app.jinja_env.globals.update(roomsslots=roomsslots, roomobjectfromid=roomobjectfromid, roomtypeobjectfromid=roomtypeobjectfromid, roomsperroomtype=roomsperroomtype, courseobjectfromid=courseobjectfromid, onesslots=onesslots, myobjectfromid=myobjectfromid, sumofonesteachingincourseperroomtypeperhour=sumofonesteachingincourseperroomtypeperhour, sumofonesteachingincourseperroomtype=sumofonesteachingincourseperroomtype)
 app.jinja_env.globals.update(teachersonslot=teachersonslot, roomsonslot=roomsonslot, myslots=myslots, idtocode=idtocode, defteachersondate=defteachersondate, roomsOnDate=roomsOnDate, scheduleInCourse=scheduleInCourse, allcourses=allcourses, amiteaching=amiteaching, amiresponsible=amiresponsible, amiexaminer=amiexaminer, myobject=myobject, mycoursesexaminerorresponsible=mycoursesexaminerorresponsible)
 app.jinja_env.globals.update(subjectsinslot=subjectsinslot, teachersincourse=teachersincourse, onescoursesteaching=onescoursesteaching, onescoursesresponsible=onescoursesresponsible, onescoursesexaminerorresponsible=onescoursesexaminerorresponsible, onescoursesexaminer=onescoursesexaminer, allteachers=allteachers, mycoursesteaching=mycoursesteaching, mycoursesexaminer=mycoursesexaminer)
-app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year, slotsrooms=slotsrooms)
+app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year, slotsrooms=slotsrooms, classobjectfromid=classobjectfromid)
 
 
 @app.route('/')
 def index():
 
     return redirect(url_for('login_page'))
+
 
 
 @app.route('/login/', methods=["GET", "POST"])
