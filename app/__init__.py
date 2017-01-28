@@ -1906,7 +1906,6 @@ def user_edit_content(page):
 
 
 
-
 @app.route('/editslot', methods=['GET', 'POST'])
 def editslot():
 
