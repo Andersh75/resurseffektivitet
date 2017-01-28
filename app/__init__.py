@@ -1694,6 +1694,7 @@ app.jinja_env.globals.update(allcourses_one_year=allcourses_one_year, slotsrooms
 
 
 
+
 @app.route('/')
 def index():
 
