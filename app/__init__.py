@@ -1966,6 +1966,7 @@ def editslot():
             infovar = request.form['info']
             print infovar
             contentvar = request.form['quote']
+            print contentvar
             idvar = request.form['entity_key']
             print idvar
 
