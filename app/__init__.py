@@ -1915,8 +1915,9 @@ def user_edit_content(idvar):
         return redirect(url_for('onecourse_page', courseid=courseobj.id))
 
     except Exception as e:
-        # flash(e)
-        return render_template("login.html")
+        flash(e)
+
+    return render_template("login.html")
 
 
 
