@@ -1906,6 +1906,36 @@ def user_edit_content(page):
 
 
 
+
+@app.route('/editslot', methods=['GET', 'POST'])
+def editslot():
+
+    error = ''
+    try:
+
+        if request.method == "POST":
+
+            contentvar = request.form['quote']
+            idvar = request.form['entity_key']
+
+            classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
+            classobj.content = contentvar
+            db.session.commit()
+
+            courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
+
+        return redirect(url_for('onecourse_page', courseid=courseobj.id))
+
+    except Exception as e:
+        flash(e)
+
+    return render_template("login.html")
+
+
+
+
+
+
 @app.route('/deleteclass/<int:idvar>', methods=['GET', 'POST'])
 def deleteclass(idvar):
 
