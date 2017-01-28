@@ -116,15 +116,22 @@
                     <div class="form-group">
                       <label class="col-sm-2 ">About the class</label>
                       <div class="col-sm-10">
-                          <select class="js-example-data-array"></select>
-
-                          <select class="js-example-data-array-selected">
-                            <option value="2" selected="selected">duplicate</option>
-                          </select>
+                          <select class="js-example-tags form-control select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true">
+                                  <option selected="selected">orange</option>
+                                  <option>white</option>
+                                  <option selected="selected">purple</option>
+                                <option value="red">red</option>
+                                <option value="blue">blue</option>
+                                <option value="green">green</option>
+                        </select>
                       </div>
                     </div>
 
-
+                    <select class="js-example-tags form-control select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true">
+                            <option selected="selected">orange</option>
+                            <option>white</option>
+                            <option selected="selected">purple</option>
+                          <option value="red">red</option><option value="blue">blue</option><option value="green">green</option></select>
 
 
 
@@ -352,6 +359,10 @@
             $(".js-example-data-array-selected").select2({
                 tags: true,
                 data: data
+            });
+
+            $(".js-example-tags").select2({
+                tags: true
             });
 
 
