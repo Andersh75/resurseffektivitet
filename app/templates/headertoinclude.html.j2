@@ -245,7 +245,7 @@
                          type : 'POST',
                          success: function(data)
                          {
-                            alert($(".js-example-data-array-selected").select2('data'));
+                            alert("Selected value is: "+$(".js-example-data-array-selected").select2("val"));
                             $('#myModal').modal('hide');
                             window.location.reload(true);
 
