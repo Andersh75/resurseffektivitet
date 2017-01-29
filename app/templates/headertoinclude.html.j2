@@ -231,29 +231,7 @@
 
 
 
-            $('form').on('submit', function(event) {
 
-                $.ajax({
-                    data : {
-                        info : $('#info').val(),
-                        content : $('#content').val(),
-                        entityKey : $('#entityKey'),val()
-                    },
-                    type : 'POST',
-                    urs : '/editslot'
-                })
-                .done(function(data) {
-                    if (data.error) {
-                        $('#errorAlert').text(data.error).show();
-                        //$('#').hide();
-                    }
-                    else {
-                        $('#successAlert').text(data.content).show();
-                        //$('#errorAlert').hide();
-                    }
-                });
-                event.preventDefault();
-            });
 
             $(".edit-slots").click( function() {
                 $("#edit-slot-modal .modal-title").html("Edit content for slot");
