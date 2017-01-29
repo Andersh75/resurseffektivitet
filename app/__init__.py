@@ -213,10 +213,11 @@ class Render(QWebPage):
 '''
 
 
+
 # Lista med kurstillfallen som anvands i en kurs
 def scheduleInCourse(course):
     templist = []
-    tempvar = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id).distinct().join(Dates.classes).join(Classes.courses).filter(Courses.id == course).order_by(Dates.date).order_by(Classes.starttime).all()
+    tempvar = db.session.query(Dates.date, func.year(Dates.date), func.month(Dates.date), func.day(Dates.date), Classes.starttime, Classes.endtime, Classes.content, Classes.id, Classes.info).distinct().join(Dates.classes).join(Classes.courses).filter(Courses.id == course).order_by(Dates.date).order_by(Classes.starttime).all()
     for item in tempvar:
         print "x"
         templist.append(item)

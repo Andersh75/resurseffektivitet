@@ -86,8 +86,12 @@
               </div>
               <div class="modal-body">
                   <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="text" class="form-control" name="myModalInfo" id="myModalInfo" placeholder="info...">
+                      <label for="exampleInputEmail1">Info block</label>
+                      <input type="text" class="form-control" name="myModalInfo" id="myModalInfo" placeholder="Info...">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Content</label>
+                      <input type="text" class="form-control" name="myModalContent" id="myModalContent" placeholder="Content...">
                   </div>
 
 
@@ -213,6 +217,8 @@
                   e.preventDefault();
                   $("#myModalTitle").html('Hello, my name is '+$(this).data('name')+'!');
                   $("#myModalID").val($(this).data('id'));
+                  $("#myModalInfo").val($(this).data('info'));
+                  $("#myModalContent").val($(this).data('content'));
 
                   $('#myModal').modal('show');
                   //var infovar = $(this).find("#myModalInfo").html();
