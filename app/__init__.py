@@ -1976,6 +1976,7 @@ def editslot():
     contentvar = request.form['myModalContent']
     optionsvar = request.form['myModalOptions']
     print optionsvar[0]
+    print optionsvar[1]
     print contentvar
     idvar = request.form['myModalID']
     print idvar
