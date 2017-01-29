@@ -239,8 +239,8 @@
                          data: {
                              info: $("#myModalInfo").val(),
                              content: $("#myModalContent").val(),
-                           entityKey: $("#myModalID").val()
-                           //fruits: $("#myModalOptions").val()
+                           entityKey: $("#myModalID").val(),
+                           fruits: $(".js-example-data-array-selected").select2("val"))
                          },
                          type : 'POST',
                          success: function(data)
