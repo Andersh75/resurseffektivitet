@@ -1960,13 +1960,12 @@ def user_edit_content(page):
 
 
 
+
 @app.route('/editslot', methods=['POST'])
 def editslot():
 
     infovar = request.form['info']
     print infovar
-    fruitsvar = request.form['fruits']
-    print fruitsvar[0]
     #for item in fruitsvar:
     #    print item
     contentvar = request.form['content']

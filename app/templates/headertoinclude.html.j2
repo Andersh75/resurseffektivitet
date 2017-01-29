@@ -239,13 +239,13 @@
                          data: {
                              info: $("#myModalInfo").val(),
                              content: $("#myModalContent").val(),
-                           entityKey: $("#myModalID").val(),
-                           fruits: $("#myModalOptions").select2("val")
+                           entityKey: $("#myModalID").val()
+                          // fruits: $("#myModalOptions").select2("val")
                          },
                          type : 'POST',
                          success: function(data)
                          {
-                            alert("Selected value is: "+$(".js-example-data-array-selected").select2("val"));
+                            alert("Selected value is: "+$("#myModalOptions").select2("val"));
                             $('#myModal').modal('hide');
                             window.location.reload(true);
 
