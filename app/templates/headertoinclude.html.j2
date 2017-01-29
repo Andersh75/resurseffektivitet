@@ -86,7 +86,7 @@
                 <h4 class="modal-title" id="myModalLabel">Edit class</h4>
               </div>
 
-              <form class="form-horizontal" role="form">
+              <form class="form-horizontal" id="myForm" role="form">
 
                 <input type="text" id="entityKey" name="entity_key" class="hidden">
                 <div class="modal-body">
@@ -243,28 +243,26 @@
                 $("#edit-slot-modal input[name=content]").val(contentvar);
                 $("#edit-slot-modal input[name=entity_key]").val(entityKey);
 
-                $('button#successAlert').click(function(event) {
+                $('#successAlert').on('click', function(event) {
+                    event.preventDefault();
 
                     $.ajax({
-                        data : {
-                            info : $('#info').val(),
-                            content : $('#content').val(),
-                            entityKey : $('#entityKey'),val()
+                        data: {
+                        info: $('#info').val(),
+                        content: $('#content').val(),
+                        entityKey: $('#entityKey'),val()
                         },
                         type : 'POST',
-                        url : '/editslot'
-                    })
-                    .done(function(data) {
-                        if (data.error) {
-                            $('#errorAlert').text(data.error).show();
-                            //$('#').hide();
-                        }
-                        else {
-                            $('#successAlert').text(data.content).show();
-                            //$('#errorAlert').hide();
+                        url : '/editslot',
+                        success: function(response) {
+                            alert(response['response']);
+                        },
+                        error: function() {
+                            alert('Error');
                         }
                     });
-                    event.preventDefault();
+                    return false;
+
 
                 });
 
