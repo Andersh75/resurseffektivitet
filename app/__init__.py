@@ -1962,6 +1962,7 @@ def user_edit_content(page):
 
 
 
+
 @app.route('/editslot', methods=['POST'])
 def editslot():
 
@@ -1974,7 +1975,7 @@ def editslot():
     #for item in fruitsvar:
     #    print item['name']
     contentvar = request.form['myModalContent']
-    optionsvar = request.form['myModalOptions[]']
+    optionsvar = request.form.getlist('myModalOptions')
     print optionsvar
     #print optionsvar[1]
     print contentvar
