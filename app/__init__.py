@@ -299,6 +299,7 @@ def onescoursesexaminer(teacherid):
     return templist
 
 
+
 def onesteachingincourse(courseid, teacherid):
     templist = db.session.query(func.sum(Classes.endtime - Classes.starttime)).join(Classes.teachers).join(Classes.courses).filter(and_(Courses.id == courseid, Teachers.id == teacherid)).all()
     return templist
