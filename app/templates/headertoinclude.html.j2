@@ -243,30 +243,32 @@
                 $("#edit-slot-modal input[name=content]").val(contentvar);
                 $("#edit-slot-modal input[name=entity_key]").val(entityKey);
 
-                $('body').on('#successAlert', 'click', function() {
-                    //event.preventDefault();
-
-                    $.ajax({
-                        data: {
-                        info: $('#info').val(),
-                        content: $('#content').val(),
-                        entityKey: $('#entityKey'),val()
-                        },
-                        type : 'POST',
-                        url : '/editslot',
-                        success: function(response) {
-                            alert(response['response']);
-                        },
-                        error: function() {
-                            alert('Error');
-                        }
-                    });
 
 
+            });
+
+            $('body').on('#successAlert', 'click', function() {
+                //event.preventDefault();
+
+                $.ajax({
+                    data: {
+                    info: $('#info').val(),
+                    content: $('#content').val(),
+                    entityKey: $('#entityKey'),val()
+                    },
+                    type : 'POST',
+                    url : '/editslot',
+                    success: function(response) {
+                        alert(response['response']);
+                    },
+                    error: function() {
+                        alert('Error');
+                    }
                 });
 
 
             });
+
 
 
             //$.fn.editable.defaults.mode = 'inline';
