@@ -214,6 +214,7 @@ class Render(QWebPage):
 
 
 
+
 # Lista med kurstillfallen som anvands i en kurs
 def scheduleInCourse(course):
     templist = []
