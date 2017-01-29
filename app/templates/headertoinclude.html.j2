@@ -85,6 +85,14 @@
                 <h4 class="modal-title" id="myModalTitle"></h4>
               </div>
               <div class="modal-body">
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="text" class="form-control" name="myModalInfo" id="myModalInfo" placeholder="info...">
+                  </div>
+
+
+
+
                 <div class="alert hidden" role="alert" id="modalAlert"></div>
                 <input type="hidden" id="myModalID" name="myModalID" value="" />
                 <p>Modal example.</p>
@@ -207,6 +215,8 @@
                   $("#myModalID").val($(this).data('id'));
 
                   $('#myModal').modal('show');
+                  //var infovar = $(this).find("#myModalInfo").html();
+
 
               });
 
@@ -214,6 +224,7 @@
                   $.ajax({
                          url: '/editslot',
                          data: {
+                             info: $("#myModalInfo").val(),
                              content: $("#myModalTitle").val(),
                            entityKey: $("#myModalID").val()
                          },

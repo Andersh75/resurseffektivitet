@@ -1958,14 +1958,14 @@ def user_edit_content(page):
 @app.route('/editslot', methods=['POST'])
 def editslot():
 
-    #infovar = request.form['info']
-    #print infovar
+    infovar = request.form['info']
+    print infovar
     contentvar = request.form['content']
     print contentvar
     idvar = request.form['entityKey']
     print idvar
     classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
-    #classobj.info = infovar
+    classobj.info = infovar
     classobj.content = contentvar
     db.session.commit()
 
