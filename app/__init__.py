@@ -238,7 +238,7 @@ def roomsOnDate(date, course):
 # Lista med salar som anvands i en kurs
 def defteachersondate(date, course):
     templist = []
-    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials, Teachers.id).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials, Teachers.id, Teachers.email).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
     for item in tempvar:
         templist.append(item)
     return templist
@@ -1993,7 +1993,7 @@ def editslot():
         teacherobj = Teachers.query.filter_by(id=item).first()
         create_teacher_class_connection(teacherobj, classobj)
         create_teacher_date_connection(teacherobj, dateobj)
-    
+
     db.session.commit()
 
     return jsonify({'content': contentvar})
