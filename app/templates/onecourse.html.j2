@@ -173,9 +173,11 @@
 						</td>
 						<td class="edit-actions">
 							<button data-toggle="modal" data-target="#edit-slot-modal" type="button" class="edit-slots btn btn-warning btn-xs">Edit
-								<div class="hidden entity-key">{{ item[7] }}</div>
-								<div class="hidden content">{{ item[6] }}</div>
+
 							</button>
+							<a class="openModalLink" href="/" data-id="{{ item[7] }}" data-name="{{ item[6] }}">
+				              <span> Click me to open modal</span>
+				            </a>
 							<!-- <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" href="{{ url_for('oneslot_page', slotid=item[7]) }}" role="button">Edit</a> -->
 						</td>
 						<td>
@@ -189,11 +191,6 @@
 		        </tbody>
 		    </table>
 
-			        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			            <a class="openModalLink" href="/" data-id="1234" data-name="Stackoverflow answer">
-			              <span> Click me to open modal</span>
-			            </a>
-			        </div>
 
 
 
