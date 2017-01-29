@@ -1977,15 +1977,23 @@ def editslot():
     #    print item['name']
     contentvar = request.form['myModalContent']
     optionsvar = request.form.getlist('myModalOptions')
-    for item in optionsvar:
-        print item
+
     #print optionsvar[1]
     print contentvar
     idvar = request.form['myModalID']
     print idvar
+
+    dateobj = db.session.query(Dates).join(Dates.classes).filter(Classes.id == idvar).first()
     classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
     classobj.info = infovar
     classobj.content = contentvar
+
+    for item in optionsvar:
+        print item
+        teacherobj = Teachers.query.filter_by(id=item).first()
+        create_teacher_class_connection(teacherobj, classobj)
+        create_teacher_date_connection(teacherobj, dateobj)
+    
     db.session.commit()
 
     return jsonify({'content': contentvar})
