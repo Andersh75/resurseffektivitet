@@ -243,32 +243,34 @@
                 $("#edit-slot-modal input[name=content]").val(contentvar);
                 $("#edit-slot-modal input[name=entity_key]").val(entityKey);
 
-            });
+                $('form').on('submit', function(event) {
 
-
-            $('form').on('submit', function(event) {
-
-                $.ajax({
-                    data : {
-                        info : $('#info').val(),
-                        content : $('#content').val(),
-                        entityKey : $('#entityKey'),val()
-                    },
-                    type : 'POST',
-                    urs : '/editslot'
-                })
-                .done(function(data) {
-                    if (data.error) {
-                        $('#errorAlert').text(data.error).show();
-                        //$('#').hide();
-                    }
-                    else {
-                        $('#successAlert').text(data.content).show();
-                        //$('#errorAlert').hide();
-                    }
+                    $.ajax({
+                        data : {
+                            info : $('#info').val(),
+                            content : $('#content').val(),
+                            entityKey : $('#entityKey'),val()
+                        },
+                        type : 'POST',
+                        urs : '/editslot'
+                    })
+                    .done(function(data) {
+                        if (data.error) {
+                            $('#errorAlert').text(data.error).show();
+                            //$('#').hide();
+                        }
+                        else {
+                            $('#successAlert').text(data.content).show();
+                            //$('#errorAlert').hide();
+                        }
+                    });
+                    event.preventDefault();
                 });
-                event.preventDefault();
+
+
             });
+
+
 
             //$.fn.editable.defaults.mode = 'inline';
             //$('select').select2();

@@ -1954,7 +1954,6 @@ def user_edit_content(page):
     return json.dumps(result)
 
 
-
 @app.route('/editslot', methods=['POST'])
 def editslot():
 
