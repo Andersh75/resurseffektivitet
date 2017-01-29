@@ -212,11 +212,12 @@
 
               $("#myModalButton").click(function(){
                   $.ajax({
-                         url: '/function.php',
+                         url: '/editslot',
                          data: {
-                           id: $("#myModalID").val()
+                             content: $("#myModalTitle").val()
+                           entityKey: $("#myModalID").val()
                          },
-                         dataType: 'json',
+                         type : 'POST',
                          success: function(data)
                          {
 
