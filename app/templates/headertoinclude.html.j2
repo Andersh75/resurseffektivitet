@@ -247,19 +247,7 @@
             });
 
 
-            $(".edit-slots").click( function() {
-                $("#edit-slot-modal .modal-title").html("Edit content for slot");
-                $("#edit-slot-modal button[type=submit]").html("Saving");
-
-                contentvar = $(this).find(".content").html();
-                entityKey = $(this).find(".entity-key").html();
-
-                $("#edit-slot-modal input[name=content]").val(contentvar);
-                $("#edit-slot-modal input[name=entity_key]").val(entityKey);
-            });
-
-
-
+            
 
             //$.fn.editable.defaults.mode = 'inline';
             //$('select').select2();
