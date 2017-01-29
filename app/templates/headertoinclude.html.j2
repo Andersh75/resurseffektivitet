@@ -98,7 +98,6 @@
                   <div class="form-group">
                       <label for="exampleInputEmail1">Select</label>
                         <select class="js-example-data-array-selected form-control" id="myModalOptions" name="myModalOptions" multiple="multiple">
-                            <option value="2" selected="selected">duplicate</option>
                         </select>
                   </div>
 
@@ -237,7 +236,7 @@
               });
 
               $("#myModalButton").click(function(){
-                  alert($('form').serialize());
+                  //alert($('form').serialize());
 
                   $.ajax({
                          url: '/editslot',
@@ -254,7 +253,7 @@
                          success: function(data)
                          {
                             //alert("Selected value is: "+$("#myModalOptions").select2("val"));
-                            alert($('#myModalOptions').serializeArray());
+                            //alert($('#myModalOptions').serializeArray());
                             $('#myModal').modal('hide');
                             window.location.reload(true);
 

@@ -226,6 +226,7 @@ def scheduleInCourse(course):
     return templist
 
 
+
 # Lista med salar som anvands i en kurs
 def roomsOnDate(date, course):
     templist = []
