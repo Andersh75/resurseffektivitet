@@ -77,60 +77,37 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="edit-slot-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-
-          <div class="modal-dialog" role="document">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+          <div class="modal-dialog ">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit class</h4>
+                <h4 class="modal-title" id="myModalTitle"></h4>
               </div>
-
-              <form class="form-horizontal" id="myForm" role="form">
-
-                <input type="text" id="entityKey" name="entity_key" class="hidden">
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">Content</label>
-                    <div class="col-sm-10">
-                      <input type="text" name="content" id="content" class="form-control show">
-                    </div>
-                  </div>
-
-
-                    <div class="form-group">
-                      <label class="col-sm-2 ">About the class</label>
-                      <div class="col-sm-10">
-                          <textarea class="form-control" name="info" id="info" rows="1"></textarea>
-                      </div>
-                    </div>
-
-
-                    <!--
-                    <div class="form-group">
-                      <label class="col-sm-2 ">Teachers</label>
-                      <div class="col-sm-10">
-                          <select class="js-example-tags-teachers form-control select2-hidden-accessible" id="tags" multiple="multiple" name="tags" tabindex="-1" aria-hidden="true"></select>
-                      </div>
-                    </div>
-                -->
-
-
-
-
-                </div>
-
-
-
-
-                <div class="modal-footer">
-                <button type="button" id="errorAlert" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="submit" onclick="saveData()" id="successAlert" class="btn btn-primary">Save</button>
-                </div>
-              </form>
+              <div class="modal-body">
+                <div class="alert hidden" role="alert" id="modalAlert"></div>
+                <input type="hidden" id="myModalID" name="myModalID" value="" />
+                <p>Modal example.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="myModalButton">Submit</button>
+              </div>
             </div>
           </div>
         </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <a class="openModalLink" href="/" data-id="1234" data-name="Stackoverflow answer">
+              <span> Click me to open modal</span>
+            </a>
+        </div>
+    </div>
+
+
+
+
+
     </div> <!-- /container -->
 
 
@@ -229,6 +206,42 @@
         $(document).ready(function() {
             //$('select').select2();
 
+
+            $(".openModalLink").click(function(e) {
+                  e.preventDefault();
+                  $("#myModalTitle").html('Hello, my name is '+$(this).data('name')+'!');
+                  $("#myModalID").val($(this).data('id'));
+
+                  $('#myModal').modal('show');
+
+              });
+
+              $("#myModalButton").click(function(){
+                  $.ajax({
+                         url: '/function.php',
+                         data: {
+                           id: $("#myModalID").val()
+                         },
+                         dataType: 'json',
+                         success: function(data)
+                         {
+
+                          $('#myModal').find('#modalAlert').addClass('alert-success');
+                          $('#myModal').find('#modalAlert').html(data.message).show;
+                          $('#myModal').find('#modalAlert').removeClass('hidden');
+
+                         }
+                   });
+              });
+
+
+
+
+
+
+
+
+
             function saveData(){
                 $.ajax({
                     data: {
@@ -247,7 +260,19 @@
             });
 
 
-            
+            $(".edit-slots").click( function() {
+                $("#edit-slot-modal .modal-title").html("Edit content for slot");
+                $("#edit-slot-modal button[type=submit]").html("Saving");
+
+                contentvar = $(this).find(".content").html();
+                entityKey = $(this).find(".entity-key").html();
+
+                $("#edit-slot-modal input[name=content]").val(contentvar);
+                $("#edit-slot-modal input[name=entity_key]").val(entityKey);
+            });
+
+
+
 
             //$.fn.editable.defaults.mode = 'inline';
             //$('select').select2();
