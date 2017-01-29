@@ -243,7 +243,9 @@
                 $("#edit-slot-modal input[name=content]").val(contentvar);
                 $("#edit-slot-modal input[name=entity_key]").val(entityKey);
 
-                $('form').on('submit', function(event) {
+            });
+
+            $('form').on('submit', function(event) {
 
                 $.ajax({
                     data : {
@@ -265,11 +267,7 @@
                     }
                 });
                 event.preventDefault();
-                });
-
-
             });
-
 
 
             //$.fn.editable.defaults.mode = 'inline';
