@@ -1970,7 +1970,7 @@ def editslot():
     classobj.content = contentvar
     db.session.commit()
 
-    return jsonify({'info' : infovar, 'content' : contentvar})
+    return jsonify({'content': contentvar})
 
     '''
     teacherlist = request.getall('tags')
