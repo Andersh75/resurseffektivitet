@@ -1966,14 +1966,14 @@ def editslot():
     #data = json.loads(request.content.read())
     #templist = request.form.getlist('fruits[]')
     #print templist[0]
-    infovar = request.form['info']
+    infovar = request.form['myModalInfo']
     print infovar
     #fruitsvar = request.form['fruits']
     #for item in fruitsvar:
     #    print item['name']
-    contentvar = request.form['content']
+    contentvar = request.form['myModalContent']
     print contentvar
-    idvar = request.form['entityKey']
+    idvar = request.form['myModalID']
     print idvar
     classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
     classobj.info = infovar
