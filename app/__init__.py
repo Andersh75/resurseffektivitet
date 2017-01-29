@@ -1991,7 +1991,9 @@ def editslot():
 
     for item in optionsvar:
         print item
-        teacherobj = Teachers.query.filter_by(id=item).first()
+        teacheremail = db.session.query(Teachers.email).get(idvar)
+        teacherobj = db.session.query(Teachers).filter(Teachers.email == teacheremail).first()
+
         create_teacher_class_connection(teacherobj, classobj)
         create_teacher_date_connection(teacherobj, dateobj)
 
