@@ -245,9 +245,10 @@
                          type : 'POST',
                          success: function(data)
                          {
+                            alert($(".js-example-data-array-selected").select2('data'));
                             $('#myModal').modal('hide');
                             window.location.reload(true);
-                            alert($(".leaderMultiSelctdropdown").select2('data'));
+
 
                          }
                    });
