@@ -164,7 +164,7 @@
 		                </td>
 		                <td class="text-left">
 		                    {% for subitem in defteachersondate(item[0], courseid): %}
-		                        <a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem[3]) }}" role="button">{{ subitem[2] }}</a>
+		                        <a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem[3]) }}" role="button">{{ subitem[0] }}</a>
 		                    {% endfor %}
 		                </td>
 						<td>
