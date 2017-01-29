@@ -1956,50 +1956,51 @@ def user_edit_content(page):
 
 
 
-@app.route('/editslot', methods=['GET', 'POST'])
+@app.route('/editslot', methods=['POST'])
 def editslot():
 
-    error = ''
-    try:
+    infovar = request.form['info']
+    print infovar
+    contentvar = request.form['content']
+    print contentvar
+    idvar = request.form['entity_key']
+    print idvar
+    classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
+    classobj.info = infovar
+    classobj.content = contentvar
+    db.session.commit()
 
-        if request.method == "POST":
+    return jsonify({'info' : infovar, 'content' : contentvar})
 
-            infovar = request.form['info']
-            print infovar
-            contentvar = request.form['content']
-            print contentvar
-            idvar = request.form['entity_key']
-            print idvar
-            teacherlist = request.getall('tags')
-            print "XXXX"
-            #print teacherlist
+    '''
+    teacherlist = request.getall('tags')
+    print "XXXX"
+    #print teacherlist
 
-            for item in teacherlist:
-                print "HEJ"
-                print item
+    for item in teacherlist:
+        print "HEJ"
+        print item
 
-            #print list(teacherlist)
-            #print list(teacherlist[0])
+    #print list(teacherlist)
+    #print list(teacherlist[0])
 
-            # teacherobj = db.session.query(Teachers).filter(Teachers.id == item).first()
-            # print teacherobj.email
-            classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
-            #print classobj.id
-            classobj.content = contentvar
-            #classobj.info = infovar
-            db.session.commit()
-            print "zzzz"
+    # teacherobj = db.session.query(Teachers).filter(Teachers.id == item).first()
+    # print teacherobj.email
+    classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
+    #print classobj.id
+    classobj.content = contentvar
+    #classobj.info = infovar
+    db.session.commit()
+    print "zzzz"
 
-            courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
-            print courseobj.id
+    courseobj = db.session.query(Courses).join(Courses.classes).filter(Classes.id == idvar).first()
+    print courseobj.id
 
-        return redirect(url_for('onecourse_page', courseid=courseobj.id))
 
-    except Exception as e:
-        flash(e)
+
 
     return render_template("login.html")
-
+    '''
 
 
 

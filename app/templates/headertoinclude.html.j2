@@ -93,7 +93,7 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Content</label>
                     <div class="col-sm-10">
-                      <input type="text" name="content" class="form-control show">
+                      <input type="text" name="content" id="content" class="form-control show">
                     </div>
                   </div>
 
@@ -101,16 +101,19 @@
                     <div class="form-group">
                       <label class="col-sm-2 ">About the class</label>
                       <div class="col-sm-10">
-                          <textarea class="form-control" name="info" rows="1"></textarea>
+                          <textarea class="form-control" name="info" id="info" rows="1"></textarea>
                       </div>
                     </div>
 
+
+                    <!--
                     <div class="form-group">
                       <label class="col-sm-2 ">Teachers</label>
                       <div class="col-sm-10">
                           <select class="js-example-tags-teachers form-control select2-hidden-accessible" id="tags" multiple="multiple" name="tags" tabindex="-1" aria-hidden="true"></select>
                       </div>
                     </div>
+                -->
 
 
 
@@ -121,8 +124,8 @@
 
 
                 <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" id="errorAlert" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" id="successAlert" class="btn btn-primary">Save</button>
                 </div>
               </form>
             </div>
@@ -311,7 +314,28 @@
             //});
 
 
+            $.('form').on('submit', function(event) {
 
+                $.ajax({
+                    data : {
+                        info : $('#info').val(),
+                        content $('#content').val()
+                    },
+                    type : 'POST',
+                    urs : '/editslot'
+                })
+                .done(function(data) {
+                    if (data.error) {
+                        $('#errorAlert').text(data.error).show();
+                        //$('#').hide();
+                    }
+                    else {
+                        $('#successAlert').text(data.content).show();
+                        //$('#errorAlert').hide();
+                    }
+                });
+                event.preventDefault();
+            });
 
 
 
