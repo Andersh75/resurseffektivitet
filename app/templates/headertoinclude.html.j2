@@ -237,12 +237,15 @@
 
                   $.ajax({
                          url: '/editslot',
+                         data: $('form').serialize(),
+
+                         /*
                          data: {
                              info: $("#myModalInfo").val(),
                              content: $("#myModalContent").val(),
-                           entityKey: $("#myModalID").val(),
-                          fruits: $('#myModalOptions').serializeArray()
+                           entityKey: $("#myModalID").val()
                          },
+                         */
                          type : 'POST',
                          success: function(data)
                          {
