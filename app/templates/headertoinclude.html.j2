@@ -86,7 +86,7 @@
                 <h4 class="modal-title" id="myModalLabel">Edit class</h4>
               </div>
 
-              <form action="{{ url_for('editslot') }}" method="POST" class="form-horizontal" role="form">
+              <form class="form-horizontal" role="form">
 
                 <input type="text" id="entityKey" name="entity_key" class="hidden">
                 <div class="modal-body">
@@ -245,7 +245,7 @@
 
             });
 
-            $('form').on('submit', function(event) {
+            $('button#successAlert').click(function() {
 
                 $.ajax({
                     data : {
@@ -254,7 +254,7 @@
                         entityKey : $('#entityKey'),val()
                     },
                     type : 'POST',
-                    urs : '/editslot'
+                    url : '/editslot'
                 })
                 .done(function(data) {
                     if (data.error) {
@@ -266,7 +266,6 @@
                         //$('#errorAlert').hide();
                     }
                 });
-                event.preventDefault();
             });
 
 
