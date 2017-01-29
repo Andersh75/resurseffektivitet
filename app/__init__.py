@@ -1967,14 +1967,14 @@ def editslot():
     #templist = request.form.getlist('fruits[]')
     #print templist[0]
     infovar = request.form['info']
-    #print infovar
+    print infovar
     #fruitsvar = request.form['fruits']
     #for item in fruitsvar:
     #    print item['name']
     contentvar = request.form['content']
-    #print contentvar
+    print contentvar
     idvar = request.form['entityKey']
-    #print idvar
+    print idvar
     classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
     classobj.info = infovar
     classobj.content = contentvar
