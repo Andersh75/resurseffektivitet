@@ -234,6 +234,7 @@
               });
 
               $("#myModalButton").click(function(){
+                  alert($('form').serialize());
 
                   $.ajax({
                          url: '/editslot',
