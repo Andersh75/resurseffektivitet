@@ -96,7 +96,7 @@
 
                   <div class="form-group">
                       <label for="exampleInputEmail1">Select</label>
-                        <select class="js-example-data-array-selected form-control" id="myModalOptions" name="myModalOptions">
+                        <select class="form-control" id="myModalOptions" name="myModalOptions">
                             <option value="2" selected="selected">duplicate</option>
                         </select>
                   </div>
@@ -226,6 +226,10 @@
                   $("#myModalID").val($(this).data('id'));
                   $("#myModalInfo").val($(this).data('info'));
                   $("#myModalContent").val($(this).data('content'));
+                  $("#myModalOptions").select2({
+                      tags: true,
+                      data: tempdata
+                  });
 
                   $('#myModal').modal('show');
                   //var infovar = $(this).find("#myModalInfo").html();
