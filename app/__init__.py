@@ -1966,7 +1966,7 @@ def editslot():
     infovar = request.form['info']
     print infovar
     fruitsvar = request.form.getlist('fruits')
-    print fruitsvar
+    print fruitsvar['text']
     contentvar = request.form['content']
     print contentvar
     idvar = request.form['entityKey']
