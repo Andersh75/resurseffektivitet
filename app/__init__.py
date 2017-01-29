@@ -1964,7 +1964,7 @@ def user_edit_content(page):
 def editslot():
 
     #data = json.loads(request.content.read())
-    templist = request.form.getlist('col_filter[]')
+    templist = request.form.getlist('fruits[]')
     print templist[0]
     infovar = request.form['info']
     #print infovar
