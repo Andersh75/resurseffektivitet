@@ -243,7 +243,7 @@
                 $("#edit-slot-modal input[name=content]").val(contentvar);
                 $("#edit-slot-modal input[name=entity_key]").val(entityKey);
 
-                $('#successAlert').on('click', function(event) {
+                $('#edit-slot-modal #successAlert').on('click', function(event) {
                     event.preventDefault();
 
                     $.ajax({
