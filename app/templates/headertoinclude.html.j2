@@ -241,13 +241,13 @@
                              info: $("#myModalInfo").val(),
                              content: $("#myModalContent").val(),
                            entityKey: $("#myModalID").val(),
-                          fruits: $('#myModalOptions').serialize()
+                          fruits: $('#myModalOptions').serializeArray()
                          },
                          type : 'POST',
                          success: function(data)
                          {
                             //alert("Selected value is: "+$("#myModalOptions").select2("val"));
-                            alert($('#myModalOptions').serialize());
+                            alert($('#myModalOptions').serializeArray());
                             $('#myModal').modal('hide');
                             window.location.reload(true);
 
