@@ -88,7 +88,7 @@
 
               <form action="{{ url_for('editslot') }}" method="POST" class="form-horizontal" role="form">
 
-                <input type="text" name="entity_key" class="hidden">
+                <input type="text" id="entityKey" name="entity_key" class="hidden">
                 <div class="modal-body">
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Content</label>
@@ -319,7 +319,8 @@
                 $.ajax({
                     data : {
                         info : $('#info').val(),
-                        content $('#content').val()
+                        content : $('#content').val(),
+                        entityKey : $('#entityKey'),val()
                     },
                     type : 'POST',
                     urs : '/editslot'
