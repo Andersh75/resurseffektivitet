@@ -77,7 +77,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
           <div class="modal-dialog ">
             <div class="modal-content">
               <div class="modal-header">
@@ -96,7 +96,7 @@
 
                   <div class="form-group">
                       <label for="exampleInputEmail1">Select</label>
-                        <select class="js-example-data-array-selected form-control" id="myModalOptions[]" name="myModalOptions[]">
+                        <select class="js-example-data-array-selected form-control" id="myModalOptions" name="myModalOptions">
                             <option value="2" selected="selected">duplicate</option>
                         </select>
                   </div>
@@ -240,7 +240,7 @@
                              info: $("#myModalInfo").val(),
                              content: $("#myModalContent").val(),
                            entityKey: $("#myModalID").val(),
-                           fruits: $("#myModalOptions[]").val()
+                           fruits: $("#myModalOptions").val()
                          },
                          type : 'POST',
                          success: function(data)
