@@ -1963,8 +1963,7 @@ def user_edit_content(page):
 @app.route('/editslot', methods=['POST'])
 def editslot():
 
-    datavar = request.get_json()
-    print datavar['info']
+    data = json.loads(request.content.read())
 
     infovar = request.form['info']
     #print infovar
