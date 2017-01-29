@@ -1963,15 +1963,18 @@ def user_edit_content(page):
 @app.route('/editslot', methods=['POST'])
 def editslot():
 
+    datavar = request.get_json()
+    print datavar['info']
+
     infovar = request.form['info']
-    print infovar
-    fruitsvar = request.form['fruits']
+    #print infovar
+    #fruitsvar = request.form['fruits']
     #for item in fruitsvar:
     #    print item['name']
     contentvar = request.form['content']
-    print contentvar
+    #print contentvar
     idvar = request.form['entityKey']
-    print idvar
+    #print idvar
     classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
     classobj.info = infovar
     classobj.content = contentvar
