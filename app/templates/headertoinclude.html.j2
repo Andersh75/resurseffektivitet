@@ -181,6 +181,16 @@
 
 
 
+                 <div class="form-group">
+                     <label for="exampleInputEmail1" class="col-sm-2 control-label">Select</label>
+                    <div class="col-sm-10">
+                       <select class="form-control" id="myModalTeachers" name="myModalTeachers" multiple="multiple">
+                       </select>
+                        </div>
+                 </div>
+
+
+
 
 
 
@@ -314,6 +324,16 @@
                   $("#myModalID").val($(this).data('id'));
                   $("#myModalInfo").val($(this).data('info'));
                   $("#myModalContent").val($(this).data('content'));
+
+
+                  var jsondata = $(this).data('teachers')
+                  var listItems = '<option selected="selected" value="0">- Select -</option>';
+
+                  for (var i = 0; i < jsonData.Table.length; i++) {
+                      listItems += "<option value='" + jsonData[i].id + "'>" + jsonData.[i].text + "</option>";
+                  }
+
+                  $("#myModalTeachers").html(listitems);
 
 
                   $('#myModal').modal('show');
