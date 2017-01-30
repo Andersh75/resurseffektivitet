@@ -541,7 +541,6 @@ def teacherslistjson():
 
 
 
-
 def teacherslistjson2():
     templist = db.session.query(Teachers.email).all()
 
@@ -550,7 +549,7 @@ def teacherslistjson2():
         d = {}
         d["id"] = idx
         d["text"] = item
-        templist2.append(json.dumps(d, ensure_ascii=False))
+        templist2.append(d)
 
 
     tempvar = '[{'
