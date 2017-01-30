@@ -1890,7 +1890,6 @@ def allcourses_page(page=1):
 
 
 
-
 @app.route('/allrooms')
 @app.route('/allrooms/<int:page>')
 def allrooms_page(page=1):
