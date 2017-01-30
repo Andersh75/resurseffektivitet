@@ -585,6 +585,7 @@ def createtables():
     db.session.commit()
 
 
+
 # Import CSV-file and transform imported CSV to tables
 def csvimporter():
     with open('static/teachers.csv', 'rb') as f:

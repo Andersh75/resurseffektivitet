@@ -471,19 +471,23 @@
             var teacherssdata = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
 
             $(".js-example-data-array").select2({
+                width: '100%',
                 data: tempdata
             });
 
             $(".js-example-data-array-selected").select2({
-                data: tempdata
+                data: tempdata,
+                width: '100%'
             });
 
             $(".js-example-tags-teachers").select2({
-                data: tempdata
+                data: tempdata,
+                width: '100%'
             });
 
             $(".js-example-tags-rooms").select2({
-                data: roomsdata
+                data: roomsdata,
+                width: '100%'
             });
 
 
