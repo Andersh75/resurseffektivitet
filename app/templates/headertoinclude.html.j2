@@ -327,10 +327,12 @@
                   var myVariable = $(this).data('teachers');
 
                   alert(myVariable);
+
                   $.each(myVariable, function (index, value) {
                         alert(index);
                         alert(value.text);
                     });
+                alert("HEJ");
 
                   var jsonData = $(this).data('teachers');
                   var myObj = JSON.parse(jsonData);
