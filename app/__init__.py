@@ -1904,6 +1904,7 @@ def allteachers_page(page=1):
 
 
 
+
 @app.route('/oneteacher')
 @app.route('/oneteacher/<int:teacherid>')
 def oneteacher_page(teacherid=1):
