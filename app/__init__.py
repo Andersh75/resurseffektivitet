@@ -497,6 +497,7 @@ def subjectslistjson():
 
 
 
+
 def roomslistjson():
     templist = db.session.query(Rooms.name).all()
 
