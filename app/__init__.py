@@ -532,8 +532,8 @@ def teacherslistjson():
     # print tempvar
     # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     # print testvar.password
-    #return tempvar
-    return json.dumps(tempvar)
+    return tempvar
+    #return json.dumps(tempvar)
 
 
 
@@ -1909,7 +1909,10 @@ def oneteacher_page(teacherid=1):
 @app.route('/onecourse')
 @app.route('/onecourse/<int:courseid>')
 def onecourse_page(courseid=1):
-    return render_template('onecourse.html.j2', courseid=courseid)
+    object = [{"id": 1, "company": "Google"}, {"id": 2, "company": "H&M"}, {"id": 3, "company": "Ikea"}]
+]
+    return render_template('onecourse.html.j2', courseid=courseid, objectvar=objectvar)
+
 
 
 @app.route('/oneroom')

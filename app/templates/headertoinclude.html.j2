@@ -324,7 +324,9 @@
                   $("#myModalID").val($(this).data('id'));
                   $("#myModalInfo").val($(this).data('info'));
                   $("#myModalContent").val($(this).data('content'));
+                  var myVariable = {{ objectvar|tojson|safe }};
 
+                  alert(myVariable);
 
                   var jsonData = $(this).data('teachers')
                   //var myObj = JSON.parse(jsonData);
