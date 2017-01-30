@@ -1896,6 +1896,7 @@ def allrooms_page(page=1):
     return render_template('allrooms.html.j2', page=page)
 
 
+
 @app.route('/allteachers')
 @app.route('/allteachers/<int:page>')
 def allteachers_page(page=1):

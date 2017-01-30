@@ -329,9 +329,9 @@
                   alert(myVariable);
                   alert("HEJ");
 
-                  $.each(myVariable, function (value, index) {
-                        alert(index);
-                        alert(value.text);
+                  $.each(myVariable, function (index, value) {
+                        alert(index.text);
+                        alert(value);
                     });
 
 
