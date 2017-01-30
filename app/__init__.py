@@ -2502,7 +2502,7 @@ def bookedrooms():
 
     #try:
     req = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
-    print j[0]
+    #print j[0]
 
     xml = BeautifulSoup(req)
 
