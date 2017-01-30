@@ -1903,6 +1903,7 @@ def allteachers_page(page=1):
     return render_template('allteachers.html.j2', page=page)
 
 
+
 @app.route('/oneteacher')
 @app.route('/oneteacher/<int:teacherid>')
 def oneteacher_page(teacherid=1):
