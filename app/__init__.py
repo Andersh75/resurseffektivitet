@@ -2501,8 +2501,12 @@ def bookedrooms():
     #tempdict = {}
 
     #try:
-    j = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
+    req = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
     print j[0]
+
+    xml = BeautifulSoup(req)
+
+    print xml
 
     #j_obj = json.load(j[0])
 
