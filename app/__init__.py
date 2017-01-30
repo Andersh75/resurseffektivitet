@@ -555,7 +555,8 @@ def teacherslistjson2():
     print tempvar
     # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     # print testvar.password
-    tempvar2 = "[{ 'id': 1, 'text': 'bug' }, { 'id': 2, 'text': 'duplicate' }, { 'id': 3, 'text': 'invalid' }, { 'id': 4, 'text': 'wontfix' }]"
+    tempvar2 = [{ 'id': 1, 'text': 'bug' }, { 'id': 2, 'text': 'duplicate' }, { 'id': 3, 'text': 'invalid' }, { 'id': 4, 'text': 'wontfix' }]
+    objectvar = [{'id': 1, 'company': 'Google'}, {'id': 2, 'company': 'HM'}, {'id': 3, 'company': 'Ikea'}]
     return tempvar2
 
 
