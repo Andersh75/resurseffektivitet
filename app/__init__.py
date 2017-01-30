@@ -244,6 +244,15 @@ def defteachersondate(date, course):
         templist.append(item)
     return templist
 
+def defteachersonslot(date, course):
+    templist = []
+    tempvar = db.session.query(Teachers.firstname, Teachers.lastname, Teachers.initials, Teachers.id, Teachers.email).distinct().join(Teachers.classes).join(Classes.dates).join(Classes.courses).filter(Dates.date == date).filter(Courses.id == course).all()
+    for item in tempvar:
+        templist.append(item)
+    return templist
+
+
+
 
 def idtocode(courseid):
     tempvar = db.session.query(Courses.code).filter(Courses.id == courseid).first()
@@ -431,7 +440,7 @@ def roomsonslot(slotid):
 
 
 def teachersonslot(slotid):
-    templist = db.session.query(Teachers.initials, Teachers.id).join(Teachers.classes).filter(Classes.id == slotid).all()
+    templist = db.session.query(Teachers.initials, Teachers.id, Teachers.firstname, Teachers.lastname, Teachers.email).join(Teachers.classes).filter(Classes.id == slotid).all()
     return templist
 
 
@@ -601,6 +610,7 @@ def csvimporter():
 
     # for i in schedules_list:
     #    print i
+
 
     # Populate tables
     '''
@@ -1991,8 +2001,8 @@ def editslot():
 
     for item in optionsvar:
         print item
-        startitem = int(item)
-        enditem = startitem + 1
+        enditem = int(item)
+        startitem = enditem - 1
         teacheremail = db.session.query(Teachers.email).slice(startitem, enditem)
         teacherobj = db.session.query(Teachers).filter(Teachers.email == teacheremail).first()
 
