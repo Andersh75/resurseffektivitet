@@ -119,7 +119,7 @@
                   <div class="form-group">
                       <label for="exampleInputEmail1" class="col-sm-2 control-label">Select</label>
                      <div class="col-sm-10">
-                        <select multiple class="form-control js-example-data-array-selected">
+                        <select multiple class="form-control js-example-data-array">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -477,8 +477,7 @@
             var tempdata = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate', selected: true }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix', selected: true }];
 
             $(".js-example-data-array").select2({
-                width: '100%',
-                data: tempdata
+                width: '100%'
             });
 
             $(".js-example-data-array-selected").select2({
