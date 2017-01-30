@@ -534,6 +534,24 @@ def teacherslistjson():
     return tempvar
 
 
+
+def teacherslistjson2():
+    templist = db.session.query(Teachers.email).all()
+
+    tempvar = "[{"
+    id = 1
+    for item in templist[:-1]:
+        # print item
+        tempvar = tempvar + " '"id"': " + str(id) + ", '"text"': '" + item[0] + "' }, {"
+        id = id + 1
+    tempvar = tempvar + " '"id"': '" + str(id) + "', '"text"': '" + templist[-1][0] + "' }]"
+
+    # print tempvar
+    # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
+    # print testvar.password
+    return tempvar
+
+
 def amiexaminer(code):
     testvar = db.session.query(Teachers).filter(Teachers.email == session['user']).first()
     already = db.session.query(exists().where(and_(Courses.code == code, Courses.examiner == testvar))).scalar()
