@@ -1911,7 +1911,7 @@ def oneteacher_page(teacherid=1):
 @app.route('/onecourse/<int:courseid>')
 def onecourse_page(courseid=1):
     objectvar = [{"id": 1, "company": "Google"}, {"id": 2, "company": "HM"}, {"id": 3, "company": "Ikea"}]
-    return render_template('onecourse.html.j2', courseid=courseid, objectvar=objectvar)
+    return render_template('onecourse.html.j2', courseid=courseid, objectvar=json.dumps(objectvar))
 
 
 
