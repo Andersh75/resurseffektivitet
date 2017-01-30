@@ -553,7 +553,7 @@ def amiteaching(code):
     return already
 
 
-def removeallteachersfromslot(slotid):
+def removeallteachersfromslot(slotid, classobj):
     teacherstoremovelist = teachersonslot(slotid)
     for item in teacherstoremovelist:
         teachertoremoveobj = db.session.query(Teachers).filter(Teachers.id == item[1]).first()
@@ -2008,7 +2008,7 @@ def editslot():
     classobj.info = infovar
     classobj.content = contentvar
 
-    removeallteachersfromslot(slotidvar)
+    removeallteachersfromslot(slotidvar, classobj)
 
     for item in optionsvar:
         print item
