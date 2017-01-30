@@ -550,7 +550,7 @@ def teacherslistjson2(classid):
     for idx,item in enumerate(templist):
 
         d = {}
-        d["id"] = idx - 1
+        d["id"] = idx
         d["text"] = item
         if item in templist3:
             d["selected"] = 1
@@ -2067,7 +2067,7 @@ def editslot():
 
     for item in teachersvar:
         print item
-        enditem = int(item)
+        enditem = int(item)+1
         startitem = enditem - 1
         teacheremail = db.session.query(Teachers.email).slice(startitem, enditem)
         teacherobj = db.session.query(Teachers).filter(Teachers.email == teacheremail).first()
