@@ -536,6 +536,7 @@ def teacherslistjson():
 
 
 
+
 def teacherslistjson2():
     templist = db.session.query(Teachers.email).all()
 
