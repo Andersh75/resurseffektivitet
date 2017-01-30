@@ -2507,7 +2507,11 @@ def bookedrooms():
     j_obj = json.loads(response.read())
 
     for item in j_obj:
-        print item['id']
+        print item['start']
+        print item['end']
+        for location in item['locations']:
+            print location['name']
+            
         #templist.append(item['code'])
 
     #tempdict = {'department': j_obj['department'], 'courses': templist}
