@@ -2512,7 +2512,7 @@ def bookedrooms():
         for location in item['locations']:
             room = location['name'].split()
             try:
-                print room[0].encode
+                print room[0]
             except:
                 continue
 
