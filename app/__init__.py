@@ -2511,7 +2511,10 @@ def bookedrooms():
         print item['end']
         for location in item['locations']:
             room = location['name'].split()
-            print room[0]
+            try:
+                print room[0].encode
+            except:
+                continue
 
         #templist.append(item['code'])
 
