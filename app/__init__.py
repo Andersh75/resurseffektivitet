@@ -553,6 +553,14 @@ def amiteaching(code):
     return already
 
 
+def removeallteachersfromslot(slotid):
+    teacherstoremovelist = teachersonslot(slotid)
+    for item in teacherstoremovelist:
+        teachertoremoveobj = db.session.query(Teachers).filter(Teachers.id == item[1]).first()
+        classobj.teachers.remove(teachertoremoveobj)
+        db.session.commit()
+
+
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -1992,19 +2000,15 @@ def editslot():
 
     #print optionsvar[1]
     print contentvar
-    idvar = request.form['myModalID']
-    print idvar
+    slotidvar = request.form['myModalID']
+    print slotidvar
 
-    dateobj = db.session.query(Dates).join(Dates.classes).filter(Classes.id == idvar).first()
-    classobj = db.session.query(Classes).filter(Classes.id == idvar).first()
+    dateobj = db.session.query(Dates).join(Dates.classes).filter(Classes.id == slotidvar).first()
+    classobj = db.session.query(Classes).filter(Classes.id == slotidvar).first()
     classobj.info = infovar
     classobj.content = contentvar
 
-    teacherstoremovelist = teachersonslot(idvar)
-    for item in teacherstoremovelist:
-        teachertoremoveobj = db.session.query(Teachers).filter(Teachers.id == item[1]).first()
-        classobj.teachers.remove(teachertoremoveobj)
-        db.session.commit()
+    removeallteachersfromslot(slotidvar)
 
     for item in optionsvar:
         print item
