@@ -2115,6 +2115,7 @@ def editslot():
 
 
 
+
 @app.route('/deleteclass/<int:idvar>', methods=['GET', 'POST'])
 def deleteclass(idvar):
 
