@@ -2051,7 +2051,7 @@ def editslot():
     #for item in fruitsvar:
     #    print item['name']
     contentvar = request.form['myModalContent']
-    optionsvar = request.form.getlist('myModalOptions')
+    teachersvar = request.form.getlist('myModalTeachers')
 
     #print optionsvar[1]
     print contentvar
@@ -2065,7 +2065,7 @@ def editslot():
 
     removeallteachersfromslot(slotidvar, classobj)
 
-    for item in optionsvar:
+    for item in teachersvar:
         print item
         enditem = int(item)
         startitem = enditem - 1
