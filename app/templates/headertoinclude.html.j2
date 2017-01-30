@@ -85,20 +85,29 @@
                 <h4 class="modal-title" id="myModalTitle"></h4>
               </div>
               <div class="modal-body">
-                  <form>
+
+
+                <form class="form-horizontal">
                   <div class="form-group">
-                      <label for="exampleInputEmail1">Info block</label>
+                    <label for="exampleInputEmail1" class="col-sm-2 control-label">Info block</label>
+                    <div class="col-sm-10">
                       <input type="text" class="form-control" name="myModalInfo" id="myModalInfo" placeholder="Info...">
-                  </div>
-                  <div class="form-group">
-                      <label for="exampleInputEmail1">Content</label>
-                      <input type="text" class="form-control" name="myModalContent" id="myModalContent" placeholder="Content...">
+                    </div>
                   </div>
 
                   <div class="form-group">
-                      <label for="exampleInputEmail1">Select</label>
+                    <label for="exampleInputEmail1" class="col-sm-2 control-label">Content</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="myModalContent" id="myModalContent" placeholder="Content...">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="exampleInputEmail1" class="col-sm-2 control-label">Select</label>
+                     <div class="col-sm-10">
                         <select class="js-example-data-array-selected form-control" id="myModalOptions" name="myModalOptions" multiple="multiple">
                         </select>
+                         </div>
                   </div>
 
 
@@ -112,8 +121,11 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-danger" id="myModalButton">Submit</button>
               </div>
-
           </form>
+
+
+
+
             </div>
           </div>
         </div>
