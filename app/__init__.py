@@ -2498,7 +2498,7 @@ def page_not_found(e):
 @app.route('/bookedrooms')
 def bookedrooms():
 
-    tempdict = {}
+    #tempdict = {}
 
     #try:
     j = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
@@ -2518,7 +2518,7 @@ def bookedrooms():
     #varcode = "error"
     #print varcode
 
-    #return tempdict
+    return "HEJ"
 
 # TO DO
 def courseinfoperyearandround(x, y):
