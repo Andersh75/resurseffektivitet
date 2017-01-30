@@ -461,6 +461,7 @@ def roomtypesincourse(courseid):
     return templist
 
 
+
 def mycourseslist():
     '''
     templist = db.session.query(Teachers.email).all()

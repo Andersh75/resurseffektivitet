@@ -164,7 +164,7 @@
 		                </td>
 		                <td class="text-left">
 		                    {% for subitem in teachersonslot(item[7]): %}
-		                        <a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem[3]) }}" role="button">{{ subitem[4] }}</a>
+		                        <a class="btn btn-success btn-xs" href="{{ url_for('oneteacher_page', teacherid=subitem[1]) }}" role="button">{{ subitem[4] }}</a>
 		                    {% endfor %}
 		                </td>
 						<td>
