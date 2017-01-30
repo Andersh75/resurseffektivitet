@@ -829,6 +829,7 @@ def reformat_date(list1):
 
 
 
+
 # Insert Column to Table
 def add_col(list1):
     for i in range(0, len(list1)):
