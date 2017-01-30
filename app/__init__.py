@@ -2503,11 +2503,11 @@ def bookedrooms():
     try:
         j = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
 
-        j_obj = json.load(j)
+        j_obj = json.load(j[0])
 
         templist = []
 
-        for item in j_obj[0]:
+        for item in j_obj:
             print item.id
             #templist.append(item['code'])
 
