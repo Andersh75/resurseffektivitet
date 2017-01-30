@@ -2000,6 +2000,12 @@ def editslot():
     classobj.info = infovar
     classobj.content = contentvar
 
+    teacherstoremovelist = teachersonslot(idvar)
+    for item in teacherstoremovelist:
+        teachertoremoveobj = db.session.query(Teachers).filter(Teachers.id == item[1]).first()
+        classobj.teachers.remove(teachertoremoveobj)
+        db.session.commit()
+
     for item in optionsvar:
         print item
         enditem = int(item)
