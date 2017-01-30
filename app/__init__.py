@@ -539,8 +539,10 @@ def teacherslistjson():
 
 
 def teacherslistjson2(classid):
-    templist3 = db.session.query(Teachers.email).join(Teachers.classes).filter(Courses.id == classid).all()
+    templist3 = db.session.query(Teachers.email).join(Teachers.classes).filter(Classes.id == classid).all()
     templist = db.session.query(Teachers.email).all()
+
+
 
     templist2 = []
     for idx,item in enumerate(templist):
