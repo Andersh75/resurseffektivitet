@@ -1597,6 +1597,9 @@ def fetchinglistofcodesfordepartmentcourses(department):
     return tempdict
 
 
+
+
+
 def jsonifycoursesfromdepartment(tempdict):
 
     templist2 = []
@@ -2491,6 +2494,30 @@ def page_not_found(e):
 
     return "fel"
 
+
+@app.route('/fetchingbookedrooms')
+def fetchingbookedrooms():
+
+    tempdict = {}
+
+    try:
+        j = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
+
+        j_obj = json.load(j)
+
+        templist = []
+
+        for item in j_obj:
+            print item.id
+            #templist.append(item['code'])
+
+        #tempdict = {'department': j_obj['department'], 'courses': templist}
+
+    except Exception, e:
+        varcode = "error"
+        print varcode
+
+    #return tempdict
 
 # TO DO
 def courseinfoperyearandround(x, y):
