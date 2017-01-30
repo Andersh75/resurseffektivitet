@@ -327,7 +327,8 @@
 
 
                   var jsonData = $(this).data('teachers')
-                  alert(jsonData);
+                  var myObj = JSON.parse(jsonData);
+                  alert(myObj);
                   var listItems = '<option selected="selected" value="0">- Select -</option>';
 
                   for (var i = 0; i < jsonData.length; i++) {

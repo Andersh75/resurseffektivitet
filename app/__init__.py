@@ -517,6 +517,7 @@ def roomslistjson():
     return tempvar
 
 
+
 def teacherslistjson():
     templist = db.session.query(Teachers.email).all()
 
