@@ -1991,7 +1991,9 @@ def editslot():
 
     for item in optionsvar:
         print item
-        teacheremail = db.session.query(Teachers.email).slice(item, item + 1)
+        startitem = int(item)
+        enditem = startitem + 1
+        teacheremail = db.session.query(Teachers.email).slice(startitem, enditem)
         teacherobj = db.session.query(Teachers).filter(Teachers.email == teacheremail).first()
 
         create_teacher_class_connection(teacherobj, classobj)
