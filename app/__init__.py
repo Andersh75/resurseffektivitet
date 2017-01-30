@@ -831,6 +831,7 @@ def add_col(list1):
     return list1
 
 
+
 # Extract beginning and end time
 def extract_start_slut_tid(list1):
     i = 1
