@@ -1926,6 +1926,7 @@ def oneslot_page(slotid=1):
     return render_template('oneslot.html.j2', slotid=slotid)
 
 
+
 @app.route('/myteaching')
 @app.route('/myteaching/<int:page>')
 def myteaching_page(page=1):

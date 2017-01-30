@@ -327,6 +327,10 @@
                   var myVariable = {{ objectvar|tojson|safe }};
 
                   alert(myVariable);
+                  $.each(myVariable, function (index, value) {
+                        alert(index);
+                        alert(value);
+                    });
 
                   var jsonData = $(this).data('teachers')
                   //var myObj = JSON.parse(jsonData);
