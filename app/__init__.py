@@ -2495,8 +2495,8 @@ def page_not_found(e):
     return "fel"
 
 
-@app.route('/fetchingbookedrooms')
-def fetchingbookedrooms():
+@app.route('/bookedrooms')
+def bookedrooms():
 
     tempdict = {}
 
