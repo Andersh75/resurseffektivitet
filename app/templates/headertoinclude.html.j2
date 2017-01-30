@@ -326,22 +326,25 @@
                   $("#myModalContent").val($(this).data('content'));
                   var myVariable = $(this).data('teachers');
 
+                  var listItems = '<option selected="selected" value="0">- Select -</option>';
+
                   alert(myVariable);
                   alert("HEJ");
 
                   $.each(myVariable, function (index, value) {
-                        alert(index);
-                        alert(value.text);
+                      alert(value.id);
+                      alert(value.text);
+                      //listItems += "<option value='" + value.id + "'>" + value.text + "</option>";
                     });
 
 
                   var jsonData = $(this).data('teachers');
                   var myObj = JSON.parse(jsonData);
                   alert(jsonData);
-                  var listItems = '<option selected="selected" value="0">- Select -</option>';
+
 
                   for (var i = 0; i < jsonData.length; i++) {
-                      listItems += "<option value='" + jsonData[i].id + "'>" + jsonData[i].text + "</option>";
+
                   }
 
                   $("#myModalTeachers").html(listItems);
