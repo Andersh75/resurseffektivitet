@@ -2502,7 +2502,7 @@ def bookedrooms():
 
     #try:
     j = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
-    print j
+    print j[0]
 
     #j_obj = json.load(j[0])
 
