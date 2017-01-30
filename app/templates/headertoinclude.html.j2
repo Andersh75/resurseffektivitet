@@ -332,20 +332,9 @@
                   alert("HEJ");
 
                   $.each(myVariable, function (index, value) {
-                      alert(value.id);
-                      alert(value.text);
-                      //listItems += "<option value='" + value.id + "'>" + value.text + "</option>";
+                      listItems += "<option value='" + value.id + "'>" + value.text + "</option>";
                     });
 
-
-                  var jsonData = $(this).data('teachers');
-                  var myObj = JSON.parse(jsonData);
-                  alert(jsonData);
-
-
-                  for (var i = 0; i < jsonData.length; i++) {
-
-                  }
 
                   $("#myModalTeachers").html(listItems);
 
