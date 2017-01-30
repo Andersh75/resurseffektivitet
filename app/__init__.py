@@ -2507,7 +2507,7 @@ def bookedrooms():
 
         templist = []
 
-        for item in j_obj:
+        for item in j_obj[0]:
             print item.id
             #templist.append(item['code'])
 
