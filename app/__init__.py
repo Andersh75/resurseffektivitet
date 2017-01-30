@@ -2510,8 +2510,9 @@ def bookedrooms():
         print item['start']
         print item['end']
         for location in item['locations']:
-            print location['name']
-            
+            room = location['name'].split()
+            print room[0]
+
         #templist.append(item['code'])
 
     #tempdict = {'department': j_obj['department'], 'courses': templist}
