@@ -329,7 +329,7 @@
                   var jsondata = $(this).data('teachers')
                   var listItems = '<option selected="selected" value="0">- Select -</option>';
 
-                  for (var i = 0; i < jsonData.Table.length; i++) {
+                  for (var i = 0; i < jsonData.length; i++) {
                       listItems += "<option value='" + jsonData[i].id + "'>" + jsonData[i].text + "</option>";
                   }
 
