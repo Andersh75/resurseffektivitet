@@ -555,7 +555,6 @@ def amiteaching(code):
 
 
 
-
 def removeallteachersfromslot(slotid, classobj):
     teacherstoremovelist = teachersonslot(slotid)
     for item in teacherstoremovelist:
