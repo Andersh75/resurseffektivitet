@@ -324,7 +324,7 @@
                   $("#myModalID").val($(this).data('id'));
                   $("#myModalInfo").val($(this).data('info'));
                   $("#myModalContent").val($(this).data('content'));
-                  var myVariable = {{ teacherslistjson2()|tojson|safe }};
+                  var myVariable = $(this).data('teachers');
 
                   alert(myVariable);
                   $.each(myVariable, function (index, value) {
