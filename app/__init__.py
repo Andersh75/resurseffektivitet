@@ -550,7 +550,7 @@ def teacherslistjson2(classid):
     for idx,item in enumerate(templist):
 
         d = {}
-        d["id"] = idx
+        d["id"] = idx - 1
         d["text"] = item
         if item in templist3:
             d["selected"] = 1
