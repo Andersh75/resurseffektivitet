@@ -2500,22 +2500,23 @@ def bookedrooms():
 
     tempdict = {}
 
-    try:
-        j = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
+    #try:
+    j = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
+    print j
 
-        j_obj = json.load(j[0])
+    #j_obj = json.load(j[0])
 
-        templist = []
+    #templist = []
 
-        for item in j_obj:
-            print item.id
-            #templist.append(item['code'])
+    #for item in j_obj:
+        #print item.id
+        #templist.append(item['code'])
 
-        #tempdict = {'department': j_obj['department'], 'courses': templist}
+    #tempdict = {'department': j_obj['department'], 'courses': templist}
 
-    except Exception, e:
-        varcode = "error"
-        print varcode
+    ##except Exception, e:
+    #varcode = "error"
+    #print varcode
 
     #return tempdict
 
