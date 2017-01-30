@@ -314,7 +314,7 @@
                   $("#myModalID").val($(this).data('id'));
                   $("#myModalInfo").val($(this).data('info'));
                   $("#myModalContent").val($(this).data('content'));
-                  
+
 
                   $('#myModal').modal('show');
                   //var infovar = $(this).find("#myModalInfo").html();
@@ -397,7 +397,7 @@
 
 
             //$(".js-example-data-array").select2( {
-                //data:[{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]
+                //data:[{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug', selected: true }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid', selected: true }, { id: 4, text: 'wontfix' }]
             //    data:tempvar
             //} );
 
@@ -473,8 +473,8 @@
 
 
             var roomsdata = {{ roomslistjson() }}
-            var tempdata = {{ teacherslistjson() }}
-            var teacherssdata = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+            var teacherssdata = {{ teacherslistjson() }}
+            var tempdata = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate', selected: true }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix', selected: true }];
 
             $(".js-example-data-array").select2({
                 width: '100%',
