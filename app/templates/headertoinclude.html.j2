@@ -332,7 +332,11 @@
                   alert("HEJ");
 
                   $.each(myVariable, function (index, value) {
+                      if (value.selected > 0) {
                       listItems += "<option value='" + value.id + "' selected>" + value.text + "</option>";
+                  } else {
+                      listItems += "<option value='" + value.id + "'>" + value.text + "</option>";
+                  }
                     });
 
 

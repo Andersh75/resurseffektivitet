@@ -538,15 +538,21 @@ def teacherslistjson():
 
 
 
-
-def teacherslistjson2():
+def teacherslistjson2(classid):
+    templist3 = db.session.query(Teachers.email).join(Teachers.classes).filter(Courses.id == classid).all()
     templist = db.session.query(Teachers.email).all()
 
     templist2 = []
     for idx,item in enumerate(templist):
+
         d = {}
         d["id"] = idx
         d["text"] = item
+        if item in templist3:
+            d["selected"] = 1
+        else:
+            d["selected"] = 0
+
         templist2.append(d)
 
     return templist2
