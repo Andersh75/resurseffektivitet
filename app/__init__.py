@@ -2504,17 +2504,10 @@ def bookedrooms():
     url = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
     #print j[0]
     content = url.read()
-    soup = BeautifulSoup(content)
-    
+    j_obj = json.load(content[0])
 
-    print soup
-
-    #j_obj = json.load(j[0])
-
-    #templist = []
-
-    #for item in j_obj:
-        #print item.id
+    for item in j_obj:
+        print item.id
         #templist.append(item['code'])
 
     #tempdict = {'department': j_obj['department'], 'courses': templist}
