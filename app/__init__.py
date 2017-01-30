@@ -530,7 +530,7 @@ def teacherslistjson():
     tempvar = tempvar + " id: '" + str(id) + "', text: '" + templist[-1][0] + "' }]"
 
     # print tempvar
-    # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
+    tempvar2 = "[{ 'id': 1, 'text': 'bug' }, { 'id': 2, 'text': 'duplicate' }, { 'id': 3, 'text': 'invalid' }, { 'id': 4, 'text': 'wontfix' }]"
     # print testvar.password
     return tempvar
     #return json.dumps(tempvar)
@@ -555,7 +555,8 @@ def teacherslistjson2():
     print tempvar
     # tempvar2 = "[{ id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]"
     # print testvar.password
-    return tempvar
+    tempvar2 = "[{ 'id': 1, 'text': 'bug' }, { 'id': 2, 'text': 'duplicate' }, { 'id': 3, 'text': 'invalid' }, { 'id': 4, 'text': 'wontfix' }]"
+    return tempvar2
 
 
 
