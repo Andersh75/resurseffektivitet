@@ -545,6 +545,14 @@ def teacherslistjson():
 def teacherslistjson2():
     templist = db.session.query(Teachers.email).all()
 
+    templist2 = []
+    for idx,item in enumerate(templist):
+        d = {}
+        d["id"] = idx
+        d["text"] = item
+        templist2.append(json.dumps(d, ensure_ascii=False))
+
+
     tempvar = '[{'
     id = 1
     for item in templist[:-1]:
@@ -558,8 +566,8 @@ def teacherslistjson2():
     # print testvar.password
     tempvar2 = [{ 'id': 1, 'text': 'bug' }, { 'id': 2, 'text': 'duplicate' }, { 'id': 3, 'text': 'invalid' }, { 'id': 4, 'text': 'wontfix' }]
     objectvar = [{'id': 1, 'company': 'Google'}, {'id': 2, 'company': 'HM'}, {'id': 3, 'company': 'Ikea'}]
-    #retur#n tempvar
-    return jsonify(db.session.query(Teachers.email).all())
+    return templist2
+    #return jsonify(db.session.query(Teachers.email).all())
 
 
 
