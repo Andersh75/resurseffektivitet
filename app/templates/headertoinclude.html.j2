@@ -338,7 +338,8 @@
 
             $(".openModalLink").click(function(e) {
                   e.preventDefault();
-                  $("#myModalTitle").html('Hello, my name is '+$(this).data('name')+'!');
+                  //$("#myModalTitle").html('Hello, my name is '+$(this).data('name')+'!');
+                  $("#myModalTitle").html('Edit class');
                   $("#myModalID").val($(this).data('id'));
                   $("#myModalInfo").val($(this).data('info'));
                   $("#myModalContent").val($(this).data('content'));
