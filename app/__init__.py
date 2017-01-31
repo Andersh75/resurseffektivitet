@@ -2508,7 +2508,6 @@ def bookedrooms():
 
 
 
-
     #Rebooking? How to handle...
     #tempdict = {}
 
