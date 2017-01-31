@@ -155,7 +155,7 @@
 		            {% set rowloop = loop %}
 		            <tr>
 						<td class="details-control">
-							<a class="btn btn-warning btn-xs" data-toggle="collapse" data-target="#collapseExample{{rowloop}}" aria-expanded="false" aria-controls="collapseExample{{rowloop}}" href="#0" role="button">Test</a>
+							<a class="btn btn-warning btn-xs" data-toggle="collapse" data-target="#collapseExample{{ rowloop.index }}" aria-expanded="false" aria-controls="collapseExample{{ rowloop.index }}" href="#0" role="button">Test</a>
 
 						</td>
 		                {% if item[2] > 9 %}
@@ -214,7 +214,7 @@
 
 		            </tr>
 					<tr style="border:none">
-            			<td colspan="9" class="hiddenRow" style="border:none"><div class="collapse" id="collapseExample{{rowloop}}"><div class="well">
+            			<td colspan="9" class="hiddenRow" style="border:none"><div class="collapse" id="collapseExample{{ rowloop.index }}"><div class="well">
     TEST
   </div>
 </div> </td>
