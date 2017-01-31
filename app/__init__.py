@@ -2499,7 +2499,6 @@ def page_not_found(e):
 def bookedrooms():
 
 
-
     #Rebooking? How to handle...
     #tempdict = {}
 
