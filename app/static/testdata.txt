@@ -1,0 +1,930 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red246\green246\blue246;\red0\green0\blue0;
+\red52\green52\blue52;\red255\green255\blue255;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c20000\c20000\c20000;\cssrgb\c97255\c97255\c97255;\cssrgb\c0\c0\c0;
+\cssrgb\c26667\c26667\c26667;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\cf7 "data"\cf2 : [\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Tiger Nixon"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "System Architect"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$320,800"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/04/25"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "5421"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Garrett Winters"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Accountant"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$170,750"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/07/25"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Tokyo"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8422"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Ashton Cox"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Junior Technical Author"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$86,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/01/12"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1562"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Cedric Kelly"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Senior Javascript Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$433,060"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/03/29"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6224"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Airi Satou"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Accountant"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$162,700"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/11/28"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Tokyo"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "5407"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Brielle Williamson"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Integration Specialist"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$372,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/12/02"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "4804"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Herrod Chandler"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Sales Assistant"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$137,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/08/06"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "9608"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Rhona Davidson"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Integration Specialist"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$327,900"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/10/14"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Tokyo"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6200"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Colleen Hurst"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Javascript Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$205,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/09/15"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2360"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Sonya Frost"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Software Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$103,600"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/12/13"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1667"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Jena Gaines"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Office Manager"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$90,560"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/12/19"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "3814"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Quinn Flynn"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Support Lead"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$342,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2013/03/03"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "9497"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Charde Marshall"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Regional Director"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$470,600"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/10/16"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6741"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Haley Kennedy"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Senior Marketing Designer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$313,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/12/18"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "3597"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Tatyana Fitzpatrick"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Regional Director"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$385,750"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/03/17"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1965"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Michael Silva"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Marketing Designer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$198,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/11/27"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1581"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Paul Byrd"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Chief Financial Officer (CFO)"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$725,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/06/09"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "3059"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Gloria Little"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Systems Administrator"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$237,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/04/10"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1721"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Bradley Greer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Software Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$132,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/10/13"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2558"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Dai Rios"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Personnel Lead"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$217,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/09/26"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2290"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Jenette Caldwell"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Development Lead"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$345,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/09/03"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1937"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Yuri Berry"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Chief Marketing Officer (CMO)"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$675,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/06/25"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6154"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Caesar Vance"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Pre-Sales Support"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$106,450"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/12/12"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8330"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Doris Wilder"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Sales Assistant"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$85,600"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/09/20"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Sidney"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "3023"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Angelica Ramos"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Chief Executive Officer (CEO)"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$1,200,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/10/09"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "5797"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Gavin Joyce"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$92,575"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/12/22"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8822"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Jennifer Chang"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Regional Director"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$357,650"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/11/14"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Singapore"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "9239"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Brenden Wagner"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Software Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$206,850"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/06/07"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1314"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Fiona Green"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Chief Operating Officer (COO)"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$850,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/03/11"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2947"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Shou Itou"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Regional Marketing"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$163,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/08/14"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Tokyo"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8899"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Michelle House"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Integration Specialist"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$95,400"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/06/02"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Sidney"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2769"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Suki Burks"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$114,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/10/22"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6832"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Prescott Bartlett"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Technical Author"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$145,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/05/07"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "3606"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Gavin Cortez"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Team Leader"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$235,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/10/26"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2860"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Martena Mccray"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Post-Sales support"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$324,050"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/03/09"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8240"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Unity Butler"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Marketing Designer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$85,675"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/12/09"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "5384"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Howard Hatfield"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Office Manager"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$164,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/12/16"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "7031"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Hope Fuentes"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Secretary"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$109,850"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/02/12"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6318"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Vivian Harrell"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Financial Controller"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$452,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/02/14"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "9422"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Timothy Mooney"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Office Manager"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$136,200"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/12/11"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "7580"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Jackson Bradshaw"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Director"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$645,750"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/09/26"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1042"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Olivia Liang"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Support Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$234,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/02/03"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Singapore"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2120"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Bruno Nash"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Software Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$163,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/05/03"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6222"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Sakura Yamamoto"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Support Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$139,575"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/08/19"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Tokyo"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "9383"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Thor Walton"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$98,540"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2013/08/11"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8327"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Finn Camacho"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Support Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$87,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/07/07"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "2927"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Serge Baldwin"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Data Coordinator"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$138,575"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/04/09"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Singapore"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8352"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Zenaida Frank"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Software Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$125,250"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/01/04"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "7439"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Zorita Serrano"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Software Engineer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$115,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2012/06/01"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "4389"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Jennifer Acosta"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Junior Javascript Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$75,650"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2013/02/01"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "3431"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Cara Stevens"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Sales Assistant"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$145,600"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/12/06"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "3990"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Hermione Butler"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Regional Director"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$356,250"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/03/21"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "1016"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Lael Greer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Systems Administrator"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$103,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2009/02/27"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "London"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6733"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Jonas Alexander"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$86,500"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2010/07/14"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "San Francisco"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "8196"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Shad Decker"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Regional Director"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$183,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2008/11/13"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Edinburgh"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "6373"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Michael Bruce"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Javascript Developer"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$183,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/06/27"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "Singapore"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "5384"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \},\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\cf2 \{\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "name"\cf2 : \cf7 "Donna Snider"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "position"\cf2 : \cf7 "Customer Support"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "salary"\cf2 : \cf7 "$112,000"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "start_date"\cf2 : \cf7 "2011/01/25"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "office"\cf2 : \cf7 "New York"\cf2 ,\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\cf7 "extn"\cf2 : \cf7 "4226"\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 \'a0\'a0\'a0\'a0\cf2 \}\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \'a0\'a0\cf2 ]\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb6 \}}
