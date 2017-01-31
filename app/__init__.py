@@ -2498,6 +2498,8 @@ def page_not_found(e):
 @app.route('/bookedrooms')
 def bookedrooms():
 
+
+    #Rebooking? How to handle...
     #tempdict = {}
 
     #try:
@@ -2509,9 +2511,14 @@ def bookedrooms():
     for item in j_obj:
         print item['start']
         print item['end']
+        datevar = item['start'][:10]
+        starttime = item['start'][11:13]
+        endtime = item['end'][11:13]
+        roomvar = None
         for location in item['locations']:
             room = location['name'].split()
             try:
+                roomvar = room[0]
                 print room[0]
             except:
                 continue
