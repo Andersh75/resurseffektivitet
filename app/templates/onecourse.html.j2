@@ -154,7 +154,15 @@
 		            {% for item in scheduleInCourse(courseid): %}
 		            {% set rowloop = loop %}
 		            <tr>
-						<th class="details-control"></th>
+						<td class="details-control">
+							<a class="btn btn-warning btn-xs" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" href="#" role="button">Test</a>
+							<div class="collapse" id="collapseExample">
+							  <div class="well">
+							    jhgkjhgkjhgjhgjgh
+							  </div>
+							</div>
+
+						</td>
 		                {% if item[2] > 9 %}
 		                    {% if item[3] > 9 %}
 		                    <td class="text-left">{{ item[1] }}-{{ item[2] }}-{{ item[3] }}</td>
