@@ -375,7 +375,7 @@ tr.shown td.details-control {
             $('select').select2();
 
             var table = $('#example').DataTable( {
-                "ajax": "{{ url_for('static', filename='testdata.txt') }}",
+                "ajax": "{{ url_for('static', filename='testdata') }}",
                 "columns": [
                     {
                         "className":      'details-control',
