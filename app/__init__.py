@@ -2579,9 +2579,12 @@ def bookedrooms():
             room = location['name'].split()
 
             roomvar = room[0]
-            print roomvar
-            roomobj = create_or_fetch_roomobj(roomvar)
-            notourclassesobj = create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, endtimevar, lastchangeddatevar, lastchangedtimevar, statusvar, roomobj)
+            try:
+                roomobj = create_or_fetch_roomobj(roomvar)
+                notourclassesobj = create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, endtimevar, lastchangeddatevar, lastchangedtimevar, statusvar, roomobj)
+            except Exception, e:
+                continue
+
 
 
 
