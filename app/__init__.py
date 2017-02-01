@@ -2570,10 +2570,10 @@ def bookedrooms():
 
         startdatevar = startvar[:10]
         enddatevar = endvar[:10]
-        starttimevar = startvar[11:13]
-        endtimevar = endvar[11:13]
+        starttimevar = startvar[12:14]
+        endtimevar = endvar[12:14]
         lastchangeddatevar = lastchangedvar[:10]
-        lastchangedtimevar = lastchangedvar[11:13]
+        lastchangedtimevar = lastchangedvar[12:14]
 
         for location in locationslist:
             room = location['name'].split()
