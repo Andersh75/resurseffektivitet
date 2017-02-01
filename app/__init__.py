@@ -1279,7 +1279,10 @@ def create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, end
             notourclassobj = notourclasssubq.first()
         else:
             print "NO PREVIOUS NOTOURCLASSOBJECT"
+            print starttimevar
+            print endtimevar
             print "CREATING NOTOURCLASSOBJECT"
+
             tempdict = {}
             tempdict['starttime'] = starttimevar
             tempdict['endtime'] = endtimevar
