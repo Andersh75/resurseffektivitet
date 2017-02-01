@@ -1189,9 +1189,10 @@ def fetch_dateobj(datevar):
 
 def create_or_fetch_roomobj(roomvar):
     roomobj = None
-
+    print "HEJ"
     roomvarlist = roomvar.split()
     roomvar = roomvarlist[0]
+    print "HOPP"
 
     if roomvar:
         roomsubq = db.session.query(Rooms).filter(Rooms.name == roomvar)
