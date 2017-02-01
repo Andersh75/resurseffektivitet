@@ -193,12 +193,12 @@ class Notourclasses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     startdate = db.Column(db.DateTime, nullable=False)
     enddate = db.Column(db.DateTime, nullable=False)
-    starttime = db.Column(db.Integer, nullable=False)
-    endtime = db.Column(db.Integer, nullable=False)
+    starttime = db.Column(db.String, nullable=False)
+    endtime = db.Column(db.String, nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('rooms.id'))
     status = db.Column(db.String(100), nullable=False)
     lastchangeddate = db.Column(db.DateTime, nullable=False)
-    lastchangedtime = db.Column(db.Integer, nullable=False)
+    lastchangedtime = db.Column(db.String, nullable=False)
     # __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id),)
     # UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
 
@@ -2570,10 +2570,10 @@ def bookedrooms():
 
         startdatevar = startvar[:10]
         enddatevar = endvar[:10]
-        starttimevar = startvar[12:14]
-        endtimevar = endvar[12:14]
+        starttimevar = startvar[11:13]
+        endtimevar = endvar[11:13]
         lastchangeddatevar = lastchangedvar[:10]
-        lastchangedtimevar = lastchangedvar[12:14]
+        lastchangedtimevar = lastchangedvar[11:13]
 
         for location in locationslist:
             room = location['name'].split()
