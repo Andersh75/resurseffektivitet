@@ -186,6 +186,22 @@ class Classes(db.Model):
     # UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
 
 
+class Notourclasses(db.Model):
+    __table_args__ = (db.UniqueConstraint('startdate', 'enddate', 'endtime', 'starttime', 'lastchangeddate', 'lastchangedtime', 'status', 'room_id'),
+                      )
+    id = db.Column(db.Integer, primary_key=True)
+    startdate = db.Column(db.DateTime, unique=True)
+    enddate = db.Column(db.DateTime, unique=True)
+    starttime = db.Column(db.Integer, nullable=False)
+    endtime = db.Column(db.Integer, nullable=False)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+    status = db.Column(db.String(100))
+    lastchangeddate = db.Column(db.DateTime, unique=True)
+    lastchangedtime = db.Column(db.Integer, nullable=False)
+    # __table_args__ = (db.UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id),)
+    # UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
+
+
 class RegistrationForm(Form):
     initials = TextField('Initials', [validators.Length(min=2, max=20)])
     firstname = TextField('First name', [validators.Length(min=2, max=20)])
@@ -1245,6 +1261,40 @@ def fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
         print "NO STARTTIMEVAR OR ENDTIMEVAR OR COURSEOBJ OR DATEOBJ"
 
     return classobj
+
+
+def create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, endtimevar, lastchangeddatevar, lastchangedtimevar, statusvar, roomobj):
+
+    notourclassobj = None
+
+    if starttimevar and endtimevar and startdatevar and enddatevar and lastchangeddatevar and lastchangedtimevar and statusvar and roomobj:
+        notourclasssubq = db.session.query(Notourclasses).filter(and_(Notourclasses.room_id == roomobj.id, Notourclasses.status == statusvar, Notourclasses.lastchangedtime == lastchangedtimevar, Notourclasses.lastchangeddate == lastchangeddatevar, Notourclasses.enddate == enddatevar, Notourclasses.startdate == startdatevar, Notourclasses.starttime == starttimevar, Notourclasses.endtime == endtimevar))
+        alreadyclass = db.session.query(notourclasssubq.exists()).scalar()
+
+        if alreadyclass:
+            print "NOTOURCLASSOBJECT FETCHED"
+            notourclassobj = notourclasssubq.first()
+        else:
+            print "NO PREVIOUS NOTOURCLASSOBJECT"
+            print "CREATING NOTOURCLASSOBJECT"
+            tempdict = {}
+            tempdict['starttime'] = starttimevar
+            tempdict['endtime'] = endtimevar
+            tempdict['startdate'] = startdatevar
+            tempdict['enddate'] = enddatevar
+            tempdict['lastchangedtime'] = lastchangedtimevar
+            tempdict['lastchangeddate'] = lastchangeddatevar
+            tempdict['room_id'] = roomobj.id
+            tempdict['status'] = statusvar
+
+            record = Notourclasses(**tempdict)
+            notourclassobj = record
+            db.session.add(record)
+            db.session.commit()
+    else:
+        print "NOT ALL MATCHED"
+
+    return notourclassobj
 
 
 def create_room_date_connection(roomobj, dateobj):
@@ -2502,7 +2552,7 @@ def bookedrooms():
 
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
     jsonobj = respobj.json()
-    print jsonobj[0]
+    #print jsonobj[0]
 
     for item in jsonobj:
 
@@ -2512,19 +2562,19 @@ def bookedrooms():
         statusvar = item['status']
         locationslist = item['locations']
 
+        startdatevar = startvar[:10]
+        enddatevar = endvar[:10]
+        starttimevar = startvar[11:13]
+        endtimevar = endvar[11:13]
+        lastchangeddatevar = lastchangedvar[:10]
+        lastchangedtimevar = lastchangedvar[11:13]
+
         for location in locationslist:
             room = location['name'].split()
             try:
                 roomvar = room[0]
-                # print roomvar
-                # roomobj = create_or_fetch_roomobj(roomvar)
-                # bookingobj = create_or_fetch_bookingobj(startvar, endvar, lastchangedvar, statusvar, roomobj)
-                if roomvar == "L1":
-                    print roomvar
-                    print startvar
-                    print endvar
-                    print lastchangedvar
-                    print statusvar
+                roomobj = create_or_fetch_roomobj(roomvar)
+                notourclassesobj = create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, endtimevar, lastchangeddatevar, lastchangedtimevar, statusvar, roomobj)
 
             except:
                 continue
