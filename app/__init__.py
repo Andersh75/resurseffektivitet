@@ -105,6 +105,7 @@ class Rooms(db.Model):
     seats = db.Column(db.Integer)
     roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
     classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
+    notourclasses = db.relationship('Notourclasses', backref='rooms', lazy='dynamic')
 
 
 class Subjects(db.Model):
@@ -194,7 +195,7 @@ class Notourclasses(db.Model):
     enddate = db.Column(db.DateTime, unique=True)
     starttime = db.Column(db.Integer, nullable=False)
     endtime = db.Column(db.Integer, nullable=False)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('rooms.id'))
     status = db.Column(db.String(100))
     lastchangeddate = db.Column(db.DateTime, unique=True)
     lastchangedtime = db.Column(db.Integer, nullable=False)
