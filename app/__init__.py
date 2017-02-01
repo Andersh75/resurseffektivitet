@@ -1267,6 +1267,7 @@ def fetch_classobj(starttimevar, endtimevar, courseobj, dateobj):
 def create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, endtimevar, lastchangeddatevar, lastchangedtimevar, statusvar, roomobj):
 
     notourclassobj = None
+    print "TRYING!"
 
     if starttimevar and endtimevar and startdatevar and enddatevar and lastchangeddatevar and lastchangedtimevar and statusvar and roomobj:
         notourclasssubq = db.session.query(Notourclasses).filter(and_(Notourclasses.room_id == roomobj.id, Notourclasses.status == statusvar, Notourclasses.lastchangedtime == lastchangedtimevar, Notourclasses.lastchangeddate == lastchangeddatevar, Notourclasses.enddate == enddatevar, Notourclasses.startdate == startdatevar, Notourclasses.starttime == starttimevar, Notourclasses.endtime == endtimevar))
@@ -2574,6 +2575,7 @@ def bookedrooms():
             room = location['name'].split()
             try:
                 roomvar = room[0]
+                print roomvar
                 roomobj = create_or_fetch_roomobj(roomvar)
                 notourclassesobj = create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, endtimevar, lastchangeddatevar, lastchangedtimevar, statusvar, roomobj)
 
