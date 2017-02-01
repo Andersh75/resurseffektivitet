@@ -2519,7 +2519,7 @@ def bookedrooms():
                 # print roomvar
                 # roomobj = create_or_fetch_roomobj(roomvar)
                 # bookingobj = create_or_fetch_bookingobj(startvar, endvar, lastchangedvar, statusvar, roomobj)
-                if roomvar = "L1":
+                if roomvar == "L1":
                     print roomvar
                     print startvar
                     print endvar
