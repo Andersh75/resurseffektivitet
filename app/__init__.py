@@ -2503,26 +2503,36 @@ def bookedrooms():
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
     jsonobj = respobj.json()
     print jsonobj[0]
-    '''
-    response = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
-    j_obj = json.loads(response.read())
 
-    for item in j_obj:
-        print item['start']
-        print item['end']
-        datevar = item['start'][:10]
-        starttime = item['start'][11:13]
-        endtime = item['end'][11:13]
-        roomvar = None
-        for location in item['locations']:
+    for item in jsonobj:
+
+        startvar = item['start']
+        endvar = item['end']
+        lastchangedvar = item['lastchanged']
+        statusvar = item['status']
+        locationslist = item['locations']
+
+        for location in locationslist:
             room = location['name'].split()
             try:
                 roomvar = room[0]
-                print room[0]
+                # print roomvar
+                # roomobj = create_or_fetch_roomobj(roomvar)
+                # bookingobj = create_or_fetch_bookingobj(startvar, endvar, lastchangedvar, statusvar, roomobj)
+                if roomvar = "L1":
+                    print roomvar
+                    print startvar
+                    print endvar
+                    print lastchangedvar
+                    print statusvar
+
             except:
                 continue
 
-        #templist.append(item['code'])
+
+    '''
+
+    #templist.append(item['code'])
 
     #tempdict = {'department': j_obj['department'], 'courses': templist}
 
