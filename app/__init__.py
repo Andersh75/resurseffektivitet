@@ -2455,15 +2455,6 @@ def restartall():
 
 
 
-
-
-
-
-
-
-
-
-
     tempdict = {}
     templist = []
 
@@ -2510,18 +2501,7 @@ def page_not_found(e):
 def bookedrooms():
 
 
-
-
-
-
-
-    #Rebooking? How to handle...
-    #tempdict = {}
-
-    #try:
     response = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
-    #print j[0]
-    #content = url.read()
     j_obj = json.loads(response.read())
 
     for item in j_obj:
