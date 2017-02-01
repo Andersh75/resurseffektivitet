@@ -2502,7 +2502,7 @@ def bookedrooms():
 
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
     jsonobj = respobj.json()
-    print jsonobj
+    print jsonobj[0]
     '''
     response = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
     j_obj = json.loads(response.read())
