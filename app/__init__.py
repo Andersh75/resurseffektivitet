@@ -2500,7 +2500,10 @@ def page_not_found(e):
 @app.route('/bookedrooms')
 def bookedrooms():
 
-
+    respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
+    jsonobj = respobj.json()
+    print jsonobj
+    '''
     response = urllib2.urlopen('http://www.kth.se/api/timetable/v1/reservations/search')
     j_obj = json.loads(response.read())
 
@@ -2526,6 +2529,7 @@ def bookedrooms():
     ##except Exception, e:
     #varcode = "error"
     #print varcode
+    '''
 
     return "HEJ"
 
