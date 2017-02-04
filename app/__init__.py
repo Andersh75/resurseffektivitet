@@ -1201,6 +1201,7 @@ def create_or_fetch_roomobj(roomvar):
         if alreadyroom:
             print "ROOMOBJECT FETCHED"
             roomobj = roomsubq.first()
+            db.session.close()
         else:
             print "NO PREVIOUS ROOMOBJECT"
             print "CREATING ROOMOBJECT"
@@ -1210,6 +1211,7 @@ def create_or_fetch_roomobj(roomvar):
             roomobj = record
             db.session.add(record)
             db.session.commit()
+            db.session.close()
     else:
         print "NO ROOMVAR"
 
@@ -1277,6 +1279,7 @@ def create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, end
         if alreadyclass:
             print "NOTOURCLASSOBJECT FETCHED"
             notourclassobj = notourclasssubq.first()
+            db.session.close()
         else:
             print "NO PREVIOUS NOTOURCLASSOBJECT"
             print starttimevar
@@ -1297,6 +1300,7 @@ def create_or_fetch_notourclassesobj(startdatevar, enddatevar, starttimevar, end
             notourclassobj = record
             db.session.add(record)
             db.session.commit()
+            db.session.close()
     else:
         print "NOT ALL MATCHED"
 
