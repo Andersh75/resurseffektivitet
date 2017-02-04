@@ -2563,7 +2563,7 @@ def split_list(a_list):
 
 
 def bookedroomstodb(bookingslist):
-    for item in firsq:
+    for item in bookingslist:
 
         startvar = item['start']
         endvar = item['end']
