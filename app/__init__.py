@@ -2557,14 +2557,13 @@ def page_not_found(e):
     return "fel"
 
 
-@app.route('/bookedrooms')
-def bookedrooms():
+def split_list(a_list):
+    half = len(a_list)/2
+    return a_list[:half], a_list[half:]
 
-    respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
-    jsonobj = respobj.json()
-    #print jsonobj[0]
 
-    for item in jsonobj:
+def bookedroomstodb(bookingslist):
+    for item in firsq:
 
         startvar = item['start']
         endvar = item['end']
@@ -2590,20 +2589,23 @@ def bookedrooms():
                 continue
 
 
+@app.route('/bookedrooms')
+def bookedrooms():
 
+    respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
+    jsonobj = respobj.json()
 
-    '''
+    firsthalf, secondhalf = split_list(jsonobj)
+    firsq, secondq = split_list(firsthalf)
+    thirdq, fourthq = split_list(secondhalf)
 
-    #templist.append(item['code'])
-
-    #tempdict = {'department': j_obj['department'], 'courses': templist}
-
-    ##except Exception, e:
-    #varcode = "error"
-    #print varcode
-    '''
+    bookedroomstodb(firsq)
+    bookedroomstodb(secondq)
+    bookedroomstodb(thirdq)
+    bookedroomstodb(fourthq)
 
     return "HEJ"
+
 
 # TO DO
 def courseinfoperyearandround(x, y):
