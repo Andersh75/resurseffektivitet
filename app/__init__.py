@@ -2654,7 +2654,7 @@ def printabookedroom():
 
 
     for item in objectslist:
-        print item.lastchangeddate + ": " + item.room_id + " " + item.startdate + " " + item.starttime + "-" + item.endtime + " >>> " + item.status
+        print str(item.lastchangeddate) + ": " + item.room_id + " " + str(item.startdate) + " " + item.starttime + "-" + item.endtime + " >>> " + item.status
 
     return "HEJ"
 
