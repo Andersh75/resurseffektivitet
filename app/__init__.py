@@ -2650,11 +2650,12 @@ def bookedrooms4():
 @app.route('/printabookedroom')
 def printabookedroom():
 
-    objectslist = db.session.query(Notourclasses).filter(Notourclasses.room_id == 1).order_by(Notourclasses.startdate).all()
+    objectslist = db.session.query(Notourclasses, Rooms.name).Join(Notourclasses.rooms).filter(Notourclasses.room_id == 1).order_by(Notourclasses.startdate).all()
 
 
-    for item in objectslist:
-        print str(item.lastchangeddate) + ": " + str(item.room_id) + " " + str(item.startdate) + " " + str(item.starttime) + "-" + str(item.endtime) + " >>> " + str(item.status)
+    for items in objectslist:
+        item = items[0]
+        print str(item.lastchangeddate) + ": " + items[1] + " " + str(item.startdate) + " " + str(item.starttime) + "-" + str(item.endtime) + " >>> " + str(item.status)
 
     return "HEJ"
 
