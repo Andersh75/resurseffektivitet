@@ -2589,7 +2589,55 @@ def bookedroomstodb(bookingslist):
                 continue
 
 
-@app.route('/bookedrooms')
+@app.route('/bookedrooms1')
+def bookedrooms():
+
+    respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
+    jsonobj = respobj.json()
+
+    firsthalf, secondhalf = split_list(jsonobj)
+    firsq, secondq = split_list(firsthalf)
+    thirdq, fourthq = split_list(secondhalf)
+
+    bookedroomstodb(firsq)
+
+    return "HEJ"
+
+@app.route('/bookedrooms2')
+def bookedrooms():
+
+    respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
+    jsonobj = respobj.json()
+
+    firsthalf, secondhalf = split_list(jsonobj)
+    firsq, secondq = split_list(firsthalf)
+    thirdq, fourthq = split_list(secondhalf)
+
+    bookedroomstodb(firsq)
+    bookedroomstodb(secondq)
+    bookedroomstodb(thirdq)
+    bookedroomstodb(fourthq)
+
+    return "HEJ"
+
+@app.route('/bookedrooms3')
+def bookedrooms():
+
+    respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
+    jsonobj = respobj.json()
+
+    firsthalf, secondhalf = split_list(jsonobj)
+    firsq, secondq = split_list(firsthalf)
+    thirdq, fourthq = split_list(secondhalf)
+
+    bookedroomstodb(firsq)
+    bookedroomstodb(secondq)
+    bookedroomstodb(thirdq)
+    bookedroomstodb(fourthq)
+
+    return "HEJ"
+
+@app.route('/bookedrooms4')
 def bookedrooms():
 
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
