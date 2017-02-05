@@ -105,7 +105,7 @@ class Rooms(db.Model):
     seats = db.Column(db.Integer)
     roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
     classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
-    notourclasses = db.relationship('Notourclasses', backref='bookedrooms', lazy='dynamic')
+    notourclasses = db.relationship('Notourclasses', backref='rooms', lazy='dynamic')
 
 
 class Subjects(db.Model):
@@ -1201,7 +1201,7 @@ def create_or_fetch_roomobj(roomvar):
         if alreadyroom:
             print "ROOMOBJECT FETCHED"
             roomobj = roomsubq.first()
-            db.session.close()
+            # db.session.close()
         else:
             print "NO PREVIOUS ROOMOBJECT"
             print "CREATING ROOMOBJECT"
@@ -1211,7 +1211,7 @@ def create_or_fetch_roomobj(roomvar):
             roomobj = record
             db.session.add(record)
             db.session.commit()
-            db.session.close()
+            # db.session.close()
     else:
         print "NO ROOMVAR"
 
