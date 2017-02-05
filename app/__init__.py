@@ -2331,9 +2331,9 @@ def slotsfromsocial():
         coursecode = item.code
         # coursecode = "AI2808"
         # Fetching slots from schedule API
-        ''''
+
         slotsfromscheduleapi(coursecode)
-        '''
+        
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
 
@@ -2651,7 +2651,7 @@ def bookedrooms4():
 def printabookedroom():
 
     datevar = "2016-11-03"
-    objectslist = db.session.query(Notourclasses, Rooms.name).join(Notourclasses.rooms).filter(and_(Notourclasses.room_id == 49, Notourclasses.starttime < 12, Notourclasses.endtime > 10, Notourclasses.status == "Published", str(Notourclasses.startdate)[:10] == datevar)).order_by(Notourclasses.startdate).all()
+    objectslist = db.session.query(Notourclasses, Rooms.name).join(Notourclasses.rooms).filter(and_(Notourclasses.room_id == 49, Notourclasses.starttime < 12, Notourclasses.endtime > 10, Notourclasses.status == "Published", Notourclasses.startdate[:10] == datevar)).order_by(Notourclasses.startdate).all()
 
 
 
