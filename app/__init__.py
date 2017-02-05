@@ -2650,7 +2650,7 @@ def bookedrooms4():
 @app.route('/printabookedroom')
 def printabookedroom():
 
-    datevar = "2017-11-03"
+    datevar = "2016-11-03"
     objectslist = db.session.query(Notourclasses, Rooms.name).join(Notourclasses.rooms).filter(and_(Notourclasses.room_id == 49, Notourclasses.starttime < 12, Notourclasses.endtime > 10, Notourclasses.status == "Published", str(Notourclasses.startdate)[:10] == datevar)).order_by(Notourclasses.startdate).all()
 
 
