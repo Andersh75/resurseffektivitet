@@ -2647,6 +2647,18 @@ def bookedrooms4():
     return "HEJ"
 
 
+@app.route('/printabookedroom')
+def printabookedroom():
+
+    objectslist = db.session.query(Notourclasses).filter(room_id == 1).all()
+
+
+    for item in objectslist:
+        print item.lastchangeddate + ": " + item.room_id + " " + item.startdate + " " + item.starttime + "-" + item.endtime + " >>> " + item.status
+
+    return "HEJ"
+
+
 # TO DO
 def courseinfoperyearandround(x, y):
     req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
