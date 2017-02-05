@@ -105,7 +105,7 @@ class Rooms(db.Model):
     seats = db.Column(db.Integer)
     roomtypes_id = db.Column(db.Integer, db.ForeignKey('roomtypes.id'))
     classes = db.relationship('Classes', secondary=rooms_classes, backref=db.backref('rooms', lazy='dynamic'))
-    notourclasses = db.relationship('Notourclasses', backref='rooms', lazy='dynamic')
+    notourclasses = db.relationship('Notourclasses', backref='bookedrooms', lazy='dynamic')
 
 
 class Subjects(db.Model):
@@ -2333,7 +2333,7 @@ def slotsfromsocial():
         # Fetching slots from schedule API
 
         slotsfromscheduleapi(coursecode)
-        
+
         try:
             url = br.open('https://www.kth.se/social/course/%s/subgroup/' % (coursecode))
 
