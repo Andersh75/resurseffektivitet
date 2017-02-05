@@ -2613,10 +2613,7 @@ def bookedrooms2():
     firsq, secondq = split_list(firsthalf)
     thirdq, fourthq = split_list(secondhalf)
 
-    bookedroomstodb(firsq)
     bookedroomstodb(secondq)
-    bookedroomstodb(thirdq)
-    bookedroomstodb(fourthq)
 
     return "HEJ"
 
@@ -2630,10 +2627,8 @@ def bookedrooms3():
     firsq, secondq = split_list(firsthalf)
     thirdq, fourthq = split_list(secondhalf)
 
-    bookedroomstodb(firsq)
-    bookedroomstodb(secondq)
     bookedroomstodb(thirdq)
-    bookedroomstodb(fourthq)
+
 
     return "HEJ"
 
@@ -2647,9 +2642,6 @@ def bookedrooms4():
     firsq, secondq = split_list(firsthalf)
     thirdq, fourthq = split_list(secondhalf)
 
-    bookedroomstodb(firsq)
-    bookedroomstodb(secondq)
-    bookedroomstodb(thirdq)
     bookedroomstodb(fourthq)
 
     return "HEJ"
