@@ -2590,7 +2590,7 @@ def bookedroomstodb(bookingslist):
 
 
 @app.route('/bookedrooms1')
-def bookedrooms():
+def bookedrooms1():
 
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
     jsonobj = respobj.json()
@@ -2604,7 +2604,7 @@ def bookedrooms():
     return "HEJ"
 
 @app.route('/bookedrooms2')
-def bookedrooms():
+def bookedrooms2():
 
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
     jsonobj = respobj.json()
@@ -2621,7 +2621,7 @@ def bookedrooms():
     return "HEJ"
 
 @app.route('/bookedrooms3')
-def bookedrooms():
+def bookedrooms3():
 
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
     jsonobj = respobj.json()
@@ -2638,7 +2638,7 @@ def bookedrooms():
     return "HEJ"
 
 @app.route('/bookedrooms4')
-def bookedrooms():
+def bookedrooms4():
 
     respobj = requests.get('http://www.kth.se/api/timetable/v1/reservations/search')
     jsonobj = respobj.json()
