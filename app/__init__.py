@@ -2650,7 +2650,7 @@ def bookedrooms4():
 @app.route('/printabookedroom')
 def printabookedroom():
 
-    objectslist = db.session.query(Notourclasses, Rooms.name).Join(Notourclasses.rooms).filter(Notourclasses.room_id == 1).order_by(Notourclasses.startdate).all()
+    objectslist = db.session.query(Notourclasses, Rooms.name).join(Notourclasses.rooms).filter(Notourclasses.room_id == 1).order_by(Notourclasses.startdate).all()
 
 
     for items in objectslist:
