@@ -2660,6 +2660,7 @@ def printabookedroom():
 
         datevar = str(item.startdate)
         datevar = datevar[:10]
+        print datevar
         if datevar == "2016-11-03":
             print str(item.lastchangeddate) + ": " + items[1] + " " + str(item.startdate) + " " + str(item.starttime) + "-" + str(item.endtime) + " >>> " + str(item.status)
 
