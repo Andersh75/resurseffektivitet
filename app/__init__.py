@@ -2667,6 +2667,14 @@ def printabookedroom():
     return "HEJ"
 
 
+@app.route('/adminpage')
+def adminpage():
+
+    return render_template("adminpage.html")
+
+
+
+
 # TO DO
 def courseinfoperyearandround(x, y):
     req = urllib2.urlopen('http://www.kth.se/api/kopps/v1/courseRounds/%s:%s' % (x, y))
