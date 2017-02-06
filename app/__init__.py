@@ -2670,7 +2670,7 @@ def printabookedroom():
 @app.route('/adminpage')
 def adminpage():
 
-    return render_template("adminpage.html")
+    return render_template("adminpage.html.j2")
 
 
 
