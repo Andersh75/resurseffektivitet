@@ -1838,6 +1838,12 @@ def index():
     return redirect(url_for('login_page'))
 
 
+@app.route('/nextsite')
+def nextsite():
+
+    render_template("nextsite.html")
+
+
 
 
 @app.route('/login/', methods=["GET", "POST"])
@@ -2959,5 +2965,3 @@ if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=1080)
     #app.run(host='0.0.0.0', port=1080)
     #app.run(host='dansfolk.no-ip.org', port=1080)
-
-    
