@@ -1841,7 +1841,7 @@ def index():
 @app.route('/nextsite')
 def nextsite():
 
-    return render_template("nextsite.html")
+    return render_template("nextsite.html.j2")
 
 
 
