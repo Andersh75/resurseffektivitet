@@ -187,6 +187,7 @@ class Classes(db.Model):
     # UniqueConstraint('starttime', 'endtime', 'courses_id', 'dates_id')
 
 
+
 class Notourclasses(db.Model):
     __table_args__ = (db.UniqueConstraint('startdate', 'enddate', 'endtime', 'starttime', 'lastchangeddate', 'lastchangedtime', 'status', 'room_id'),
                       )
